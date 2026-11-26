@@ -1,10 +1,11 @@
 import type { Fetcher } from "../types";
 import type { NewsItem } from "./types";
 import { fetchText } from "../adapters/http";
+import { shortText } from "./rss";
 
 // Finnhub (clé gratuite) : actualités générales et par société. La clé n'est jamais dans le dépôt.
 
-interface FinnhubNews { headline?: string; url?: string; source?: string; datetime?: number; related?: string }
+interface FinnhubNews { summary?: string; headline?: string; url?: string; source?: string; datetime?: number; related?: string }
 
 export function parseFinnhub(json: string, symbols: string[] = [], max = 20): NewsItem[] {
   const arr = JSON.parse(json);
@@ -15,6 +16,7 @@ export function parseFinnhub(json: string, symbols: string[] = [], max = 20): Ne
           title: n.headline, url: n.url, source: n.source ?? "Finnhub",
           publishedAt: n.datetime ? new Date(n.datetime * 1000).toISOString() : "",
           symbols: symbols.length ? symbols : (n.related ? n.related.split(",").filter(Boolean) : []),
+          ...(shortText(n.summary) ? { summary: shortText(n.summary) } : {}),
         }]
       : []);
 }

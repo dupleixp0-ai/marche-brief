@@ -31,3 +31,13 @@ describe("buildBriefPrompt", () => {
     expect(p).toContain("NVDA : Vendre — Tendance : en baisse");
   });
 });
+
+import { buildBriefPrompt as bp, BRIEF_MODEL as M } from "./brief";
+describe("prompt du brief", () => {
+  it("inclut le résumé des articles et le contexte de marché ; modèle Sonnet 5.5", () => {
+    const p = bp([{ title: "Fed holds rates", url: "https://x", source: "Fed", publishedAt: "2026-11-26T10:00:00Z", symbols: [], summary: "Rates unchanged at 4%." }], [], "- VIX à 26,8");
+    expect(p).toContain("Rates unchanged at 4%.");
+    expect(p).toContain("Contexte de marché");
+    expect(M).toBe("claude-sonnet-5-5");
+  });
+});

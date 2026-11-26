@@ -3,6 +3,8 @@ import type { Snapshot } from "../collect";
 import type { Decision } from "../scoring/score";
 import { dailyChangePct } from "../indicators/change";
 import { marketSummary } from "../market/summary";
+import { marketOutlook } from "../market/outlook";
+import { dailyPoint } from "../market/dailyPoint";
 
 export interface Alert { kind: "decision" | "vix"; text: string }
 export interface Digest { subject: string; html: string; text: string; alerts: Alert[] }
@@ -53,6 +55,17 @@ export function buildDigest(snap: Snapshot, previous: Snapshot | null, opt: Dige
   const bullets = snap.brief?.data?.bullets ?? [];
   const news = snap.news?.data ?? [];
   const disc = snap.discoveries?.data;
+  // « Le point du jour » : mêmes phrases que dans l'application (calculées à partir des chiffres).
+  const topOf = <T extends { score: number }>(l?: T[]) => (l?.length ? [...l].sort((a, b) => b.score - a.score)[0] : undefined);
+  const ds = topOf(disc?.stocks), de = topOf(disc?.etfs);
+  const point = dailyPoint({
+    spx: spxBars, vix: vixBars, fearGreed: fg, marketNote: null,
+    outlook: marketOutlook({ spxCloses: spxBars.map((b) => b.close), vixCloses: vixBars.map((b) => b.close), fearGreed: fg?.value ?? null }),
+    etfs: opt.etfs.map((t) => ({ ticker: t, name: opt.names?.[t] || t, bars: snap.prices[t]?.data?.bars ?? [], decision: snap.scores[t]?.decision })),
+    stocks: opt.stocks.map((t) => ({ ticker: t, bars: snap.prices[t]?.data?.bars ?? [], decision: snap.scores[t]?.decision })),
+    discoveries: { stock: ds && { name: ds.name, country: ds.country, score: ds.score }, etf: de && { name: de.name, score: de.score } },
+  });
+  const DOT: Record<string, string> = { up: "#16a34a", down: "#dc2626", warn: "#f59e0b", neutral: "#94a3b8" };
 
   const subject = `MarketPulse · ${new Date(snap.generatedAt).toLocaleDateString("fr-FR", { timeZone: "Europe/Berlin", day: "numeric", month: "long" })}`
     + (alerts.length ? ` · ${alerts.length} alerte(s)` : "")
@@ -82,10 +95,11 @@ export function buildDigest(snap: Snapshot, previous: Snapshot | null, opt: Dige
     <p style="font-size:14px;margin:0">${fg ? `Fear &amp; Greed <b>${fg.value}</b> (${esc(fg.label)}) · ` : ""}VIX <b>${m.vix != null ? num(m.vix) : "—"}</b> · S&amp;P 500 <b>${m.spx != null ? num(m.spx, 0) : "—"}</b></p>
     <p style="font-size:14px;color:#334155">${esc(m.sentence)}</p>
     <p style="font-size:12px;color:#64748b">Recommandations : ${counts.Acheter} Acheter · ${counts.Attendre} Attendre · ${counts.Vendre} Vendre</p>
-    ${h2("Brief du jour")}
+    ${h2("Le point du jour")}
+    <table role="presentation" width="100%" cellspacing="0" cellpadding="0">${point.map((p) => `<tr><td style="vertical-align:top;padding:4px 8px 4px 0;width:10px"><span style="display:inline-block;width:8px;height:8px;border-radius:4px;background:${DOT[p.tone]}"></span></td><td style="font-size:14px;padding:2px 0 6px">${`<b>${esc(p.topic)} · </b>${esc(p.text)}`}</td></tr>`).join("")}</table>
     ${bullets.length
-      ? `<ul style="padding-left:18px;font-size:14px">${bullets.map((b) => `<li style="margin-bottom:6px">${esc(b.text)} ${b.links.map((l, i) => `<a href="${esc(l.url)}" style="color:#2563eb;font-size:12px">[${i + 1}]</a>`).join(" ")}</li>`).join("")}</ul>`
-      : `<ul style="padding-left:18px;font-size:13px">${news.slice(0, 6).map((n) => `<li><a href="${esc(n.url)}" style="color:#0f172a">${esc(n.title)}</a> <span style="color:#64748b">· ${esc(n.source)}</span></li>`).join("")}</ul>`}
+      ? `${h2("Les actualités résumées")}<ul style="padding-left:18px;font-size:14px">${bullets.map((b) => `<li style="margin-bottom:8px">${esc(b.text)}${b.links.length ? `<br>${b.links.map((l) => `<a href="${esc(l.url)}" style="color:#2563eb;font-size:11px">${esc(l.title)}</a>`).join(" · ")}` : ""}</li>`).join("")}</ul>`
+      : news.length ? `<p style="font-size:12px;color:#64748b">Dernières actualités : ${news.slice(0, 4).map((n) => `<a href="${esc(n.url)}" style="color:#2563eb">${esc(n.title)}</a>`).join(" · ")}</p>` : ""}
     ${h2("Mes ETF")}${table(etfs)}
     <p style="font-size:11px;color:#64748b">Pour un ETF long terme, « Vendre » signifie surtout « tendance dégradée » (lecture : Réduire).</p>
     ${h2("Actions suivies")}${table(stocks)}
@@ -99,7 +113,8 @@ export function buildDigest(snap: Snapshot, previous: Snapshot | null, opt: Dige
     snap.marketNote ?? "",
     alerts.length ? `\nALERTES\n${alerts.map((a) => `- ${a.text}`).join("\n")}` : "",
     `\nMARCHÉ\n${fg ? `Fear & Greed ${fg.value} (${fg.label}) · ` : ""}VIX ${m.vix != null ? num(m.vix) : "—"}\n${m.sentence}`,
-    `\nBRIEF\n${(bullets.length ? bullets.map((b) => b.text) : news.slice(0, 6).map((n) => n.title)).map((t) => `- ${t}`).join("\n")}`,
+    `\nLE POINT DU JOUR\n${point.map((p) => `- ${p.topic} : ${p.text}`).join("\n")}`,
+    bullets.length ? `\nACTUALITÉS RÉSUMÉES\n${bullets.map((b) => `- ${b.text}`).join("\n")}` : "",
     `\nETF\n${etfs.map((r) => `- ${r.sym} ${r.close != null ? num(r.close) : "—"} (${pct(r.ch)}) ${r.s ? `${r.s.decision} ${r.s.score}` : ""}`).join("\n")}`,
     `\nACTIONS\n${stocks.map((r) => `- ${r.sym} ${r.close != null ? num(r.close) : "—"} (${pct(r.ch)}) ${r.s ? `${r.s.decision} ${r.s.score}` : ""}`).join("\n")}`,
     opt.siteUrl ? `\nDashboard : ${opt.siteUrl}` : "",

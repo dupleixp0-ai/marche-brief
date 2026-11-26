@@ -30,3 +30,4 @@ export * from "./fx/fx";
 export * from "./adapters/yahooIntraday";
 export * from "./market/holidays";
 export * from "./market/outlook";
+export * from "./market/dailyPoint";

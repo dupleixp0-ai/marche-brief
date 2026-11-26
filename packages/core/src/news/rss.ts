@@ -2,7 +2,7 @@ import type { Fetcher } from "../types";
 import type { NewsItem } from "./types";
 import { fetchText } from "../adapters/http";
 
-// Lecteur RSS minimal (sans dépendance, compatible Worker) : titre + lien + date uniquement.
+// Lecteur RSS minimal (sans dépendance, compatible Worker) : titre, lien, date et court résumé.
 
 const decode = (s: string) =>
   s.replace(/<!\[CDATA\[([\s\S]*?)\]\]>/g, "$1")
@@ -14,6 +14,12 @@ const tag = (block: string, name: string) => {
   return m ? decode(m[1]) : "";
 };
 
+/** Texte brut court (balises HTML retirées, 300 caractères max). */
+export function shortText(html: string | undefined, max = 300): string {
+  const t = (html ?? "").replace(/<[^>]+>/g, " ").replace(/&nbsp;/g, " ").replace(/\s+/g, " ").trim();
+  return t.length > max ? `${t.slice(0, max - 1).trimEnd()}…` : t;
+}
+
 export function parseRss(xml: string, source: string, max = 10): NewsItem[] {
   if (!/<rss|<feed/i.test(xml)) throw new Error("flux RSS invalide");
   const items = xml.match(/<item[\s>][\s\S]*?<\/item>/gi) ?? [];
@@ -21,7 +27,8 @@ export function parseRss(xml: string, source: string, max = 10): NewsItem[] {
     const title = tag(b, "title"), url = tag(b, "link"), date = tag(b, "pubDate");
     if (!title || !/^https?:\/\//.test(url)) return [];
     const t = Date.parse(date);
-    return [{ title, url, source, publishedAt: Number.isFinite(t) ? new Date(t).toISOString() : "", symbols: [] }];
+    const summary = shortText(tag(b, "description"));
+    return [{ title, url, source, publishedAt: Number.isFinite(t) ? new Date(t).toISOString() : "", symbols: [], ...(summary ? { summary } : {}) }];
   });
 }
 

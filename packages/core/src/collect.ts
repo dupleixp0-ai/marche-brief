@@ -12,6 +12,8 @@ import type Anthropic from "@anthropic-ai/sdk";
 import type { NewsItem } from "./news/types";
 import { collectNews, newsHash } from "./news/collect";
 import { generateBrief, type Brief } from "./ai/brief";
+import { dailyPoint } from "./market/dailyPoint";
+import { marketOutlook } from "./market/outlook";
 import { collectDiscoveries, type Universe } from "./discover/collect";
 import type { Discoveries } from "./discover/discover";
 import { convertBars, FX_PAIR, ratesFrom } from "./fx/fx";
@@ -119,7 +121,13 @@ export async function collectSnapshot(symbols: string[], previous?: Snapshot | n
   // Actualités, puis brief Claude régénéré seulement si de nouvelles actualités sont arrivées.
   const news = await collectNews(symbols, { finnhubKey: opt.finnhubKey, companyNews: opt.companyNews, previous: previous?.news, now });
   const baseScores = scoreSnapshot(market, prices, previous, {}, fx);
-  const brief = await makeBrief(news, baseScores, previous?.brief, opt, now);
+  // Contexte chiffré pour Claude : mêmes phrases que « Le point du jour » (marché, nervosité, tendance).
+  const spxC = spx.data?.bars.map((b) => b.close) ?? [], vixC = vix.data?.bars.map((b) => b.close) ?? [];
+  const context = dailyPoint({
+    spx: spx.data?.bars ?? [], vix: vix.data?.bars ?? [], fearGreed: fearGreed.data, marketNote: null, etfs: [], stocks: [],
+    outlook: marketOutlook({ spxCloses: spxC, vixCloses: vixC, fearGreed: fearGreed.data?.value ?? null }),
+  }).map((p) => `- ${p.text}`).join("\n");
+  const brief = await makeBrief(news, baseScores, previous?.brief, opt, now, context);
   const scores = scoreSnapshot(market, prices, previous, brief.data?.sentiments ?? {}, fx);
 
   const discoveries = opt.universe
@@ -146,6 +154,7 @@ async function makeBrief(
   previous: SourceResult<Brief> | undefined,
   opt: CollectOptions,
   now: Date,
+  context?: string,
 ): Promise<SourceResult<Brief>> {
   const items = news.data ?? [];
   const hash = newsHash(items);
@@ -156,7 +165,7 @@ async function makeBrief(
   if (!items.length) return stale("aucune actualité");
   try {
     const assets = Object.entries(scores).map(([symbol, s]) => ({ symbol, name: opt.names?.[symbol], decision: s.decision, reasons: s.reasons }));
-    const data = await generateBrief(opt.anthropic, items.slice(0, 60), assets, hash, now);
+    const data = await generateBrief(opt.anthropic, items.slice(0, 60), assets, hash, now, context);
     return { data, source: "Claude", fetchedAt: now.toISOString(), status: "ok" };
   } catch (e) {
     return stale(e instanceof Error ? e.message : String(e));

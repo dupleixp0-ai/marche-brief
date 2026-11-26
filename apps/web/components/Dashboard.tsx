@@ -1,6 +1,6 @@
 "use client";
 import { useCallback, useEffect, useMemo, useState, type ReactNode } from "react";
-import { dailyChangePct, marketOutlook, marketSummary, ratesFrom, smaSeries, DISPLAY_CURRENCIES, type Discovery, type DisplayCurrency, type IntradaySeries, type Snapshot } from "@marche-brief/core";
+import { dailyChangePct, dailyPoint, marketOutlook, type PointBullet, type Tone, marketSummary, ratesFrom, smaSeries, DISPLAY_CURRENCIES, type Discovery, type DisplayCurrency, type IntradaySeries, type Snapshot } from "@marche-brief/core";
 import type { DashboardData, WatchItem } from "../lib/types";
 import { AssetCard } from "./AssetCard";
 import { InfoTip } from "./InfoTip";
@@ -84,35 +84,68 @@ function Skeleton({ h = 64 }: { h?: number }) {
   return <div className="animate-pulse rounded-2xl bg-slate-200 dark:bg-slate-800" style={{ height: h }} />;
 }
 
-function BriefList({ snap, max }: { snap: Snapshot | null; max?: number }) {
+const TONE_DOT: Record<Tone, string> = { up: "bg-green-500", down: "bg-red-500", warn: "bg-amber-500", neutral: "bg-slate-400" };
+
+/** « Le point du jour » (chiffres) + résumé des actualités par Claude (si disponible) + liens des sources. */
+function BriefList({ snap, point, max, full = false }: { snap: Snapshot | null; point: PointBullet[]; max?: number; full?: boolean }) {
   const brief = snap?.brief;
   const news = snap?.news?.data ?? [];
-  if (brief?.data) {
-    return (
-      <>
-        <ul className="space-y-2 text-sm">
-          {brief.data.bullets.slice(0, max).map((b, i) => (
-            <li key={i} className="flex gap-2">
-              <span className="mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full bg-blue-600" />
-              <span>{b.text}{" "}
-                {b.links.map((l, j) => <a key={j} href={l.url} target="_blank" rel="noopener noreferrer" title={l.title} className="ml-0.5 text-xs text-blue-600 hover:underline">[{j + 1}]</a>)}
-              </span>
+  return (
+    <div className="space-y-4">
+      <div>
+        {full && <h3 className="mb-2 text-sm font-semibold">Le point du jour</h3>}
+        <ul className="space-y-2.5 text-sm">
+          {point.slice(0, max).map((b) => (
+            <li key={b.topic} className="flex gap-2.5">
+              <span className={`mt-1.5 h-2 w-2 shrink-0 rounded-full ${TONE_DOT[b.tone]}`} />
+              <span><b className="font-semibold">{b.topic} · </b>{b.text}</span>
             </li>
           ))}
         </ul>
-        <p className="mt-2 text-[10px] text-slate-500">Résumé par Claude ({brief.data.model}) · {fmtDateTime(brief.fetchedAt)} <StatusBadge status={brief.status} /></p>
-      </>
-    );
-  }
-  return (
-    <>
-      <p className="text-xs text-slate-500">Résumé indisponible{brief?.error ? ` (${brief.error})` : ""}. Dernières actualités :</p>
-      <ul className="mt-2 space-y-1.5 text-sm">
-        {news.slice(0, max ?? 6).map((n) => (
-          <li key={n.url}><a href={n.url} target="_blank" rel="noopener noreferrer" className="hover:underline">{n.title}</a> <span className="text-[10px] text-slate-500">· {n.source}{n.publishedAt ? ` · ${fmtDateTime(n.publishedAt)}` : ""}</span></li>
-        ))}
-      </ul>
-    </>
+        {snap && <p className="mt-2 text-[10px] text-slate-500">Calculé à partir des cours et indicateurs du {fmtDateTime(snap.generatedAt)} (sans IA).</p>}
+      </div>
+
+      {full && (
+        <div>
+          <h3 className="mb-2 text-sm font-semibold">Les actualités résumées</h3>
+          {brief?.data?.bullets.length ? (
+            <>
+              <ul className="space-y-3 text-sm">
+                {brief.data.bullets.map((b, i) => (
+                  <li key={i} className="flex gap-2.5">
+                    <span className="mt-1.5 h-2 w-2 shrink-0 rounded-full bg-blue-600" />
+                    <span>{b.text}
+                      {b.links.length > 0 && (
+                        <span className="mt-1 flex flex-wrap gap-1">
+                          {b.links.map((l, j) => <a key={j} href={l.url} target="_blank" rel="noopener noreferrer" title={l.title} className="max-w-full truncate rounded-full bg-slate-100 px-2 py-0.5 text-[10px] text-blue-600 hover:underline dark:bg-slate-800">{l.title}</a>)}
+                        </span>
+                      )}
+                    </span>
+                  </li>
+                ))}
+              </ul>
+              <p className="mt-2 text-[10px] text-slate-500">Résumé rédigé par Claude ({brief.data.model}) à partir des sources ci-dessus · {fmtDateTime(brief.fetchedAt)} <StatusBadge status={brief.status} /></p>
+            </>
+          ) : (
+            <p className="rounded-xl bg-amber-50 p-3 text-xs text-amber-800 dark:bg-amber-950/40 dark:text-amber-300">
+              Le résumé des actualités par Claude s'activera dès que les clés <b>ANTHROPIC_API_KEY</b> (rédaction) et <b>FINNHUB_API_KEY</b> (actualités des marchés et des sociétés) seront ajoutées dans GitHub Secrets.
+              {brief?.error && <span className="mt-1 block text-[10px] opacity-80">État : {brief.error}</span>}
+            </p>
+          )}
+        </div>
+      )}
+
+      {full && news.length > 0 && (
+        <details>
+          <summary className="cursor-pointer text-xs text-blue-600">Sources : {news.length} dernières actualités ({snap?.news?.source})</summary>
+          <ul className="mt-2 space-y-1.5 text-sm">
+            {news.slice(0, 30).map((n) => (
+              <li key={n.url}><a href={n.url} target="_blank" rel="noopener noreferrer" className="hover:underline">{n.title}</a> <span className="text-[10px] text-slate-500">· {n.source}{n.publishedAt ? ` · ${fmtDateTime(n.publishedAt)}` : ""}</span></li>
+            ))}
+          </ul>
+        </details>
+      )}
+    </div>
   );
 }
 
@@ -254,6 +287,20 @@ function Inner({ data, snap, setSnap }: { data: DashboardData; snap: Snapshot | 
   const sources = snap ? [snap.market.vix, snap.market.spx, snap.market.fearGreed, ...(snap.news ? [snap.news] : []), ...(snap.brief ? [snap.brief] : []), ...Object.values(snap.fx ?? {}), ...Object.values(snap.prices)] : [];
   const okCount = sources.filter((s) => s.status === "ok").length;
   const fg = snap?.market.fearGreed;
+  // « Le point du jour » : phrases calculées à partir des chiffres (règles dans packages/core).
+  const point = useMemo<PointBullet[]>(() => {
+    if (!snap || !market) return [];
+    const top = (l?: Discovery[]) => l?.length ? [...l].sort((a, b) => b.score - a.score)[0] : undefined;
+    const ds = top(snap.discoveries?.data?.stocks), de = top(snap.discoveries?.data?.etfs);
+    return dailyPoint({
+      spx: snap.market.spx.data?.bars ?? [], vix: snap.market.vix.data?.bars ?? [], fearGreed: snap.market.fearGreed.data,
+      outlook: market.outlook, marketNote: null, // déjà affichée dans l'en-tête
+      etfs: data.watchlist.etfs.map((e) => ({ ticker: e.ticker, name: e.name ?? e.ticker, bars: snap.prices[e.ticker]?.data?.bars ?? [], decision: snap.scores[e.ticker]?.decision })),
+      stocks: data.watchlist.stocks.map((x) => ({ ticker: x.ticker, bars: snap.prices[x.ticker]?.data?.bars ?? [], decision: snap.scores[x.ticker]?.decision })),
+      discoveries: { stock: ds && { name: ds.name, country: ds.country, score: ds.score }, etf: de && { name: de.name, score: de.score } },
+    });
+  }, [snap, market, data.watchlist]);
+
   const signals = useMemo(() => {
     const c = { Acheter: 0, Attendre: 0, Vendre: 0 };
     for (const s of Object.values(snap?.scores ?? {})) c[s.decision]++;
@@ -337,7 +384,7 @@ function Inner({ data, snap, setSnap }: { data: DashboardData; snap: Snapshot | 
             <MiniTable items={data.watchlist.etfs} snap={snap} isEtf onOpen={(i) => openWatch(i, true)} />
           </Panel>
           <Panel title={t("brief")} right={<button onClick={() => setView("news")} className="text-xs text-blue-600">Tout lire →</button>}>
-            <BriefList snap={snap} max={4} />
+            <BriefList snap={snap} point={point} max={4} />
           </Panel>
           <Panel title={`${t("stocks")} — top score`} right={<button onClick={() => setView("stocks")} className="text-xs text-blue-600">Tout voir →</button>}>
             <MiniTable items={stocks.slice(0, 5)} snap={snap} isEtf={false} onOpen={(i) => openWatch(i, false)} />
@@ -394,21 +441,13 @@ function Inner({ data, snap, setSnap }: { data: DashboardData; snap: Snapshot | 
     news: (
       <div className="grid gap-4 lg:grid-cols-3">
         <Panel title={t("brief")} className="lg:col-span-2">
-          <BriefList snap={snap} />
+          <BriefList snap={snap} point={point} full />
           {snap?.news && <p className="mt-1 text-[10px] text-slate-500">Actualités : {snap.news.source} · {fmtDateTime(snap.news.fetchedAt)} <StatusBadge status={snap.news.status} /></p>}
         </Panel>
         <Panel title={t("upcoming")}>
           {data.events.length ? (
             <ul className="space-y-1 text-sm">{data.events.map((e) => <li key={e.date + e.title}><span className="text-slate-500">{e.date}</span> · {e.title}</li>)}</ul>
           ) : <p className="text-xs text-slate-500">{t("noEvents")}</p>}
-        </Panel>
-        <Panel title="Toutes les actualités" className="lg:col-span-3">
-          <ul className="divide-y divide-slate-100 text-sm dark:divide-slate-800">
-            {(snap?.news?.data ?? []).slice(0, 40).map((n) => (
-              <li key={n.url} className="py-2"><a href={n.url} target="_blank" rel="noopener noreferrer" className="hover:underline">{n.title}</a>
-                <span className="block text-[10px] text-slate-500">{n.source}{n.symbols.length ? ` · ${n.symbols.join(", ")}` : ""}{n.publishedAt ? ` · ${fmtDateTime(n.publishedAt)}` : ""}</span></li>
-            ))}
-          </ul>
         </Panel>
       </div>
     ),

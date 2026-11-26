@@ -1,8 +1,9 @@
 name: Collecte quotidienne (6h00 Berlin)
 on:
   schedule:
-    - cron: "0 4 * * *" # 6h00 heure d'été
-    - cron: "0 5 * * *" # 6h00 heure d'hiver
+    # Lundi à vendredi uniquement (04:00/05:00 UTC tombent le même jour qu'à Berlin).
+    - cron: "0 4 * * 1-5" # 6h00 heure d'été
+    - cron: "0 5 * * 1-5" # 6h00 heure d'hiver
   workflow_dispatch:
     inputs:
       backtest: { description: "Recalculer aussi le backtest", type: boolean, default: false }

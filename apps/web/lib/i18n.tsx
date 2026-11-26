@@ -6,7 +6,7 @@ export type Lang = "fr" | "en" | "de";
 const LANG_KEY = "marche-brief:lang";
 
 const fr = {
-  overview: "Vue d'ensemble", news: "Actualités", updated: "Mis à jour le", noData: "Aucune donnée", sourcesOk: "sources OK", refresh: "Actualiser",
+  overview: "Vue d'ensemble", portfolio: "Personnel", news: "Actualités", updated: "Mis à jour le", noData: "Aucune donnée", sourcesOk: "sources OK", refresh: "Actualiser",
   market: "Marché", brief: "Brief du jour", upcoming: "Événements à venir", noEvents: "Aucun événement saisi (config/events.json).",
   myEtfs: "Mes ETF", stocks: "Actions suivies", byScore: "Par score", byName: "Par nom",
   discoveries: "Découvertes", reliability: "Fiabilité", pullToRefresh: "Relâcher pour actualiser",
@@ -24,7 +24,7 @@ const fr = {
 type Dict = typeof fr;
 
 const en: Dict = {
-  overview: "Overview", news: "News", updated: "Updated", noData: "No data", sourcesOk: "sources OK", refresh: "Refresh",
+  overview: "Overview", portfolio: "My portfolio", news: "News", updated: "Updated", noData: "No data", sourcesOk: "sources OK", refresh: "Refresh",
   market: "Market", brief: "Daily brief", upcoming: "Upcoming events", noEvents: "No events entered (config/events.json).",
   myEtfs: "My ETFs", stocks: "Watched stocks", byScore: "By score", byName: "By name",
   discoveries: "Discoveries", reliability: "Reliability", pullToRefresh: "Release to refresh",
@@ -40,7 +40,7 @@ const en: Dict = {
 };
 
 const de: Dict = {
-  overview: "Übersicht", news: "Nachrichten", updated: "Aktualisiert am", noData: "Keine Daten", sourcesOk: "Quellen OK", refresh: "Aktualisieren",
+  overview: "Übersicht", portfolio: "Mein Depot", news: "Nachrichten", updated: "Aktualisiert am", noData: "Keine Daten", sourcesOk: "Quellen OK", refresh: "Aktualisieren",
   market: "Markt", brief: "Tagesbriefing", upcoming: "Anstehende Termine", noEvents: "Keine Termine erfasst (config/events.json).",
   myEtfs: "Meine ETFs", stocks: "Beobachtete Aktien", byScore: "Nach Score", byName: "Nach Name",
   discoveries: "Entdeckungen", reliability: "Zuverlässigkeit", pullToRefresh: "Loslassen zum Aktualisieren",

@@ -7,6 +7,8 @@ const SYMBOL: Record<DisplayCurrency, string> = { EUR: "€", USD: "$", GBP: "£
 
 interface Ctx {
   currency: DisplayCurrency;
+  /** Taux du snapshot (unités par €). */
+  rates: FxRates;
   setCurrency: (c: DisplayCurrency) => void;
   /** Convertit une série (null si taux manquant : on garde alors la devise d'origine). */
   bars: (b: Bar[], from?: string) => { bars: Bar[]; currency: string };
@@ -24,6 +26,7 @@ export function CurrencyProvider({ rates, children }: { rates: FxRates; children
   }, []);
   const value = useMemo<Ctx>(() => ({
     currency,
+    rates,
     setCurrency: (c) => { localStorage.setItem(KEY, c); set(c); },
     bars: (b, from) => {
       const out = convertBars(b, from, currency, rates);

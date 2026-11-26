@@ -9,6 +9,7 @@ import { TrackRecord } from "./TrackRecord";
 import { useI18n, type Lang, type TKey } from "../lib/i18n";
 import { usePullToRefresh } from "../lib/usePullToRefresh";
 import { DiscoveriesSection } from "./Discoveries";
+import { PortfolioView } from "./Portfolio";
 import { DetailSheet, type DetailTarget } from "./DetailSheet";
 import { FearGreedGauge } from "./FearGreedGauge";
 import { PriceChart } from "./PriceChart";
@@ -26,10 +27,11 @@ const CODE_KEY = "marche-brief:code";
 export const APP_NAME = "MarketPulse";
 
 // ---------- Navigation ----------
-const VIEWS = ["overview", "market", "etfs", "stocks", "discoveries", "news", "reliability"] as const;
+const VIEWS = ["overview", "portfolio", "market", "etfs", "stocks", "discoveries", "news", "reliability"] as const;
 type View = (typeof VIEWS)[number];
 const ICON: Record<View, string> = {
   overview: "M3 13h8V3H3v10zm0 8h8v-6H3v6zm10 0h8V11h-8v10zm0-18v6h8V3h-8z",
+  portfolio: "M6 10V7a6 6 0 0112 0v3M5 10h14v11H5zM12 14v3",
   market: "M3 17l6-6 4 4 8-8M14 7h7v7",
   etfs: "M12 2a10 10 0 100 20 10 10 0 000-20zm0 0v10l7 5",
   stocks: "M4 20V10m6 10V4m6 16v-7m4 7H2",
@@ -38,14 +40,14 @@ const ICON: Record<View, string> = {
   reliability: "M12 2l8 4v6c0 5-3.5 9-8 10-4.5-1-8-5-8-10V6l8-4zm-3 10l2 2 4-4",
 };
 const LABEL_KEY: Record<View, TKey> = {
-  overview: "overview", market: "market", etfs: "myEtfs", stocks: "stocks", discoveries: "discoveries", news: "news", reliability: "reliability",
+  overview: "overview", portfolio: "portfolio", market: "market", etfs: "myEtfs", stocks: "stocks", discoveries: "discoveries", news: "news", reliability: "reliability",
 };
 
 // Libellés courts de la barre d'onglets du téléphone.
 const SHORT: Record<Lang, Record<View, string>> = {
-  fr: { overview: "Accueil", market: "Marché", etfs: "ETF", stocks: "Actions", discoveries: "Découvrir", news: "Actus", reliability: "Fiabilité" },
-  en: { overview: "Home", market: "Market", etfs: "ETFs", stocks: "Stocks", discoveries: "Discover", news: "News", reliability: "Reliability" },
-  de: { overview: "Start", market: "Markt", etfs: "ETFs", stocks: "Aktien", discoveries: "Entdecken", news: "News", reliability: "Qualität" },
+  fr: { overview: "Accueil", portfolio: "Perso", market: "Marché", etfs: "ETF", stocks: "Actions", discoveries: "Découvrir", news: "Actus", reliability: "Fiabilité" },
+  en: { overview: "Home", portfolio: "Mine", market: "Market", etfs: "ETFs", stocks: "Stocks", discoveries: "Discover", news: "News", reliability: "Reliability" },
+  de: { overview: "Start", portfolio: "Depot", market: "Markt", etfs: "ETFs", stocks: "Aktien", discoveries: "Entdecken", news: "News", reliability: "Qualität" },
 };
 
 function Icon({ d, className = "h-5 w-5" }: { d: string; className?: string }) {
@@ -319,6 +321,15 @@ function Inner({ data, snap, setSnap }: { data: DashboardData; snap: Snapshot | 
       news: (snap.news?.data ?? []).filter((n) => n.symbols.includes(item.ticker)).slice(0, 5),
     });
   };
+  // Ouvre la fiche d'une valeur à partir de son symbole (onglet Personnel).
+  const openTicker = (ticker: string) => {
+    const e = data.watchlist.etfs.find((x) => x.ticker === ticker);
+    if (e) return openWatch(e, true);
+    const st = data.watchlist.stocks.find((x) => x.ticker === ticker);
+    if (st) return openWatch(st, false);
+    const d = [...(snap?.discoveries?.data?.stocks ?? []), ...(snap?.discoveries?.data?.etfs ?? [])].find((x) => x.ticker === ticker);
+    if (d) openDiscovery(d);
+  };
   const openDiscovery = (d: Discovery) => {
     setOpen({
       ticker: d.ticker, name: d.name, subtitle: `${d.country} · ${d.exchange} · ${d.sector} · cotation ${d.currency}`, isEtf: d.type === "etf",
@@ -404,6 +415,7 @@ function Inner({ data, snap, setSnap }: { data: DashboardData; snap: Snapshot | 
         </div>
       </div>
     ),
+    portfolio: <PortfolioView snap={snap} watchlist={data.watchlist} onOpen={openTicker} />,
     market: marketPanel(true),
     etfs: snap && (
       <div className="space-y-4">
@@ -493,7 +505,7 @@ function Inner({ data, snap, setSnap }: { data: DashboardData; snap: Snapshot | 
   const navBtn = (v: View, compact: boolean) => (
     <button key={v} onClick={() => setView(v)} aria-current={view === v ? "page" : undefined}
       className={compact
-        ? `flex min-w-14 flex-1 flex-col items-center gap-0.5 px-1 py-1.5 text-[10px] ${view === v ? "text-blue-600" : "text-slate-500"}`
+        ? `flex min-w-[2.9rem] flex-1 flex-col items-center gap-0.5 px-0.5 py-1.5 text-[10px] ${view === v ? "text-blue-600" : "text-slate-500"}`
         : `flex w-full items-center gap-3 rounded-xl px-3 py-2 text-sm font-medium ${view === v ? "bg-blue-600 text-white" : "text-slate-600 hover:bg-slate-100 dark:text-slate-300 dark:hover:bg-slate-800"}`}>
       <Icon d={ICON[v]} className={compact ? "h-5 w-5" : "h-5 w-5 shrink-0"} />
       <span className={compact ? "truncate" : ""}>{compact ? SHORT[lang][v] : t(LABEL_KEY[v])}</span>

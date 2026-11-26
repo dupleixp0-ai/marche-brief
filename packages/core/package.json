@@ -1,0 +1,17 @@
+{
+  "name": "@marche-brief/core",
+  "version": "0.0.1",
+  "private": true,
+  "type": "module",
+  "main": "src/index.ts",
+  "scripts": {
+    "test": "vitest run"
+  },
+  "devDependencies": {
+    "typescript": "^5.8.0",
+    "vitest": "^3.2.0"
+  },
+  "dependencies": {
+    "@anthropic-ai/sdk": "^1.14.0"
+  }
+}

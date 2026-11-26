@@ -1,0 +1,32 @@
+name: Déploiement GitHub Pages
+on:
+  push: { branches: [main] }
+  workflow_dispatch:
+  workflow_call: # appelé par daily.yml après la collecte
+permissions: { contents: read, pages: write, id-token: write }
+concurrency: { group: pages, cancel-in-progress: false }
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      # ref = branche : récupère aussi le commit de données créé juste avant par daily.yml
+      - uses: actions/checkout@v4
+        with: { ref: "${{ github.ref_name }}" }
+      - uses: actions/setup-node@v4
+        with: { node-version: 22, cache: npm }
+      - run: npm ci
+      - run: npm test
+      - run: npm run build
+        env:
+          BASE_PATH: "/${{ github.event.repository.name }}"
+          NEXT_PUBLIC_WORKER_URL: "${{ vars.WORKER_URL }}" # variable du dépôt (pas un secret)
+      - run: touch apps/web/out/.nojekyll
+      - uses: actions/upload-pages-artifact@v3
+        with: { path: apps/web/out }
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment: { name: github-pages, url: "${{ steps.d.outputs.page_url }}" }
+    steps:
+      - id: d
+        uses: actions/deploy-pages@v4

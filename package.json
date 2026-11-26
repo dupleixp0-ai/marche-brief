@@ -1,0 +1,25 @@
+{
+  "name": "marche-brief",
+  "private": true,
+  "workspaces": [
+    "packages/*",
+    "apps/*"
+  ],
+  "scripts": {
+    "dev": "npm run dev -w apps/web",
+    "build": "npm run build -w apps/web",
+    "test": "npm run test -w packages/core",
+    "collect": "tsx scripts/collect.ts",
+    "backtest": "tsx scripts/backtest.ts",
+    "should-run": "tsx scripts/should-run.ts",
+    "email:preview": "tsx scripts/email.ts"
+  },
+  "devDependencies": {
+    "tsx": "^4.20.0"
+  },
+  "dependencies": {
+    "@marche-brief/core": "*",
+    "@anthropic-ai/sdk": "^1.14.0"
+  },
+  "type": "module"
+}

@@ -1,0 +1,1334 @@
+{
+ "note": "Univers des Découvertes. 'broker' = cotation probable sur Trade Republic (à vérifier). Ajouter l'Asie-Pacifique à l'étape suivante.",
+ "liquidityMinEUR": {
+  "stock": 5000000,
+  "etf": 1000000
+ },
+ "regions": {
+  "Amérique": {
+   "benchmark": "^GSPC"
+  },
+  "Europe": {
+   "benchmark": "^STOXX"
+  },
+  "Asie-Pacifique": {
+   "benchmark": "URTH"
+  },
+  "Monde": {
+   "benchmark": "URTH"
+  }
+ },
+ "worldBenchmark": "URTH",
+ "items": [
+  {
+   "ticker": "AAPL",
+   "name": "Apple",
+   "type": "stock",
+   "region": "Amérique",
+   "country": "US",
+   "exchange": "NASDAQ/NYSE",
+   "sector": "Tech",
+   "broker": true
+  },
+  {
+   "ticker": "NFLX",
+   "name": "Netflix",
+   "type": "stock",
+   "region": "Amérique",
+   "country": "US",
+   "exchange": "NASDAQ/NYSE",
+   "sector": "Médias",
+   "broker": true
+  },
+  {
+   "ticker": "ORCL",
+   "name": "Oracle",
+   "type": "stock",
+   "region": "Amérique",
+   "country": "US",
+   "exchange": "NASDAQ/NYSE",
+   "sector": "Tech",
+   "broker": true
+  },
+  {
+   "ticker": "CRM",
+   "name": "Salesforce",
+   "type": "stock",
+   "region": "Amérique",
+   "country": "US",
+   "exchange": "NASDAQ/NYSE",
+   "sector": "Logiciels",
+   "broker": true
+  },
+  {
+   "ticker": "ADBE",
+   "name": "Adobe",
+   "type": "stock",
+   "region": "Amérique",
+   "country": "US",
+   "exchange": "NASDAQ/NYSE",
+   "sector": "Logiciels",
+   "broker": true
+  },
+  {
+   "ticker": "INTU",
+   "name": "Intuit",
+   "type": "stock",
+   "region": "Amérique",
+   "country": "US",
+   "exchange": "NASDAQ/NYSE",
+   "sector": "Logiciels",
+   "broker": true
+  },
+  {
+   "ticker": "NOW",
+   "name": "ServiceNow",
+   "type": "stock",
+   "region": "Amérique",
+   "country": "US",
+   "exchange": "NASDAQ/NYSE",
+   "sector": "Logiciels",
+   "broker": true
+  },
+  {
+   "ticker": "QCOM",
+   "name": "Qualcomm",
+   "type": "stock",
+   "region": "Amérique",
+   "country": "US",
+   "exchange": "NASDAQ/NYSE",
+   "sector": "Semi-conducteurs",
+   "broker": true
+  },
+  {
+   "ticker": "TXN",
+   "name": "Texas Instruments",
+   "type": "stock",
+   "region": "Amérique",
+   "country": "US",
+   "exchange": "NASDAQ/NYSE",
+   "sector": "Semi-conducteurs",
+   "broker": true
+  },
+  {
+   "ticker": "AMAT",
+   "name": "Applied Materials",
+   "type": "stock",
+   "region": "Amérique",
+   "country": "US",
+   "exchange": "NASDAQ/NYSE",
+   "sector": "Semi-conducteurs",
+   "broker": true
+  },
+  {
+   "ticker": "LRCX",
+   "name": "Lam Research",
+   "type": "stock",
+   "region": "Amérique",
+   "country": "US",
+   "exchange": "NASDAQ/NYSE",
+   "sector": "Semi-conducteurs",
+   "broker": true
+  },
+  {
+   "ticker": "KLAC",
+   "name": "KLA",
+   "type": "stock",
+   "region": "Amérique",
+   "country": "US",
+   "exchange": "NASDAQ/NYSE",
+   "sector": "Semi-conducteurs",
+   "broker": true
+  },
+  {
+   "ticker": "ARM",
+   "name": "Arm Holdings",
+   "type": "stock",
+   "region": "Amérique",
+   "country": "US",
+   "exchange": "NASDAQ/NYSE",
+   "sector": "Semi-conducteurs",
+   "broker": true
+  },
+  {
+   "ticker": "ANET",
+   "name": "Arista Networks",
+   "type": "stock",
+   "region": "Amérique",
+   "country": "US",
+   "exchange": "NASDAQ/NYSE",
+   "sector": "Réseaux",
+   "broker": true
+  },
+  {
+   "ticker": "CSCO",
+   "name": "Cisco",
+   "type": "stock",
+   "region": "Amérique",
+   "country": "US",
+   "exchange": "NASDAQ/NYSE",
+   "sector": "Réseaux",
+   "broker": true
+  },
+  {
+   "ticker": "IBM",
+   "name": "IBM",
+   "type": "stock",
+   "region": "Amérique",
+   "country": "US",
+   "exchange": "NASDAQ/NYSE",
+   "sector": "Tech",
+   "broker": true
+  },
+  {
+   "ticker": "UBER",
+   "name": "Uber",
+   "type": "stock",
+   "region": "Amérique",
+   "country": "US",
+   "exchange": "NASDAQ/NYSE",
+   "sector": "Transport",
+   "broker": true
+  },
+  {
+   "ticker": "PLTR",
+   "name": "Palantir",
+   "type": "stock",
+   "region": "Amérique",
+   "country": "US",
+   "exchange": "NASDAQ/NYSE",
+   "sector": "Logiciels",
+   "broker": true
+  },
+  {
+   "ticker": "NET",
+   "name": "Cloudflare",
+   "type": "stock",
+   "region": "Amérique",
+   "country": "US",
+   "exchange": "NASDAQ/NYSE",
+   "sector": "Cybersécurité",
+   "broker": true
+  },
+  {
+   "ticker": "ZS",
+   "name": "Zscaler",
+   "type": "stock",
+   "region": "Amérique",
+   "country": "US",
+   "exchange": "NASDAQ/NYSE",
+   "sector": "Cybersécurité",
+   "broker": true
+  },
+  {
+   "ticker": "FTNT",
+   "name": "Fortinet",
+   "type": "stock",
+   "region": "Amérique",
+   "country": "US",
+   "exchange": "NASDAQ/NYSE",
+   "sector": "Cybersécurité",
+   "broker": true
+  },
+  {
+   "ticker": "DDOG",
+   "name": "Datadog",
+   "type": "stock",
+   "region": "Amérique",
+   "country": "US",
+   "exchange": "NASDAQ/NYSE",
+   "sector": "Logiciels",
+   "broker": true
+  },
+  {
+   "ticker": "SNOW",
+   "name": "Snowflake",
+   "type": "stock",
+   "region": "Amérique",
+   "country": "US",
+   "exchange": "NASDAQ/NYSE",
+   "sector": "Logiciels",
+   "broker": true
+  },
+  {
+   "ticker": "JPM",
+   "name": "JPMorgan",
+   "type": "stock",
+   "region": "Amérique",
+   "country": "US",
+   "exchange": "NASDAQ/NYSE",
+   "sector": "Finance",
+   "broker": true
+  },
+  {
+   "ticker": "V",
+   "name": "Visa",
+   "type": "stock",
+   "region": "Amérique",
+   "country": "US",
+   "exchange": "NASDAQ/NYSE",
+   "sector": "Finance",
+   "broker": true
+  },
+  {
+   "ticker": "MA",
+   "name": "Mastercard",
+   "type": "stock",
+   "region": "Amérique",
+   "country": "US",
+   "exchange": "NASDAQ/NYSE",
+   "sector": "Finance",
+   "broker": true
+  },
+  {
+   "ticker": "GS",
+   "name": "Goldman Sachs",
+   "type": "stock",
+   "region": "Amérique",
+   "country": "US",
+   "exchange": "NASDAQ/NYSE",
+   "sector": "Finance",
+   "broker": true
+  },
+  {
+   "ticker": "BRK-B",
+   "name": "Berkshire Hathaway",
+   "type": "stock",
+   "region": "Amérique",
+   "country": "US",
+   "exchange": "NASDAQ/NYSE",
+   "sector": "Finance",
+   "broker": true
+  },
+  {
+   "ticker": "LLY",
+   "name": "Eli Lilly",
+   "type": "stock",
+   "region": "Amérique",
+   "country": "US",
+   "exchange": "NASDAQ/NYSE",
+   "sector": "Santé",
+   "broker": true
+  },
+  {
+   "ticker": "UNH",
+   "name": "UnitedHealth",
+   "type": "stock",
+   "region": "Amérique",
+   "country": "US",
+   "exchange": "NASDAQ/NYSE",
+   "sector": "Santé",
+   "broker": true
+  },
+  {
+   "ticker": "JNJ",
+   "name": "Johnson & Johnson",
+   "type": "stock",
+   "region": "Amérique",
+   "country": "US",
+   "exchange": "NASDAQ/NYSE",
+   "sector": "Santé",
+   "broker": true
+  },
+  {
+   "ticker": "ABBV",
+   "name": "AbbVie",
+   "type": "stock",
+   "region": "Amérique",
+   "country": "US",
+   "exchange": "NASDAQ/NYSE",
+   "sector": "Santé",
+   "broker": true
+  },
+  {
+   "ticker": "ISRG",
+   "name": "Intuitive Surgical",
+   "type": "stock",
+   "region": "Amérique",
+   "country": "US",
+   "exchange": "NASDAQ/NYSE",
+   "sector": "Santé",
+   "broker": true
+  },
+  {
+   "ticker": "VRTX",
+   "name": "Vertex",
+   "type": "stock",
+   "region": "Amérique",
+   "country": "US",
+   "exchange": "NASDAQ/NYSE",
+   "sector": "Santé",
+   "broker": true
+  },
+  {
+   "ticker": "XOM",
+   "name": "ExxonMobil",
+   "type": "stock",
+   "region": "Amérique",
+   "country": "US",
+   "exchange": "NASDAQ/NYSE",
+   "sector": "Énergie",
+   "broker": true
+  },
+  {
+   "ticker": "CVX",
+   "name": "Chevron",
+   "type": "stock",
+   "region": "Amérique",
+   "country": "US",
+   "exchange": "NASDAQ/NYSE",
+   "sector": "Énergie",
+   "broker": true
+  },
+  {
+   "ticker": "CAT",
+   "name": "Caterpillar",
+   "type": "stock",
+   "region": "Amérique",
+   "country": "US",
+   "exchange": "NASDAQ/NYSE",
+   "sector": "Industrie",
+   "broker": true
+  },
+  {
+   "ticker": "GE",
+   "name": "GE Aerospace",
+   "type": "stock",
+   "region": "Amérique",
+   "country": "US",
+   "exchange": "NASDAQ/NYSE",
+   "sector": "Aéronautique",
+   "broker": true
+  },
+  {
+   "ticker": "ETN",
+   "name": "Eaton",
+   "type": "stock",
+   "region": "Amérique",
+   "country": "US",
+   "exchange": "NASDAQ/NYSE",
+   "sector": "Industrie",
+   "broker": true
+  },
+  {
+   "ticker": "VRT",
+   "name": "Vertiv",
+   "type": "stock",
+   "region": "Amérique",
+   "country": "US",
+   "exchange": "NASDAQ/NYSE",
+   "sector": "Data centers",
+   "broker": true
+  },
+  {
+   "ticker": "DE",
+   "name": "Deere",
+   "type": "stock",
+   "region": "Amérique",
+   "country": "US",
+   "exchange": "NASDAQ/NYSE",
+   "sector": "Industrie",
+   "broker": true
+  },
+  {
+   "ticker": "HD",
+   "name": "Home Depot",
+   "type": "stock",
+   "region": "Amérique",
+   "country": "US",
+   "exchange": "NASDAQ/NYSE",
+   "sector": "Consommation",
+   "broker": true
+  },
+  {
+   "ticker": "COST",
+   "name": "Costco",
+   "type": "stock",
+   "region": "Amérique",
+   "country": "US",
+   "exchange": "NASDAQ/NYSE",
+   "sector": "Consommation",
+   "broker": true
+  },
+  {
+   "ticker": "WMT",
+   "name": "Walmart",
+   "type": "stock",
+   "region": "Amérique",
+   "country": "US",
+   "exchange": "NASDAQ/NYSE",
+   "sector": "Consommation",
+   "broker": true
+  },
+  {
+   "ticker": "MCD",
+   "name": "McDonald's",
+   "type": "stock",
+   "region": "Amérique",
+   "country": "US",
+   "exchange": "NASDAQ/NYSE",
+   "sector": "Consommation",
+   "broker": true
+  },
+  {
+   "ticker": "TSLA",
+   "name": "Tesla",
+   "type": "stock",
+   "region": "Amérique",
+   "country": "US",
+   "exchange": "NASDAQ/NYSE",
+   "sector": "Automobile",
+   "broker": true
+  },
+  {
+   "ticker": "LIN",
+   "name": "Linde",
+   "type": "stock",
+   "region": "Amérique",
+   "country": "US",
+   "exchange": "NASDAQ/NYSE",
+   "sector": "Matériaux",
+   "broker": true
+  },
+  {
+   "ticker": "NEE",
+   "name": "NextEra Energy",
+   "type": "stock",
+   "region": "Amérique",
+   "country": "US",
+   "exchange": "NASDAQ/NYSE",
+   "sector": "Services publics",
+   "broker": true
+  },
+  {
+   "ticker": "PLD",
+   "name": "Prologis",
+   "type": "stock",
+   "region": "Amérique",
+   "country": "US",
+   "exchange": "NASDAQ/NYSE",
+   "sector": "Immobilier",
+   "broker": true
+  },
+  {
+   "ticker": "DELL",
+   "name": "Dell",
+   "type": "stock",
+   "region": "Amérique",
+   "country": "US",
+   "exchange": "NASDAQ/NYSE",
+   "sector": "Tech",
+   "broker": true
+  },
+  {
+   "ticker": "LMT",
+   "name": "Lockheed Martin",
+   "type": "stock",
+   "region": "Amérique",
+   "country": "US",
+   "exchange": "NASDAQ/NYSE",
+   "sector": "Défense",
+   "broker": true
+  },
+  {
+   "ticker": "SAP.DE",
+   "name": "SAP",
+   "type": "stock",
+   "region": "Europe",
+   "country": "DE",
+   "exchange": "XETRA",
+   "sector": "Logiciels",
+   "broker": true
+  },
+  {
+   "ticker": "SIE.DE",
+   "name": "Siemens",
+   "type": "stock",
+   "region": "Europe",
+   "country": "DE",
+   "exchange": "XETRA",
+   "sector": "Industrie",
+   "broker": true
+  },
+  {
+   "ticker": "ALV.DE",
+   "name": "Allianz",
+   "type": "stock",
+   "region": "Europe",
+   "country": "DE",
+   "exchange": "XETRA",
+   "sector": "Finance",
+   "broker": true
+  },
+  {
+   "ticker": "DTE.DE",
+   "name": "Deutsche Telekom",
+   "type": "stock",
+   "region": "Europe",
+   "country": "DE",
+   "exchange": "XETRA",
+   "sector": "Télécoms",
+   "broker": true
+  },
+  {
+   "ticker": "IFX.DE",
+   "name": "Infineon",
+   "type": "stock",
+   "region": "Europe",
+   "country": "DE",
+   "exchange": "XETRA",
+   "sector": "Semi-conducteurs",
+   "broker": true
+  },
+  {
+   "ticker": "MUV2.DE",
+   "name": "Munich Re",
+   "type": "stock",
+   "region": "Europe",
+   "country": "DE",
+   "exchange": "XETRA",
+   "sector": "Finance",
+   "broker": true
+  },
+  {
+   "ticker": "RHM.DE",
+   "name": "Rheinmetall",
+   "type": "stock",
+   "region": "Europe",
+   "country": "DE",
+   "exchange": "XETRA",
+   "sector": "Défense",
+   "broker": true
+  },
+  {
+   "ticker": "MBG.DE",
+   "name": "Mercedes-Benz",
+   "type": "stock",
+   "region": "Europe",
+   "country": "DE",
+   "exchange": "XETRA",
+   "sector": "Automobile",
+   "broker": true
+  },
+  {
+   "ticker": "BAS.DE",
+   "name": "BASF",
+   "type": "stock",
+   "region": "Europe",
+   "country": "DE",
+   "exchange": "XETRA",
+   "sector": "Matériaux",
+   "broker": true
+  },
+  {
+   "ticker": "ADS.DE",
+   "name": "Adidas",
+   "type": "stock",
+   "region": "Europe",
+   "country": "DE",
+   "exchange": "XETRA",
+   "sector": "Consommation",
+   "broker": true
+  },
+  {
+   "ticker": "AIR.PA",
+   "name": "Airbus",
+   "type": "stock",
+   "region": "Europe",
+   "country": "FR",
+   "exchange": "Euronext Paris",
+   "sector": "Aéronautique",
+   "broker": true
+  },
+  {
+   "ticker": "MC.PA",
+   "name": "LVMH",
+   "type": "stock",
+   "region": "Europe",
+   "country": "FR",
+   "exchange": "Euronext Paris",
+   "sector": "Luxe",
+   "broker": true
+  },
+  {
+   "ticker": "OR.PA",
+   "name": "L'Oréal",
+   "type": "stock",
+   "region": "Europe",
+   "country": "FR",
+   "exchange": "Euronext Paris",
+   "sector": "Consommation",
+   "broker": true
+  },
+  {
+   "ticker": "RMS.PA",
+   "name": "Hermès",
+   "type": "stock",
+   "region": "Europe",
+   "country": "FR",
+   "exchange": "Euronext Paris",
+   "sector": "Luxe",
+   "broker": true
+  },
+  {
+   "ticker": "TTE.PA",
+   "name": "TotalEnergies",
+   "type": "stock",
+   "region": "Europe",
+   "country": "FR",
+   "exchange": "Euronext Paris",
+   "sector": "Énergie",
+   "broker": true
+  },
+  {
+   "ticker": "SU.PA",
+   "name": "Schneider Electric",
+   "type": "stock",
+   "region": "Europe",
+   "country": "FR",
+   "exchange": "Euronext Paris",
+   "sector": "Industrie",
+   "broker": true
+  },
+  {
+   "ticker": "SAN.PA",
+   "name": "Sanofi",
+   "type": "stock",
+   "region": "Europe",
+   "country": "FR",
+   "exchange": "Euronext Paris",
+   "sector": "Santé",
+   "broker": true
+  },
+  {
+   "ticker": "BNP.PA",
+   "name": "BNP Paribas",
+   "type": "stock",
+   "region": "Europe",
+   "country": "FR",
+   "exchange": "Euronext Paris",
+   "sector": "Finance",
+   "broker": true
+  },
+  {
+   "ticker": "SAF.PA",
+   "name": "Safran",
+   "type": "stock",
+   "region": "Europe",
+   "country": "FR",
+   "exchange": "Euronext Paris",
+   "sector": "Aéronautique",
+   "broker": true
+  },
+  {
+   "ticker": "AI.PA",
+   "name": "Air Liquide",
+   "type": "stock",
+   "region": "Europe",
+   "country": "FR",
+   "exchange": "Euronext Paris",
+   "sector": "Matériaux",
+   "broker": true
+  },
+  {
+   "ticker": "CAP.PA",
+   "name": "Capgemini",
+   "type": "stock",
+   "region": "Europe",
+   "country": "FR",
+   "exchange": "Euronext Paris",
+   "sector": "Tech",
+   "broker": true
+  },
+  {
+   "ticker": "ASML.AS",
+   "name": "ASML",
+   "type": "stock",
+   "region": "Europe",
+   "country": "NL",
+   "exchange": "Euronext Amsterdam",
+   "sector": "Semi-conducteurs",
+   "broker": true
+  },
+  {
+   "ticker": "ADYEN.AS",
+   "name": "Adyen",
+   "type": "stock",
+   "region": "Europe",
+   "country": "NL",
+   "exchange": "Euronext Amsterdam",
+   "sector": "Finance",
+   "broker": true
+  },
+  {
+   "ticker": "INGA.AS",
+   "name": "ING",
+   "type": "stock",
+   "region": "Europe",
+   "country": "NL",
+   "exchange": "Euronext Amsterdam",
+   "sector": "Finance",
+   "broker": true
+  },
+  {
+   "ticker": "ASM.AS",
+   "name": "ASM International",
+   "type": "stock",
+   "region": "Europe",
+   "country": "NL",
+   "exchange": "Euronext Amsterdam",
+   "sector": "Semi-conducteurs",
+   "broker": true
+  },
+  {
+   "ticker": "BESI.AS",
+   "name": "BE Semiconductor",
+   "type": "stock",
+   "region": "Europe",
+   "country": "NL",
+   "exchange": "Euronext Amsterdam",
+   "sector": "Semi-conducteurs",
+   "broker": true
+  },
+  {
+   "ticker": "NESN.SW",
+   "name": "Nestlé",
+   "type": "stock",
+   "region": "Europe",
+   "country": "CH",
+   "exchange": "SIX",
+   "sector": "Consommation",
+   "broker": true
+  },
+  {
+   "ticker": "NOVN.SW",
+   "name": "Novartis",
+   "type": "stock",
+   "region": "Europe",
+   "country": "CH",
+   "exchange": "SIX",
+   "sector": "Santé",
+   "broker": true
+  },
+  {
+   "ticker": "ROG.SW",
+   "name": "Roche",
+   "type": "stock",
+   "region": "Europe",
+   "country": "CH",
+   "exchange": "SIX",
+   "sector": "Santé",
+   "broker": true
+  },
+  {
+   "ticker": "UBSG.SW",
+   "name": "UBS",
+   "type": "stock",
+   "region": "Europe",
+   "country": "CH",
+   "exchange": "SIX",
+   "sector": "Finance",
+   "broker": true
+  },
+  {
+   "ticker": "ABBN.SW",
+   "name": "ABB",
+   "type": "stock",
+   "region": "Europe",
+   "country": "CH",
+   "exchange": "SIX",
+   "sector": "Industrie",
+   "broker": true
+  },
+  {
+   "ticker": "SHEL.L",
+   "name": "Shell",
+   "type": "stock",
+   "region": "Europe",
+   "country": "GB",
+   "exchange": "LSE",
+   "sector": "Énergie",
+   "broker": true
+  },
+  {
+   "ticker": "AZN.L",
+   "name": "AstraZeneca",
+   "type": "stock",
+   "region": "Europe",
+   "country": "GB",
+   "exchange": "LSE",
+   "sector": "Santé",
+   "broker": true
+  },
+  {
+   "ticker": "HSBA.L",
+   "name": "HSBC",
+   "type": "stock",
+   "region": "Europe",
+   "country": "GB",
+   "exchange": "LSE",
+   "sector": "Finance",
+   "broker": true
+  },
+  {
+   "ticker": "ULVR.L",
+   "name": "Unilever",
+   "type": "stock",
+   "region": "Europe",
+   "country": "GB",
+   "exchange": "LSE",
+   "sector": "Consommation",
+   "broker": true
+  },
+  {
+   "ticker": "REL.L",
+   "name": "RELX",
+   "type": "stock",
+   "region": "Europe",
+   "country": "GB",
+   "exchange": "LSE",
+   "sector": "Tech",
+   "broker": true
+  },
+  {
+   "ticker": "RR.L",
+   "name": "Rolls-Royce",
+   "type": "stock",
+   "region": "Europe",
+   "country": "GB",
+   "exchange": "LSE",
+   "sector": "Aéronautique",
+   "broker": true
+  },
+  {
+   "ticker": "BA.L",
+   "name": "BAE Systems",
+   "type": "stock",
+   "region": "Europe",
+   "country": "GB",
+   "exchange": "LSE",
+   "sector": "Défense",
+   "broker": true
+  },
+  {
+   "ticker": "NOVO-B.CO",
+   "name": "Novo Nordisk",
+   "type": "stock",
+   "region": "Europe",
+   "country": "DK",
+   "exchange": "Nasdaq Copenhague",
+   "sector": "Santé",
+   "broker": true
+  },
+  {
+   "ticker": "ITX.MC",
+   "name": "Inditex",
+   "type": "stock",
+   "region": "Europe",
+   "country": "ES",
+   "exchange": "BME",
+   "sector": "Consommation",
+   "broker": true
+  },
+  {
+   "ticker": "SAN.MC",
+   "name": "Banco Santander",
+   "type": "stock",
+   "region": "Europe",
+   "country": "ES",
+   "exchange": "BME",
+   "sector": "Finance",
+   "broker": true
+  },
+  {
+   "ticker": "IBE.MC",
+   "name": "Iberdrola",
+   "type": "stock",
+   "region": "Europe",
+   "country": "ES",
+   "exchange": "BME",
+   "sector": "Services publics",
+   "broker": true
+  },
+  {
+   "ticker": "ENEL.MI",
+   "name": "Enel",
+   "type": "stock",
+   "region": "Europe",
+   "country": "IT",
+   "exchange": "Borsa Italiana",
+   "sector": "Services publics",
+   "broker": true
+  },
+  {
+   "ticker": "ISP.MI",
+   "name": "Intesa Sanpaolo",
+   "type": "stock",
+   "region": "Europe",
+   "country": "IT",
+   "exchange": "Borsa Italiana",
+   "sector": "Finance",
+   "broker": true
+  },
+  {
+   "ticker": "RACE.MI",
+   "name": "Ferrari",
+   "type": "stock",
+   "region": "Europe",
+   "country": "IT",
+   "exchange": "Borsa Italiana",
+   "sector": "Automobile",
+   "broker": true
+  },
+  {
+   "ticker": "NOKIA.HE",
+   "name": "Nokia",
+   "type": "stock",
+   "region": "Europe",
+   "country": "FI",
+   "exchange": "Nasdaq Helsinki",
+   "sector": "Réseaux",
+   "broker": true
+  },
+  {
+   "ticker": "ERIC-B.ST",
+   "name": "Ericsson",
+   "type": "stock",
+   "region": "Europe",
+   "country": "SE",
+   "exchange": "Nasdaq Stockholm",
+   "sector": "Réseaux",
+   "broker": true
+  },
+  {
+   "ticker": "VOLV-B.ST",
+   "name": "Volvo",
+   "type": "stock",
+   "region": "Europe",
+   "country": "SE",
+   "exchange": "Nasdaq Stockholm",
+   "sector": "Industrie",
+   "broker": true
+  },
+  {
+   "ticker": "ATCO-A.ST",
+   "name": "Atlas Copco",
+   "type": "stock",
+   "region": "Europe",
+   "country": "SE",
+   "exchange": "Nasdaq Stockholm",
+   "sector": "Industrie",
+   "broker": true
+  },
+  {
+   "ticker": "EQNR.OL",
+   "name": "Equinor",
+   "type": "stock",
+   "region": "Europe",
+   "country": "NO",
+   "exchange": "Oslo Børs",
+   "sector": "Énergie",
+   "broker": true
+  },
+  {
+   "ticker": "QQQ",
+   "name": "Nasdaq 100",
+   "type": "etf",
+   "region": "Amérique",
+   "country": "US",
+   "exchange": "NYSE Arca/Nasdaq",
+   "sector": "Tech",
+   "broker": false
+  },
+  {
+   "ticker": "VGK",
+   "name": "FTSE Europe",
+   "type": "etf",
+   "region": "Europe",
+   "country": "US",
+   "exchange": "NYSE Arca/Nasdaq",
+   "sector": "Régional",
+   "broker": false
+  },
+  {
+   "ticker": "EWJ",
+   "name": "MSCI Japon",
+   "type": "etf",
+   "region": "Asie-Pacifique",
+   "country": "US",
+   "exchange": "NYSE Arca/Nasdaq",
+   "sector": "Régional",
+   "broker": false
+  },
+  {
+   "ticker": "EWG",
+   "name": "MSCI Allemagne",
+   "type": "etf",
+   "region": "Europe",
+   "country": "US",
+   "exchange": "NYSE Arca/Nasdaq",
+   "sector": "Régional",
+   "broker": false
+  },
+  {
+   "ticker": "EWQ",
+   "name": "MSCI France",
+   "type": "etf",
+   "region": "Europe",
+   "country": "US",
+   "exchange": "NYSE Arca/Nasdaq",
+   "sector": "Régional",
+   "broker": false
+  },
+  {
+   "ticker": "EWU",
+   "name": "MSCI Royaume-Uni",
+   "type": "etf",
+   "region": "Europe",
+   "country": "US",
+   "exchange": "NYSE Arca/Nasdaq",
+   "sector": "Régional",
+   "broker": false
+  },
+  {
+   "ticker": "INDA",
+   "name": "MSCI Inde",
+   "type": "etf",
+   "region": "Asie-Pacifique",
+   "country": "US",
+   "exchange": "NYSE Arca/Nasdaq",
+   "sector": "Émergents",
+   "broker": false
+  },
+  {
+   "ticker": "EWT",
+   "name": "MSCI Taïwan",
+   "type": "etf",
+   "region": "Asie-Pacifique",
+   "country": "US",
+   "exchange": "NYSE Arca/Nasdaq",
+   "sector": "Émergents",
+   "broker": false
+  },
+  {
+   "ticker": "EWY",
+   "name": "MSCI Corée du Sud",
+   "type": "etf",
+   "region": "Asie-Pacifique",
+   "country": "US",
+   "exchange": "NYSE Arca/Nasdaq",
+   "sector": "Émergents",
+   "broker": false
+  },
+  {
+   "ticker": "MCHI",
+   "name": "MSCI Chine",
+   "type": "etf",
+   "region": "Asie-Pacifique",
+   "country": "US",
+   "exchange": "NYSE Arca/Nasdaq",
+   "sector": "Émergents",
+   "broker": false
+  },
+  {
+   "ticker": "EEM",
+   "name": "MSCI Marchés émergents",
+   "type": "etf",
+   "region": "Monde",
+   "country": "US",
+   "exchange": "NYSE Arca/Nasdaq",
+   "sector": "Émergents",
+   "broker": false
+  },
+  {
+   "ticker": "EWZ",
+   "name": "MSCI Brésil",
+   "type": "etf",
+   "region": "Amérique",
+   "country": "US",
+   "exchange": "NYSE Arca/Nasdaq",
+   "sector": "Émergents",
+   "broker": false
+  },
+  {
+   "ticker": "ITA",
+   "name": "Aéronautique & défense US",
+   "type": "etf",
+   "region": "Amérique",
+   "country": "US",
+   "exchange": "NYSE Arca/Nasdaq",
+   "sector": "Défense",
+   "broker": false
+  },
+  {
+   "ticker": "XLE",
+   "name": "Énergie US",
+   "type": "etf",
+   "region": "Amérique",
+   "country": "US",
+   "exchange": "NYSE Arca/Nasdaq",
+   "sector": "Énergie",
+   "broker": false
+  },
+  {
+   "ticker": "XLV",
+   "name": "Santé US",
+   "type": "etf",
+   "region": "Amérique",
+   "country": "US",
+   "exchange": "NYSE Arca/Nasdaq",
+   "sector": "Santé",
+   "broker": false
+  },
+  {
+   "ticker": "XLF",
+   "name": "Finance US",
+   "type": "etf",
+   "region": "Amérique",
+   "country": "US",
+   "exchange": "NYSE Arca/Nasdaq",
+   "sector": "Finance",
+   "broker": false
+  },
+  {
+   "ticker": "XLI",
+   "name": "Industrie US",
+   "type": "etf",
+   "region": "Amérique",
+   "country": "US",
+   "exchange": "NYSE Arca/Nasdaq",
+   "sector": "Industrie",
+   "broker": false
+  },
+  {
+   "ticker": "XLU",
+   "name": "Services publics US",
+   "type": "etf",
+   "region": "Amérique",
+   "country": "US",
+   "exchange": "NYSE Arca/Nasdaq",
+   "sector": "Services publics",
+   "broker": false
+  },
+  {
+   "ticker": "IBB",
+   "name": "Biotech",
+   "type": "etf",
+   "region": "Amérique",
+   "country": "US",
+   "exchange": "NYSE Arca/Nasdaq",
+   "sector": "Santé",
+   "broker": false
+  },
+  {
+   "ticker": "ICLN",
+   "name": "Énergie propre mondiale",
+   "type": "etf",
+   "region": "Monde",
+   "country": "US",
+   "exchange": "NYSE Arca/Nasdaq",
+   "sector": "Énergie propre",
+   "broker": false
+  },
+  {
+   "ticker": "URA",
+   "name": "Uranium",
+   "type": "etf",
+   "region": "Monde",
+   "country": "US",
+   "exchange": "NYSE Arca/Nasdaq",
+   "sector": "Énergie",
+   "broker": false
+  },
+  {
+   "ticker": "COPX",
+   "name": "Mines de cuivre",
+   "type": "etf",
+   "region": "Monde",
+   "country": "US",
+   "exchange": "NYSE Arca/Nasdaq",
+   "sector": "Matériaux",
+   "broker": false
+  },
+  {
+   "ticker": "SLV",
+   "name": "Argent",
+   "type": "etf",
+   "region": "Monde",
+   "country": "US",
+   "exchange": "NYSE Arca/Nasdaq",
+   "sector": "Métaux précieux",
+   "broker": false
+  },
+  {
+   "ticker": "BOTZ",
+   "name": "Robotique & IA",
+   "type": "etf",
+   "region": "Monde",
+   "country": "US",
+   "exchange": "NYSE Arca/Nasdaq",
+   "sector": "Tech",
+   "broker": false
+  },
+  {
+   "ticker": "IGV",
+   "name": "Logiciels US",
+   "type": "etf",
+   "region": "Amérique",
+   "country": "US",
+   "exchange": "NYSE Arca/Nasdaq",
+   "sector": "Logiciels",
+   "broker": false
+  },
+  {
+   "ticker": "EUNL.DE",
+   "name": "iShares Core MSCI World (UCITS)",
+   "type": "etf",
+   "region": "Monde",
+   "country": "DE",
+   "exchange": "XETRA",
+   "sector": "Monde",
+   "broker": true
+  },
+  {
+   "ticker": "SXR8.DE",
+   "name": "iShares Core S&P 500 (UCITS)",
+   "type": "etf",
+   "region": "Amérique",
+   "country": "DE",
+   "exchange": "XETRA",
+   "sector": "Régional",
+   "broker": true
+  },
+  {
+   "ticker": "IS3N.DE",
+   "name": "iShares Core MSCI EM IMI (UCITS)",
+   "type": "etf",
+   "region": "Monde",
+   "country": "DE",
+   "exchange": "XETRA",
+   "sector": "Émergents",
+   "broker": true
+  },
+  {
+   "ticker": "VWCE.DE",
+   "name": "Vanguard FTSE All-World (UCITS)",
+   "type": "etf",
+   "region": "Monde",
+   "country": "DE",
+   "exchange": "XETRA",
+   "sector": "Monde",
+   "broker": true
+  },
+  {
+   "ticker": "EXS1.DE",
+   "name": "iShares Core DAX (UCITS)",
+   "type": "etf",
+   "region": "Europe",
+   "country": "DE",
+   "exchange": "XETRA",
+   "sector": "Régional",
+   "broker": true
+  }
+ ]
+}

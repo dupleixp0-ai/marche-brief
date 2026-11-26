@@ -1,0 +1,13 @@
+# Cloudflare Worker : API « Actualiser ».
+# Secrets (jamais dans le dépôt) : npx wrangler secret put ACCESS_CODE
+#                                   npx wrangler secret put ANTHROPIC_API_KEY
+#                                   npx wrangler secret put FINNHUB_API_KEY (facultatif)
+name = "marche-brief-api"
+main = "src/index.ts"
+compatibility_date = "2026-11-01"
+
+[vars]
+# Origines autorisées (CORS), séparées par des virgules. Ajouter l'adresse GitHub Pages.
+ALLOWED_ORIGINS = "http://localhost:3200"
+# Snapshot publié (sert de « dernière valeur connue » et pour l'hystérésis). Vide = aucun.
+SNAPSHOT_URL = ""

@@ -1,0 +1,54 @@
+name: Collecte quotidienne (6h00 Berlin)
+on:
+  schedule:
+    - cron: "0 4 * * *" # 6h00 heure d'été
+    - cron: "0 5 * * *" # 6h00 heure d'hiver
+  workflow_dispatch:
+    inputs:
+      backtest: { description: "Recalculer aussi le backtest", type: boolean, default: false }
+concurrency: { group: daily, cancel-in-progress: false }
+jobs:
+  collect:
+    runs-on: ubuntu-latest
+    permissions: { contents: write }
+    outputs: { run: "${{ steps.guard.outputs.run }}" }
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with: { node-version: 22, cache: npm }
+      - run: npm ci
+      # Garde-fou : ne continue que s'il est ~6h à Berlin (ou lancement manuel).
+      - id: guard
+        run: npm run should-run
+        env: { FORCE: "${{ github.event_name == 'workflow_dispatch' }}" }
+      - if: steps.guard.outputs.run == 'true'
+        run: npm test
+      - if: steps.guard.outputs.run == 'true'
+        run: npm run collect
+        env:
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+          FINNHUB_API_KEY: ${{ secrets.FINNHUB_API_KEY }}
+          # E-mail : adresse et clé uniquement dans les secrets (jamais dans le dépôt public).
+          SEND_EMAIL: "true"
+          RESEND_API_KEY: ${{ secrets.RESEND_API_KEY }}
+          EMAIL_TO: ${{ secrets.EMAIL_TO }}
+          EMAIL_FROM: ${{ secrets.EMAIL_FROM }}
+          SITE_URL: ${{ vars.SITE_URL }}
+      # Backtest : chaque lundi, ou sur demande.
+      - if: steps.guard.outputs.run == 'true' && (inputs.backtest || github.event_name == 'schedule')
+        run: |
+          if [ "${{ inputs.backtest }}" = "true" ] || [ "$(TZ=Europe/Berlin date +%u)" = "1" ]; then npm run backtest; fi
+      - if: steps.guard.outputs.run == 'true'
+        name: Commit des données
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add data/
+          git diff --cached --quiet && echo "Rien à commiter" && exit 0
+          git commit -m "Données du $(TZ=Europe/Berlin date '+%Y-%m-%d %H:%M') (Berlin)"
+          git push
+  deploy:
+    needs: collect
+    if: needs.collect.outputs.run == 'true'
+    permissions: { contents: read, pages: write, id-token: write }
+    uses: ./.github/workflows/deploy.yml

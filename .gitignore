@@ -1,0 +1,12 @@
+node_modules/
+.next/
+out/
+.env*
+!.env.example
+.DS_Store
+apps/web/public/data/
+.next-dev/
+.dev.vars
+.wrangler/
+tmp/
+*.tsbuildinfo

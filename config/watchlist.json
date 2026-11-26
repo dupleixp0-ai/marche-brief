@@ -1,0 +1,19 @@
+{
+  "stocks": [
+    { "ticker": "NVDA", "sector": "Semi-conducteurs" }, { "ticker": "AVGO", "sector": "Semi-conducteurs" },
+    { "ticker": "AMD", "sector": "Semi-conducteurs" }, { "ticker": "MU", "sector": "Semi-conducteurs" },
+    { "ticker": "MSFT", "sector": "Tech" }, { "ticker": "GOOGL", "sector": "Tech" },
+    { "ticker": "AMZN", "sector": "Tech" }, { "ticker": "META", "sector": "Tech" },
+    { "ticker": "PANW", "sector": "Cybersécurité" }, { "ticker": "CRWD", "sector": "Cybersécurité" },
+    { "ticker": "EQIX", "sector": "Data centers" }, { "ticker": "DLR", "sector": "Data centers" }
+  ],
+  "etfs": [
+    { "ticker": "URTH", "name": "MSCI World", "tickerEUR": null },
+    { "ticker": "SMH", "name": "Semi-conducteurs VanEck", "tickerEUR": null },
+    { "ticker": "SOXX", "name": "Semi-conducteurs Nasdaq", "tickerEUR": null },
+    { "ticker": "CIBR", "name": "Cybersécurité", "tickerEUR": null },
+    { "ticker": "SRVR", "name": "Data centers", "tickerEUR": null },
+    { "ticker": "GLD", "name": "Or", "tickerEUR": null },
+    { "ticker": "SPY", "name": "S&P 500 (référence)", "tickerEUR": null }
+  ]
+}

@@ -53,7 +53,7 @@ function Icon({ d, className = "h-5 w-5" }: { d: string; className?: string }) {
 }
 
 // ---------- Éléments communs ----------
-const panel = "rounded-2xl border border-slate-200 bg-white p-4 shadow-sm dark:border-slate-800 dark:bg-slate-900";
+const panel = "min-w-0 rounded-2xl border border-slate-200 bg-white p-4 shadow-sm dark:border-slate-800 dark:bg-slate-900";
 
 function Panel({ title, right, children, className = "", onClick }: { title?: ReactNode; right?: ReactNode; children: ReactNode; className?: string; onClick?: () => void }) {
   return (
@@ -98,7 +98,7 @@ function BriefList({ snap, point, max, full = false }: { snap: Snapshot | null; 
           {point.slice(0, max).map((b) => (
             <li key={b.topic} className="flex gap-2.5">
               <span className={`mt-1.5 h-2 w-2 shrink-0 rounded-full ${TONE_DOT[b.tone]}`} />
-              <span><b className="font-semibold">{b.topic} · </b>{b.text}</span>
+              <span className="min-w-0 flex-1 break-words"><b className="font-semibold">{b.topic} · </b>{b.text}</span>
             </li>
           ))}
         </ul>
@@ -114,10 +114,10 @@ function BriefList({ snap, point, max, full = false }: { snap: Snapshot | null; 
                 {brief.data.bullets.map((b, i) => (
                   <li key={i} className="flex gap-2.5">
                     <span className="mt-1.5 h-2 w-2 shrink-0 rounded-full bg-blue-600" />
-                    <span>{b.text}
+                    <span className="min-w-0 flex-1 break-words">{b.text}
                       {b.links.length > 0 && (
                         <span className="mt-1 flex flex-wrap gap-1">
-                          {b.links.map((l, j) => <a key={j} href={l.url} target="_blank" rel="noopener noreferrer" title={l.title} className="max-w-full truncate rounded-full bg-slate-100 px-2 py-0.5 text-[10px] text-blue-600 hover:underline dark:bg-slate-800">{l.title}</a>)}
+                          {b.links.map((l, j) => <a key={j} href={l.url} target="_blank" rel="noopener noreferrer" title={l.title} className="block max-w-full truncate rounded-full bg-slate-100 px-2 py-0.5 text-[10px] text-blue-600 hover:underline dark:bg-slate-800">{l.title}</a>)}
                         </span>
                       )}
                     </span>
@@ -138,7 +138,7 @@ function BriefList({ snap, point, max, full = false }: { snap: Snapshot | null; 
       {full && news.length > 0 && (
         <details>
           <summary className="cursor-pointer text-xs text-blue-600">Sources : {news.length} dernières actualités ({snap?.news?.source})</summary>
-          <ul className="mt-2 space-y-1.5 text-sm">
+          <ul className="mt-2 space-y-1.5 break-words text-sm">
             {news.slice(0, 30).map((n) => (
               <li key={n.url}><a href={n.url} target="_blank" rel="noopener noreferrer" className="hover:underline">{n.title}</a> <span className="text-[10px] text-slate-500">· {n.source}{n.publishedAt ? ` · ${fmtDateTime(n.publishedAt)}` : ""}</span></li>
             ))}
@@ -541,7 +541,7 @@ function Inner({ data, snap, setSnap }: { data: DashboardData; snap: Snapshot | 
         {error && <p className="mt-1 text-xs text-red-600">{error}</p>}
       </header>
 
-      <main className="mx-auto max-w-7xl px-4 pb-24 pt-4 lg:px-8 lg:pb-8">
+      <main className="mx-auto min-w-0 max-w-7xl overflow-x-hidden px-4 pb-24 pt-4 lg:px-8 lg:pb-8">
         {pull > 0 && (
           <div className="flex justify-center py-2 text-xs text-slate-500" style={{ height: pull / 2 }}>{pull >= 80 ? t("pullToRefresh") : "↓"}</div>
         )}

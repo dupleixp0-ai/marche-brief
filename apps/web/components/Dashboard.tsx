@@ -469,7 +469,7 @@ function Inner({ data, snap, setSnap }: { data: DashboardData; snap: Snapshot | 
       </aside>
 
       {/* Bandeau d'état */}
-      <header className="sticky top-0 z-30 border-b border-slate-200 bg-slate-50/90 px-4 py-3 backdrop-blur lg:px-8 dark:border-slate-800 dark:bg-slate-950/90">
+      <header className="sticky top-0 z-30 border-b border-slate-200 bg-slate-50/95 px-4 pb-3 pt-[calc(env(safe-area-inset-top)+0.75rem)] backdrop-blur lg:px-8 dark:border-slate-800 dark:bg-slate-950/90">
         <div className="flex items-center justify-between gap-3">
           <div className="min-w-0">
             <p className="text-[11px] font-semibold uppercase tracking-wide text-blue-600 lg:hidden">{APP_NAME}</p>

@@ -26,7 +26,7 @@ export async function sendDailyEmail(snap: Snapshot, previous: Snapshot | null):
   if (!key || !to) { console.log("E-mail non envoyé : RESEND_API_KEY ou EMAIL_TO manquant."); return; }
   try {
     const id = await sendWithResend(key, {
-      from: process.env.EMAIL_FROM || "Marché-Brief <onboarding@resend.dev>",
+      from: process.env.EMAIL_FROM || "MarketPulse <onboarding@resend.dev>",
       to: to.split(",").map((s) => s.trim()),
       subject: digest.subject, html: digest.html, text: digest.text,
     });

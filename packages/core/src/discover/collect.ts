@@ -1,6 +1,7 @@
 import { withFallback } from "../fallback";
 import { yahooFetcher } from "../adapters/yahoo";
 import type { Bar, SourceResult } from "../types";
+import { FX_PAIR } from "../fx/fx";
 import { buildDiscoveries, evaluateCandidate, type Discoveries, type Evaluated, type UniverseItem } from "./discover";
 
 export interface Universe {
@@ -10,12 +11,6 @@ export interface Universe {
   items: UniverseItem[];
 }
 
-/** Taux Yahoo « EURxxx=X » = unités de devise pour 1 €. */
-const FX_PAIR: Record<string, { pair: string; scale: number }> = {
-  USD: { pair: "EURUSD=X", scale: 1 }, GBP: { pair: "EURGBP=X", scale: 1 }, GBp: { pair: "EURGBP=X", scale: 1 },
-  CHF: { pair: "EURCHF=X", scale: 1 }, SEK: { pair: "EURSEK=X", scale: 1 }, DKK: { pair: "EURDKK=X", scale: 1 },
-  NOK: { pair: "EURNOK=X", scale: 1 },
-};
 
 /** Collecte et évalue tout l'univers (job quotidien uniquement : ~130 requêtes). */
 export async function collectDiscoveries(
@@ -37,7 +32,7 @@ export async function collectDiscoveries(
     if (currency === "EUR") return null;
     const p = FX_PAIR[currency];
     if (!p) return undefined; // devise non gérée
-    const s = await get(p.pair);
+    const s = await get(p);
     return s ? s.bars.map((b) => ({ date: b.date, close: 1 / b.close })) : undefined; // € pour 1 unité
   };
 

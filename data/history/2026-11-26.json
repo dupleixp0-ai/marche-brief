@@ -1,54 +1,47 @@
 {
- "generatedAt": "2026-11-26T16:08:39.066Z",
+ "generatedAt": "2026-11-26T16:40:01.632Z",
  "recommendations": {
-  "URTH": {
-   "score": 34,
-   "decision": "Vendre",
-   "confidence": "moyenne",
-   "asOf": "2026-11-25",
-   "close": 194.5500030517578
-  },
-  "SMH": {
-   "score": 8,
-   "decision": "Vendre",
-   "confidence": "élevée",
-   "asOf": "2026-11-25",
-   "close": 422.4599914550781
-  },
-  "SOXX": {
-   "score": 8,
-   "decision": "Vendre",
-   "confidence": "élevée",
-   "asOf": "2026-11-25",
-   "close": 127.9800033569336
-  },
-  "CIBR": {
-   "score": 46,
+  "EUNL.DE": {
+   "score": 52,
    "decision": "Attendre",
-   "confidence": "moyenne",
-   "asOf": "2026-11-25",
-   "close": 94.83000183105469
+   "confidence": "élevée",
+   "asOf": "2026-11-26",
+   "close": 125.93000030517578
   },
-  "SRVR": {
-   "score": 14,
+  "IS3N.DE": {
+   "score": 17,
    "decision": "Vendre",
    "confidence": "élevée",
-   "asOf": "2026-11-25",
-   "close": 26.18000030517578
+   "asOf": "2026-11-26",
+   "close": 42.38999938964844
   },
-  "GLD": {
-   "score": 11,
+  "HNSC.MI": {
+   "score": 10,
    "decision": "Vendre",
    "confidence": "élevée",
-   "asOf": "2026-11-25",
-   "close": 327.45001220703125
+   "asOf": "2026-11-26",
+   "close": 27.149999618530273
   },
-  "SPY": {
-   "score": 34,
+  "VVSM.DE": {
+   "score": 9,
    "decision": "Vendre",
-   "confidence": "moyenne",
-   "asOf": "2026-11-25",
-   "close": 716.7000122070312
+   "confidence": "élevée",
+   "asOf": "2026-11-26",
+   "close": 71.37000274658203
+  },
+  "L0CK.DE": {
+   "score": 65,
+   "decision": "Attendre",
+   "confidence": "faible",
+   "asOf": "2026-11-26",
+   "close": 11.491999626159668
+  },
+  "PPFB.DE": {
+   "score": 13,
+   "decision": "Vendre",
+   "confidence": "élevée",
+   "asOf": "2026-11-26",
+   "close": 63.154998779296875
   },
   "NVDA": {
    "score": 8,

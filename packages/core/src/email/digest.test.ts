@@ -33,7 +33,7 @@ describe("alertes", () => {
 describe("buildDigest", () => {
   const d = buildDigest(snap(32, "Vendre"), snap(25, "Attendre"), { etfs: ["SPY"], stocks: ["NVDA"], siteUrl: "https://exemple.github.io/marche-brief/" });
   it("objet avec date, alertes et Fear & Greed", () => {
-    expect(d.subject).toBe("Marché-Brief · 26 novembre · 2 alerte(s) · Fear & Greed 20");
+    expect(d.subject).toBe("MarketPulse · 26 novembre · 2 alerte(s) · Fear & Greed 20");
   });
   it("heure réelle de collecte, titres échappés, lien du dashboard", () => {
     expect(d.html).toContain("06:02");

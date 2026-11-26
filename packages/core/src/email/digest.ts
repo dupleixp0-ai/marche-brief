@@ -54,7 +54,7 @@ export function buildDigest(snap: Snapshot, previous: Snapshot | null, opt: Dige
   const news = snap.news?.data ?? [];
   const disc = snap.discoveries?.data;
 
-  const subject = `Marché-Brief · ${new Date(snap.generatedAt).toLocaleDateString("fr-FR", { timeZone: "Europe/Berlin", day: "numeric", month: "long" })}`
+  const subject = `MarketPulse · ${new Date(snap.generatedAt).toLocaleDateString("fr-FR", { timeZone: "Europe/Berlin", day: "numeric", month: "long" })}`
     + (alerts.length ? ` · ${alerts.length} alerte(s)` : "")
     + (fg ? ` · Fear & Greed ${fg.value}` : "");
 
@@ -74,7 +74,7 @@ export function buildDigest(snap: Snapshot, previous: Snapshot | null, opt: Dige
 
   const html = `<!doctype html><html lang="fr"><body style="margin:0;background:#f1f5f9;font-family:-apple-system,Segoe UI,Roboto,sans-serif;color:#0f172a">
   <div style="max-width:600px;margin:0 auto;background:#fff;padding:20px">
-    <h1 style="font-size:20px;margin:0">Marché-Brief</h1>
+    <h1 style="font-size:20px;margin:0">MarketPulse</h1>
     <p style="color:#64748b;font-size:12px;margin:4px 0 0">Collecte réelle : ${esc(berlin(snap.generatedAt))} (heure de Berlin)</p>
     ${snap.marketNote ? `<p style="background:#fef3c7;padding:8px;border-radius:6px;font-size:13px">${esc(snap.marketNote)}</p>` : ""}
     ${alerts.length ? `${h2("⚠️ Alertes")}<ul style="padding-left:18px;font-size:14px">${alerts.map((a) => `<li>${esc(a.text)}</li>`).join("")}</ul>` : ""}
@@ -95,7 +95,7 @@ export function buildDigest(snap: Snapshot, previous: Snapshot | null, opt: Dige
   </div></body></html>`;
 
   const text = [
-    `Marché-Brief — collecte du ${berlin(snap.generatedAt)}`,
+    `MarketPulse — collecte du ${berlin(snap.generatedAt)}`,
     snap.marketNote ?? "",
     alerts.length ? `\nALERTES\n${alerts.map((a) => `- ${a.text}`).join("\n")}` : "",
     `\nMARCHÉ\n${fg ? `Fear & Greed ${fg.value} (${fg.label}) · ` : ""}VIX ${m.vix != null ? num(m.vix) : "—"}\n${m.sentence}`,

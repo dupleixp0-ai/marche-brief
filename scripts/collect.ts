@@ -19,6 +19,7 @@ const names = Object.fromEntries([...watchlist.etfs, ...watchlist.stocks].map((v
 const snap = await collectSnapshot(symbols, previous, {
   finnhubKey: process.env.FINNHUB_API_KEY,
   companyNews: true,
+  intraday: true,
   anthropic: process.env.ANTHROPIC_API_KEY ? new Anthropic() : null,
   names,
   universe: JSON.parse(readFileSync(path("config/universe.json"), "utf8")),
@@ -35,7 +36,8 @@ writeFileSync(path(`data/history/${day}.json`), JSON.stringify({ generatedAt: sn
 const history: ArchivedDay[] = readdirSync(path("data/history/"))
   .filter((f) => f.endsWith(".json"))
   .map((f) => JSON.parse(readFileSync(path(`data/history/${f}`), "utf8")));
-const priceMap = Object.fromEntries(Object.entries(snap.prices).map(([k, r]) => [k, r.data?.bars ?? []]));
+const priceMap: Record<string, { date: string; close: number }[]> = Object.fromEntries(Object.entries(snap.prices).map(([k, r]) => [k, r.data?.bars ?? []]));
+priceMap.SPY ??= snap.market.spx.data?.bars ?? []; // référence : S&P 500
 writeFileSync(path("data/track-record.json"), JSON.stringify(evaluateTrackRecord(history, priceMap), null, 1) + "\n");
 
 // Résumé console + journal des sources en échec.

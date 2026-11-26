@@ -1,5 +1,5 @@
 // Service worker : l'application et le dernier snapshot restent disponibles hors ligne.
-const CACHE = "marche-brief-v1";
+const CACHE = "marketpulse-v2";
 const SCOPE = self.registration.scope;
 
 self.addEventListener("install", (e) => {

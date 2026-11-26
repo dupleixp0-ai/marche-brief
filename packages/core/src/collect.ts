@@ -14,6 +14,11 @@ import { collectNews, newsHash } from "./news/collect";
 import { generateBrief, type Brief } from "./ai/brief";
 import { collectDiscoveries, type Universe } from "./discover/collect";
 import type { Discoveries } from "./discover/discover";
+import { convertBars, FX_PAIR, ratesFrom } from "./fx/fx";
+import { yahooIntradayFetcher, type IntradaySeries } from "./adapters/yahooIntraday";
+
+/** Devises dont on garde le taux contre l'euro (affichage et conversions). */
+export const FX_CURRENCIES = ["USD", "GBP", "CHF"] as const;
 
 export interface Snapshot {
   generatedAt: string;
@@ -29,6 +34,10 @@ export interface Snapshot {
   news: SourceResult<NewsItem[]>;
   brief: SourceResult<Brief>;
   discoveries: SourceResult<Discoveries> | null;
+  /** Taux EURxxx=X (unités de devise pour 1 €), clé = devise. */
+  fx: Record<string, SourceResult<PriceSeries>>;
+  /** Cours intraday 5 jours / 15 min (job quotidien ; le Worker garde les précédents). */
+  intraday?: Record<string, SourceResult<IntradaySeries>>;
 }
 
 export interface CollectOptions {
@@ -41,6 +50,8 @@ export interface CollectOptions {
   names?: Record<string, string>;
   /** Univers des découvertes (job quotidien). Absent = on garde les découvertes précédentes. */
   universe?: Universe | null;
+  /** Collecter l'intraday des valeurs suivies et des découvertes (job quotidien). */
+  intraday?: boolean;
 }
 
 /** Calcule les scores de toutes les valeurs ; `previous` sert à l'hystérésis. */
@@ -49,15 +60,20 @@ export function scoreSnapshot(
   prices: Snapshot["prices"],
   previous?: Snapshot | null,
   sentiments: Record<string, { value: number }> = {},
+  fx?: Snapshot["fx"],
 ): Snapshot["scores"] {
   const out: Snapshot["scores"] = {};
-  const bench = market.spx.data?.bars ?? [];
+  const benchUsd = market.spx.data?.bars ?? [];
+  const rates = ratesFrom(fx);
   const vix = market.vix.data?.bars.at(-1)?.close ?? null;
   const fg = market.fearGreed.data?.value ?? null;
   for (const [sym, r] of Object.entries(prices)) {
     const bars = r.data?.bars;
     if (!bars || bars.length < 210) continue; // pas assez d'historique : pas de score
     const closes = bars.map((b) => b.close);
+    // Force relative comparée dans la même devise (ex. ETF en euros vs S&P 500 converti en euros).
+    const cur = r.data?.currency ?? "USD";
+    const bench = cur === "USD" ? benchUsd : convertBars(benchUsd, "USD", cur === "GBp" ? "GBP" : cur, rates) ?? benchUsd;
     const benchCloses = alignTo(bars.map((b) => b.date), bench).map((x, i) => x ?? closes[i]);
     const res = scoreAsset({ closes, benchCloses, vix, fearGreed: fg, newsSentiment: sentiments[sym]?.value ?? null }, previous?.scores?.[sym]?.decision);
     out[sym] = { ...res, asOf: bars.at(-1)!.date };
@@ -83,6 +99,13 @@ export async function collectSnapshot(symbols: string[], previous?: Snapshot | n
   };
   const fearGreed = await withFallback([cnnFetcher(), homemade], previous?.market.fearGreed);
 
+  const fx: Snapshot["fx"] = {};
+  for (const c of FX_CURRENCIES) {
+    const pair = FX_PAIR[c];
+    const chain = [yahooFetcher(pair, "2y"), ...(c === "USD" ? [fredFetcher("DEXUSEU", pair)] : [])];
+    fx[c] = await withFallback(chain, previous?.fx?.[c]);
+  }
+
   const prices: Snapshot["prices"] = {};
   // Séquentiel avec petite pause : évite de saturer les sources gratuites.
   for (const s of symbols) {
@@ -95,16 +118,26 @@ export async function collectSnapshot(symbols: string[], previous?: Snapshot | n
 
   // Actualités, puis brief Claude régénéré seulement si de nouvelles actualités sont arrivées.
   const news = await collectNews(symbols, { finnhubKey: opt.finnhubKey, companyNews: opt.companyNews, previous: previous?.news, now });
-  const baseScores = scoreSnapshot(market, prices, previous);
+  const baseScores = scoreSnapshot(market, prices, previous, {}, fx);
   const brief = await makeBrief(news, baseScores, previous?.brief, opt, now);
-  const scores = scoreSnapshot(market, prices, previous, brief.data?.sentiments ?? {});
+  const scores = scoreSnapshot(market, prices, previous, brief.data?.sentiments ?? {}, fx);
 
   const discoveries = opt.universe
     ? await collectDiscoveries(opt.universe, { vix: vix.data?.bars.at(-1)?.close ?? null, fearGreed: fearGreed.data?.value ?? null, now, delayMs })
     : previous?.discoveries ?? null;
 
+  let intraday = previous?.intraday;
+  if (opt.intraday) {
+    intraday = {};
+    const extra = [...(discoveries?.data?.stocks ?? []), ...(discoveries?.data?.etfs ?? [])].map((d) => d.ticker);
+    for (const s of [...new Set([...symbols, ...extra])]) {
+      intraday[s] = await withFallback([yahooIntradayFetcher(s)], previous?.intraday?.[s]);
+      if (delayMs) await new Promise((r) => setTimeout(r, delayMs));
+    }
+  }
+
   const lastUs = prices["SPY"]?.data?.bars.at(-1)?.date ?? spx.data?.bars.at(-1)?.date;
-  return { generatedAt: now.toISOString(), marketNote: marketClosedNote(lastUs, now), market, prices, scores, news, brief, discoveries };
+  return { generatedAt: now.toISOString(), marketNote: marketClosedNote(lastUs, now), market, prices, scores, news, brief, discoveries, fx, intraday };
 }
 
 async function makeBrief(

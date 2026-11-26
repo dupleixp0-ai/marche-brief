@@ -22,6 +22,8 @@ export interface Discovery {
   breakout: boolean;           // proche du plus haut 1 an avec volume en hausse
   buyable: boolean | null;
   spark: number[];
+  /** ~1 an de clôtures (graphiques de la fiche détail). */
+  history: Bar[];
   why: string[];
   risks: string[];
 }
@@ -113,7 +115,7 @@ export function evaluateCandidate(c: CandidateInput): Evaluated {
       ...item, currency: c.currency, score: res.score, decision: res.decision, factors: res.factors,
       lastClose: last.close, lastDate: last.date, marketOpen: isExchangeOpen(item.exchange, now),
       perf3m: r3, perf3mEUR: r3EUR, relRegion, relWorld, breakout, buyable: item.broker ?? null,
-      spark: closes.slice(-63), why: why.slice(0, 3), risks: risks.slice(0, 3),
+      spark: closes.slice(-63), history: bars.slice(-260).map((b) => ({ date: b.date, close: +b.close.toPrecision(6) })), why: why.slice(0, 3), risks: risks.slice(0, 3),
     },
   };
 }

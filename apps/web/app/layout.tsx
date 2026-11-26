@@ -5,11 +5,11 @@ import { ServiceWorker } from "../components/ServiceWorker";
 const base = process.env.NEXT_PUBLIC_BASE_PATH ?? "";
 
 export const metadata = {
-  title: "Marché-Brief",
-  description: "Dashboard boursier quotidien",
+  title: "MarketPulse",
+  description: "Tableau de bord boursier quotidien : marché, ETF, actions, découvertes",
   manifest: `${base}/manifest.webmanifest`,
   icons: { icon: `${base}/icon.svg`, apple: `${base}/apple-touch-icon.png` },
-  appleWebApp: { capable: true, title: "Marché-Brief", statusBarStyle: "black-translucent" as const },
+  appleWebApp: { capable: true, title: "MarketPulse", statusBarStyle: "black-translucent" as const },
 };
 export const viewport = {
   width: "device-width",
@@ -26,7 +26,7 @@ export default function RootLayout({ children }: { children: ReactNode }) {
     <html lang="fr">
       <body className="min-h-screen bg-slate-50 text-slate-900 antialiased dark:bg-slate-950 dark:text-slate-100">
         {children}
-        <footer className="px-4 pb-[max(1.5rem,env(safe-area-inset-bottom))] text-center text-[11px] text-slate-500">
+        <footer className="px-4 pb-24 text-center lg:pb-6 lg:pl-64 text-[11px] text-slate-500">
           Information uniquement, pas un conseil en investissement.
         </footer>
         <ServiceWorker />

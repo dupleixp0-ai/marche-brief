@@ -26,3 +26,5 @@ export * from "./discover/collect";
 export * from "./email/digest";
 export * from "./email/send";
 export * from "./track/track";
+export * from "./fx/fx";
+export * from "./adapters/yahooIntraday";

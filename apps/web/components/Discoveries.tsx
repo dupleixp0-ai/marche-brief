@@ -3,7 +3,9 @@ import { useEffect, useMemo, useState } from "react";
 import type { Discovery, Discoveries as D, SourceResult } from "@marche-brief/core";
 import { DecisionBadge, StatusBadge } from "./Badges";
 import { Sparkline } from "./Sparkline";
-import { fmtDateTime, fmtNum, fmtRatio } from "../lib/format";
+import { fmtDateTime, fmtRatio } from "../lib/format";
+import { useCurrency } from "../lib/currency";
+import { Abbr } from "./Abbr";
 
 const FOLLOW_KEY = "marche-brief:suivies";
 const FLAG: Record<string, string> = { US: "🇺🇸", DE: "🇩🇪", FR: "🇫🇷", NL: "🇳🇱", CH: "🇨🇭", GB: "🇬🇧", DK: "🇩🇰", ES: "🇪🇸", IT: "🇮🇹", FI: "🇫🇮", SE: "🇸🇪", NO: "🇳🇴" };
@@ -22,12 +24,16 @@ export function useFollowed() {
 const pctCls = (x: number | null) => (x == null ? "" : x >= 0 ? "text-green-600" : "text-red-600");
 const signed = (x: number | null) => (x == null ? "—" : `${x >= 0 ? "+" : ""}${fmtRatio(x)}`);
 
-function Card({ d, followed, onFollow }: { d: Discovery; followed: boolean; onFollow: () => void }) {
+function Card({ d, followed, onFollow, onOpen }: { d: Discovery; followed: boolean; onFollow: () => void; onOpen: () => void }) {
+  const cur = useCurrency();
+  const conv = cur.bars(d.history?.length ? d.history : [{ date: d.lastDate, close: d.lastClose }], d.currency);
+  const spark = d.history?.length ? conv.bars.slice(-63).map((b) => b.close) : d.spark;
   return (
-    <article className="rounded-xl border border-slate-200 bg-white p-3 shadow-sm dark:border-slate-800 dark:bg-slate-900">
+    <article onClick={onOpen} role="button" tabIndex={0} onKeyDown={(e) => e.key === "Enter" && onOpen()}
+      className="cursor-pointer rounded-xl border border-slate-200 bg-white p-3 shadow-sm transition hover:border-blue-400 hover:shadow-md dark:border-slate-800 dark:bg-slate-900 dark:hover:border-blue-500">
       <div className="flex items-start gap-3">
         <div className="min-w-0 flex-1">
-          <p className="font-semibold">{d.name} <span className="text-xs font-normal text-slate-500">{d.ticker}</span></p>
+          <p className="font-semibold"><Abbr text={d.name} /> <span className="text-xs font-normal text-slate-500">{d.ticker}</span></p>
           <p className="text-[11px] text-slate-500">
             {FLAG[d.country] ?? d.country} {d.exchange} · {d.sector} · {d.currency}
           </p>
@@ -37,11 +43,11 @@ function Card({ d, followed, onFollow }: { d: Discovery; followed: boolean; onFo
         </div>
         <div className="text-right">
           <DecisionBadge decision={d.decision} score={d.score} />
-          <p className="mt-1 text-sm tabular-nums">{fmtNum(d.lastClose)}</p>
+          <p className="mt-1 text-sm tabular-nums">{cur.money(conv.bars.at(-1)?.close, conv.currency)}</p>
         </div>
       </div>
       <div className="mt-2 flex items-center justify-between gap-2">
-        <Sparkline values={d.spark} width={120} height={34} />
+        <Sparkline values={spark} width={120} height={34} />
         <div className="text-right text-[11px] tabular-nums">
           <p>3 mois : <span className={pctCls(d.perf3m)}>{signed(d.perf3m)}</span> {d.currency !== "EUR" && <>· en € <span className={pctCls(d.perf3mEUR)}>{signed(d.perf3mEUR)}</span></>}</p>
           <p className="text-slate-500">vs région {signed(d.relRegion)} · vs monde {signed(d.relWorld)}</p>
@@ -55,7 +61,8 @@ function Card({ d, followed, onFollow }: { d: Discovery; followed: boolean; onFo
         <span className="text-[10px] text-slate-500">
           {d.buyable ? "Probablement achetable (Trade Republic, à vérifier)" : d.buyable === false ? "Version UCITS à chercher chez ton courtier" : "Disponibilité inconnue"}
         </span>
-        <button onClick={onFollow}
+        <span className="text-[10px] text-blue-600">Graphiques →</span>
+        <button onClick={(e) => { e.stopPropagation(); onFollow(); }}
           className={`rounded-full px-3 py-1 text-xs font-semibold ${followed ? "bg-slate-200 dark:bg-slate-700" : "bg-blue-600 text-white"}`}>
           {followed ? "✓ Suivie" : "+ Suivre"}
         </button>
@@ -64,7 +71,7 @@ function Card({ d, followed, onFollow }: { d: Discovery; followed: boolean; onFo
   );
 }
 
-export function DiscoveriesSection({ res }: { res: SourceResult<D> | null | undefined }) {
+export function DiscoveriesSection({ res, onOpen }: { res: SourceResult<D> | null | undefined; onOpen: (d: Discovery) => void }) {
   const [region, setRegion] = useState("Tous");
   const [type, setType] = useState<"stocks" | "etfs">("stocks");
   const [buyableOnly, setBuyableOnly] = useState(false);
@@ -94,7 +101,7 @@ export function DiscoveriesSection({ res }: { res: SourceResult<D> | null | unde
         </label>
       </div>
       <div className="mt-3 grid gap-3 md:grid-cols-2 xl:grid-cols-3">
-        {shown.length ? shown.map((d) => <Card key={d.ticker} d={d} followed={list.includes(d.ticker)} onFollow={() => toggle(d.ticker)} />)
+        {shown.length ? shown.map((d) => <Card key={d.ticker} d={d} followed={list.includes(d.ticker)} onFollow={() => toggle(d.ticker)} onOpen={() => onOpen(d)} />)
           : <p className="text-sm text-slate-500">Aucune valeur ne remplit les critères avec ces filtres.</p>}
       </div>
       <p className="mt-2 text-[10px] text-slate-500">

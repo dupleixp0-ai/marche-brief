@@ -1,6 +1,6 @@
 {
-  "name": "Marché-Brief",
-  "short_name": "Marché-Brief",
+  "name": "MarketPulse",
+  "short_name": "MarketPulse",
   "description": "Dashboard boursier quotidien",
   "lang": "fr",
   "start_url": "./",

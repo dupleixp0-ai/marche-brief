@@ -1,5 +1,5 @@
 {
- "generatedAt": "2026-11-26T18:12:36.920Z",
+ "generatedAt": "2026-11-26T18:36:20.793Z",
  "marketNote": "Marché américain fermé (Thanksgiving) : cours du mercredi 25/11.",
  "market": {
   "vix": {
@@ -1280,7 +1280,7 @@
     ]
    },
    "source": "Yahoo Finance",
-   "fetchedAt": "2026-11-26T18:12:29.448Z",
+   "fetchedAt": "2026-11-26T18:36:13.829Z",
    "status": "ok"
   },
   "spx": {
@@ -3796,7 +3796,7 @@
     ]
    },
    "source": "Yahoo Finance",
-   "fetchedAt": "2026-11-26T18:12:29.419Z",
+   "fetchedAt": "2026-11-26T18:36:13.830Z",
    "status": "ok"
   },
   "fearGreed": {
@@ -3806,7 +3806,7 @@
     "homemade": false
    },
    "source": "CNN",
-   "fetchedAt": "2026-11-26T18:12:29.587Z",
+   "fetchedAt": "2026-11-26T18:36:13.864Z",
    "status": "ok"
   }
  },
@@ -6344,7 +6344,7 @@
     ]
    },
    "source": "Yahoo Finance",
-   "fetchedAt": "2026-11-26T18:12:29.877Z",
+   "fetchedAt": "2026-11-26T18:36:14.063Z",
    "status": "ok"
   },
   "IS3N.DE": {
@@ -8880,7 +8880,7 @@
     ]
    },
    "source": "Yahoo Finance",
-   "fetchedAt": "2026-11-26T18:12:30.234Z",
+   "fetchedAt": "2026-11-26T18:36:14.404Z",
    "status": "ok"
   },
   "HNSC.MI": {
@@ -11411,7 +11411,7 @@
     ]
    },
    "source": "Yahoo Finance",
-   "fetchedAt": "2026-11-26T18:12:30.598Z",
+   "fetchedAt": "2026-11-26T18:36:14.746Z",
    "status": "ok"
   },
   "VVSM.DE": {
@@ -13947,7 +13947,7 @@
     ]
    },
    "source": "Yahoo Finance",
-   "fetchedAt": "2026-11-26T18:12:30.958Z",
+   "fetchedAt": "2026-11-26T18:36:15.092Z",
    "status": "ok"
   },
   "L0CK.DE": {
@@ -16483,7 +16483,7 @@
     ]
    },
    "source": "Yahoo Finance",
-   "fetchedAt": "2026-11-26T18:12:31.327Z",
+   "fetchedAt": "2026-11-26T18:36:15.443Z",
    "status": "ok"
   },
   "V9N.DE": {
@@ -19019,7 +19019,7 @@
     ]
    },
    "source": "Yahoo Finance",
-   "fetchedAt": "2026-11-26T18:12:31.705Z",
+   "fetchedAt": "2026-11-26T18:36:15.791Z",
    "status": "ok"
   },
   "8PSG.DE": {
@@ -21560,7 +21560,7 @@
     ]
    },
    "source": "Yahoo Finance",
-   "fetchedAt": "2026-11-26T18:12:32.067Z",
+   "fetchedAt": "2026-11-26T18:36:16.189Z",
    "status": "ok"
   },
   "NVDA": {
@@ -24076,7 +24076,7 @@
     ]
    },
    "source": "Yahoo Finance",
-   "fetchedAt": "2026-11-26T18:12:32.439Z",
+   "fetchedAt": "2026-11-26T18:36:16.551Z",
    "status": "ok"
   },
   "AVGO": {
@@ -26592,7 +26592,7 @@
     ]
    },
    "source": "Yahoo Finance",
-   "fetchedAt": "2026-11-26T18:12:32.820Z",
+   "fetchedAt": "2026-11-26T18:36:16.920Z",
    "status": "ok"
   },
   "AMD": {
@@ -29108,7 +29108,7 @@
     ]
    },
    "source": "Yahoo Finance",
-   "fetchedAt": "2026-11-26T18:12:33.182Z",
+   "fetchedAt": "2026-11-26T18:36:17.283Z",
    "status": "ok"
   },
   "MU": {
@@ -31624,7 +31624,7 @@
     ]
    },
    "source": "Yahoo Finance",
-   "fetchedAt": "2026-11-26T18:12:33.585Z",
+   "fetchedAt": "2026-11-26T18:36:17.648Z",
    "status": "ok"
   },
   "MSFT": {
@@ -34140,7 +34140,7 @@
     ]
    },
    "source": "Yahoo Finance",
-   "fetchedAt": "2026-11-26T18:12:33.975Z",
+   "fetchedAt": "2026-11-26T18:36:18.017Z",
    "status": "ok"
   },
   "GOOGL": {
@@ -36656,7 +36656,7 @@
     ]
    },
    "source": "Yahoo Finance",
-   "fetchedAt": "2026-11-26T18:12:34.340Z",
+   "fetchedAt": "2026-11-26T18:36:18.367Z",
    "status": "ok"
   },
   "AMZN": {
@@ -39172,7 +39172,7 @@
     ]
    },
    "source": "Yahoo Finance",
-   "fetchedAt": "2026-11-26T18:12:34.701Z",
+   "fetchedAt": "2026-11-26T18:36:18.716Z",
    "status": "ok"
   },
   "META": {
@@ -41688,7 +41688,7 @@
     ]
    },
    "source": "Yahoo Finance",
-   "fetchedAt": "2026-11-26T18:12:35.090Z",
+   "fetchedAt": "2026-11-26T18:36:19.067Z",
    "status": "ok"
   },
   "PANW": {
@@ -44204,7 +44204,7 @@
     ]
    },
    "source": "Yahoo Finance",
-   "fetchedAt": "2026-11-26T18:12:35.451Z",
+   "fetchedAt": "2026-11-26T18:36:19.420Z",
    "status": "ok"
   },
   "CRWD": {
@@ -46720,7 +46720,7 @@
     ]
    },
    "source": "Yahoo Finance",
-   "fetchedAt": "2026-11-26T18:12:35.827Z",
+   "fetchedAt": "2026-11-26T18:36:19.778Z",
    "status": "ok"
   },
   "EQIX": {
@@ -49236,7 +49236,7 @@
     ]
    },
    "source": "Yahoo Finance",
-   "fetchedAt": "2026-11-26T18:12:36.225Z",
+   "fetchedAt": "2026-11-26T18:36:20.130Z",
    "status": "ok"
   },
   "DLR": {
@@ -51752,7 +51752,7 @@
     ]
    },
    "source": "Yahoo Finance",
-   "fetchedAt": "2026-11-26T18:12:36.620Z",
+   "fetchedAt": "2026-11-26T18:36:20.494Z",
    "status": "ok"
   }
  },
@@ -52150,7 +52150,7 @@
    "asOf": "2026-11-26"
   },
   "NVDA": {
-   "score": 8,
+   "score": 7,
    "decision": "Vendre",
    "confidence": "élevée",
    "factors": [
@@ -52185,9 +52185,9 @@
     {
      "key": "news",
      "label": "Actualité",
-     "score": 50,
+     "score": 35,
      "weight": 0.1,
-     "reason": "Pas encore d'analyse d'actualité (neutre)"
+     "reason": "Sentiment des actualités négatif"
     },
     {
      "key": "market",
@@ -52206,7 +52206,7 @@
    "asOf": "2026-11-25"
   },
   "AVGO": {
-   "score": 9,
+   "score": 8,
    "decision": "Vendre",
    "confidence": "élevée",
    "factors": [
@@ -52241,9 +52241,9 @@
     {
      "key": "news",
      "label": "Actualité",
-     "score": 50,
+     "score": 45,
      "weight": 0.1,
-     "reason": "Pas encore d'analyse d'actualité (neutre)"
+     "reason": "Sentiment des actualités négatif"
     },
     {
      "key": "market",
@@ -52262,7 +52262,7 @@
    "asOf": "2026-11-25"
   },
   "AMD": {
-   "score": 14,
+   "score": 13,
    "decision": "Vendre",
    "confidence": "élevée",
    "factors": [
@@ -52297,9 +52297,9 @@
     {
      "key": "news",
      "label": "Actualité",
-     "score": 50,
+     "score": 40,
      "weight": 0.1,
-     "reason": "Pas encore d'analyse d'actualité (neutre)"
+     "reason": "Sentiment des actualités négatif"
     },
     {
      "key": "market",
@@ -52318,7 +52318,7 @@
    "asOf": "2026-11-25"
   },
   "MU": {
-   "score": 8,
+   "score": 6,
    "decision": "Vendre",
    "confidence": "élevée",
    "factors": [
@@ -52353,9 +52353,9 @@
     {
      "key": "news",
      "label": "Actualité",
-     "score": 50,
+     "score": 30,
      "weight": 0.1,
-     "reason": "Pas encore d'analyse d'actualité (neutre)"
+     "reason": "Sentiment des actualités négatif"
     },
     {
      "key": "market",
@@ -52411,7 +52411,7 @@
      "label": "Actualité",
      "score": 50,
      "weight": 0.1,
-     "reason": "Pas encore d'analyse d'actualité (neutre)"
+     "reason": "Sentiment des actualités positif"
     },
     {
      "key": "market",
@@ -52430,7 +52430,7 @@
    "asOf": "2026-11-25"
   },
   "GOOGL": {
-   "score": 8,
+   "score": 9,
    "decision": "Vendre",
    "confidence": "élevée",
    "factors": [
@@ -52465,9 +52465,9 @@
     {
      "key": "news",
      "label": "Actualité",
-     "score": 50,
+     "score": 55,
      "weight": 0.1,
-     "reason": "Pas encore d'analyse d'actualité (neutre)"
+     "reason": "Sentiment des actualités positif"
     },
     {
      "key": "market",
@@ -52486,9 +52486,9 @@
    "asOf": "2026-11-25"
   },
   "AMZN": {
-   "score": 37,
+   "score": 36,
    "decision": "Vendre",
-   "confidence": "faible",
+   "confidence": "moyenne",
    "factors": [
     {
      "key": "trend",
@@ -52521,9 +52521,9 @@
     {
      "key": "news",
      "label": "Actualité",
-     "score": 50,
+     "score": 35,
      "weight": 0.1,
-     "reason": "Pas encore d'analyse d'actualité (neutre)"
+     "reason": "Sentiment des actualités négatif"
     },
     {
      "key": "market",
@@ -52542,7 +52542,7 @@
    "asOf": "2026-11-25"
   },
   "META": {
-   "score": 46,
+   "score": 47,
    "decision": "Attendre",
    "confidence": "moyenne",
    "factors": [
@@ -52577,9 +52577,9 @@
     {
      "key": "news",
      "label": "Actualité",
-     "score": 50,
+     "score": 65,
      "weight": 0.1,
-     "reason": "Pas encore d'analyse d'actualité (neutre)"
+     "reason": "Sentiment des actualités positif"
     },
     {
      "key": "market",
@@ -52593,12 +52593,12 @@
     "Force relative : Fait mieux que le S&P 500 sur 3 mois (+13,9 %)",
     "Tendance : Cours au-dessus de 0 moyenne(s) mobile(s) sur 3 (MM200 : -2,8 %), MM50 en hausse",
     "Risque : Volatilité 49 %, baisse depuis le plus haut -21,6 %, VIX 26.8",
-    "Contexte de marché : S&P 500 en dessous de sa MM200, Fear & Greed 15"
+    "Actualité : Sentiment des actualités positif"
    ],
    "asOf": "2026-11-25"
   },
   "PANW": {
-   "score": 48,
+   "score": 46,
    "decision": "Attendre",
    "confidence": "moyenne",
    "factors": [
@@ -52633,9 +52633,9 @@
     {
      "key": "news",
      "label": "Actualité",
-     "score": 50,
+     "score": 35,
      "weight": 0.1,
-     "reason": "Pas encore d'analyse d'actualité (neutre)"
+     "reason": "Sentiment des actualités négatif"
     },
     {
      "key": "market",
@@ -52648,8 +52648,8 @@
    "reasons": [
     "Risque : Volatilité 70 %, baisse depuis le plus haut -15,2 %, VIX 26.8",
     "Tendance : Cours au-dessus de 2 moyenne(s) mobile(s) sur 3 (MM200 : +25,3 %), MM50 en baisse",
-    "Contexte de marché : S&P 500 en dessous de sa MM200, Fear & Greed 15",
-    "Momentum : Rendement 3 mois -7,0 %, 6 mois +38,2 %, RSI 53"
+    "Actualité : Sentiment des actualités négatif",
+    "Contexte de marché : S&P 500 en dessous de sa MM200, Fear & Greed 15"
    ],
    "asOf": "2026-11-25"
   },
@@ -52689,9 +52689,9 @@
     {
      "key": "news",
      "label": "Actualité",
-     "score": 50,
+     "score": 55,
      "weight": 0.1,
-     "reason": "Pas encore d'analyse d'actualité (neutre)"
+     "reason": "Sentiment des actualités positif"
     },
     {
      "key": "market",
@@ -52710,9 +52710,9 @@
    "asOf": "2026-11-25"
   },
   "EQIX": {
-   "score": 29,
+   "score": 30,
    "decision": "Vendre",
-   "confidence": "élevée",
+   "confidence": "moyenne",
    "factors": [
     {
      "key": "trend",
@@ -52745,9 +52745,9 @@
     {
      "key": "news",
      "label": "Actualité",
-     "score": 50,
+     "score": 60,
      "weight": 0.1,
-     "reason": "Pas encore d'analyse d'actualité (neutre)"
+     "reason": "Sentiment des actualités positif"
     },
     {
      "key": "market",
@@ -52825,11 +52825,610 @@
  "news": {
   "data": [
    {
+    "title": "Trump demands probe into ‘record setting error’ after third-quarter GDP data gets massive revision higher",
+    "url": "https://www.cnbc.com/2026/11/26/trump-gdp-revision-investigation.html",
+    "source": "CNBC",
+    "publishedAt": "2026-11-26T17:57:32.000Z",
+    "symbols": [],
+    "summary": "President Donald Trump on Thursday deemed the latest gross domestic product revision a historic mistake, claiming that it should be \"immediately investigated.\""
+   },
+   {
+    "title": "Alphabet Could Be the Safest Way to Own Anthropic. Here’s the Math.",
+    "url": "https://finnhub.io/api/news?id=933686949bd26892b9dfaf34b94d6cbd056000419b49f64cfe45d4232220786b",
+    "source": "Yahoo",
+    "publishedAt": "2026-11-26T17:47:02.000Z",
+    "symbols": [
+     "NVDA"
+    ],
+    "summary": "Alphabet owns a piece of Anthropic and also gets paid to supply its computing power, which is a nice way to be on both sides of the AI boom."
+   },
+   {
+    "title": "NFL's Thanksgiving Boom Raises Stakes for Disney, Netflix",
+    "url": "https://finnhub.io/api/news?id=1a19450f491fc7e50fdefa2d8aadf7130c37c8d20e81140d23582a9729d89a92",
+    "source": "Yahoo",
+    "publishedAt": "2026-11-26T17:42:28.000Z",
+    "symbols": [
+     "AMZN"
+    ],
+    "summary": "America's favorite sport is becoming an increasingly expensive business."
+   },
+   {
+    "title": "Should You Buy Nvidia After Its Sharp Decline? Warren Buffett’s Long-Held Investment Philosophy Provides a Clear Answer",
+    "url": "https://finnhub.io/api/news?id=7edeedd2a2e567642e8f9911996d68aef03798b013aa58bf8994495f0541f145",
+    "source": "Yahoo",
+    "publishedAt": "2026-11-26T17:35:02.000Z",
+    "symbols": [
+     "NVDA"
+    ],
+    "summary": "Is it time to get greedy while others are fearful?"
+   },
+   {
+    "title": "NVIDIA Stocks Fall 3.91% as S&P Puts AA Rating on Downgrade Watch",
+    "url": "https://finnhub.io/api/news?id=50a2cd416e7b84eb7af0aaac8cdd512637ebfacc4295284966c90b37cdd025fe",
+    "source": "Yahoo",
+    "publishedAt": "2026-11-26T17:31:02.000Z",
+    "symbols": [
+     "NVDA"
+    ],
+    "summary": "A governance review after Jensen Huang's exit and return now threatens a one-notch cut, while Moody's keeps its Aa1 rating steady."
+   },
+   {
+    "title": "Micron Stocks Fall 4.53% as TrendForce Cuts 2027 Memory Forecasts",
+    "url": "https://finnhub.io/api/news?id=9955eacbddc843c2adbb7cb1fba6f8cbf11f3944f786b31f609d4a31dbed441c",
+    "source": "Yahoo",
+    "publishedAt": "2026-11-26T17:26:00.000Z",
+    "symbols": [
+     "MU"
+    ],
+    "summary": "Chinese cloud providers are trimming 2027 orders, pushing NAND into a downward pricing cycle while DRAM stays tight."
+   },
+   {
+    "title": "Meta Platforms Stocks Jump 3.4% on Reported Amazon Talks Over Muse AI Agent",
+    "url": "https://finnhub.io/api/news?id=92dcd4f311276b9ab64e230891d2349b979f28bf82f5ef216e1a9689b3d58cf4",
+    "source": "Yahoo",
+    "publishedAt": "2026-11-26T17:23:38.000Z",
+    "symbols": [
+     "AMZN"
+    ],
+    "summary": "Shares swung from a 3.7% loss to a gain after Fortune reported Amazon may let Meta's shopping agent back onto its store."
+   },
+   {
+    "title": "Nvidia faces credit rating review as S&P flags governance concerns",
+    "url": "https://finnhub.io/api/news?id=a57513f1874bf235955e61f79943797e673bc5596ec9d994585688f962e663a3",
+    "source": "Yahoo",
+    "publishedAt": "2026-11-26T17:16:00.000Z",
+    "symbols": [
+     "NVDA"
+    ],
+    "summary": "S&P Global Ratings has placed Nvidia Corp (NASDAQ:NVDA, XETRA:NVD)'s AA credit rating on negative watch, citing concerns over corporate governance, board independence and the company’s reliance on CEO Jensen Huang. The review comes amid scrutiny of Huang’s alleged personal relationship..."
+   },
+   {
+    "title": "Amazon Stocks Fall 3.12% as Bernstein Flags a 16% Drop in Cloud Web Traffic",
+    "url": "https://finnhub.io/api/news?id=5eb74de44bb8354c3750e38e022afbf11fd67157301a50f38af62b13e0d40619",
+    "source": "Yahoo",
+    "publishedAt": "2026-11-26T17:15:31.000Z",
+    "symbols": [
+     "AMZN"
+    ],
+    "summary": "The firm warned AWS growth could slow by several hundred basis points in early 2027 while Amazon spends roughly $220 billion this year."
+   },
+   {
+    "title": "What Does Pinterest (PINS) Pay Overhaul Mean For Its Takeover Talk And Ad Push?",
+    "url": "https://finnhub.io/api/news?id=771894a9f2bc67a39e90a99b925357a791596b3a5d874966ae0c5500a672b5c4",
+    "source": "Yahoo",
+    "publishedAt": "2026-11-26T17:14:47.000Z",
+    "symbols": [
+     "MSFT"
+    ],
+    "summary": "Pinterest (NYSE:PINS) reworked executive compensation in November 2026, adding fresh change-in-control terms that investors read as potential takeover defenses. The company expanded its collaboration with Microsoft Advertising, bringing more visual search driven shopping ads across Pinterest's surf…"
+   },
+   {
+    "title": "nVent Electric (NVT) Brings AI Data Center Cooling And Power Systems To SC26",
+    "url": "https://finnhub.io/api/news?id=17ecf398559206799f26d0ffcbd875f03dcdfda15f39b958fe71465bc43898ad",
+    "source": "Yahoo",
+    "publishedAt": "2026-11-26T17:13:31.000Z",
+    "symbols": [
+     "NVDA"
+    ],
+    "summary": "nVent Electric (NYSE:NVT) introduced new liquid cooling and engineered power distribution products for AI data centers at SC26. The company unveiled its CX121 coolant distribution unit, aimed at supporting higher density AI computing environments. nVent announced collaborations with AMD and NVIDIA,…"
+   },
+   {
+    "title": "Equinix (EQIX) Stock Could Be 42% Undervalued On AI Data Center Demand",
+    "url": "https://finnhub.io/api/news?id=7e30f6b9f6d58e4bfd0dcad848c2ff080cd52d38662514c2ed94d143df44ba1c",
+    "source": "Yahoo",
+    "publishedAt": "2026-11-26T17:13:03.000Z",
+    "symbols": [
+     "EQIX"
+    ],
+    "summary": "Equinix has delivered strong multi year gains for shareholders, yet the stock has recently cooled off, which naturally puts the spotlight on whether its cash flows are enough to back up a near US$1,000 share price. With markets paying close attention to data center operators, the question is how mu…"
+   },
+   {
+    "title": "Amazon Has 59 Buy Ratings and Not a Single Sell. Here’s Where its Headed",
+    "url": "https://finnhub.io/api/news?id=0a915e9b948b5d00b3225260447fa53343bd561cba2da9ae09e8d91c19487b73",
+    "source": "Yahoo",
+    "publishedAt": "2026-11-26T17:10:02.000Z",
+    "symbols": [
+     "MSFT"
+    ],
+    "summary": "Wall Street analysts agree on Amazon, yet the stock keeps stalling while AWS accelerates. A $220 billion spending plan and negative free cash flow could decide whether the cloud giant rewards patient investors or tests their nerve."
+   },
+   {
+    "title": "Alphabet (GOOGL) Dropped, So What Is Behind The Latest Attention?",
+    "url": "https://finnhub.io/api/news?id=e46c2c2c83e3a44a957d7afac3ab9b4ec06eca24d50494df2d505411eca103d9",
+    "source": "Yahoo",
+    "publishedAt": "2026-11-26T17:09:37.000Z",
+    "symbols": [
+     "GOOGL"
+    ],
+    "summary": "Alphabet (GOOGL) has launched Gemini 4 Neon, an AI model that topped an accounting benchmark alongside Gemini 4 Argon, shortly after the stock declined about 14% over the past year. The Gemini 4 Neon launch lands at a time when Alphabet’s recent share price performance has been weak, with the 30 da…"
+   },
+   {
+    "title": "I'm an Investing Expert: What Warren Buffett's Cash Stockpile Says About Stocks",
+    "url": "https://finnhub.io/api/news?id=5fafa1df45698964bd4eb80d52e3003610b43ab7951ee1d0fbd3ca2cd92cab4d",
+    "source": "Yahoo",
+    "publishedAt": "2026-11-26T17:00:39.000Z",
+    "symbols": [
+     "GOOGL"
+    ],
+    "summary": "What can everyday investors take away from Berkshire Hathaway's enormous cash reserve, and what does it say about today's stock market? Is it good or bad?"
+   },
+   {
+    "title": "Was CrowdStrike’s $43.9 Billion Bid for Zscaler the Right Move at the Wrong Time?",
+    "url": "https://finnhub.io/api/news?id=639b0e28551c03cfbc4e71608d82f957846bcc2cfcbb0792b2e3fa4697147251",
+    "source": "Yahoo",
+    "publishedAt": "2026-11-26T17:00:31.000Z",
+    "symbols": [
+     "GOOGL"
+    ],
+    "summary": "CrowdStrike just posted its best quarter ever, then paid a fortune in stock for a rival whose own guidance vanished. Investors now face a year of waiting to learn whether strength or ambition sets the price."
+   },
+   {
+    "title": "Meta Platforms’ (META) Surging Capex Pressures Free Cash Flow Amid Monetization Debates",
+    "url": "https://finnhub.io/api/news?id=1fad383abf89d0cd5f1eccb6c7295603aedbf80599201146d3cfd62a20acccdb",
+    "source": "Yahoo",
+    "publishedAt": "2026-11-26T16:59:27.000Z",
+    "symbols": [
+     "META"
+    ],
+    "summary": "Hayden Capital, an investment management firm, released its third-quarter 2026 investment letter. The letter can be downloaded here. In the third quarter, the portfolio fell 0.4%, bringing its year-to-date loss to 23.6%, versus gains of 2.3% and 12.7% for the S&P 500, and 1.2% and 12.9% for MSCI Wo…"
+   },
+   {
+    "title": "This AI Investing Prodigy Lost 65% in a Single Quarter and Is Still Up 88.5% in 2026. Here’s the Lesson for Investors.",
+    "url": "https://finnhub.io/api/news?id=5dbffa72c04d180c03dbbf5571dceb13977c43532d65c6a34caefbc3db9cb40c",
+    "source": "Yahoo",
+    "publishedAt": "2026-11-26T16:55:13.000Z",
+    "symbols": [
+     "MU"
+    ],
+    "summary": "Leopold Aschenbrenner called the AI boom right, and the companies he bet on kept posting record results. His fund still nearly collapsed. What went wrong, and how can ordinary investors avoid the same trap?"
+   },
+   {
+    "title": "SK Hynix Just Revealed the Next Generation of DRAM. Can It Beat Micron in the Next Memory Supercycle?",
+    "url": "https://finnhub.io/api/news?id=670ed03d97a9bac2537ed908920d49a68a916184d5383b8142940537663eb6e7",
+    "source": "Yahoo",
+    "publishedAt": "2026-11-26T16:44:25.000Z",
+    "symbols": [
+     "MU"
+    ],
+    "summary": "SK hynix is racing toward 100-layer 3D DRAM while both stocks trade at the same bargain multiple. Income, growth, and risk each pull in a different direction, and one overlooked weakness could decide who survives the next downturn."
+   },
+   {
+    "title": "CoreWeave Seeks $4.5 Billion Meta-Backed Loan as Bond Yields Hit 18%",
+    "url": "https://finnhub.io/api/news?id=6965dfaacef5ea0b6e2f536f78b8fb1694e7b3252d4d832f01432f6cb2e4a766",
+    "source": "Yahoo",
+    "publishedAt": "2026-11-26T16:31:42.000Z",
+    "symbols": [
+     "META"
+    ],
+    "summary": "The AI infrastructure provider seeks lower borrowing costs through chip-backed financing amid rising credit concerns."
+   },
+   {
+    "title": "Russia arrests deputy aerospace commander in reported corruption case - Reuters",
+    "url": "https://news.google.com/rss/articles/CBMitwFBVV95cUxNQzFOeDFjM0VPTXBIZkxlelN0ZFAtQ25fOUZkTVVheGM0cURoX1RqVXUzTGttUDlLTmhuczVlelh1eGJUYkVWQllDQ1ZzTlB3OUdQMjloczZsRGR4WGwzbF9XWURoSk9Tb2FybGNlbExBc243elBHTGxtNnpacDR3Y1pSaDctcFZqdUs5UkJiZ1R1Q09lTWxkUmN2TnNSZUdaQlpPNUl1N0tZVDJGd0xOT0lTU0tGUzA?oc=5",
+    "source": "Reuters",
+    "publishedAt": "2026-11-26T16:29:52.000Z",
+    "symbols": [],
+    "summary": "Russia arrests deputy aerospace commander in reported corruption case Reuters"
+   },
+   {
+    "title": "Oracle Stock Dipped Under $100 as Banks Try to Unload Its Data-Center Loans",
+    "url": "https://finnhub.io/api/news?id=b38f3680b51d6a13bde96978f63cd152239796efeef44f764ac4e5845c0a308c",
+    "source": "Yahoo",
+    "publishedAt": "2026-11-26T16:27:22.000Z",
+    "symbols": [
+     "MSFT"
+    ],
+    "summary": "Oracle's backlog is huge and the demand is real, yet lenders are quietly accepting steep discounts on the debt behind its data centers. What does the bond market see that the analysts' bullish targets don't?"
+   },
+   {
+    "title": "Meta Platforms Just Partnered With Walmart. Here's Why Investors Should Pay Attention",
+    "url": "https://finnhub.io/api/news?id=eff18ba4256409325d4995fff44044b87dc49da7528f30fc5bac751ddbd98a75",
+    "source": "Yahoo",
+    "publishedAt": "2026-11-26T16:25:02.000Z",
+    "symbols": [
+     "META"
+    ],
+    "summary": "Meta landing Walmart as a shopping partner may signal that the tech leader's AI spending could eventually pay off."
+   },
+   {
+    "title": "Equinix (EQIX) Is Tied To A $284.27 Billion Data Centre Market By 2035",
+    "url": "https://finnhub.io/api/news?id=217b5d42957186d8858f4422819703a4f9d9b2a33ca83f35db535693ac88d463",
+    "source": "Yahoo",
+    "publishedAt": "2026-11-26T16:16:35.000Z",
+    "symbols": [
+     "EQIX"
+    ],
+    "summary": "Equinix (NasdaqGS:EQIX) is highlighted as a key beneficiary in a global data centre market forecast to reach $284.27b by 2035. The projection ties expected industry expansion to rising AI workloads and broader cloud computing adoption through 2035. Analysts point to Equinix's role in supporting hig…"
+   },
+   {
+    "title": "Israel's Eisenkot reaches deal with left-wing faction as coalition talks gain steam - Reuters",
+    "url": "https://news.google.com/rss/articles/CBMiywFBVV95cUxOQnltOGlBZG16OU1LUGlBS25WVUFhN2VnM0NhWHpzTlVscC1iOE5kdFZnaGhBbmNOdm80b05IQWttZm9MV0liVmZzVE56bXVxSHJXYXBmMktWSVQwZ2hfNmVGdWVJQmp5RkRtS1dXR0wwT0pXX1dFdUM5dDJrUWNTNHVsYjRNWXBWcmx3RTlqQ0ZQNEJWWFVxalA1Z0tkRExSbGJVOWpWX1pMY25aZHB3VnlvTWF0QUNvaElpM0FORVM5a1ZPa05mWDBXQQ?oc=5",
+    "source": "Reuters",
+    "publishedAt": "2026-11-26T16:16:29.000Z",
+    "symbols": [],
+    "summary": "Israel's Eisenkot reaches deal with left-wing faction as coalition talks gain steam Reuters"
+   },
+   {
+    "title": "Cerebras Expands AI Inference Reach: Can It Challenge NVDA & AMD?",
+    "url": "https://finnhub.io/api/news?id=03f38cb1cb453ba672ce13a0e3df51366c1b059d752ca9fabb5702e4d1a10cb8",
+    "source": "Yahoo",
+    "publishedAt": "2026-11-26T16:14:00.000Z",
+    "symbols": [
+     "AMD"
+    ],
+    "summary": "CBRS is ramping up its AI inference capabilities with hyperscaler partnerships, wafer-scale innovations, and expanding capacity to challenge NVIDIA and Advanced Micro Devices."
+   },
+   {
+    "title": "Argentina's Senate poised to suspend primaries, boosting Milei's re-election bid - Reuters",
+    "url": "https://news.google.com/rss/articles/CBMiwwFBVV95cUxOME12Z2hWeXJDdjhYQll0TW9vYWFaMzgwdWdBQ05BR3k4ckdrdFo3SkdfOXZrOGVXU1VUOTNtYXRXWEJBYlExUllERjdYRGxqR3lCelZyQTJxd0o2Q1VacWw0Sk5QajJWbGlDaDV1Y2hjWDE4dEVjNFpSQXdhQWg4MmFydGdDMEhmQjI2TjNiMUliZ1hBX1lXaDBoRlN0RHoxeUpxV3JuMkU2TmFncHhfWXdyOFNaUlVrUC1NZnlSS0NoRFE?oc=5",
+    "source": "Reuters",
+    "publishedAt": "2026-11-26T16:11:15.000Z",
+    "symbols": [],
+    "summary": "Argentina's Senate poised to suspend primaries, boosting Milei's re-election bid Reuters"
+   },
+   {
+    "title": "Which Funds With Software Exposure Fit Rising US AI Spending?",
+    "url": "https://finnhub.io/api/news?id=7b2711f4da58d13b22711f758a4d84ee552fe1d7c5718bf5e2cd96fbdc73a781",
+    "source": "Yahoo",
+    "publishedAt": "2026-11-26T16:09:05.000Z",
+    "symbols": [
+     "MSFT"
+    ],
+    "summary": "Software themed funds can look interchangeable from the ticker list, yet what sits inside can pull your money toward very different risks. Pick one without checking and you might think you are leaning into paid software demand, only to find most of your dollars riding on hardware or security instea…"
+   },
+   {
+    "title": "Walmart, Amazon Face Surprising Shopping Shift",
+    "url": "https://finnhub.io/api/news?id=03b382c05553d440c04d120f0e490c30eaa3631a478b1a85bf926bd03eb79784",
+    "source": "Yahoo",
+    "publishedAt": "2026-11-26T16:08:13.000Z",
+    "symbols": [
+     "AMZN"
+    ],
+    "summary": "A familiar holiday tradition is exposing deeper economic pressures."
+   },
+   {
+    "title": "NVIDIA Just Dropped 31% in a Month. Will NVDA Stock Hit $125 or $200 First?",
+    "url": "https://finnhub.io/api/news?id=9979a9cabc5bd6df9ee7b624e9fbcbbb6d0a8fe0471c41fe29476cc752aefd4a",
+    "source": "Yahoo",
+    "publishedAt": "2026-11-26T16:06:22.000Z",
+    "symbols": [
+     "AVGO"
+    ],
+    "summary": "A CEO resignation, a credit rating on watch, and export rules scrambling China-bound GPUs have rattled the AI trade's biggest name. Two very different futures now compete for NVIDIA shares, and the next catalysts could tip the balance."
+   },
+   {
+    "title": "CoreWeave Can Now Borrow at 7% With Meta’s Name on the Loan",
+    "url": "https://finnhub.io/api/news?id=5c29965114088c54485af5951a6d67976766864599fbbd0938d7451a3fe1f876",
+    "source": "Yahoo",
+    "publishedAt": "2026-11-26T15:48:20.000Z",
+    "symbols": [
+     "META"
+    ],
+    "summary": "Banks are preparing a multibillion-dollar loan for CoreWeave at a rate far below what its own bondholders demand. The gap reveals who is really on the hook, and why shareholders may be last in line."
+   },
+   {
+    "title": "S&P’s NVIDIA Warning is Backward Looking Governance Theater That Gives Everyone an Opportunity to Buy at $150",
+    "url": "https://finnhub.io/api/news?id=4b381c34877592e853a0c49b44d87f4662bac04de5b8b8fd88e00cd4f8c97e4b",
+    "source": "Yahoo",
+    "publishedAt": "2026-11-26T15:45:38.000Z",
+    "symbols": [
+     "AVGO"
+    ],
+    "summary": "NVIDIA lost its CEO, drew a credit warning, and watched its stock slide nearly a third in a month. So why does one investor keep buying more every week, and which three numbers convinced him the real story lies elsewhere?"
+   },
+   {
+    "title": "Hamas weighs response after Israel kills 10 people in Gaza - Reuters",
+    "url": "https://news.google.com/rss/articles/CBMixwFBVV95cUxNNzFiM29KUVhvZHZUYTV1SWtlLXNYbXg3ZzRodFVmanZkNzJsczZ4UldfRkNkSW1fVDhMaTFYOW9ETUxXaXFKcktCTThoYnBYS21mVjQxYkNWM19MR1h0WHNSdjlGenRTNkExU2RKU0ZKNUhCRWR0OVU2VmFqTUJHeE5QMVNybDE4Qk1WTmp5VGgyWDV0NjhaM3h4Ulp1bWZDUThnSlI0TFMwMnQzNk5KQnZXVTRCUUxvc2FLbmlDYVREeHpwOUpV?oc=5",
+    "source": "Reuters",
+    "publishedAt": "2026-11-26T15:40:25.000Z",
+    "symbols": [],
+    "summary": "Hamas weighs response after Israel kills 10 people in Gaza Reuters"
+   },
+   {
+    "title": "Two Italians killed in Iranian drone attack in Kuwait, Italy says - Reuters",
+    "url": "https://news.google.com/rss/articles/CBMiswFBVV95cUxPeE9DZXQ0VUMxV052eWlmWWlKM3R0LTFiMS1ITm93Ty1NOWpta1ZVNU5MeWVVMHRlcmdXd0NpZmxJeGlGZEhCeklaaEs2VWlSWnR0RVRLUHhCNm9MeFNTMmNUZFEyWWdoUVVBWUZTcVc0LVNFY0gxN050ZHNtS3psSVRHQWtBVEM5N3dPYVl6T1Flb0tBb1BlUGVxQ3ZaNURWVU9vTHYtTGxFRDJSQVhaMU1Tbw?oc=5",
+    "source": "Reuters",
+    "publishedAt": "2026-11-26T15:40:17.000Z",
+    "symbols": [],
+    "summary": "Two Italians killed in Iranian drone attack in Kuwait, Italy says Reuters"
+   },
+   {
+    "title": "CoreWeave’s Default Odds Hit a Record. Core Scientific Has a Big Problem",
+    "url": "https://finnhub.io/api/news?id=6f1f603dbd249ce1664d7c1758170016b62e1fedacd6c1e8dce8a54d22d3319a",
+    "source": "Yahoo",
+    "publishedAt": "2026-11-26T15:35:26.000Z",
+    "symbols": [
+     "AMD"
+    ],
+    "summary": "Key TakeawaysThe cost of insuring CoreWeave’s debt against default hit a record, implying a 68% chance of default within five years. About 84% of Core Scientific’s revenue in the first nine months of 2026 came from CoreWeave."
+   },
+   {
+    "title": "Iraqi Kurds protest against Baghdad leader's moves to assert central control - Reuters",
+    "url": "https://news.google.com/rss/articles/CBMiwgFBVV95cUxOZ2xrakttQVBBRkRuMG9VbFRZaFJxcnIxZE1TV3EzdTFtV0w2anEwMWgxb2VDdzhFazVicDR0cW45TExKWFZlbVAzd05hUEhwVUt6YzBGVXJBOGtFYk5pUjRsVVJJYVNrRjFwSGk2bGdiY0poRXBqNDBFT3QybWZKT0FHUmRSdEZJUU5TWUJNQ205UmlpbFpiajFXTVZ1X3dxMU5NZEwyN2pEa2ZOVWtrcFFfbWcxczcyektCWlRlWnlyZw?oc=5",
+    "source": "Reuters",
+    "publishedAt": "2026-11-26T15:21:46.000Z",
+    "symbols": [],
+    "summary": "Iraqi Kurds protest against Baghdad leader's moves to assert central control Reuters"
+   },
+   {
+    "title": "What's Happening To Marvell's Cash Gap With Broadcom",
+    "url": "https://finnhub.io/api/news?id=89e5ce8e0372d1b8ef5e567c8c4ca8e2f6a1b7b7accb3f8aab049f3aa40eaf00",
+    "source": "Yahoo",
+    "publishedAt": "2026-11-26T15:15:26.000Z",
+    "symbols": [
+     "AVGO"
+    ],
+    "summary": "Today's big story: Anthropic Broke Its $83 IPO Price. What Did Facebook Do Next."
+   },
+   {
+    "title": "Marvell Reports Tuesday. How Often Has It Dropped 10%?",
+    "url": "https://finnhub.io/api/news?id=7a56ebaeec9561956b6666a174e9ab8a836fe55f1c81683b21a4bd3a7d5a8024",
+    "source": "Yahoo",
+    "publishedAt": "2026-11-26T15:15:26.000Z",
+    "symbols": [
+     "AVGO"
+    ],
+    "summary": "Marvell Technology reports its quarterly results next Tuesday, Dec 1, after the market close. The first trading session after that report is Wednesday, Dec 2. In the 26 reports our earnings calendar lists since March 2020, Marvell fell 10% or more the next day 6 times. That is about 1 in 4 reports."
+   },
+   {
+    "title": "Spain's De Cos set to be nominated by EU countries as next head of ECB - Reuters",
+    "url": "https://news.google.com/rss/articles/CBMiqgFBVV95cUxOOV8wZkxRVTY5U0ZQeVZwSGtCMVZJTjV2d2t5TlhsSVoxQmpLRXI4OTV1R0QwQkV1QmZma3BDN0lrOEJTNGFVeloyeE5HbnhmWDZfR1VrbzN5TzZrck5WTTlKNTBaeFhVbDd4RldhY0hZMnFsczlsTURLY0FpWWgzeE5YVVc2NUZqMy1KbldQVDJfcUtsVEhINHF2emJ5SEFrMXozWUdTM3BFQQ?oc=5",
+    "source": "Reuters",
+    "publishedAt": "2026-11-26T14:57:22.000Z",
+    "symbols": [],
+    "summary": "Spain's De Cos set to be nominated by EU countries as next head of ECB Reuters"
+   },
+   {
+    "title": "Credo Technology Ahead of Q2 Earnings: How to Approach the Stock Now?",
+    "url": "https://finnhub.io/api/news?id=0f221f31322062af60c26787fb7f8f0df51008eac39e938bbcf2f2d9056474a8",
+    "source": "Yahoo",
+    "publishedAt": "2026-11-26T14:30:00.000Z",
+    "symbols": [
+     "AVGO"
+    ],
+    "summary": "CRDO heads into Q2 earnings with strong AEC demand and growing optical opportunities, but premium valuation and execution risks warrant caution."
+   },
+   {
+    "title": "How Investors May Respond To Equinix (EQIX) Raised Guidance",
+    "url": "https://finnhub.io/api/news?id=8d1f2489b4507acde473d4227e0c57be0aa146525b7b16eb84a51164d176f313",
+    "source": "Yahoo",
+    "publishedAt": "2026-11-26T14:18:02.000Z",
+    "symbols": [
+     "EQIX"
+    ],
+    "summary": "Equinix reported strong Q3 2026 fundamentals, with revenue up 11% year over year, adjusted EBITDA up 15%, and full year guidance raised for the third consecutive quarter as demand for specialized data center capacity and pricing power remained firm. The firm is leaning into tight supply and robust…"
+   },
+   {
+    "title": "Two Italian workers killed in Iranian strike in Kuwait, source says - Reuters",
+    "url": "https://news.google.com/rss/articles/CBMitAFBVV95cUxPZ2hPQWhhdW9HTWxtRndjQkN3aFhQTzhyWV9sQ0NTbHNsRFpINkRjMHhKRGN4QTk1NTJYWU1yVHhmYVJSazJEVGtOdVIzZ2xsNFJFeHF0YXNEbXBqTF94bnBDOEFnMV9JdGRRbWVROFJGRmZISmZWUXhtYTlJTXFFMlBWa2IwdXBfUXY4OENRd2tVeWh0Q1M1OThsMl9kMkVEamJiTjMzdWxwZHRzdlVHYmtwTUI?oc=5",
+    "source": "Reuters",
+    "publishedAt": "2026-11-26T14:02:19.000Z",
+    "symbols": [],
+    "summary": "Two Italian workers killed in Iranian strike in Kuwait, source says Reuters"
+   },
+   {
+    "title": "Airline Norse Atlantic flags bankruptcy risk as flights suspended - Reuters",
+    "url": "https://news.google.com/rss/articles/CBMixwFBVV95cUxNelVSdGZIMFMxelZ3SVpNZHYyYzRTZWN4S010bExkN0lmVVk5eng2VWp0VUszQXhGVDF5TUFxTDQzSXFuNmxHazV3d1VSR1BWMFRIeFBMQzJDeUM0RG5Cazhya0dpdDA2ZzJDSnd0WGVvVGItS0ttemdLUGhUbUwwbjBWbUk2VktZQUxsa0haX290d21lVFg5Ri1UZ0FkcFo1ZUpnSUNTd1ZudHJWYnQ5T0U4X0w2aExZRXBSOE9ETlEwa2ljRmxF?oc=5",
+    "source": "Reuters",
+    "publishedAt": "2026-11-26T13:58:06.000Z",
+    "symbols": [],
+    "summary": "Airline Norse Atlantic flags bankruptcy risk as flights suspended Reuters"
+   },
+   {
+    "title": "Jim Cramer Says Micron Stock Is “Comically Cheap” at About 3 Times Earnings",
+    "url": "https://finnhub.io/api/news?id=f5f53062f961ffc74408216d3f8efb8086acc0f8baae397f44fad0569f4fd976",
+    "source": "Yahoo",
+    "publishedAt": "2026-11-26T13:53:39.000Z",
+    "symbols": [
+     "MU"
+    ],
+    "summary": "Micron just posted the most profitable year in its history, yet the stock has shed a third of its value in a month. Memory's long record of boom and bust may explain why investors refuse to pay up."
+   },
+   {
+    "title": "Spain's de Cos to become ECB's next president, FT reports - Reuters",
+    "url": "https://news.google.com/rss/articles/CBMiogFBVV95cUxPaWxGUjk3QjBiVW11a0hIVTN4R21ScVdhVXZTY2ZEeU5oRXp6U3VWWHNqblR6MUNJcWVHc0xQSEZwd2l4cDkwNmZ1N0NxbHF3c1g4TlZiZTVKemRnZktkWENldWhOMkN6N0t2MTc0Z0daLUtFOGtXLWlWSTVZa0FUeUNYZjhKdTNnc2lCMVgyc2VtMkNmUzlhaDhDang2Yndad2c?oc=5",
+    "source": "Reuters",
+    "publishedAt": "2026-11-26T13:51:46.000Z",
+    "symbols": [],
+    "summary": "Spain's de Cos to become ECB's next president, FT reports Reuters"
+   },
+   {
+    "title": "Iran's supreme leader urges Guards-linked Basij volunteers to broaden social reach - Reuters",
+    "url": "https://news.google.com/rss/articles/CBMivAFBVV95cUxQYmt1bHZnbVJoU3dJN3o2VEQ1c1c2WXRPeTRxRVFRT0I5bHc5MEJweVVlZ1J1aXNVd0NCZ0piWlg1OU14dVJiR3FyZTVicHoxc3FIS2tZbXdvU3gxLXBQRi1mOGhmaEZGUkV4elpkWk94MVdtVDBtTngyT0FaSm1OQ1BZV0dNNnBqTWNZcTR0U1FfU3pLQlNKN2NYWkJFWlFIRmdlOURCWTlaWHN6ZEpYTXhuelJiSUstVDQ4TQ?oc=5",
+    "source": "Reuters",
+    "publishedAt": "2026-11-26T13:47:44.000Z",
+    "symbols": [],
+    "summary": "Iran's supreme leader urges Guards-linked Basij volunteers to broaden social reach Reuters"
+   },
+   {
+    "title": "Dow Jones Futures Rise With U.S. Markets Shut; Look For This Bullish Signal",
+    "url": "https://finnhub.io/api/news?id=25e251e96603bf647960d91d405b09b6ec8a41ac3646bcf46669b4eecc0a2efd",
+    "source": "Yahoo",
+    "publishedAt": "2026-11-26T13:47:33.000Z",
+    "symbols": [
+     "MU"
+    ],
+    "summary": "Futures are rising with U.S. markets shut after a wild session in which the Nasdaq rallied off lows while the Dow Jones and Anthropic reversed higher."
+   },
+   {
+    "title": "Equinix (EQIX) Could Be 42% Undervalued On Conflicting Fair Value Views",
+    "url": "https://finnhub.io/api/news?id=2247f5e96eb951bb1180ef666b88d7a1f4a77eacd06afee02f5e73603503bc1e",
+    "source": "Yahoo",
+    "publishedAt": "2026-11-26T13:08:14.000Z",
+    "symbols": [
+     "EQIX"
+    ],
+    "summary": "ETF flows around Equinix (EQIX) changed direction on November 24 when the Invesco S&P 500 Low Volatility ETF exited its position, selling 62,859 shares worth about US$61.8 million. Equinix shares have cooled off in the short term, with the price down 5.6% over the past week and 9.1% over 90 days. H…"
+   },
+   {
+    "title": "OPEC+ oil capacity disputes persist ahead of Sunday meeting on 2027 quotas, sources say - Reuters",
+    "url": "https://news.google.com/rss/articles/CBMiwgFBVV95cUxPRWNNN09tM1phcUhhRlFRRTlHaW0yYU5fQUxJUVFEZjl5cEdhaHRnOGNwRkl6QUZTWEhNeU16Vnk5bHhNQ3JSd0FXNDlHZkdDVTV4ZkVsbUpQUFV4VWdobEhfdlpHOUt4SEJadFRpNHlYZTZRZFdBaEZKYnUyTHJ0eHlyWjE1a1FjenhuYWtoZHJJSHVPYVhjSlprNF81NkNiMlpQNUpBcy1kcHd3eEFaRjZHczhHV3RIWlJRaHZOQlBXUQ?oc=5",
+    "source": "Reuters",
+    "publishedAt": "2026-11-26T13:02:42.000Z",
+    "symbols": [],
+    "summary": "OPEC+ oil capacity disputes persist ahead of Sunday meeting on 2027 quotas, sources say Reuters"
+   },
+   {
+    "title": "Planes, trains and automobiles: The best ways to beat travel fatigue—so you can come home feeling rested and fulfilled",
+    "url": "https://www.cnbc.com/make-it/2026/11/26/travel-fatigue-holiday-tips.html",
+    "source": "CNBC",
+    "publishedAt": "2026-11-26T13:00:01.000Z",
+    "symbols": [],
+    "summary": "Visiting loved ones for the holidays? Here's how to manage the travel fatigue, from a travel expert and a sleep medicine specialist."
+   },
+   {
+    "title": "Serbia presidential election set for December 27 - Reuters",
+    "url": "https://news.google.com/rss/articles/CBMijwFBVV95cUxQSm1tYjVaQVYwTmZWQk9pQXBBNlZvQjZGcjdpVlpzQ09hQmwxVmNJOXhiZVF1TTJsS05JM3NOOHhaRzJIaU9MT0c4bXdManBOdXk2Z2hReHlKTFJOaUR0aWRSMl9lVzNuelZRMkIycmpJRlV4RTBRd09kWVJTZ0tNdUNqRWNncHAtMzlyQnVmRQ?oc=5",
+    "source": "Reuters",
+    "publishedAt": "2026-11-26T12:39:43.000Z",
+    "symbols": [],
+    "summary": "Serbia presidential election set for December 27 Reuters"
+   },
+   {
+    "title": "Ukraine says Russia hits two grain ships near Odesa ports - Reuters",
+    "url": "https://news.google.com/rss/articles/CBMiqgFBVV95cUxNYlR6OVYzNjI0N0hVQ2FsMVFSWU13djRFWmZDLUFQSUNoOFdWZ2RSdlZuLVZvbjc3bDlwWGlrN3NLMnktVFQtTndObHZZQVBFTjRGSkY0SmJVSkVteFYyY2RXRDNfRkdlQ1VNVWtkbjBQZmgtbXhpYTFXOElWeDYxNVlHdUlwVnhDV28xZlJoSC1GQ0tjcGRvXzZjNnpvZ2l4SHNqS1pLaFpaUQ?oc=5",
+    "source": "Reuters",
+    "publishedAt": "2026-11-26T12:30:05.000Z",
+    "symbols": [],
+    "summary": "Ukraine says Russia hits two grain ships near Odesa ports Reuters"
+   },
+   {
     "title": "Meeting of 28-29 October 2026",
     "url": "https://www.ecb.europa.eu//press/accounts/2026/html/ecb.mg261126~ccf28c8071.en.html",
     "source": "BCE",
     "publishedAt": "2026-11-26T12:30:00.000Z",
     "symbols": []
+   },
+   {
+    "title": "German police arrest two Iraqis over alleged Cologne synagogue bomb plot - Reuters",
+    "url": "https://news.google.com/rss/articles/CBMixAFBVV95cUxONnk2X1RfVHc3VF8ybnZCVzdIbjFrdTNMbzI2SXhxVW9VTGx4RV94OV8zdU9yRzJPS1daUUZzMXBKM0o5aW1HMklsR1Y5OUlxMEhWTVpNX0tXclphbWhDcE1kb050ekVqaWtrcEpyenZQdS1MWlE2ZVp3ZjNJUjg4ay1HM2VPa0l3emJ0MHpGNHFmdUhsWGIwRXdfMUFuRlBWNDZSNXNzcE9kTkFLd2VnREE1Vl8zOVU0REpaT3o5dkhtTElF?oc=5",
+    "source": "Reuters",
+    "publishedAt": "2026-11-26T12:28:28.000Z",
+    "symbols": [],
+    "summary": "German police arrest two Iraqis over alleged Cologne synagogue bomb plot Reuters"
+   },
+   {
+    "title": "Kremlin accuses Ukraine of trying to widen conflict zone to Mediterranean and Baltic seas - Reuters",
+    "url": "https://news.google.com/rss/articles/CBMiwwFBVV95cUxQNkZDUllJVFY3eXN6WHo2ckVKVlc0QUlMdUpITVdwSnR3aVVMY3J1Qm44dDNSczF0M0FETnpkcjdFUGlhaHFkY3F4YzZQdkZHa041UzItOTZwa2VHWXc4TWx3RE1tTGdLdkZxNHRiUEtLSG1hUkdKbFd2aV8xSlh4ZFNweWxNN1VSaEVNMERhcVcyY202WXVFWGdxS2w1a0l5TkVTcDFQSGc4ZkxvaEF1ZzN4NDA0ano0V014YWJPRFdvV1E?oc=5",
+    "source": "Reuters",
+    "publishedAt": "2026-11-26T12:18:46.000Z",
+    "symbols": [],
+    "summary": "Kremlin accuses Ukraine of trying to widen conflict zone to Mediterranean and Baltic seas Reuters"
+   },
+   {
+    "title": "Palo Alto Networks (PANW) Hit With Fraud Lawsuit After $4.5 Billion AI Deal",
+    "url": "https://finnhub.io/api/news?id=e3b72fa574c5c414dcf51173981c6ede6eaa2deb819b30962b794286600fbeea",
+    "source": "Yahoo",
+    "publishedAt": "2026-11-26T12:15:15.000Z",
+    "symbols": [
+     "PANW"
+    ],
+    "summary": "Palo Alto Networks (NasdaqGS:PANW) is facing a material lawsuit from a former executive alleging accounting fraud tied to reseller deals. The complaint claims the cybersecurity group inflated revenue through questionable reseller arrangements and then wrongfully terminated the executive. The filing…"
+   },
+   {
+    "title": "Iran's Revolutionary Guards say two oil tankers hit sea mines near Oman’s Khasab - Reuters",
+    "url": "https://news.google.com/rss/articles/CBMizAFBVV95cUxOcHNnYmJXdWlaS3JfaTRfQUhza0lkR0lSNjhWNVJoY1Mxd3VSVVZyOHV0R0xZbHl2TS1FX2VROGg0bmg1dHFUbG9ZckxfT2lSaFotSmNFczlabFRHWjZZUEYycHA3S0tXN0p4cHFvbjUyam9IcDBwYkFBSTJfbFZwLTVickFLaFU0bTYxeHI3eHVGTmQyV3ozMTQzWm4tWGduQi00RHJoclptRnlsQjJqdTdMTU9yX2w0OXRmanYtUndOZmtaSy1JdmRuRzg?oc=5",
+    "source": "Reuters",
+    "publishedAt": "2026-11-26T12:06:18.000Z",
+    "symbols": [],
+    "summary": "Iran's Revolutionary Guards say two oil tankers hit sea mines near Oman’s Khasab Reuters"
+   },
+   {
+    "title": "Microdrama apps chase profits as Hollywood moves into short-form, vertical video",
+    "url": "https://www.cnbc.com/2026/11/26/micro-drama-apps-hollywood-vertical-video.html",
+    "source": "CNBC",
+    "publishedAt": "2026-11-26T12:00:01.000Z",
+    "symbols": [],
+    "summary": "The microdrama category has exploded at a time when traditional forms of media face waning interest and YouTube claims more viewing hours."
+   },
+   {
+    "title": "Nvidia Wins Three Wall Street Upgrades as Jensen Huang Returns as CEO",
+    "url": "https://finnhub.io/api/news?id=57e4372dd65b6fa8b1824e7800c1d48adc7733f0d3b3eb24f5ee9a53896d0847",
+    "source": "Yahoo",
+    "publishedAt": "2026-11-26T11:26:25.000Z",
+    "symbols": [
+     "CRWD"
+    ],
+    "summary": "Bernstein, Oppenheimer and StoneX restore bullish ratings as leadership uncertainty eases."
+   },
+   {
+    "title": "Own Palo Alto Stock? Watch Its Deferred Revenue",
+    "url": "https://finnhub.io/api/news?id=0746232813c9963ce39c216b822286bc0a125e61c2ecdcdb337b9169c689fb18",
+    "source": "Yahoo",
+    "publishedAt": "2026-11-26T11:15:19.000Z",
+    "symbols": [
+     "PANW"
+    ],
+    "summary": "Palo Alto Networks closed at $356.14 on Wednesday, Nov 25, up 0.9%. The SPDR S&P 500 ETF fell 0.3% the same day. On Nov 18, after the market closed, the company reported results. It also said it plans to buy Applied Compute for $4.5 billion, paid in stock. The stock jumped 6.4% the next day. This a…"
+   },
+   {
+    "title": "Invesco S&P 500 Low Volatility ETF (SPLV) Sells Williams and Equinix on Nov. 24",
+    "url": "https://finnhub.io/api/news?id=4407d773872b1624a1677c931fc11656a55c2dee1b28ff8761866485eeccc41c",
+    "source": "Yahoo",
+    "publishedAt": "2026-11-26T11:05:49.000Z",
+    "symbols": [
+     "EQIX"
+    ],
+    "summary": "The fund sold $145.2 million of stock on Tuesday, cutting 109 positions and adding none."
+   },
+   {
+    "title": "57 ETFs Add to Palo Alto Networks (PANW) on Tuesday",
+    "url": "https://finnhub.io/api/news?id=d670e2cd45113961e2365b6d73b27845cf7272b41a530fa556f04a476dc3305a",
+    "source": "Yahoo",
+    "publishedAt": "2026-11-26T11:01:33.000Z",
+    "symbols": [
+     "PANW"
+    ],
+    "summary": "ETFs bought a net $34.1 million of Palo Alto Networks stock on Tuesday, Nov. 24."
+   },
+   {
+    "title": "BT launches nationwide cyber resilience drive as AI helps fuel 500% surge in malicious activity",
+    "url": "https://finnhub.io/api/news?id=b92eeec63dad5dfe2e50191efebfbaa9fec2d980af2d987c06cfbd3c2d4e1019",
+    "source": "Yahoo",
+    "publishedAt": "2026-11-26T10:46:00.000Z",
+    "symbols": [
+     "CRWD"
+    ],
+    "summary": "BT is launching a nationwide programme, Cyber Prepared UK, designed to increase the nation's resilience by transforming the way Britain's small businesses respond to growing cyber-attacks. It comes as new BT data shows that AI has helped drive a more than 500% increase in malicious cyber scans – wh…"
+   },
+   {
+    "title": "Truist Sees 52% Upside in Zscaler, and the Reason Has Nothing to Do With Zscaler’s Valuation",
+    "url": "https://finnhub.io/api/news?id=eebb2733e0a29982ec57b1692d46bcb1b6f8b75e99dc54e2e0186571e59030a9",
+    "source": "Yahoo",
+    "publishedAt": "2026-11-26T09:20:27.000Z",
+    "symbols": [
+     "CRWD"
+    ],
+    "summary": "Key TakeawaysTruist kept its Buy rating on Zscaler and raised its price target to $340 from $250, 52% above Wednesday’s close. The $340 matches Truist’s $300 CrowdStrike target times 1."
+   },
+   {
+    "title": "RQI: Why I'm Passing On Its 9.7% Yield For 2 Better Alternatives",
+    "url": "https://finnhub.io/api/news?id=c64e7aa282a74d11c838f2c9c38bf13c2fccff90ed52933ed3a309375f9fed19",
+    "source": "SeekingAlpha",
+    "publishedAt": "2026-11-26T05:54:03.000Z",
+    "symbols": [
+     "DLR"
+    ]
    },
    {
     "title": "Agencies announce dollar thresholds for applicability of truth in lending and consumer leasing rules for consumer credit and lease transactions",
@@ -52877,6 +53476,46 @@
     "symbols": []
    },
    {
+    "title": "Data Center REITs: The Boring Way To Own AI",
+    "url": "https://finnhub.io/api/news?id=01100055dbe5d9e2bfc18709a7ab2ae30883d5cbe22e843dde83a77fc8a2df5e",
+    "source": "SeekingAlpha",
+    "publishedAt": "2026-11-24T07:15:00.000Z",
+    "symbols": [
+     "DLR"
+    ],
+    "summary": "AI infrastructure offers a way to profit without picking a winning tech company. Data centers are seeing exceptional demand amid limited supply."
+   },
+   {
+    "title": "Why Digital Realty Trust Stock Moved Over 3% Higher on Monday",
+    "url": "https://finnhub.io/api/news?id=fc7dbd12cd389839470b56afed2c5951767a67cb04a499039cd15ff385ffb958",
+    "source": "Yahoo",
+    "publishedAt": "2026-11-23T23:06:49.000Z",
+    "symbols": [
+     "DLR"
+    ],
+    "summary": "The Nvidia Effect was strong that trading session."
+   },
+   {
+    "title": "Should You Buy Cipher Digital Stock Now Or Wait For February?",
+    "url": "https://finnhub.io/api/news?id=de33fac66ccb98cf2686ddf8e6d64d94f3d0469585bd6caf80dfdff9c9606763",
+    "source": "Yahoo",
+    "publishedAt": "2026-11-23T21:02:26.000Z",
+    "symbols": [
+     "DLR"
+    ],
+    "summary": "Today's big story: Reported SEC Probe: Could Nvidia Stock Fall To $92."
+   },
+   {
+    "title": "AI Boom at Risk as Trump Threatens “Tremendous Tax” on Overseas Data Centers While Restrictions Mount at Home",
+    "url": "https://finnhub.io/api/news?id=83f832f4564fb3a8d06f17a0712bf95061a93651d208b24809720eb478fd8e37",
+    "source": "Yahoo",
+    "publishedAt": "2026-11-23T17:19:00.000Z",
+    "symbols": [
+     "DLR"
+    ],
+    "summary": "Washington wants AI data centers built at home, but voters keep slamming the door on them. With a new tax threat looming abroad, the biggest spenders in tech may soon find nowhere cheap to turn."
+   },
+   {
     "title": "Philip R. Lane: Climate change and monetary policy",
     "url": "https://www.ecb.europa.eu//press/key/date/2026/html/ecb.sp261123~b5816801a0.en.pdf",
     "source": "BCE",
@@ -52912,83 +53551,227 @@
     "source": "BCE",
     "publishedAt": "2026-11-20T08:30:00.000Z",
     "symbols": []
-   },
-   {
-    "title": "Federal Reserve Board issues enforcement action with former employee of First Security Bancorp",
-    "url": "https://www.federalreserve.gov/newsevents/pressreleases/enforcement20261119a.htm",
-    "source": "Réserve fédérale",
-    "publishedAt": "2026-11-19T16:00:00.000Z",
-    "symbols": [],
-    "summary": "Federal Reserve Board issues enforcement action with former employee of First Security Bancorp"
-   },
-   {
-    "title": "Minutes of the Federal Open Market Committee, October 27-28, 2026",
-    "url": "https://www.federalreserve.gov/newsevents/pressreleases/monetary20261118a.htm",
-    "source": "Réserve fédérale",
-    "publishedAt": "2026-11-18T19:00:00.000Z",
-    "symbols": [],
-    "summary": "Minutes of the Federal Open Market Committee, October 27-28, 2026"
-   },
-   {
-    "title": "Boris Vujčić: Financial Stability Review - November 2026",
-    "url": "https://www.ecb.europa.eu//press/key/date/2026/html/ecb.sp261118~86f1e8147e.en.pdf",
-    "source": "BCE",
-    "publishedAt": "2026-11-18T09:00:00.000Z",
-    "symbols": []
-   },
-   {
-    "title": "Risks from AI valuations, fiscal imbalances and geoeconomic tensions weigh on financial stability outlook",
-    "url": "https://www.ecb.europa.eu//press/pr/date/2026/html/ecb.pr261118~83c5c60158.en.html",
-    "source": "BCE",
-    "publishedAt": "2026-11-18T09:00:00.000Z",
-    "symbols": []
-   },
-   {
-    "title": "Philip R. Lane: The practice and science of monetary policy communication: the ECB experience",
-    "url": "https://www.ecb.europa.eu//press/key/date/2026/html/ecb.sp261117~7f5d3b1a0e.en.pdf",
-    "source": "BCE",
-    "publishedAt": "2026-11-17T18:30:00.000Z",
-    "symbols": []
-   },
-   {
-    "title": "Agencies extend comment period for proposed third-party risk management guidance",
-    "url": "https://www.federalreserve.gov/newsevents/pressreleases/bcreg20261113a.htm",
-    "source": "Réserve fédérale",
-    "publishedAt": "2026-11-13T21:15:00.000Z",
-    "symbols": [],
-    "summary": "Agencies extend comment period for proposed third-party risk management guidance"
-   },
-   {
-    "title": "Federal Reserve Board announces pricing, effective January 1, 2027, for payment services the Federal Reserve Banks provide to banks and credit unions, and changes to streamline and adjust their check services",
-    "url": "https://www.federalreserve.gov/newsevents/pressreleases/other20261112a.htm",
-    "source": "Réserve fédérale",
-    "publishedAt": "2026-11-12T18:30:00.000Z",
-    "symbols": [],
-    "summary": "Federal Reserve Board announces pricing, effective January 1, 2027, for payment services the Federal Reserve Banks provide to banks and credit unions, and changes to streamline and adjust their check services"
-   },
-   {
-    "title": "Federal Reserve announces revised tentative schedule of Federal Open Market Committee meetings in 2027",
-    "url": "https://www.federalreserve.gov/newsevents/pressreleases/monetary20261112a.htm",
-    "source": "Réserve fédérale",
-    "publishedAt": "2026-11-12T17:45:00.000Z",
-    "symbols": [],
-    "summary": "Federal Reserve announces revised tentative schedule of Federal Open Market Committee meetings in 2027"
    }
   ],
-  "source": "Réserve fédérale, BCE",
-  "fetchedAt": "2026-11-26T18:12:36.920Z",
-  "status": "ok"
+  "source": "Réserve fédérale, BCE, Finnhub",
+  "fetchedAt": "2026-11-26T18:36:20.793Z",
+  "status": "fallback",
+  "error": "Finnhub: HTTP 403 | Finnhub: HTTP 403 | Finnhub: HTTP 403 | Finnhub: HTTP 403 | Finnhub: HTTP 403 | Finnhub: HTTP 403 | Finnhub: HTTP 403"
  },
  "brief": {
-  "data": null,
+  "data": {
+   "generatedAt": "2026-11-26T18:36:20.793Z",
+   "model": "claude-sonnet-5-5",
+   "newsHash": "c2f81274",
+   "bullets": [
+    {
+     "text": "Nvidia chute (-3,9 % selon un article) après que l'agence S&P a placé sa note de crédit AA sous surveillance négative, en raison de préoccupations de gouvernance (indépendance du conseil, dépendance envers le PDG Jensen Huang). Moody's maintient sa note Aa1, et trois banques (Bernstein, Oppenheimer, StoneX) ont relevé leur avis avec le retour de Huang comme PDG ; le titre a perdu environ 31 % en un mois, ce qui pèse sur tout le secteur des semi-conducteurs.",
+     "links": [
+      {
+       "title": "NVIDIA Stocks Fall 3.91% as S&P Puts AA Rating on Downgrade Watch",
+       "url": "https://finnhub.io/api/news?id=50a2cd416e7b84eb7af0aaac8cdd512637ebfacc4295284966c90b37cdd025fe"
+      },
+      {
+       "title": "Nvidia faces credit rating review as S&P flags governance concerns",
+       "url": "https://finnhub.io/api/news?id=a57513f1874bf235955e61f79943797e673bc5596ec9d994585688f962e663a3"
+      },
+      {
+       "title": "NVIDIA Just Dropped 31% in a Month. Will NVDA Stock Hit $125 or $200 First?",
+       "url": "https://finnhub.io/api/news?id=9979a9cabc5bd6df9ee7b624e9fbcbbb6d0a8fe0471c41fe29476cc752aefd4a"
+      }
+     ]
+    },
+    {
+     "text": "Micron recule de 4,5 % : TrendForce, cabinet d'études du secteur, réduit ses prévisions 2027 car des fournisseurs de cloud chinois diminuent leurs commandes, ce qui orienterait les prix de la mémoire NAND à la baisse (la DRAM reste tendue). Le titre a perdu un tiers en un mois malgré une année record de profits, signe que le marché craint le retournement habituel du cycle de la mémoire.",
+     "links": [
+      {
+       "title": "Micron Stocks Fall 4.53% as TrendForce Cuts 2027 Memory Forecasts",
+       "url": "https://finnhub.io/api/news?id=9955eacbddc843c2adbb7cb1fba6f8cbf11f3944f786b31f609d4a31dbed441c"
+      },
+      {
+       "title": "Jim Cramer Says Micron Stock Is “Comically Cheap” at About 3 Times Earnings",
+       "url": "https://finnhub.io/api/news?id=f5f53062f961ffc74408216d3f8efb8086acc0f8baae397f44fad0569f4fd976"
+      }
+     ]
+    },
+    {
+     "text": "Les inquiétudes sur le financement de l'IA augmentent : l'assurance contre le défaut de CoreWeave (CDS) atteint un record, impliquant 68 % de risque de défaut à cinq ans, et ses obligations rapportent jusqu'à 18 %. Une banque prépare un prêt à environ 7 % adossé au nom de Meta, et des banques cherchent à revendre avec décote des prêts liés aux data centers d'Oracle, dont l'action passe sous 100 $. Cela pèse sur les valeurs de data centers et d'infrastructures IA.",
+     "links": [
+      {
+       "title": "CoreWeave Seeks $4.5 Billion Meta-Backed Loan as Bond Yields Hit 18%",
+       "url": "https://finnhub.io/api/news?id=6965dfaacef5ea0b6e2f536f78b8fb1694e7b3252d4d832f01432f6cb2e4a766"
+      },
+      {
+       "title": "CoreWeave Can Now Borrow at 7% With Meta’s Name on the Loan",
+       "url": "https://finnhub.io/api/news?id=5c29965114088c54485af5951a6d67976766864599fbbd0938d7451a3fe1f876"
+      },
+      {
+       "title": "CoreWeave’s Default Odds Hit a Record. Core Scientific Has a Big Problem",
+       "url": "https://finnhub.io/api/news?id=6f1f603dbd249ce1664d7c1758170016b62e1fedacd6c1e8dce8a54d22d3319a"
+      }
+     ]
+    },
+    {
+     "text": "Amazon baisse de 3,1 % : Bernstein signale une baisse de 16 % du trafic web du cloud et un ralentissement possible d'AWS début 2027, alors que le groupe dépense environ 220 milliards de dollars cette année. À l'inverse, Meta gagne 3,4 % après des informations sur des discussions avec Amazon pour son agent d'achat IA, et un partenariat avec Walmart est vu comme un possible retour sur ses dépenses d'IA.",
+     "links": [
+      {
+       "title": "Amazon Stocks Fall 3.12% as Bernstein Flags a 16% Drop in Cloud Web Traffic",
+       "url": "https://finnhub.io/api/news?id=5eb74de44bb8354c3750e38e022afbf11fd67157301a50f38af62b13e0d40619"
+      },
+      {
+       "title": "Amazon Has 59 Buy Ratings and Not a Single Sell. Here’s Where its Headed",
+       "url": "https://finnhub.io/api/news?id=0a915e9b948b5d00b3225260447fa53343bd561cba2da9ae09e8d91c19487b73"
+      },
+      {
+       "title": "Meta Platforms Stocks Jump 3.4% on Reported Amazon Talks Over Muse AI Agent",
+       "url": "https://finnhub.io/api/news?id=92dcd4f311276b9ab64e230891d2349b979f28bf82f5ef216e1a9689b3d58cf4"
+      }
+     ]
+    },
+    {
+     "text": "Aux États-Unis, Donald Trump réclame une enquête sur la forte révision à la hausse du PIB du troisième trimestre, qu'il qualifie d'erreur historique. Côté tensions géopolitiques, des pétroliers ont heurté des mines près d'Oman, deux Italiens sont morts dans une attaque de drone iranienne au Koweït, et l'OPEC+ se réunit dimanche sur les quotas 2027, des sujets à surveiller pour le pétrole.",
+     "links": [
+      {
+       "title": "Trump demands probe into ‘record setting error’ after third-quarter GDP data gets massive revision higher",
+       "url": "https://www.cnbc.com/2026/11/26/trump-gdp-revision-investigation.html"
+      },
+      {
+       "title": "Iran's Revolutionary Guards say two oil tankers hit sea mines near Oman’s Khasab - Reuters",
+       "url": "https://news.google.com/rss/articles/CBMizAFBVV95cUxOcHNnYmJXdWlaS3JfaTRfQUhza0lkR0lSNjhWNVJoY1Mxd3VSVVZyOHV0R0xZbHl2TS1FX2VROGg0bmg1dHFUbG9ZckxfT2lSaFotSmNFczlabFRHWjZZUEYycHA3S0tXN0p4cHFvbjUyam9IcDBwYkFBSTJfbFZwLTVickFLaFU0bTYxeHI3eHVGTmQyV3ozMTQzWm4tWGduQi00RHJoclptRnlsQjJqdTdMTU9yX2w0OXRmanYtUndOZmtaSy1JdmRuRzg?oc=5"
+      },
+      {
+       "title": "Two Italians killed in Iranian drone attack in Kuwait, Italy says - Reuters",
+       "url": "https://news.google.com/rss/articles/CBMiswFBVV95cUxPeE9DZXQ0VUMxV052eWlmWWlKM3R0LTFiMS1ITm93Ty1NOWpta1ZVNU5MeWVVMHRlcmdXd0NpZmxJeGlGZEhCeklaaEs2VWlSWnR0RVRLUHhCNm9MeFNTMmNUZFEyWWdoUVVBWUZTcVc0LVNFY0gxN050ZHNtS3psSVRHQWtBVEM5N3dPYVl6T1Flb0tBb1BlUGVxQ3ZaNURWVU9vTHYtTGxFRDJSQVhaMU1Tbw?oc=5"
+      }
+     ]
+    },
+    {
+     "text": "Dans la cybersécurité, CrowdStrike a fait son meilleur trimestre et propose 43,9 Md$ en actions pour racheter Zscaler. Palo Alto fait face à une plainte d'un ancien dirigeant alléguant une fraude comptable liée à des ventes via revendeurs, après l'annonce du rachat d'Applied Compute pour 4,5 Md$.",
+     "links": [
+      {
+       "title": "Was CrowdStrike’s $43.9 Billion Bid for Zscaler the Right Move at the Wrong Time?",
+       "url": "https://finnhub.io/api/news?id=639b0e28551c03cfbc4e71608d82f957846bcc2cfcbb0792b2e3fa4697147251"
+      },
+      {
+       "title": "Palo Alto Networks (PANW) Hit With Fraud Lawsuit After $4.5 Billion AI Deal",
+       "url": "https://finnhub.io/api/news?id=e3b72fa574c5c414dcf51173981c6ede6eaa2deb819b30962b794286600fbeea"
+      },
+      {
+       "title": "Own Palo Alto Stock? Watch Its Deferred Revenue",
+       "url": "https://finnhub.io/api/news?id=0746232813c9963ce39c216b822286bc0a125e61c2ecdcdb337b9169c689fb18"
+      }
+     ]
+    },
+    {
+     "text": "Les data centers conservent des fondamentaux solides : Equinix a relevé ses prévisions annuelles pour le troisième trimestre de suite (revenus +11 %), mais l'action a reculé de 5,6 % sur la semaine. Alphabet a lancé de nouveaux modèles d'IA Gemini 4 alors que son titre est en baisse d'environ 14 % sur un an.",
+     "links": [
+      {
+       "title": "How Investors May Respond To Equinix (EQIX) Raised Guidance",
+       "url": "https://finnhub.io/api/news?id=8d1f2489b4507acde473d4227e0c57be0aa146525b7b16eb84a51164d176f313"
+      },
+      {
+       "title": "Equinix (EQIX) Could Be 42% Undervalued On Conflicting Fair Value Views",
+       "url": "https://finnhub.io/api/news?id=2247f5e96eb951bb1180ef666b88d7a1f4a77eacd06afee02f5e73603503bc1e"
+      },
+      {
+       "title": "Alphabet (GOOGL) Dropped, So What Is Behind The Latest Attention?",
+       "url": "https://finnhub.io/api/news?id=e46c2c2c83e3a44a957d7afac3ab9b4ec06eca24d50494df2d505411eca103d9"
+      }
+     ]
+    },
+    {
+     "text": "Marvell publie ses résultats le 1er décembre et a chuté de 10 % ou plus le lendemain dans environ un cas sur quatre depuis 2020. Credo publie aussi bientôt, avec une valorisation jugée élevée : des rendez-vous à risque pour les semi-conducteurs. En Europe, l'Espagnol de Cos devrait devenir président de la BCE.",
+     "links": [
+      {
+       "title": "Marvell Reports Tuesday. How Often Has It Dropped 10%?",
+       "url": "https://finnhub.io/api/news?id=7a56ebaeec9561956b6666a174e9ab8a836fe55f1c81683b21a4bd3a7d5a8024"
+      },
+      {
+       "title": "Credo Technology Ahead of Q2 Earnings: How to Approach the Stock Now?",
+       "url": "https://finnhub.io/api/news?id=0f221f31322062af60c26787fb7f8f0df51008eac39e938bbcf2f2d9056474a8"
+      },
+      {
+       "title": "Spain's De Cos set to be nominated by EU countries as next head of ECB - Reuters",
+       "url": "https://news.google.com/rss/articles/CBMiqgFBVV95cUxOOV8wZkxRVTY5U0ZQeVZwSGtCMVZJTjV2d2t5TlhsSVoxQmpLRXI4OTV1R0QwQkV1QmZma3BDN0lrOEJTNGFVeloyeE5HbnhmWDZfR1VrbzN5TzZrck5WTTlKNTBaeFhVbDd4RldhY0hZMnFsczlsTURLY0FpWWgzeE5YVVc2NUZqMy1KbldQVDJfcUtsVEhINHF2emJ5SEFrMXozWUdTM3BFQQ?oc=5"
+      }
+     ]
+    }
+   ],
+   "sentiments": {
+    "NVDA": {
+     "value": -0.3,
+     "reason": "Note de crédit sous surveillance négative et forte chute, partiellement compensées par trois relèvements d'analystes."
+    },
+    "MU": {
+     "value": -0.4,
+     "reason": "Prévisions mémoire 2027 réduites par TrendForce et baisse de 4,5 %."
+    },
+    "AMZN": {
+     "value": -0.3,
+     "reason": "Alerte de Bernstein sur AWS et dépenses de 220 Md$, atténuées par les discussions avec Meta."
+    },
+    "META": {
+     "value": 0.3,
+     "reason": "Hausse de 3,4 % sur les discussions avec Amazon et partenariat Walmart, mais dépenses d'investissement élevées."
+    },
+    "AMD": {
+     "value": -0.2,
+     "reason": "Contexte de stress sur l'IA et le crédit de CoreWeave, concurrence de Cerebras."
+    },
+    "AVGO": {
+     "value": -0.1,
+     "reason": "Entraîné par la faiblesse du secteur, avant les résultats de Marvell et Credo."
+    },
+    "GOOGL": {
+     "value": 0.1,
+     "reason": "Lancement de Gemini 4 mais titre faible sur un an."
+    },
+    "MSFT": {
+     "value": 0,
+     "reason": "Partenariat publicitaire avec Pinterest, mais Oracle et les prêts de data centers inquiètent."
+    },
+    "EQIX": {
+     "value": 0.2,
+     "reason": "Prévisions relevées et demande solide, mais action en repli."
+    },
+    "PANW": {
+     "value": -0.3,
+     "reason": "Plainte pour fraude comptable alléguée."
+    },
+    "CRWD": {
+     "value": 0.1,
+     "reason": "Meilleur trimestre, mais rachat coûteux de Zscaler en actions."
+    }
+   },
+   "explanations": {
+    "EUNL.DE": "L'ETF monde reste au-dessus de sa moyenne longue, mais la volatilité est élevée et le marché très craintif. Les signaux sont mitigés, d'où une position d'attente.",
+    "IS3N.DE": "Les émergents sont en baisse nette, sous leur moyenne de long terme, et font moins bien que le S&P 500. Leur volatilité est forte.",
+    "HNSC.MI": "Les semi-conducteurs sont en forte baisse, loin de leur plus haut et sous leurs moyennes mobiles. La volatilité est très élevée.",
+    "VVSM.DE": "Même constat : tendance et momentum négatifs, sous-performance face au S&P 500 et risque élevé.",
+    "L0CK.DE": "La cybersécurité résiste mieux que le marché et reste au-dessus de ses moyennes. Les signaux sont toutefois neutres, d'où l'attente.",
+    "V9N.DE": "Les data centers sont en recul marqué depuis plusieurs mois, sous leurs moyennes mobiles et plus faibles que le marché.",
+    "8PSG.DE": "L'or recule sur 3 et 6 mois, sous ses moyennes mobiles, avec une sous-performance relative.",
+    "NVDA": "Forte baisse, sous ses moyennes mobiles et très volatile. Les inquiétudes de gouvernance et de notation pèsent.",
+    "AVGO": "Tendance et momentum négatifs, très en dessous de ses moyennes mobiles, dans un secteur sous pression.",
+    "AMD": "Momentum négatif, volatilité très élevée et recul depuis le plus haut, malgré une moyenne à 50 jours en hausse.",
+    "MU": "Baisse très marquée et perte de moitié depuis le plus haut. Les prévisions mémoire revues à la baisse aggravent le tableau.",
+    "MSFT": "Elle reste au-dessus de ses moyennes et fait mieux que le marché, mais le momentum récent est faible et le contexte fragile.",
+    "GOOGL": "Tendance et momentum nettement négatifs, sous-performance face au marché, malgré les nouveaux modèles d'IA.",
+    "AMZN": "Le titre est proche de sa moyenne longue, mais le momentum est négatif et la volatilité élevée, avec des craintes sur AWS.",
+    "META": "Elle fait nettement mieux que le marché, mais reste sous sa moyenne longue dans un contexte de peur : attente.",
+    "PANW": "Tendance de long terme solide, mais moyenne à 50 jours en baisse, volatilité élevée et contexte de marché fragile.",
+    "CRWD": "Tendance de long terme positive, mais momentum récent négatif et marché fragile : signaux partagés.",
+    "EQIX": "Sous sa moyenne longue avec un momentum négatif, malgré de bons fondamentaux.",
+    "DLR": "Baisse prononcée sur plusieurs mois, sous ses moyennes mobiles et plus faible que le marché."
+   }
+  },
   "source": "Claude",
-  "fetchedAt": "2026-11-26T18:12:36.920Z",
-  "status": "error",
-  "error": "ANTHROPIC_API_KEY non configurée"
+  "fetchedAt": "2026-11-26T18:36:20.793Z",
+  "status": "ok"
  },
  "discoveries": {
   "data": {
-   "generatedAt": "2026-11-26T18:12:36.920Z",
+   "generatedAt": "2026-11-26T18:36:20.793Z",
    "regions": [
     "Amérique",
     "Europe",
@@ -58967,9 +59750,9 @@
      "lastDate": "2026-11-26",
      "marketOpen": false,
      "perf3m": 0.11202742787671593,
-     "perf3mEUR": 0.1410569379770319,
+     "perf3mEUR": 0.14123153812524758,
      "relRegion": 0.13371379809118356,
-     "relWorld": 0.2093933222886415,
+     "relWorld": 0.20956792243685718,
      "breakout": false,
      "buyable": true,
      "spark": [
@@ -60148,9 +60931,9 @@
      "lastDate": "2026-11-26",
      "marketOpen": false,
      "perf3m": 0.1613023952095809,
-     "perf3mEUR": 0.18931885672485538,
+     "perf3mEUR": 0.1893330026604414,
      "relRegion": 0.1890513319898971,
-     "relWorld": 0.2603688025034391,
+     "relWorld": 0.2603829484390251,
      "breakout": false,
      "buyable": true,
      "spark": [
@@ -68356,7 +69139,7 @@
    ]
   },
   "source": "Yahoo Finance",
-  "fetchedAt": "2026-11-26T18:12:36.920Z",
+  "fetchedAt": "2026-11-26T18:36:20.793Z",
   "status": "ok",
   "error": "1 valeur(s) exclue(s) (données incomplètes ou illiquides)"
  },
@@ -70959,7 +71742,7 @@
     ]
    },
    "source": "Yahoo Finance",
-   "fetchedAt": "2026-11-26T18:12:29.667Z",
+   "fetchedAt": "2026-11-26T18:36:13.916Z",
    "status": "ok"
   },
   "GBP": {
@@ -73554,13 +74337,13 @@
      },
      {
       "date": "2026-11-26",
-      "close": 0.8368499875068665,
+      "close": 0.836870014667511,
       "volume": 0
      }
     ]
    },
    "source": "Yahoo Finance",
-   "fetchedAt": "2026-11-26T18:12:29.755Z",
+   "fetchedAt": "2026-11-26T18:36:13.976Z",
    "status": "ok"
   },
   "CHF": {
@@ -76155,13 +76938,13 @@
      },
      {
       "date": "2026-11-26",
-      "close": 0.915149986743927,
+      "close": 0.9149900078773499,
       "volume": 0
      }
     ]
    },
    "source": "Yahoo Finance",
-   "fetchedAt": "2026-11-26T18:12:29.815Z",
+   "fetchedAt": "2026-11-26T18:36:14.018Z",
    "status": "ok"
   }
  },
@@ -76699,7 +77482,7 @@
     ]
    },
    "source": "Yahoo Finance",
-   "fetchedAt": "2026-11-26T18:13:31.562Z",
+   "fetchedAt": "2026-11-26T18:37:38.046Z",
    "status": "ok"
   },
   "^VIX": {
@@ -77679,7 +78462,7 @@
     ]
    },
    "source": "Yahoo Finance",
-   "fetchedAt": "2026-11-26T18:13:31.921Z",
+   "fetchedAt": "2026-11-26T18:37:38.386Z",
    "status": "ok"
   },
   "EUNL.DE": {
@@ -78198,7 +78981,7 @@
      },
      {
       "t": 1795616100,
-      "close": 123.15
+      "close": 123.12
      },
      {
       "t": 1795617000,
@@ -78375,7 +79158,7 @@
     ]
    },
    "source": "Yahoo Finance",
-   "fetchedAt": "2026-11-26T18:13:32.275Z",
+   "fetchedAt": "2026-11-26T18:37:38.729Z",
    "status": "ok"
   },
   "IS3N.DE": {
@@ -79067,7 +79850,7 @@
     ]
    },
    "source": "Yahoo Finance",
-   "fetchedAt": "2026-11-26T18:13:32.630Z",
+   "fetchedAt": "2026-11-26T18:37:39.067Z",
    "status": "ok"
   },
   "HNSC.MI": {
@@ -79174,7 +79957,7 @@
      },
      {
       "t": 1795420800,
-      "close": 27.14
+      "close": 27.145
      },
      {
       "t": 1795421700,
@@ -79503,7 +80286,7 @@
     ]
    },
    "source": "Yahoo Finance",
-   "fetchedAt": "2026-11-26T18:13:32.988Z",
+   "fetchedAt": "2026-11-26T18:37:39.409Z",
    "status": "ok"
   },
   "VVSM.DE": {
@@ -80187,7 +80970,7 @@
     ]
    },
    "source": "Yahoo Finance",
-   "fetchedAt": "2026-11-26T18:13:33.357Z",
+   "fetchedAt": "2026-11-26T18:37:39.749Z",
    "status": "ok"
   },
   "L0CK.DE": {
@@ -80863,7 +81646,7 @@
     ]
    },
    "source": "Yahoo Finance",
-   "fetchedAt": "2026-11-26T18:13:33.714Z",
+   "fetchedAt": "2026-11-26T18:37:40.087Z",
    "status": "ok"
   },
   "V9N.DE": {
@@ -81094,7 +81877,7 @@
      },
      {
       "t": 1795450500,
-      "close": 19.696
+      "close": 19.694
      },
      {
       "t": 1795507200,
@@ -81387,7 +82170,7 @@
     ]
    },
    "source": "Yahoo Finance",
-   "fetchedAt": "2026-11-26T18:13:34.069Z",
+   "fetchedAt": "2026-11-26T18:37:40.425Z",
    "status": "ok"
   },
   "8PSG.DE": {
@@ -82075,7 +82858,7 @@
     ]
    },
    "source": "Yahoo Finance",
-   "fetchedAt": "2026-11-26T18:13:34.425Z",
+   "fetchedAt": "2026-11-26T18:37:40.763Z",
    "status": "ok"
   },
   "NVDA": {
@@ -82130,7 +82913,7 @@
      },
      {
       "t": 1795108500,
-      "close": 150.22
+      "close": 150.25
      },
      {
       "t": 1795109400,
@@ -82262,7 +83045,7 @@
      },
      {
       "t": 1795201200,
-      "close": 133
+      "close": 132.995
      },
      {
       "t": 1795202100,
@@ -82298,7 +83081,7 @@
      },
      {
       "t": 1795445100,
-      "close": 168.555
+      "close": 168.553
      },
      {
       "t": 1795446000,
@@ -82402,7 +83185,7 @@
      },
      {
       "t": 1795531500,
-      "close": 156.22
+      "close": 156.24
      },
      {
       "t": 1795532400,
@@ -82498,7 +83281,7 @@
      },
      {
       "t": 1795553100,
-      "close": 155.47
+      "close": 155.48
      },
      {
       "t": 1795617000,
@@ -82602,7 +83385,7 @@
      },
      {
       "t": 1795639500,
-      "close": 149.29
+      "close": 149.27
      },
      {
       "t": 1795640400,
@@ -82611,7 +83394,7 @@
     ]
    },
    "source": "Yahoo Finance",
-   "fetchedAt": "2026-11-26T18:13:34.780Z",
+   "fetchedAt": "2026-11-26T18:37:41.108Z",
    "status": "ok"
   },
   "AVGO": {
@@ -82926,7 +83709,7 @@
      },
      {
       "t": 1795465800,
-      "close": 313.26
+      "close": 313.267
      },
      {
       "t": 1795466700,
@@ -83138,7 +83921,7 @@
      },
      {
       "t": 1795639500,
-      "close": 300.49
+      "close": 300.555
      },
      {
       "t": 1795640400,
@@ -83147,7 +83930,7 @@
     ]
    },
    "source": "Yahoo Finance",
-   "fetchedAt": "2026-11-26T18:13:35.139Z",
+   "fetchedAt": "2026-11-26T18:37:41.448Z",
    "status": "ok"
   },
   "AMD": {
@@ -83294,7 +84077,7 @@
      },
      {
       "t": 1795192200,
-      "close": 433.8
+      "close": 433.82
      },
      {
       "t": 1795193100,
@@ -83386,7 +84169,7 @@
      },
      {
       "t": 1795448700,
-      "close": 458.3
+      "close": 458.36
      },
      {
       "t": 1795449600,
@@ -83466,7 +84249,7 @@
      },
      {
       "t": 1795466700,
-      "close": 454.07
+      "close": 454.01
      },
      {
       "t": 1795530600,
@@ -83606,7 +84389,7 @@
      },
      {
       "t": 1795624200,
-      "close": 371.045
+      "close": 371.04
      },
      {
       "t": 1795625100,
@@ -83674,7 +84457,7 @@
      },
      {
       "t": 1795639500,
-      "close": 406.835
+      "close": 406.78
      },
      {
       "t": 1795640400,
@@ -83683,7 +84466,7 @@
     ]
    },
    "source": "Yahoo Finance",
-   "fetchedAt": "2026-11-26T18:13:35.494Z",
+   "fetchedAt": "2026-11-26T18:37:41.789Z",
    "status": "ok"
   },
   "MU": {
@@ -83794,7 +84577,7 @@
      },
      {
       "t": 1795121100,
-      "close": 689.98
+      "close": 690.12
      },
      {
       "t": 1795185000,
@@ -83846,7 +84629,7 @@
      },
      {
       "t": 1795195800,
-      "close": 606
+      "close": 605.84
      },
      {
       "t": 1795196700,
@@ -83994,7 +84777,7 @@
      },
      {
       "t": 1795464900,
-      "close": 709.74
+      "close": 709.87
      },
      {
       "t": 1795465800,
@@ -84074,7 +84857,7 @@
      },
      {
       "t": 1795545900,
-      "close": 629.715
+      "close": 629.765
      },
      {
       "t": 1795546800,
@@ -84219,7 +85002,7 @@
     ]
    },
    "source": "Yahoo Finance",
-   "fetchedAt": "2026-11-26T18:13:35.848Z",
+   "fetchedAt": "2026-11-26T18:37:42.141Z",
    "status": "ok"
   },
   "MSFT": {
@@ -84755,7 +85538,7 @@
     ]
    },
    "source": "Yahoo Finance",
-   "fetchedAt": "2026-11-26T18:13:36.219Z",
+   "fetchedAt": "2026-11-26T18:37:42.487Z",
    "status": "ok"
   },
   "GOOGL": {
@@ -84950,7 +85733,7 @@
      },
      {
       "t": 1795203000,
-      "close": 271.51
+      "close": 271.5
      },
      {
       "t": 1795203900,
@@ -84974,7 +85757,7 @@
      },
      {
       "t": 1795444200,
-      "close": 277.51
+      "close": 277.5
      },
      {
       "t": 1795445100,
@@ -85282,7 +86065,7 @@
      },
      {
       "t": 1795639500,
-      "close": 272.95
+      "close": 272.975
      },
      {
       "t": 1795640400,
@@ -85291,7 +86074,7 @@
     ]
    },
    "source": "Yahoo Finance",
-   "fetchedAt": "2026-11-26T18:13:36.611Z",
+   "fetchedAt": "2026-11-26T18:37:42.829Z",
    "status": "ok"
   },
   "AMZN": {
@@ -85338,7 +86121,7 @@
      },
      {
       "t": 1795106700,
-      "close": 266.385
+      "close": 266.425
      },
      {
       "t": 1795107600,
@@ -85358,7 +86141,7 @@
      },
      {
       "t": 1795111200,
-      "close": 260.185
+      "close": 260.17
      },
      {
       "t": 1795112100,
@@ -85722,7 +86505,7 @@
      },
      {
       "t": 1795617900,
-      "close": 240.91
+      "close": 240.93
      },
      {
       "t": 1795618800,
@@ -85827,7 +86610,7 @@
     ]
    },
    "source": "Yahoo Finance",
-   "fetchedAt": "2026-11-26T18:13:36.967Z",
+   "fetchedAt": "2026-11-26T18:37:43.168Z",
    "status": "ok"
   },
   "META": {
@@ -86154,7 +86937,7 @@
      },
      {
       "t": 1795531500,
-      "close": 598.82
+      "close": 598.895
      },
      {
       "t": 1795532400,
@@ -86363,7 +87146,7 @@
     ]
    },
    "source": "Yahoo Finance",
-   "fetchedAt": "2026-11-26T18:13:37.326Z",
+   "fetchedAt": "2026-11-26T18:37:43.519Z",
    "status": "ok"
   },
   "PANW": {
@@ -86786,7 +87569,7 @@
      },
      {
       "t": 1795553100,
-      "close": 353.14
+      "close": 353.06
      },
      {
       "t": 1795617000,
@@ -86890,7 +87673,7 @@
      },
      {
       "t": 1795639500,
-      "close": 356.19
+      "close": 356.185
      },
      {
       "t": 1795640400,
@@ -86899,7 +87682,7 @@
     ]
    },
    "source": "Yahoo Finance",
-   "fetchedAt": "2026-11-26T18:13:37.685Z",
+   "fetchedAt": "2026-11-26T18:37:43.859Z",
    "status": "ok"
   },
   "CRWD": {
@@ -87435,7 +88218,7 @@
     ]
    },
    "source": "Yahoo Finance",
-   "fetchedAt": "2026-11-26T18:13:38.042Z",
+   "fetchedAt": "2026-11-26T18:37:44.198Z",
    "status": "ok"
   },
   "EQIX": {
@@ -87971,7 +88754,7 @@
     ]
    },
    "source": "Yahoo Finance",
-   "fetchedAt": "2026-11-26T18:13:38.403Z",
+   "fetchedAt": "2026-11-26T18:37:44.574Z",
    "status": "ok"
   },
   "DLR": {
@@ -88186,7 +88969,7 @@
      },
      {
       "t": 1795207500,
-      "close": 162.51
+      "close": 162.47
      },
      {
       "t": 1795444200,
@@ -88507,7 +89290,7 @@
     ]
    },
    "source": "Yahoo Finance",
-   "fetchedAt": "2026-11-26T18:13:38.769Z",
+   "fetchedAt": "2026-11-26T18:37:44.912Z",
    "status": "ok"
   },
   "AI.PA": {
@@ -88546,7 +89329,7 @@
      },
      {
       "t": 1795167900,
-      "close": 187.22
+      "close": 187.2
      },
      {
       "t": 1795168800,
@@ -88710,7 +89493,7 @@
      },
      {
       "t": 1795433400,
-      "close": 186.5
+      "close": 186.48
      },
      {
       "t": 1795434300,
@@ -89062,7 +89845,7 @@
      },
      {
       "t": 1795680000,
-      "close": 189.5
+      "close": 189.52
      },
      {
       "t": 1795680900,
@@ -89203,7 +89986,7 @@
     ]
    },
    "source": "Yahoo Finance",
-   "fetchedAt": "2026-11-26T18:13:39.123Z",
+   "fetchedAt": "2026-11-26T18:37:45.257Z",
    "status": "ok"
   },
   "BRK-B": {
@@ -89418,7 +90201,7 @@
      },
      {
       "t": 1795207500,
-      "close": 570.29
+      "close": 570.43
      },
      {
       "t": 1795444200,
@@ -89739,7 +90522,7 @@
     ]
    },
    "source": "Yahoo Finance",
-   "fetchedAt": "2026-11-26T18:13:39.486Z",
+   "fetchedAt": "2026-11-26T18:37:45.596Z",
    "status": "ok"
   },
   "WMT": {
@@ -89962,7 +90745,7 @@
      },
      {
       "t": 1795445100,
-      "close": 127.03
+      "close": 127.02
      },
      {
       "t": 1795446000,
@@ -90275,7 +91058,7 @@
     ]
    },
    "source": "Yahoo Finance",
-   "fetchedAt": "2026-11-26T18:13:39.847Z",
+   "fetchedAt": "2026-11-26T18:37:45.940Z",
    "status": "ok"
   },
   "MUV2.DE": {
@@ -90294,7 +91077,7 @@
      },
      {
       "t": 1795163400,
-      "close": 578.8
+      "close": 578.6
      },
      {
       "t": 1795164300,
@@ -90971,7 +91754,7 @@
     ]
    },
    "source": "Yahoo Finance",
-   "fetchedAt": "2026-11-26T18:13:40.205Z",
+   "fetchedAt": "2026-11-26T18:37:46.283Z",
    "status": "ok"
   },
   "OR.PA": {
@@ -91150,7 +91933,7 @@
      },
      {
       "t": 1795428000,
-      "close": 437.1
+      "close": 437.15
      },
      {
       "t": 1795428900,
@@ -91202,7 +91985,7 @@
      },
      {
       "t": 1795439700,
-      "close": 435.375
+      "close": 435.4
      },
      {
       "t": 1795440600,
@@ -91562,7 +92345,7 @@
      },
      {
       "t": 1795688100,
-      "close": 447.1
+      "close": 447
      },
      {
       "t": 1795689000,
@@ -91667,7 +92450,7 @@
     ]
    },
    "source": "Yahoo Finance",
-   "fetchedAt": "2026-11-26T18:13:40.561Z",
+   "fetchedAt": "2026-11-26T18:37:46.628Z",
    "status": "ok"
   },
   "NESN.SW": {
@@ -91830,7 +92613,7 @@
      },
      {
       "t": 1795424400,
-      "close": 85.42
+      "close": 85.43
      },
      {
       "t": 1795425300,
@@ -92162,7 +92945,7 @@
      },
      {
       "t": 1795610700,
-      "close": 87.4
+      "close": 87.41
      },
      {
       "t": 1795611600,
@@ -92186,7 +92969,7 @@
      },
      {
       "t": 1795616100,
-      "close": 87.38
+      "close": 87.36
      },
      {
       "t": 1795617000,
@@ -92290,7 +93073,7 @@
      },
      {
       "t": 1795695300,
-      "close": 87.32
+      "close": 87.31
      },
      {
       "t": 1795696200,
@@ -92322,7 +93105,7 @@
      },
      {
       "t": 1795702500,
-      "close": 87.39
+      "close": 87.4
      },
      {
       "t": 1795703400,
@@ -92363,7 +93146,7 @@
     ]
    },
    "source": "Yahoo Finance",
-   "fetchedAt": "2026-11-26T18:13:40.932Z",
+   "fetchedAt": "2026-11-26T18:37:46.968Z",
    "status": "ok"
   },
   "REL.L": {
@@ -92450,7 +93233,7 @@
      },
      {
       "t": 1795178700,
-      "close": 2962
+      "close": 2963
      },
      {
       "t": 1795179600,
@@ -93059,7 +93842,7 @@
     ]
    },
    "source": "Yahoo Finance",
-   "fetchedAt": "2026-11-26T18:13:41.293Z",
+   "fetchedAt": "2026-11-26T18:37:47.316Z",
    "status": "ok"
   },
   "INDA": {
@@ -93210,7 +93993,7 @@
      },
      {
       "t": 1795193100,
-      "close": 53.05
+      "close": 53.055
      },
      {
       "t": 1795194000,
@@ -93586,7 +94369,7 @@
      },
      {
       "t": 1795639500,
-      "close": 53.215
+      "close": 53.21
      },
      {
       "t": 1795640400,
@@ -93595,7 +94378,7 @@
     ]
    },
    "source": "Yahoo Finance",
-   "fetchedAt": "2026-11-26T18:13:41.653Z",
+   "fetchedAt": "2026-11-26T18:37:47.660Z",
    "status": "ok"
   },
   "XLV": {
@@ -94131,7 +94914,7 @@
     ]
    },
    "source": "Yahoo Finance",
-   "fetchedAt": "2026-11-26T18:13:42.010Z",
+   "fetchedAt": "2026-11-26T18:37:48.003Z",
    "status": "ok"
   },
   "SXR8.DE": {
@@ -94827,7 +95610,7 @@
     ]
    },
    "source": "Yahoo Finance",
-   "fetchedAt": "2026-11-26T18:13:42.386Z",
+   "fetchedAt": "2026-11-26T18:37:48.349Z",
    "status": "ok"
   },
   "IBB": {
@@ -95363,7 +96146,7 @@
     ]
    },
    "source": "Yahoo Finance",
-   "fetchedAt": "2026-11-26T18:13:42.741Z",
+   "fetchedAt": "2026-11-26T18:37:48.689Z",
    "status": "ok"
   },
   "VWCE.DE": {
@@ -95526,7 +96309,7 @@
      },
      {
       "t": 1795424400,
-      "close": 161.06
+      "close": 161.08
      },
      {
       "t": 1795425300,
@@ -96059,7 +96842,7 @@
     ]
    },
    "source": "Yahoo Finance",
-   "fetchedAt": "2026-11-26T18:13:43.107Z",
+   "fetchedAt": "2026-11-26T18:37:49.031Z",
    "status": "ok"
   }
  }

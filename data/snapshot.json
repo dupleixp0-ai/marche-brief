@@ -1,5 +1,5 @@
 {
- "generatedAt": "2026-11-26T17:30:57.266Z",
+ "generatedAt": "2026-11-26T18:12:36.920Z",
  "marketNote": "Marché américain fermé (Thanksgiving) : cours du mercredi 25/11.",
  "market": {
   "vix": {
@@ -1280,7 +1280,7 @@
     ]
    },
    "source": "Yahoo Finance",
-   "fetchedAt": "2026-11-26T17:30:49.384Z",
+   "fetchedAt": "2026-11-26T18:12:29.448Z",
    "status": "ok"
   },
   "spx": {
@@ -3796,7 +3796,7 @@
     ]
    },
    "source": "Yahoo Finance",
-   "fetchedAt": "2026-11-26T17:30:49.392Z",
+   "fetchedAt": "2026-11-26T18:12:29.419Z",
    "status": "ok"
   },
   "fearGreed": {
@@ -3806,7 +3806,7 @@
     "homemade": false
    },
    "source": "CNN",
-   "fetchedAt": "2026-11-26T17:30:49.446Z",
+   "fetchedAt": "2026-11-26T18:12:29.587Z",
    "status": "ok"
   }
  },
@@ -6344,7 +6344,7 @@
     ]
    },
    "source": "Yahoo Finance",
-   "fetchedAt": "2026-11-26T17:30:49.811Z",
+   "fetchedAt": "2026-11-26T18:12:29.877Z",
    "status": "ok"
   },
   "IS3N.DE": {
@@ -8880,7 +8880,7 @@
     ]
    },
    "source": "Yahoo Finance",
-   "fetchedAt": "2026-11-26T17:30:50.203Z",
+   "fetchedAt": "2026-11-26T18:12:30.234Z",
    "status": "ok"
   },
   "HNSC.MI": {
@@ -11411,7 +11411,7 @@
     ]
    },
    "source": "Yahoo Finance",
-   "fetchedAt": "2026-11-26T17:30:50.579Z",
+   "fetchedAt": "2026-11-26T18:12:30.598Z",
    "status": "ok"
   },
   "VVSM.DE": {
@@ -13947,7 +13947,7 @@
     ]
    },
    "source": "Yahoo Finance",
-   "fetchedAt": "2026-11-26T17:30:50.957Z",
+   "fetchedAt": "2026-11-26T18:12:30.958Z",
    "status": "ok"
   },
   "L0CK.DE": {
@@ -16483,7 +16483,7 @@
     ]
    },
    "source": "Yahoo Finance",
-   "fetchedAt": "2026-11-26T17:30:51.360Z",
+   "fetchedAt": "2026-11-26T18:12:31.327Z",
    "status": "ok"
   },
   "V9N.DE": {
@@ -19019,7 +19019,7 @@
     ]
    },
    "source": "Yahoo Finance",
-   "fetchedAt": "2026-11-26T17:30:51.747Z",
+   "fetchedAt": "2026-11-26T18:12:31.705Z",
    "status": "ok"
   },
   "8PSG.DE": {
@@ -21560,7 +21560,7 @@
     ]
    },
    "source": "Yahoo Finance",
-   "fetchedAt": "2026-11-26T17:30:52.126Z",
+   "fetchedAt": "2026-11-26T18:12:32.067Z",
    "status": "ok"
   },
   "NVDA": {
@@ -24076,7 +24076,7 @@
     ]
    },
    "source": "Yahoo Finance",
-   "fetchedAt": "2026-11-26T17:30:52.527Z",
+   "fetchedAt": "2026-11-26T18:12:32.439Z",
    "status": "ok"
   },
   "AVGO": {
@@ -26592,7 +26592,7 @@
     ]
    },
    "source": "Yahoo Finance",
-   "fetchedAt": "2026-11-26T17:30:52.957Z",
+   "fetchedAt": "2026-11-26T18:12:32.820Z",
    "status": "ok"
   },
   "AMD": {
@@ -29108,7 +29108,7 @@
     ]
    },
    "source": "Yahoo Finance",
-   "fetchedAt": "2026-11-26T17:30:53.329Z",
+   "fetchedAt": "2026-11-26T18:12:33.182Z",
    "status": "ok"
   },
   "MU": {
@@ -31624,7 +31624,7 @@
     ]
    },
    "source": "Yahoo Finance",
-   "fetchedAt": "2026-11-26T17:30:53.810Z",
+   "fetchedAt": "2026-11-26T18:12:33.585Z",
    "status": "ok"
   },
   "MSFT": {
@@ -34140,7 +34140,7 @@
     ]
    },
    "source": "Yahoo Finance",
-   "fetchedAt": "2026-11-26T17:30:54.149Z",
+   "fetchedAt": "2026-11-26T18:12:33.975Z",
    "status": "ok"
   },
   "GOOGL": {
@@ -36656,7 +36656,7 @@
     ]
    },
    "source": "Yahoo Finance",
-   "fetchedAt": "2026-11-26T17:30:54.609Z",
+   "fetchedAt": "2026-11-26T18:12:34.340Z",
    "status": "ok"
   },
   "AMZN": {
@@ -39172,7 +39172,7 @@
     ]
    },
    "source": "Yahoo Finance",
-   "fetchedAt": "2026-11-26T17:30:55.002Z",
+   "fetchedAt": "2026-11-26T18:12:34.701Z",
    "status": "ok"
   },
   "META": {
@@ -41688,7 +41688,7 @@
     ]
    },
    "source": "Yahoo Finance",
-   "fetchedAt": "2026-11-26T17:30:55.423Z",
+   "fetchedAt": "2026-11-26T18:12:35.090Z",
    "status": "ok"
   },
   "PANW": {
@@ -44204,7 +44204,7 @@
     ]
    },
    "source": "Yahoo Finance",
-   "fetchedAt": "2026-11-26T17:30:55.796Z",
+   "fetchedAt": "2026-11-26T18:12:35.451Z",
    "status": "ok"
   },
   "CRWD": {
@@ -46720,7 +46720,7 @@
     ]
    },
    "source": "Yahoo Finance",
-   "fetchedAt": "2026-11-26T17:30:56.171Z",
+   "fetchedAt": "2026-11-26T18:12:35.827Z",
    "status": "ok"
   },
   "EQIX": {
@@ -49236,7 +49236,7 @@
     ]
    },
    "source": "Yahoo Finance",
-   "fetchedAt": "2026-11-26T17:30:56.578Z",
+   "fetchedAt": "2026-11-26T18:12:36.225Z",
    "status": "ok"
   },
   "DLR": {
@@ -51752,7 +51752,7 @@
     ]
    },
    "source": "Yahoo Finance",
-   "fetchedAt": "2026-11-26T17:30:56.965Z",
+   "fetchedAt": "2026-11-26T18:12:36.620Z",
    "status": "ok"
   }
  },
@@ -52836,14 +52836,16 @@
     "url": "https://www.federalreserve.gov/newsevents/pressreleases/bcreg20261125b.htm",
     "source": "Réserve fédérale",
     "publishedAt": "2026-11-25T20:00:00.000Z",
-    "symbols": []
+    "symbols": [],
+    "summary": "Agencies announce dollar thresholds for applicability of truth in lending and consumer leasing rules for consumer credit and lease transactions"
    },
    {
     "title": "Agencies announce dollar thresholds for smaller loan exemption from appraisal requirements for higher-priced mortgage loans",
     "url": "https://www.federalreserve.gov/newsevents/pressreleases/bcreg20261125a.htm",
     "source": "Réserve fédérale",
     "publishedAt": "2026-11-25T20:00:00.000Z",
-    "symbols": []
+    "symbols": [],
+    "summary": "Agencies announce dollar thresholds for smaller loan exemption from appraisal requirements for higher-priced mortgage loans"
    },
    {
     "title": "ECB and Sveriges Riksbank conclude agreement for Sweden to join T2",
@@ -52864,7 +52866,8 @@
     "url": "https://www.federalreserve.gov/newsevents/pressreleases/monetary20261124a.htm",
     "source": "Réserve fédérale",
     "publishedAt": "2026-11-24T19:00:00.000Z",
-    "symbols": []
+    "symbols": [],
+    "summary": "Minutes of the Board's discount rate meetings on October 19 and October 28, 2026"
    },
    {
     "title": "Boris Vujčić: Resilience in an age of shocks: lessons from central and eastern Europe",
@@ -52892,14 +52895,16 @@
     "url": "https://www.federalreserve.gov/newsevents/pressreleases/other20261120b.htm",
     "source": "Réserve fédérale",
     "publishedAt": "2026-11-20T21:15:00.000Z",
-    "symbols": []
+    "symbols": [],
+    "summary": "Federal Reserve announces College Fed Challenge winners"
    },
    {
     "title": "Federal Reserve Board releases results from survey of senior financial officers at banks about their strategies and practices for managing reserve balances",
     "url": "https://www.federalreserve.gov/newsevents/pressreleases/other20261120a.htm",
     "source": "Réserve fédérale",
     "publishedAt": "2026-11-20T15:00:00.000Z",
-    "symbols": []
+    "symbols": [],
+    "summary": "Federal Reserve Board releases results from survey of senior financial officers at banks about their strategies and practices for managing reserve balances"
    },
    {
     "title": "Christine Lagarde: Acting in time",
@@ -52913,14 +52918,16 @@
     "url": "https://www.federalreserve.gov/newsevents/pressreleases/enforcement20261119a.htm",
     "source": "Réserve fédérale",
     "publishedAt": "2026-11-19T16:00:00.000Z",
-    "symbols": []
+    "symbols": [],
+    "summary": "Federal Reserve Board issues enforcement action with former employee of First Security Bancorp"
    },
    {
     "title": "Minutes of the Federal Open Market Committee, October 27-28, 2026",
     "url": "https://www.federalreserve.gov/newsevents/pressreleases/monetary20261118a.htm",
     "source": "Réserve fédérale",
     "publishedAt": "2026-11-18T19:00:00.000Z",
-    "symbols": []
+    "symbols": [],
+    "summary": "Minutes of the Federal Open Market Committee, October 27-28, 2026"
    },
    {
     "title": "Boris Vujčić: Financial Stability Review - November 2026",
@@ -52948,37 +52955,40 @@
     "url": "https://www.federalreserve.gov/newsevents/pressreleases/bcreg20261113a.htm",
     "source": "Réserve fédérale",
     "publishedAt": "2026-11-13T21:15:00.000Z",
-    "symbols": []
+    "symbols": [],
+    "summary": "Agencies extend comment period for proposed third-party risk management guidance"
    },
    {
     "title": "Federal Reserve Board announces pricing, effective January 1, 2027, for payment services the Federal Reserve Banks provide to banks and credit unions, and changes to streamline and adjust their check services",
     "url": "https://www.federalreserve.gov/newsevents/pressreleases/other20261112a.htm",
     "source": "Réserve fédérale",
     "publishedAt": "2026-11-12T18:30:00.000Z",
-    "symbols": []
+    "symbols": [],
+    "summary": "Federal Reserve Board announces pricing, effective January 1, 2027, for payment services the Federal Reserve Banks provide to banks and credit unions, and changes to streamline and adjust their check services"
    },
    {
     "title": "Federal Reserve announces revised tentative schedule of Federal Open Market Committee meetings in 2027",
     "url": "https://www.federalreserve.gov/newsevents/pressreleases/monetary20261112a.htm",
     "source": "Réserve fédérale",
     "publishedAt": "2026-11-12T17:45:00.000Z",
-    "symbols": []
+    "symbols": [],
+    "summary": "Federal Reserve announces revised tentative schedule of Federal Open Market Committee meetings in 2027"
    }
   ],
   "source": "Réserve fédérale, BCE",
-  "fetchedAt": "2026-11-26T17:30:57.266Z",
+  "fetchedAt": "2026-11-26T18:12:36.920Z",
   "status": "ok"
  },
  "brief": {
   "data": null,
   "source": "Claude",
-  "fetchedAt": "2026-11-26T17:30:57.266Z",
+  "fetchedAt": "2026-11-26T18:12:36.920Z",
   "status": "error",
   "error": "ANTHROPIC_API_KEY non configurée"
  },
  "discoveries": {
   "data": {
-   "generatedAt": "2026-11-26T17:30:57.266Z",
+   "generatedAt": "2026-11-26T18:12:36.920Z",
    "regions": [
     "Amérique",
     "Europe",
@@ -58957,9 +58967,9 @@
      "lastDate": "2026-11-26",
      "marketOpen": false,
      "perf3m": 0.11202742787671593,
-     "perf3mEUR": 0.1409073550658888,
+     "perf3mEUR": 0.1410569379770319,
      "relRegion": 0.13371379809118356,
-     "relWorld": 0.2092437393774984,
+     "relWorld": 0.2093933222886415,
      "breakout": false,
      "buyable": true,
      "spark": [
@@ -60138,9 +60148,9 @@
      "lastDate": "2026-11-26",
      "marketOpen": false,
      "perf3m": 0.1613023952095809,
-     "perf3mEUR": 0.1891199175074907,
+     "perf3mEUR": 0.18931885672485538,
      "relRegion": 0.1890513319898971,
-     "relWorld": 0.2601698632860744,
+     "relWorld": 0.2603688025034391,
      "breakout": false,
      "buyable": true,
      "spark": [
@@ -68346,7 +68356,7 @@
    ]
   },
   "source": "Yahoo Finance",
-  "fetchedAt": "2026-11-26T17:30:57.266Z",
+  "fetchedAt": "2026-11-26T18:12:36.920Z",
   "status": "ok",
   "error": "1 valeur(s) exclue(s) (données incomplètes ou illiquides)"
  },
@@ -70943,13 +70953,13 @@
      },
      {
       "date": "2026-11-26",
-      "close": 1.0973334312438965,
+      "close": 1.0972130298614502,
       "volume": 0
      }
     ]
    },
    "source": "Yahoo Finance",
-   "fetchedAt": "2026-11-26T17:30:49.521Z",
+   "fetchedAt": "2026-11-26T18:12:29.667Z",
    "status": "ok"
   },
   "GBP": {
@@ -73544,13 +73554,13 @@
      },
      {
       "date": "2026-11-26",
-      "close": 0.837090015411377,
+      "close": 0.8368499875068665,
       "volume": 0
      }
     ]
    },
    "source": "Yahoo Finance",
-   "fetchedAt": "2026-11-26T17:30:49.591Z",
+   "fetchedAt": "2026-11-26T18:12:29.755Z",
    "status": "ok"
   },
   "CHF": {
@@ -76145,13 +76155,13 @@
      },
      {
       "date": "2026-11-26",
-      "close": 0.9152600169181824,
+      "close": 0.915149986743927,
       "volume": 0
      }
     ]
    },
    "source": "Yahoo Finance",
-   "fetchedAt": "2026-11-26T17:30:49.735Z",
+   "fetchedAt": "2026-11-26T18:12:29.815Z",
    "status": "ok"
   }
  },
@@ -76689,7 +76699,7 @@
     ]
    },
    "source": "Yahoo Finance",
-   "fetchedAt": "2026-11-26T17:31:59.153Z",
+   "fetchedAt": "2026-11-26T18:13:31.562Z",
    "status": "ok"
   },
   "^VIX": {
@@ -77669,7 +77679,7 @@
     ]
    },
    "source": "Yahoo Finance",
-   "fetchedAt": "2026-11-26T17:31:59.539Z",
+   "fetchedAt": "2026-11-26T18:13:31.921Z",
    "status": "ok"
   },
   "EUNL.DE": {
@@ -78188,7 +78198,7 @@
      },
      {
       "t": 1795616100,
-      "close": 123.12
+      "close": 123.15
      },
      {
       "t": 1795617000,
@@ -78365,7 +78375,7 @@
     ]
    },
    "source": "Yahoo Finance",
-   "fetchedAt": "2026-11-26T17:31:59.908Z",
+   "fetchedAt": "2026-11-26T18:13:32.275Z",
    "status": "ok"
   },
   "IS3N.DE": {
@@ -79057,7 +79067,7 @@
     ]
    },
    "source": "Yahoo Finance",
-   "fetchedAt": "2026-11-26T17:32:00.274Z",
+   "fetchedAt": "2026-11-26T18:13:32.630Z",
    "status": "ok"
   },
   "HNSC.MI": {
@@ -79164,7 +79174,7 @@
      },
      {
       "t": 1795420800,
-      "close": 27.145
+      "close": 27.14
      },
      {
       "t": 1795421700,
@@ -79493,7 +79503,7 @@
     ]
    },
    "source": "Yahoo Finance",
-   "fetchedAt": "2026-11-26T17:32:00.704Z",
+   "fetchedAt": "2026-11-26T18:13:32.988Z",
    "status": "ok"
   },
   "VVSM.DE": {
@@ -80177,7 +80187,7 @@
     ]
    },
    "source": "Yahoo Finance",
-   "fetchedAt": "2026-11-26T17:32:01.087Z",
+   "fetchedAt": "2026-11-26T18:13:33.357Z",
    "status": "ok"
   },
   "L0CK.DE": {
@@ -80853,7 +80863,7 @@
     ]
    },
    "source": "Yahoo Finance",
-   "fetchedAt": "2026-11-26T17:32:01.455Z",
+   "fetchedAt": "2026-11-26T18:13:33.714Z",
    "status": "ok"
   },
   "V9N.DE": {
@@ -81377,7 +81387,7 @@
     ]
    },
    "source": "Yahoo Finance",
-   "fetchedAt": "2026-11-26T17:32:01.845Z",
+   "fetchedAt": "2026-11-26T18:13:34.069Z",
    "status": "ok"
   },
   "8PSG.DE": {
@@ -82065,7 +82075,7 @@
     ]
    },
    "source": "Yahoo Finance",
-   "fetchedAt": "2026-11-26T17:32:02.216Z",
+   "fetchedAt": "2026-11-26T18:13:34.425Z",
    "status": "ok"
   },
   "NVDA": {
@@ -82120,7 +82130,7 @@
      },
      {
       "t": 1795108500,
-      "close": 150.25
+      "close": 150.22
      },
      {
       "t": 1795109400,
@@ -82376,7 +82386,7 @@
      },
      {
       "t": 1795464900,
-      "close": 166.39
+      "close": 166.4
      },
      {
       "t": 1795465800,
@@ -82488,7 +82498,7 @@
      },
      {
       "t": 1795553100,
-      "close": 155.48
+      "close": 155.47
      },
      {
       "t": 1795617000,
@@ -82592,7 +82602,7 @@
      },
      {
       "t": 1795639500,
-      "close": 149.27
+      "close": 149.29
      },
      {
       "t": 1795640400,
@@ -82601,7 +82611,7 @@
     ]
    },
    "source": "Yahoo Finance",
-   "fetchedAt": "2026-11-26T17:32:02.599Z",
+   "fetchedAt": "2026-11-26T18:13:34.780Z",
    "status": "ok"
   },
   "AVGO": {
@@ -83128,7 +83138,7 @@
      },
      {
       "t": 1795639500,
-      "close": 300.555
+      "close": 300.49
      },
      {
       "t": 1795640400,
@@ -83137,7 +83147,7 @@
     ]
    },
    "source": "Yahoo Finance",
-   "fetchedAt": "2026-11-26T17:32:02.975Z",
+   "fetchedAt": "2026-11-26T18:13:35.139Z",
    "status": "ok"
   },
   "AMD": {
@@ -83216,7 +83226,7 @@
      },
      {
       "t": 1795113900,
-      "close": 480.88
+      "close": 480.853
      },
      {
       "t": 1795114800,
@@ -83456,7 +83466,7 @@
      },
      {
       "t": 1795466700,
-      "close": 454.01
+      "close": 454.07
      },
      {
       "t": 1795530600,
@@ -83673,7 +83683,7 @@
     ]
    },
    "source": "Yahoo Finance",
-   "fetchedAt": "2026-11-26T17:32:03.345Z",
+   "fetchedAt": "2026-11-26T18:13:35.494Z",
    "status": "ok"
   },
   "MU": {
@@ -83836,7 +83846,7 @@
      },
      {
       "t": 1795195800,
-      "close": 605.84
+      "close": 606
      },
      {
       "t": 1795196700,
@@ -84064,7 +84074,7 @@
      },
      {
       "t": 1795545900,
-      "close": 629.765
+      "close": 629.715
      },
      {
       "t": 1795546800,
@@ -84209,7 +84219,7 @@
     ]
    },
    "source": "Yahoo Finance",
-   "fetchedAt": "2026-11-26T17:32:03.722Z",
+   "fetchedAt": "2026-11-26T18:13:35.848Z",
    "status": "ok"
   },
   "MSFT": {
@@ -84745,7 +84755,7 @@
     ]
    },
    "source": "Yahoo Finance",
-   "fetchedAt": "2026-11-26T17:32:04.103Z",
+   "fetchedAt": "2026-11-26T18:13:36.219Z",
    "status": "ok"
   },
   "GOOGL": {
@@ -84940,7 +84950,7 @@
      },
      {
       "t": 1795203000,
-      "close": 271.5
+      "close": 271.51
      },
      {
       "t": 1795203900,
@@ -84964,7 +84974,7 @@
      },
      {
       "t": 1795444200,
-      "close": 277.5
+      "close": 277.51
      },
      {
       "t": 1795445100,
@@ -85281,7 +85291,7 @@
     ]
    },
    "source": "Yahoo Finance",
-   "fetchedAt": "2026-11-26T17:32:04.485Z",
+   "fetchedAt": "2026-11-26T18:13:36.611Z",
    "status": "ok"
   },
   "AMZN": {
@@ -85712,7 +85722,7 @@
      },
      {
       "t": 1795617900,
-      "close": 240.93
+      "close": 240.91
      },
      {
       "t": 1795618800,
@@ -85817,7 +85827,7 @@
     ]
    },
    "source": "Yahoo Finance",
-   "fetchedAt": "2026-11-26T17:32:04.867Z",
+   "fetchedAt": "2026-11-26T18:13:36.967Z",
    "status": "ok"
   },
   "META": {
@@ -86144,7 +86154,7 @@
      },
      {
       "t": 1795531500,
-      "close": 598.895
+      "close": 598.82
      },
      {
       "t": 1795532400,
@@ -86353,7 +86363,7 @@
     ]
    },
    "source": "Yahoo Finance",
-   "fetchedAt": "2026-11-26T17:32:05.245Z",
+   "fetchedAt": "2026-11-26T18:13:37.326Z",
    "status": "ok"
   },
   "PANW": {
@@ -86776,7 +86786,7 @@
      },
      {
       "t": 1795553100,
-      "close": 353.06
+      "close": 353.14
      },
      {
       "t": 1795617000,
@@ -86880,7 +86890,7 @@
      },
      {
       "t": 1795639500,
-      "close": 356.185
+      "close": 356.19
      },
      {
       "t": 1795640400,
@@ -86889,7 +86899,7 @@
     ]
    },
    "source": "Yahoo Finance",
-   "fetchedAt": "2026-11-26T17:32:05.619Z",
+   "fetchedAt": "2026-11-26T18:13:37.685Z",
    "status": "ok"
   },
   "CRWD": {
@@ -87425,7 +87435,7 @@
     ]
    },
    "source": "Yahoo Finance",
-   "fetchedAt": "2026-11-26T17:32:06.041Z",
+   "fetchedAt": "2026-11-26T18:13:38.042Z",
    "status": "ok"
   },
   "EQIX": {
@@ -87961,7 +87971,7 @@
     ]
    },
    "source": "Yahoo Finance",
-   "fetchedAt": "2026-11-26T17:32:06.417Z",
+   "fetchedAt": "2026-11-26T18:13:38.403Z",
    "status": "ok"
   },
   "DLR": {
@@ -88176,7 +88186,7 @@
      },
      {
       "t": 1795207500,
-      "close": 162.47
+      "close": 162.51
      },
      {
       "t": 1795444200,
@@ -88497,7 +88507,7 @@
     ]
    },
    "source": "Yahoo Finance",
-   "fetchedAt": "2026-11-26T17:32:06.791Z",
+   "fetchedAt": "2026-11-26T18:13:38.769Z",
    "status": "ok"
   },
   "AI.PA": {
@@ -88696,11 +88706,11 @@
      },
      {
       "t": 1795432500,
-      "close": 186.64
+      "close": 186.66
      },
      {
       "t": 1795433400,
-      "close": 186.46
+      "close": 186.5
      },
      {
       "t": 1795434300,
@@ -89193,7 +89203,7 @@
     ]
    },
    "source": "Yahoo Finance",
-   "fetchedAt": "2026-11-26T17:32:07.182Z",
+   "fetchedAt": "2026-11-26T18:13:39.123Z",
    "status": "ok"
   },
   "BRK-B": {
@@ -89408,7 +89418,7 @@
      },
      {
       "t": 1795207500,
-      "close": 570.43
+      "close": 570.29
      },
      {
       "t": 1795444200,
@@ -89729,7 +89739,7 @@
     ]
    },
    "source": "Yahoo Finance",
-   "fetchedAt": "2026-11-26T17:32:07.558Z",
+   "fetchedAt": "2026-11-26T18:13:39.486Z",
    "status": "ok"
   },
   "WMT": {
@@ -89952,7 +89962,7 @@
      },
      {
       "t": 1795445100,
-      "close": 127.02
+      "close": 127.03
      },
      {
       "t": 1795446000,
@@ -90265,7 +90275,7 @@
     ]
    },
    "source": "Yahoo Finance",
-   "fetchedAt": "2026-11-26T17:32:07.945Z",
+   "fetchedAt": "2026-11-26T18:13:39.847Z",
    "status": "ok"
   },
   "MUV2.DE": {
@@ -90284,7 +90294,7 @@
      },
      {
       "t": 1795163400,
-      "close": 578.6
+      "close": 578.8
      },
      {
       "t": 1795164300,
@@ -90961,7 +90971,7 @@
     ]
    },
    "source": "Yahoo Finance",
-   "fetchedAt": "2026-11-26T17:32:08.322Z",
+   "fetchedAt": "2026-11-26T18:13:40.205Z",
    "status": "ok"
   },
   "OR.PA": {
@@ -91552,7 +91562,7 @@
      },
      {
       "t": 1795688100,
-      "close": 447.05
+      "close": 447.1
      },
      {
       "t": 1795689000,
@@ -91657,7 +91667,7 @@
     ]
    },
    "source": "Yahoo Finance",
-   "fetchedAt": "2026-11-26T17:32:08.695Z",
+   "fetchedAt": "2026-11-26T18:13:40.561Z",
    "status": "ok"
   },
   "NESN.SW": {
@@ -91820,7 +91830,7 @@
      },
      {
       "t": 1795424400,
-      "close": 85.43
+      "close": 85.42
      },
      {
       "t": 1795425300,
@@ -92176,7 +92186,7 @@
      },
      {
       "t": 1795616100,
-      "close": 87.36
+      "close": 87.38
      },
      {
       "t": 1795617000,
@@ -92280,7 +92290,7 @@
      },
      {
       "t": 1795695300,
-      "close": 87.31
+      "close": 87.32
      },
      {
       "t": 1795696200,
@@ -92312,7 +92322,7 @@
      },
      {
       "t": 1795702500,
-      "close": 87.4
+      "close": 87.39
      },
      {
       "t": 1795703400,
@@ -92353,7 +92363,7 @@
     ]
    },
    "source": "Yahoo Finance",
-   "fetchedAt": "2026-11-26T17:32:09.063Z",
+   "fetchedAt": "2026-11-26T18:13:40.932Z",
    "status": "ok"
   },
   "REL.L": {
@@ -93049,7 +93059,7 @@
     ]
    },
    "source": "Yahoo Finance",
-   "fetchedAt": "2026-11-26T17:32:09.432Z",
+   "fetchedAt": "2026-11-26T18:13:41.293Z",
    "status": "ok"
   },
   "INDA": {
@@ -93200,7 +93210,7 @@
      },
      {
       "t": 1795193100,
-      "close": 53.055
+      "close": 53.05
      },
      {
       "t": 1795194000,
@@ -93585,7 +93595,7 @@
     ]
    },
    "source": "Yahoo Finance",
-   "fetchedAt": "2026-11-26T17:32:09.817Z",
+   "fetchedAt": "2026-11-26T18:13:41.653Z",
    "status": "ok"
   },
   "XLV": {
@@ -94121,7 +94131,7 @@
     ]
    },
    "source": "Yahoo Finance",
-   "fetchedAt": "2026-11-26T17:32:10.187Z",
+   "fetchedAt": "2026-11-26T18:13:42.010Z",
    "status": "ok"
   },
   "SXR8.DE": {
@@ -94817,7 +94827,7 @@
     ]
    },
    "source": "Yahoo Finance",
-   "fetchedAt": "2026-11-26T17:32:10.566Z",
+   "fetchedAt": "2026-11-26T18:13:42.386Z",
    "status": "ok"
   },
   "IBB": {
@@ -95353,7 +95363,7 @@
     ]
    },
    "source": "Yahoo Finance",
-   "fetchedAt": "2026-11-26T17:32:10.928Z",
+   "fetchedAt": "2026-11-26T18:13:42.741Z",
    "status": "ok"
   },
   "VWCE.DE": {
@@ -96049,7 +96059,7 @@
     ]
    },
    "source": "Yahoo Finance",
-   "fetchedAt": "2026-11-26T17:32:11.302Z",
+   "fetchedAt": "2026-11-26T18:13:43.107Z",
    "status": "ok"
   }
  }

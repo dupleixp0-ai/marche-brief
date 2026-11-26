@@ -4,6 +4,9 @@ import type { NewsItem } from "./types";
 import { RSS_FEEDS, rssFetcher } from "./rss";
 import { finnhubCompanyFetcher, finnhubGeneralFetcher } from "./finnhub";
 
+/** Symbole couvert par l'offre gratuite de Finnhub (cotation américaine, sans suffixe de place). */
+export const finnhubCovers = (symbol: string) => /^[A-Z]{1,5}(-[A-Z])?$/.test(symbol);
+
 export interface NewsOptions {
   finnhubKey?: string;
   /** Actualités par société (19 appels) : job quotidien seulement, pas le Worker. */
@@ -18,7 +21,8 @@ export async function collectNews(symbols: string[], opt: NewsOptions = {}): Pro
   for (const f of RSS_FEEDS) results.push(await withFallback([rssFetcher(f)]));
   if (opt.finnhubKey) {
     results.push(await withFallback([finnhubGeneralFetcher(opt.finnhubKey)]));
-    if (opt.companyNews) for (const s of symbols) results.push(await withFallback([finnhubCompanyFetcher(opt.finnhubKey, s, opt.now)]));
+    // Offre gratuite Finnhub : sociétés américaines seulement (pas les cotations européennes « XXX.DE », « XXX.MI »).
+    if (opt.companyNews) for (const s of symbols.filter(finnhubCovers)) results.push(await withFallback([finnhubCompanyFetcher(opt.finnhubKey, s, opt.now)]));
   }
   // Le Worker ne relit pas les actualités par société : il garde celles du dernier snapshot.
   if (!opt.companyNews && opt.previous?.data) {

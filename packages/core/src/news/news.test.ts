@@ -38,3 +38,11 @@ describe("newsHash", () => {
     expect(newsHash([a])).not.toBe(newsHash([a, b]));
   });
 });
+
+import { finnhubCovers } from "./collect";
+describe("couverture Finnhub gratuite", () => {
+  it("actions américaines oui, cotations européennes non", () => {
+    expect(["NVDA", "GOOGL", "BRK-B"].every(finnhubCovers)).toBe(true);
+    expect(["EUNL.DE", "HNSC.MI", "8PSG.DE", "^VIX"].some(finnhubCovers)).toBe(false);
+  });
+});

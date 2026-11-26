@@ -27,7 +27,7 @@ const CODE_KEY = "marche-brief:code";
 export const APP_NAME = "MarketPulse";
 
 // ---------- Navigation ----------
-const VIEWS = ["overview", "portfolio", "market", "etfs", "stocks", "discoveries", "news", "reliability"] as const;
+const VIEWS = ["overview", "market", "etfs", "stocks", "discoveries", "news", "reliability", "portfolio"] as const;
 type View = (typeof VIEWS)[number];
 const ICON: Record<View, string> = {
   overview: "M3 13h8V3H3v10zm0 8h8v-6H3v6zm10 0h8V11h-8v10zm0-18v6h8V3h-8z",

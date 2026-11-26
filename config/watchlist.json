@@ -96,11 +96,20 @@
       "exchange": "Xetra"
     },
     {
-      "ticker": "PPFB.DE",
+      "ticker": "V9N.DE",
+      "name": "Data Center REITs & Digital Infrastructure USD (Acc)",
+      "fullName": "Global X Data Center REITs & Digital Infrastructure UCITS ETF USD (Accumulating)",
+      "isin": "IE00BMH5Y327",
+      "issuer": "Global X (Mirae Asset)",
+      "index": "Solactive Data Center REITs & Digital Infrastructure v2 : 25 à 40 sociétés mondiales tirant ≥ 50 % de leurs revenus des data centers (foncières, tours, réseaux)",
+      "exchange": "Xetra"
+    },
+    {
+      "ticker": "8PSG.DE",
       "name": "Physical Gold USD (Acc)",
-      "fullName": "iShares Physical Gold ETC (Exchange Traded Commodity), adossé à de l'or physique",
-      "isin": "IE00B4ND3602",
-      "issuer": "iShares (BlackRock)",
+      "fullName": "Invesco Physical Gold ETC (Exchange Traded Commodity), adossé à de l'or physique",
+      "isin": "IE00B579F325",
+      "issuer": "Invesco",
       "index": "Prix de l'once d'or (LBMA)",
       "exchange": "Xetra"
     }

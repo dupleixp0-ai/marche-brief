@@ -19,7 +19,8 @@ export const GLOSSARY: Record<string, string> = {
   ESG: "Environnement, Social, Gouvernance : critères extra-financiers",
   ISIN: "International Securities Identification Number : identifiant unique d'un titre",
   ACWI: "All Country World Index : pays développés + émergents",
-  REIT: "Real Estate Investment Trust : société foncière cotée",
+  REIT: "Real Estate Investment Trust : société foncière cotée (ici propriétaires de data centers)",
+  REITs: "Real Estate Investment Trusts : sociétés foncières cotées (ici propriétaires de data centers)",
   PHLX: "Philadelphia Stock Exchange : indice des semi-conducteurs (SOX)",
   ETN: "Exchange Traded Note : titre de dette coté",
 };

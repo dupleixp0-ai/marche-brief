@@ -1,47 +1,54 @@
 {
- "generatedAt": "2026-11-26T16:40:01.632Z",
+ "generatedAt": "2026-11-26T17:01:32.176Z",
  "recommendations": {
   "EUNL.DE": {
-   "score": 52,
+   "score": 51,
    "decision": "Attendre",
    "confidence": "élevée",
    "asOf": "2026-11-26",
-   "close": 125.93000030517578
+   "close": 125.82499694824219
   },
   "IS3N.DE": {
    "score": 17,
    "decision": "Vendre",
    "confidence": "élevée",
    "asOf": "2026-11-26",
-   "close": 42.38999938964844
+   "close": 42.39699935913086
   },
   "HNSC.MI": {
    "score": 10,
    "decision": "Vendre",
    "confidence": "élevée",
    "asOf": "2026-11-26",
-   "close": 27.149999618530273
+   "close": 27.135000228881836
   },
   "VVSM.DE": {
    "score": 9,
    "decision": "Vendre",
    "confidence": "élevée",
    "asOf": "2026-11-26",
-   "close": 71.37000274658203
+   "close": 71.36000061035156
   },
   "L0CK.DE": {
-   "score": 65,
+   "score": 64,
    "decision": "Attendre",
    "confidence": "faible",
    "asOf": "2026-11-26",
-   "close": 11.491999626159668
+   "close": 11.461999893188477
   },
-  "PPFB.DE": {
+  "V9N.DE": {
+   "score": 14,
+   "decision": "Vendre",
+   "confidence": "élevée",
+   "asOf": "2026-11-26",
+   "close": 18.979999542236328
+  },
+  "8PSG.DE": {
    "score": 13,
    "decision": "Vendre",
    "confidence": "élevée",
    "asOf": "2026-11-26",
-   "close": 63.154998779296875
+   "close": 313.0799865722656
   },
   "NVDA": {
    "score": 8,

@@ -358,7 +358,7 @@ function Inner({ data, snap, setSnap }: { data: DashboardData; snap: Snapshot | 
         </div>
         <Panel title="Lexique des noms d'ETF">
           <dl className="grid gap-x-4 gap-y-1.5 text-xs sm:grid-cols-[auto_1fr]">
-            {["ETF", "ETC", "UCITS", "MSCI", "Core", "EM", "IMI", "Nasdaq", "USD", "Acc"].map((k) => (
+            {["ETF", "ETC", "UCITS", "MSCI", "Core", "EM", "IMI", "Nasdaq", "REIT", "USD", "Acc"].map((k) => (
               <div key={k} className="contents"><dt className="font-semibold">{k}</dt><dd className="text-slate-600 dark:text-slate-300">{GLOSSARY[k]}</dd></div>
             ))}
           </dl>

@@ -28,3 +28,4 @@ export * from "./email/send";
 export * from "./track/track";
 export * from "./fx/fx";
 export * from "./adapters/yahooIntraday";
+export * from "./market/holidays";

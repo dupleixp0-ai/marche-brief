@@ -1,4 +1,5 @@
 // État d'ouverture du marché américain, vu depuis Berlin.
+import { holidayName } from "./holidays";
 
 /** Date du jour (AAAA-MM-JJ) dans un fuseau donné. */
 export function localDate(now: Date, timeZone: string): string {
@@ -13,10 +14,12 @@ export function localHour(now: Date, timeZone: string): number {
 const dayOfWeek = (iso: string) => new Date(`${iso}T12:00:00Z`).getUTCDay();
 const addDays = (iso: string, n: number) => new Date(Date.parse(`${iso}T12:00:00Z`) + n * 864e5).toISOString().slice(0, 10);
 
-/** Dernière séance US attendue (jour ouvré précédent la date de New York, jours fériés non compris). */
+const isUsSession = (d: string) => dayOfWeek(d) !== 0 && dayOfWeek(d) !== 6 && !holidayName("US", d);
+
+/** Dernière séance US attendue (jour ouvré précédent la date de New York, jours fériés exclus). */
 export function expectedLastSession(now: Date): string {
   let d = addDays(localDate(now, "America/New_York"), -1);
-  while (dayOfWeek(d) === 0 || dayOfWeek(d) === 6) d = addDays(d, -1);
+  while (!isUsSession(d)) d = addDays(d, -1);
   return d;
 }
 
@@ -33,6 +36,13 @@ export function marketClosedNote(lastBarDate: string | undefined, now: Date): st
   const label = `${DAYS[dayOfWeek(lastBarDate)]} ${lastBarDate.slice(8, 10)}/${lastBarDate.slice(5, 7)}`;
   const nyDow = dayOfWeek(localDate(now, "America/New_York"));
   const weekend = nyDow === 0 || nyDow === 6 || (nyDow === 1 && localHour(now, "America/New_York") < 16);
-  if (lastBarDate >= expected) return weekend && dayOfWeek(lastBarDate) === 5 ? `Marché fermé (week-end) : cours du ${label}.` : null;
-  return `Marché fermé (jour férié) ou données en retard : cours du ${label}.`;
+  // Jour férié US entre la dernière séance et aujourd'hui (New York) : on le nomme.
+  const today = localDate(now, "America/New_York");
+  let holiday: string | null = null;
+  for (let d = addDays(lastBarDate, 1); d <= today && !holiday; d = addDays(d, 1)) holiday = holidayName("US", d);
+  if (lastBarDate >= expected) {
+    if (holiday) return `Marché américain fermé (${holiday}) : cours du ${label}.`;
+    return weekend && dayOfWeek(lastBarDate) === 5 ? `Marché fermé (week-end) : cours du ${label}.` : null;
+  }
+  return `Données en retard : cours du ${label}.`;
 }

@@ -467,7 +467,6 @@ function Inner({ data, snap, setSnap }: { data: DashboardData; snap: Snapshot | 
       <header className="sticky top-0 z-30 border-b border-slate-200 bg-slate-50/95 px-4 pb-3 pt-[calc(env(safe-area-inset-top)+1.5rem)] lg:pt-3 backdrop-blur lg:px-8 dark:border-slate-800 dark:bg-slate-950/90">
         <div className="flex items-center justify-between gap-3">
           <div className="min-w-0">
-            <p className="text-[11px] font-semibold uppercase tracking-wide text-blue-600 lg:hidden">{APP_NAME}</p>
             <h1 className="truncate text-lg font-bold leading-tight lg:text-2xl">{t(LABEL_KEY[view])}</h1>
             <p className="text-[11px] text-slate-500">
               {snap ? `${t("updated")} ${fmtDateTime(snap.generatedAt)}` : t("noData")} · {t("sourcesOk")} {okCount}/{sources.length}

@@ -1,6 +1,6 @@
 "use client";
 import { useCallback, useEffect, useMemo, useState, type ReactNode } from "react";
-import { dailyChangePct, marketSummary, ratesFrom, smaSeries, DISPLAY_CURRENCIES, type Discovery, type DisplayCurrency, type IntradaySeries, type Snapshot } from "@marche-brief/core";
+import { dailyChangePct, marketOutlook, marketSummary, ratesFrom, smaSeries, DISPLAY_CURRENCIES, type Discovery, type DisplayCurrency, type IntradaySeries, type Snapshot } from "@marche-brief/core";
 import type { DashboardData, WatchItem } from "../lib/types";
 import { AssetCard } from "./AssetCard";
 import { InfoTip } from "./InfoTip";
@@ -14,6 +14,7 @@ import { FearGreedGauge } from "./FearGreedGauge";
 import { PriceChart } from "./PriceChart";
 import { DecisionBadge, StatusBadge, StatusDot } from "./Badges";
 import { Abbr } from "./Abbr";
+import { MarketSheet, OutlookBlock, BiasBadge, type MarketKind } from "./MarketSheet";
 import { CurrencyProvider, useCurrency } from "../lib/currency";
 import { GLOSSARY } from "../lib/glossary";
 import { fmtDateTime, fmtNum, fmtPct, fmtRatio } from "../lib/format";
@@ -54,9 +55,9 @@ function Icon({ d, className = "h-5 w-5" }: { d: string; className?: string }) {
 // ---------- Éléments communs ----------
 const panel = "rounded-2xl border border-slate-200 bg-white p-4 shadow-sm dark:border-slate-800 dark:bg-slate-900";
 
-function Panel({ title, right, children, className = "" }: { title?: ReactNode; right?: ReactNode; children: ReactNode; className?: string }) {
+function Panel({ title, right, children, className = "", onClick }: { title?: ReactNode; right?: ReactNode; children: ReactNode; className?: string; onClick?: () => void }) {
   return (
-    <section className={`${panel} ${className}`}>
+    <section onClick={onClick} className={`${panel} ${className} ${onClick ? "cursor-pointer transition hover:border-blue-400" : ""}`}>
       {(title || right) && (
         <div className="mb-3 flex items-center justify-between gap-2">
           {title && <h2 className="text-sm font-semibold uppercase tracking-wide text-slate-500">{title}</h2>}
@@ -161,12 +162,13 @@ function Inner({ data, snap, setSnap }: { data: DashboardData; snap: Snapshot | 
   const [error, setError] = useState<string | null>(null);
   const [view, setViewState] = useState<View>("overview");
   const [open, setOpen] = useState<DetailTarget | null>(null);
+  const [marketOpen, setMarketOpen] = useState<MarketKind | null>(null);
   const [sort, setSort] = useState<"score" | "nom">("score");
   const bt = data.backtest;
 
   // Vue courante dans l'URL (#market…) : bouton retour et favoris fonctionnent.
   useEffect(() => {
-    const read = () => { const h = location.hash.slice(1) as View; setViewState(VIEWS.includes(h) ? h : "overview"); setOpen(null); };
+    const read = () => { const h = location.hash.slice(1) as View; setViewState(VIEWS.includes(h) ? h : "overview"); setOpen(null); setMarketOpen(null); };
     read();
     window.addEventListener("hashchange", read);
     return () => window.removeEventListener("hashchange", read);
@@ -228,6 +230,7 @@ function Inner({ data, snap, setSnap }: { data: DashboardData; snap: Snapshot | 
     const pts = (bars: typeof vixBars, vals: (number | null)[], n: number) =>
       bars.map((b, i) => ({ time: b.date, value: vals[i] })).slice(-n).filter((p): p is { time: string; value: number } => p.value != null);
     return {
+      outlook: marketOutlook({ spxCloses: spxC, vixCloses: vixC, fearGreed: snap.market.fearGreed.data?.value ?? null }),
       summary: marketSummary({ vixCloses: vixC, spxCloses: spxC, fearGreed: snap.market.fearGreed.data?.value ?? null }),
       spxDay: dailyChangePct(spxBars),
       vixLines: [
@@ -295,16 +298,19 @@ function Inner({ data, snap, setSnap }: { data: DashboardData; snap: Snapshot | 
   // ---------- Vues ----------
   const marketPanel = (big: boolean) => market && snap && (
     <div className={big ? "grid gap-4 lg:grid-cols-2" : "space-y-4"}>
-      <Panel title={<>Fear &amp; Greed<InfoTip k="tipFg" /></>}>
+      <Panel className={big ? "lg:col-span-2" : ""} title="Impression générale" right={<span className="text-[10px] text-slate-500">règles simples, pas une prédiction</span>}>
+        <OutlookBlock o={market.outlook} />
+      </Panel>
+      <Panel onClick={() => setMarketOpen("fg")} title={<>Fear &amp; Greed<InfoTip k="tipFg" /></>} right={<span className="text-[10px] text-blue-600">Détails →</span>}>
         {fg?.data ? <FearGreedGauge value={fg.data.value} label={fg.data.label} /> : <p className="text-sm">Indisponible</p>}
         {fg && <p className="text-center text-[10px] text-slate-500">{fg.source}{fg.data?.homemade ? " (indice maison)" : ""} · {fmtDateTime(fg.fetchedAt)} <StatusBadge status={fg.status} /></p>}
         <p className="mt-3 text-sm">{market.summary.sentence}</p>
       </Panel>
-      <Panel title={<>VIX — volatilité<InfoTip k="tipVix" /></>} right={<span className="text-[10px] text-slate-500">du {snap.market.vix.data?.bars.at(-1)?.date} <StatusDot status={snap.market.vix.status} /></span>}>
+      <Panel onClick={() => setMarketOpen("vix")} title={<>VIX — volatilité<InfoTip k="tipVix" /></>} right={<span className="text-[10px] text-slate-500">du {snap.market.vix.data?.bars.at(-1)?.date} <StatusDot status={snap.market.vix.status} /> · <span className="text-[10px] text-blue-600">Détails →</span></span>}>
         <p className="text-xs">Dernier <b>{market.summary.vix != null ? fmtNum(market.summary.vix) : "—"}</b> · MM50 {market.summary.vixMa50 != null ? fmtNum(market.summary.vixMa50) : "—"}</p>
         <PriceChart lines={market.vixLines} height={big ? 220 : 140} />
       </Panel>
-      <Panel className={big ? "lg:col-span-2" : ""} title={<>S&amp;P 500<InfoTip k="tipMa" /></>} right={<span className="text-[10px] text-slate-500">du {snap.market.spx.data?.bars.at(-1)?.date} <StatusDot status={snap.market.spx.status} /></span>}>
+      <Panel onClick={() => setMarketOpen("spx")} className={big ? "lg:col-span-2" : ""} title={<>S&amp;P 500<InfoTip k="tipMa" /></>} right={<span className="text-[10px] text-slate-500">du {snap.market.spx.data?.bars.at(-1)?.date} <StatusDot status={snap.market.spx.status} /> · <span className="text-[10px] text-blue-600">Détails →</span></span>}>
         <p className="text-xs">Dernier <b>{market.summary.spx != null ? fmtNum(market.summary.spx, 0) : "—"}</b> pts · MM125 {market.summary.spxMa125 != null ? fmtNum(market.summary.spxMa125, 0) : "—"} · indice en points (pas une devise)</p>
         <PriceChart lines={market.spxLines} height={big ? 280 : 140} />
       </Panel>
@@ -317,12 +323,15 @@ function Inner({ data, snap, setSnap }: { data: DashboardData; snap: Snapshot | 
     overview: snap && market && (
       <div className="space-y-4">
         <div className="grid grid-cols-2 gap-3 lg:grid-cols-4">
-          <Kpi label="Fear & Greed" tip="tipFg" value={fg?.data ? fg.data.value : "—"} sub={fg?.data?.label} tone={fg?.data ? (fg.data.value < 25 ? "down" : fg.data.value > 75 ? "warn" : undefined) : undefined} onClick={() => setView("market")} />
-          <Kpi label="VIX" tip="tipVix" value={market.summary.vix != null ? fmtNum(market.summary.vix, 1) : "—"} sub={`MM50 ${market.summary.vixMa50 != null ? fmtNum(market.summary.vixMa50, 1) : "—"}`} tone={(market.summary.vix ?? 0) > 30 ? "down" : (market.summary.vix ?? 99) < 15 ? "up" : undefined} onClick={() => setView("market")} />
-          <Kpi label="S&P 500" value={market.summary.spx != null ? fmtNum(market.summary.spx, 0) : "—"} sub={<span className={(market.spxDay ?? 0) >= 0 ? "text-green-600" : "text-red-600"}>{fmtPct(market.spxDay)} · {market.summary.spx != null && market.summary.spxMa125 != null ? (market.summary.spx > market.summary.spxMa125 ? "au-dessus de la MM125" : "sous la MM125") : ""}</span>} onClick={() => setView("market")} />
+          <Kpi label="Fear & Greed" tip="tipFg" value={fg?.data ? fg.data.value : "—"} sub={fg?.data?.label} tone={fg?.data ? (fg.data.value < 25 ? "down" : fg.data.value > 75 ? "warn" : undefined) : undefined} onClick={() => setMarketOpen("fg")} />
+          <Kpi label="VIX" tip="tipVix" value={market.summary.vix != null ? fmtNum(market.summary.vix, 1) : "—"} sub={`MM50 ${market.summary.vixMa50 != null ? fmtNum(market.summary.vixMa50, 1) : "—"}`} tone={(market.summary.vix ?? 0) > 30 ? "down" : (market.summary.vix ?? 99) < 15 ? "up" : undefined} onClick={() => setMarketOpen("vix")} />
+          <Kpi label="S&P 500" value={market.summary.spx != null ? fmtNum(market.summary.spx, 0) : "—"} sub={<span className={(market.spxDay ?? 0) >= 0 ? "text-green-600" : "text-red-600"}>{fmtPct(market.spxDay)} · {market.summary.spx != null && market.summary.spxMa125 != null ? (market.summary.spx > market.summary.spxMa125 ? "au-dessus de la MM125" : "sous la MM125") : ""}</span>} onClick={() => setMarketOpen("spx")} />
           <Kpi label="Signaux du jour" value={<span><span className="text-green-600">{signals.Acheter}</span> · <span className="text-slate-500">{signals.Attendre}</span> · <span className="text-red-600">{signals.Vendre}</span></span>} sub="Acheter · Attendre · Vendre" onClick={() => setView("stocks")} />
         </div>
-        <p className={`${panel} text-sm`}>{market.summary.sentence}</p>
+        <div className={`${panel} cursor-pointer text-sm transition hover:border-blue-400`} onClick={() => setView("market")}>
+          <div className="mb-1.5 flex items-center gap-2"><span className="text-[11px] font-medium uppercase tracking-wide text-slate-500">Impression générale</span><BiasBadge bias={market.outlook.bias} /><span className="ml-auto text-[10px] text-blue-600">Détails →</span></div>
+          {market.summary.sentence}
+        </div>
         <div className="grid gap-4 lg:grid-cols-2">
           <Panel title={t("myEtfs")} right={<button onClick={() => setView("etfs")} className="text-xs text-blue-600">Tout voir →</button>}>
             <MiniTable items={data.watchlist.etfs} snap={snap} isEtf onOpen={(i) => openWatch(i, true)} />
@@ -505,6 +514,7 @@ function Inner({ data, snap, setSnap }: { data: DashboardData; snap: Snapshot | 
         {VIEWS.map((v) => navBtn(v, true))}
       </nav>
 
+      {marketOpen && snap && market && <MarketSheet kind={marketOpen} snap={snap} outlook={market.outlook} onClose={() => setMarketOpen(null)} loadIntraday={WORKER ? loadIntraday : undefined} />}
       {open && <DetailSheet target={open} onClose={() => setOpen(null)} loadIntraday={WORKER ? loadIntraday : undefined} />}
     </div>
   );

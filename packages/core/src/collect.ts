@@ -130,7 +130,7 @@ export async function collectSnapshot(symbols: string[], previous?: Snapshot | n
   if (opt.intraday) {
     intraday = {};
     const extra = [...(discoveries?.data?.stocks ?? []), ...(discoveries?.data?.etfs ?? [])].map((d) => d.ticker);
-    for (const s of [...new Set([...symbols, ...extra])]) {
+    for (const s of [...new Set(["^GSPC", "^VIX", ...symbols, ...extra])]) {
       intraday[s] = await withFallback([yahooIntradayFetcher(s)], previous?.intraday?.[s]);
       if (delayMs) await new Promise((r) => setTimeout(r, delayMs));
     }

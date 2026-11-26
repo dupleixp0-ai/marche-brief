@@ -1,5 +1,5 @@
 {
- "generatedAt": "2026-11-26T17:01:32.176Z",
+ "generatedAt": "2026-11-26T17:30:57.266Z",
  "recommendations": {
   "EUNL.DE": {
    "score": 51,
@@ -20,7 +20,7 @@
    "decision": "Vendre",
    "confidence": "élevée",
    "asOf": "2026-11-26",
-   "close": 27.135000228881836
+   "close": 27.06999969482422
   },
   "VVSM.DE": {
    "score": 9,

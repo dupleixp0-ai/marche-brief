@@ -10,7 +10,7 @@ export function MarketClock() {
   useEffect(() => { setNow(new Date()); const id = setInterval(() => setNow(new Date()), 60_000); return () => clearInterval(id); }, []);
   if (!now) return null;
   const chip = (label: string, open: boolean | null) => (
-    <span className="inline-flex items-center gap-1">
+    <span className="inline-flex items-center gap-1 whitespace-nowrap">
       <span className={`h-1.5 w-1.5 rounded-full ${open ? "bg-green-500" : "bg-slate-400"}`} />{label} {open ? t("open") : t("closed")}
     </span>
   );

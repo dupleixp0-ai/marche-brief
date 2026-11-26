@@ -461,24 +461,20 @@ function Inner({ data, snap, setSnap }: { data: DashboardData; snap: Snapshot | 
           <span className="text-lg font-bold">{APP_NAME}</span>
         </div>
         <nav className="space-y-1">{VIEWS.map((v) => navBtn(v, false))}</nav>
-        <div className="mt-auto space-y-2 px-2 text-[11px] text-slate-500">
-          <MarketClock />
-          <p>{snap ? `${t("updated")} ${fmtDateTime(snap.generatedAt)}` : t("noData")}</p>
-          <p>{t("sourcesOk")} {okCount}/{sources.length}</p>
-        </div>
       </aside>
 
       {/* Bandeau d'état */}
-      <header className="sticky top-0 z-30 border-b border-slate-200 bg-slate-50/95 px-4 pb-3 pt-[calc(env(safe-area-inset-top)+0.75rem)] backdrop-blur lg:px-8 dark:border-slate-800 dark:bg-slate-950/90">
+      <header className="sticky top-0 z-30 border-b border-slate-200 bg-slate-50/95 px-4 pb-3 pt-[calc(env(safe-area-inset-top)+1.5rem)] lg:pt-3 backdrop-blur lg:px-8 dark:border-slate-800 dark:bg-slate-950/90">
         <div className="flex items-center justify-between gap-3">
           <div className="min-w-0">
             <p className="text-[11px] font-semibold uppercase tracking-wide text-blue-600 lg:hidden">{APP_NAME}</p>
             <h1 className="truncate text-lg font-bold leading-tight lg:text-2xl">{t(LABEL_KEY[view])}</h1>
-            <p className="text-[11px] text-slate-500 lg:hidden">
+            <p className="text-[11px] text-slate-500">
               {snap ? `${t("updated")} ${fmtDateTime(snap.generatedAt)}` : t("noData")} · {t("sourcesOk")} {okCount}/{sources.length}
             </p>
           </div>
           <div className="flex items-center gap-2">
+            <div className="mr-2 hidden rounded-full border border-slate-200 px-3 py-1.5 lg:block dark:border-slate-700"><MarketClock /></div>
             <select aria-label="Devise" value={cur.currency} onChange={(e) => cur.setCurrency(e.target.value as DisplayCurrency)}
               className="rounded-full border border-slate-300 bg-white px-2 py-1.5 text-xs font-semibold dark:border-slate-700 dark:bg-slate-900">
               {DISPLAY_CURRENCIES.map((c) => <option key={c} value={c}>{c}</option>)}

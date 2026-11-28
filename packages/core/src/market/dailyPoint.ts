@@ -1,3 +1,4 @@
+import { isExtremeFear, isExtremeGreed } from "../adapters/cnn";
 // « Le point du jour » : résumé en phrases simples, calculé uniquement à partir des chiffres collectés.
 // Fiable sans clé API (pas d'IA) ; le résumé des actualités par Claude vient en complément.
 import type { Bar } from "../types";
@@ -40,7 +41,7 @@ export function dailyPoint(inp: DailyPointInput): PointBullet[] {
   const vix = inp.vix.at(-1)?.close, vixMa = sma(inp.vix.map((b) => b.close), 50);
   if (vix != null) {
     const level = vix >= 30 ? "très élevée" : vix >= 20 ? "élevée" : vix >= 15 ? "normale" : "faible";
-    const fg = inp.fearGreed ? ` Le sentiment des investisseurs est à « ${inp.fearGreed.label.toLowerCase()} » (Fear & Greed ${Math.round(inp.fearGreed.value)}/100)${inp.fearGreed.value < 25 ? ", ce qui a souvent précédé des rebonds" : inp.fearGreed.value > 75 ? ", signe possible d'excès" : ""}.` : "";
+    const fg = inp.fearGreed ? ` Le sentiment des investisseurs est à « ${inp.fearGreed.label.toLowerCase()} » (Fear & Greed ${Math.round(inp.fearGreed.value)}/100)${isExtremeFear(inp.fearGreed.value) ? ", ce qui a souvent précédé des rebonds" : isExtremeGreed(inp.fearGreed.value) ? ", signe possible d'excès" : ""}.` : "";
     out.push({ topic: "Nervosité", tone: vix >= 20 ? "warn" : "neutral",
       text: `Nervosité ${level} : VIX à ${num(vix)}${vixMa != null ? ` (moyenne 50 jours ${num(vixMa)})` : ""}.${fg}` });
   }

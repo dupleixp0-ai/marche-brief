@@ -1,3 +1,4 @@
+import { isExtremeFear, isExtremeGreed } from "../adapters/cnn";
 // Phrase d'explication du marché (section « Marché » du dashboard).
 import { sma } from "../indicators/sma";
 
@@ -27,8 +28,8 @@ export function marketSummary({ vixCloses, spxCloses, fearGreed }: MarketInputs)
     parts.push(spx >= spxMa125 ? "le S&P 500 reste au-dessus de sa moyenne 125 jours (tendance haussière)"
       : "le S&P 500 est passé sous sa moyenne 125 jours (tendance dégradée)");
   if (fearGreed != null)
-    parts.push(fearGreed < 25 ? "le sentiment est à la peur extrême, souvent proche des points bas"
-      : fearGreed > 75 ? "le sentiment est à l'avidité extrême, prudence sur les excès"
+    parts.push(isExtremeFear(fearGreed) ? "le sentiment est à la peur extrême, souvent proche des points bas"
+      : isExtremeGreed(fearGreed) ? "le sentiment est à l'avidité extrême, prudence sur les excès"
       : `le sentiment est à ${Math.round(fearGreed)}/100`);
   const s = parts.join(", ");
   return { vix, vixMa50, spx, spxMa125, sentence: s ? s.charAt(0).toUpperCase() + s.slice(1) + "." : "Données de marché indisponibles." };

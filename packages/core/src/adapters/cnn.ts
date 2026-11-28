@@ -19,20 +19,27 @@ export function parseCnnFearGreed(json: string): FearGreed {
   return { value: Math.round(value), label: fearGreedLabel(Math.round(value)), homemade: false, ...(history.length ? { history } : {}) };
 }
 
+/** Zones du Fear & Greed (valeur arrondie) : 0–25, 26–45, 46–55, 56–75, 76–100. */
+export const FG_ZONES = { extremeFear: 25, fear: 45, neutral: 55, greed: 75 };
+export const isExtremeFear = (v: number) => Math.round(v) <= FG_ZONES.extremeFear;
+export const isExtremeGreed = (v: number) => Math.round(v) > FG_ZONES.greed;
+
 export function fearGreedLabel(v: number): string {
-  if (v < 25) return "Peur extrême";
-  if (v < 45) return "Peur";
-  if (v <= 55) return "Neutre";
-  if (v <= 75) return "Avidité";
+  const r = Math.round(v);
+  if (r <= FG_ZONES.extremeFear) return "Peur extrême";
+  if (r <= FG_ZONES.fear) return "Peur";
+  if (r <= FG_ZONES.neutral) return "Neutre";
+  if (r <= FG_ZONES.greed) return "Avidité";
   return "Avidité extrême";
 }
 
 /** Couleur de la zone (mêmes seuils que le libellé) : peur extrême en rouge, peur en orange, avidité en vert, avidité extrême en alerte. */
 export function fearGreedTone(v: number): "down" | "warn" | "up" | undefined {
-  if (v < 25) return "down";
-  if (v < 45) return "warn";
-  if (v <= 55) return undefined;
-  if (v <= 75) return "up";
+  const r = Math.round(v);
+  if (r <= FG_ZONES.extremeFear) return "down";
+  if (r <= FG_ZONES.fear) return "warn";
+  if (r <= FG_ZONES.neutral) return undefined;
+  if (r <= FG_ZONES.greed) return "up";
   return "warn";
 }
 

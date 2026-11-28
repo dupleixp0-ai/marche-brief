@@ -1,6 +1,6 @@
 "use client";
 import { useEffect, useMemo, useState, type ReactNode } from "react";
-import { fearGreedLabel, fearGreedLookback, lastSession, seriesStats, smaSeries, type Bar, type IntradaySeries, type Outlook, type Signal, type Snapshot, changeBetween } from "@marche-brief/core";
+import { fearGreedLabel, fearGreedTone, isExtremeGreed, fearGreedLookback, lastSession, seriesStats, smaSeries, type Bar, type IntradaySeries, type Outlook, type Signal, type Snapshot, changeBetween } from "@marche-brief/core";
 import { PriceChart, type Line } from "./PriceChart";
 import { FearGreedGauge } from "./FearGreedGauge";
 import { StatusBadge } from "./Badges";
@@ -216,7 +216,8 @@ export function MarketSheet({ kind, snap, outlook, onClose, loadIntraday }: {
 // ---------- Historique du Fear & Greed ----------
 const FG_RANGES = { "1S": 5, "1M": 21, "3M": 63, "6M": 126, "1A": 252 } as const;
 type FgRange = keyof typeof FG_RANGES;
-const fgColor = (v: number) => (v < 25 ? "text-red-600" : v < 45 ? "text-orange-500" : v <= 55 ? "text-slate-500" : v <= 75 ? "text-lime-600" : "text-green-600");
+const FG_CLS = { down: "text-red-600", warn: "text-orange-500", up: "text-lime-600" } as const;
+const fgColor = (v: number) => { const t = fearGreedTone(v); return isExtremeGreed(v) ? "text-green-600" : t ? FG_CLS[t] : "text-slate-500"; };
 
 function FgHistory({ history, homemade }: { history: { date: string; value: number }[]; homemade: boolean }) {
   const [range, setRange] = useState<FgRange>("3M");

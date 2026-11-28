@@ -1,3 +1,4 @@
+import { isExtremeFear, isExtremeGreed } from "../adapters/cnn";
 // Lecture du marché : signaux simples et transparents qui penchent vers la hausse ou la baisse.
 // Ce n'est pas une prédiction : chaque signal est affiché avec sa règle, et le résultat est un « biais ».
 import { sma } from "../indicators/sma";
@@ -67,9 +68,9 @@ export function marketOutlook({ spxCloses, vixCloses, fearGreed }: { spxCloses: 
   }
   if (fearGreed != null) {
     // Indicateur « à contre-courant » : la peur extrême a souvent précédé des rebonds sur plusieurs mois.
-    s.push({ label: "Fear & Greed", effect: fearGreed < 25 ? 1 : fearGreed > 75 ? -1 : 0, horizon: "moyen terme",
-      text: fearGreed < 25 ? `Peur extrême (${Math.round(fearGreed)}) : historiquement, souvent proche d'un point bas (lecture à contre-courant).`
-        : fearGreed > 75 ? `Avidité extrême (${Math.round(fearGreed)}) : risque d'excès, prudence.` : `Sentiment intermédiaire (${Math.round(fearGreed)}/100).` });
+    s.push({ label: "Fear & Greed", effect: isExtremeFear(fearGreed) ? 1 : isExtremeGreed(fearGreed) ? -1 : 0, horizon: "moyen terme",
+      text: isExtremeFear(fearGreed) ? `Peur extrême (${Math.round(fearGreed)}) : historiquement, souvent proche d'un point bas (lecture à contre-courant).`
+        : isExtremeGreed(fearGreed) ? `Avidité extrême (${Math.round(fearGreed)}) : risque d'excès, prudence.` : `Sentiment intermédiaire (${Math.round(fearGreed)}/100).` });
   }
 
   const sum = (l: Signal[]) => l.reduce((a, x) => a + x.effect, 0);

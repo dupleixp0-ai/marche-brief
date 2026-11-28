@@ -50,6 +50,8 @@ describe("CNN", () => {
     expect(fearGreedLabel(10)).toBe("Peur extrême");
     expect(fearGreedLabel(50)).toBe("Neutre");
     expect(fearGreedLabel(90)).toBe("Avidité extrême");
+    expect([25, 26, 45, 46, 55, 56, 75, 76].map(fearGreedLabel)).toEqual(
+      ["Peur extrême", "Peur", "Peur", "Neutre", "Neutre", "Avidité", "Avidité", "Avidité extrême"]);
   });
 });
 
@@ -88,11 +90,18 @@ describe("Fear & Greed : libellé et couleur", () => {
   it("libellé calculé sur la valeur arrondie affichée", () => {
     const r = parseCnnFearGreed(JSON.stringify({ fear_and_greed: { score: 24.6 } }));
     expect(r.value).toBe(25);
-    expect(r.label).toBe("Peur");
+    expect(r.label).toBe("Peur extrême");
   });
   it("une couleur par zone, mêmes seuils que le libellé", () => {
     expect(fearGreedTone(18)).toBe("down");
-    expect(fearGreedTone(25)).toBe("warn");
+    expect(fearGreedTone(25)).toBe("down");
+    expect(fearGreedTone(26)).toBe("warn");
+    expect(fearGreedTone(45)).toBe("warn");
+    expect(fearGreedTone(46)).toBeUndefined();
+    expect(fearGreedTone(55)).toBeUndefined();
+    expect(fearGreedTone(56)).toBe("up");
+    expect(fearGreedTone(75)).toBe("up");
+    expect(fearGreedTone(76)).toBe("warn");
     expect(fearGreedTone(50)).toBeUndefined();
     expect(fearGreedTone(65)).toBe("up");
     expect(fearGreedTone(80)).toBe("warn");

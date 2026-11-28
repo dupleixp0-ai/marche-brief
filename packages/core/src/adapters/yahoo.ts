@@ -14,7 +14,12 @@ export function parseYahooChart(json: string, symbol: string): PriceSeries {
     if (typeof close !== "number") return; // séance sans cours
     bars.push({ date: new Date(t * 1000).toISOString().slice(0, 10), close, volume: q.volume?.[i] ?? undefined });
   });
-  return { symbol, currency: r.meta?.currency, bars };
+  const t = r.meta?.regularMarketTime;
+  return {
+    symbol, currency: r.meta?.currency, bars,
+    ...(typeof t === "number" ? { quoteTime: new Date(t * 1000).toISOString() } : {}),
+    ...(r.meta?.fullExchangeName || r.meta?.exchangeName ? { venue: r.meta.fullExchangeName ?? r.meta.exchangeName } : {}),
+  };
 }
 
 export function yahooFetcher(symbol: string, range = "1y"): Fetcher<PriceSeries> {

@@ -3,7 +3,7 @@ import { useEffect, useMemo, useState } from "react";
 import type { Discovery, Discoveries as D, SourceResult } from "@marche-brief/core";
 import { DecisionBadge, StatusBadge } from "./Badges";
 import { Sparkline } from "./Sparkline";
-import { fmtDateTime, fmtRatio } from "../lib/format";
+import { fmtDateTime, fmtRatio, fmtQuote } from "../lib/format";
 import { useCurrency } from "../lib/currency";
 import { Abbr } from "./Abbr";
 
@@ -38,7 +38,7 @@ function Card({ d, followed, onFollow, onOpen }: { d: Discovery; followed: boole
             {FLAG[d.country] ?? d.country} {d.exchange} · {d.sector} · {d.currency}
           </p>
           <p className="text-[10px] text-slate-400">
-            {d.marketOpen == null ? "" : d.marketOpen ? "🟢 Place ouverte" : "⚪ Place fermée"} · cours du {d.lastDate}
+            {d.marketOpen == null ? "" : d.marketOpen ? "🟢 Place ouverte" : "⚪ Place fermée"} · cours du {fmtQuote(d.lastDate, d.lastTime, d.exchange)}
           </p>
         </div>
         <div className="text-right">

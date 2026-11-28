@@ -5,7 +5,7 @@ import { PriceChart } from "./PriceChart";
 import { InfoTip } from "./InfoTip";
 import { DecisionBadge, StatusBadge } from "./Badges";
 import { Abbr } from "./Abbr";
-import { fmtDateTime, fmtNum, fmtPct } from "../lib/format";
+import { fmtDateTime, fmtNum, fmtPct, fmtQuote } from "../lib/format";
 import { currencySymbol, useCurrency } from "../lib/currency";
 import type { WatchItem } from "../lib/types";
 
@@ -22,6 +22,8 @@ export interface DetailTarget {
   bars: Bar[];
   currency?: string;
   meta?: { source: string; fetchedAt: string; status: SourceStatus };
+  /** Heure exacte et place du dernier cours. */
+  quote?: { time?: string; venue?: string };
   score?: { score: number; decision: Decision; factors: Factor[]; reasons?: string[]; confidence?: string; asOf?: string };
   intraday?: IntradaySeries | null;
   info?: WatchItem;
@@ -112,7 +114,7 @@ export function DetailSheet({ target: d, onClose, loadIntraday }: {
           {intraState === "loading" ? "Chargement de l'intraday… · " : intraState === "error" ? "Intraday indisponible (Worker). · " : ""}
           {view.note ? `${view.note} · ` : ""}
           {d.meta ? <>{d.meta.source} · collecté le {fmtDateTime(d.meta.fetchedAt)} · </> : null}
-          cours du {d.bars.at(-1)?.date ?? "—"}{d.currency && d.currency !== cur.currency ? ` · cotation en ${d.currency}, converti en ${cur.currency}` : ""}
+          cours du {fmtQuote(d.bars.at(-1)?.date, d.quote?.time, d.quote?.venue)}{d.currency && d.currency !== cur.currency ? ` · cotation en ${d.currency}, converti en ${cur.currency}` : ""}
           {d.meta && <> <StatusBadge status={d.meta.status} /></>}
         </p>
 

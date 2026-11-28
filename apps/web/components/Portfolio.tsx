@@ -4,7 +4,7 @@ import { useEffect, useMemo, useRef, useState, type FormEvent, type ReactNode } 
 import { evaluatePortfolio, validateHolding, DE_TAX_RATE, READING_RULES, type Holding, type HoldingMarket, type Reading, type Snapshot } from "@marche-brief/core";
 import type { Watchlist } from "../lib/types";
 import { useCurrency } from "../lib/currency";
-import { fmtDateTime, fmtLate, fmtNum, fmtPct } from "../lib/format";
+import { fmtDateTime, fmtNum, fmtPct, fmtQuote } from "../lib/format";
 import { DecisionBadge } from "./Badges";
 import { Abbr } from "./Abbr";
 import { changePassword, createVault, deleteVault, exportVault, importVault, openVault, saveVault, vaultExists, type Session, type VaultData } from "../lib/vault";
@@ -142,6 +142,13 @@ function Unlocked({ snap, watchlist, onOpen, state, onChange, onLock }: {
     }
     return { market, options };
   }, [snap, watchlist]);
+  // Heure exacte du cours : snapshot (liste suivie, valeurs actualisées) ou découvertes.
+  const quoteOf = (t: string, date: string) => {
+    const p = snap?.prices[t]?.data;
+    if (p?.quoteTime) return fmtQuote(date, p.quoteTime, p.venue);
+    const d = [...(snap?.discoveries?.data?.stocks ?? []), ...(snap?.discoveries?.data?.etfs ?? [])].find((x) => x.ticker === t);
+    return fmtQuote(date, d?.lastTime, d?.exchange);
+  };
   const labelOf = (t: string) => options.find((o) => o.ticker === t)?.label.replace(/ \([^)]*\)$/, "") ?? t;
 
   const pf = useMemo(() => evaluatePortfolio(data.holdings, market, cur.rates, { currency: cur.currency, allowance: data.allowance }), [data, market, cur.rates, cur.currency]);
@@ -183,7 +190,7 @@ function Unlocked({ snap, watchlist, onOpen, state, onChange, onLock }: {
       <div className="grid grid-cols-2 gap-3 lg:grid-cols-4">
         <Stat label="Valeur actuelle" value={money(pf.value)} sub={`Investi ${money(pf.cost)}`} />
         <Stat label="Gain / perte" value={<span className={tone(pf.pnl)}>{signed(pf.pnl)}</span>} sub={<span className={tone(pf.pnl)}>{fmtPct(pf.pnlPct == null ? null : pf.pnlPct * 100)}</span>} />
-        <Stat label="Dernière séance" value={<span className={tone(pf.dayPnl)}>{signed(pf.dayPnl)}</span>} sub={asOf ? `cours du ${asOf.slice(8, 10)}/${asOf.slice(5, 7)} au plus tôt` : "—"} />
+        <Stat label="Dernière séance" value={<span className={tone(pf.dayPnl)}>{signed(pf.dayPnl)}</span>} sub={asOf ? `cours du ${asOf.slice(8, 10)}/${asOf.slice(5, 7)} au plus tôt (heure par ligne)` : "—"} />
         <Stat label="Après impôt (estim.)" value={<span className={tone(pf.tax.netPnl)}>{signed(pf.tax.netPnl)}</span>} sub={`Impôt estimé ${money(pf.tax.tax)}`} />
       </div>
 
@@ -204,7 +211,7 @@ function Unlocked({ snap, watchlist, onOpen, state, onChange, onLock }: {
               <div className="flex items-start justify-between gap-2">
                 <button onClick={() => onOpen(r.ticker)} className="min-w-0 text-left">
                   <p className="font-semibold leading-tight"><Abbr text={labelOf(r.ticker)} /></p>
-                  <p className="text-[11px] text-slate-500">{r.ticker} · {fmtNum(r.shares, r.shares % 1 ? 4 : 0)} parts · moyen {cur.money(r.avgPrice, "EUR")}{r.asOf ? ` · cours du ${r.asOf.slice(8, 10)}/${r.asOf.slice(5, 7)}` : ""}{snap?.prices[r.ticker]?.data?.late ? ` (${fmtLate(snap.prices[r.ticker]!.data!.late)})` : ""}</p>
+                  <p className="text-[11px] text-slate-500">{r.ticker} · {fmtNum(r.shares, r.shares % 1 ? 4 : 0)} parts · moyen {cur.money(r.avgPrice, "EUR")}{r.asOf ? ` · cours du ${quoteOf(r.ticker, r.asOf)}` : ""}</p>
                 </button>
                 <div className="shrink-0 text-right">
                   <p className="whitespace-nowrap font-semibold tabular-nums">{money(r.value)}</p>

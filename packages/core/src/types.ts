@@ -22,6 +22,10 @@ export interface PriceSeries {
   symbol: string;
   currency?: string;
   bars: Bar[];
+  /** Heure exacte du dernier cours (ISO), si la source la donne. */
+  quoteTime?: string;
+  /** Place de cotation du dernier cours (ex. « XETRA », « Düsseldorf »). */
+  venue?: string;
   /** Dernier cours pris sur une place qui cote plus tard (ex. Düsseldorf après la clôture de Xetra). */
   late?: LateQuote;
 }

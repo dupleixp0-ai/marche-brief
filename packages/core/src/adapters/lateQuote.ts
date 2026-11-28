@@ -44,8 +44,8 @@ export function mergeLateQuote(series: PriceSeries, q: LateQuote): PriceSeries {
   const t = new Date(q.time);
   const day = localDate(t, "Europe/Berlin");
   if (day === last.date && berlinTime(t) >= PRIMARY_CLOSE) {
-    return { ...series, bars: [...series.bars.slice(0, -1), { ...last, close: q.price }], late: q };
+    return { ...series, bars: [...series.bars.slice(0, -1), { ...last, close: q.price }], late: q, quoteTime: q.time, venue: q.venue };
   }
-  if (day > last.date) return { ...series, bars: [...series.bars, { date: day, close: q.price }], late: q };
+  if (day > last.date) return { ...series, bars: [...series.bars, { date: day, close: q.price }], late: q, quoteTime: q.time, venue: q.venue };
   return series;
 }

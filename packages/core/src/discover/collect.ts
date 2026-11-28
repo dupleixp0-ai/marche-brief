@@ -19,11 +19,11 @@ export async function collectDiscoveries(
 ): Promise<SourceResult<Discoveries>> {
   const now = ctx.now ?? new Date();
   const wait = () => (ctx.delayMs ? new Promise((r) => setTimeout(r, ctx.delayMs)) : null);
-  const cache = new Map<string, { bars: Bar[]; currency: string } | null>();
+  const cache = new Map<string, { bars: Bar[]; currency: string; quoteTime?: string; venue?: string } | null>();
   const get = async (sym: string) => {
     if (!cache.has(sym)) {
       const r = await withFallback([yahooFetcher(sym, "2y")]);
-      cache.set(sym, r.data ? { bars: r.data.bars, currency: r.data.currency ?? "" } : null);
+      cache.set(sym, r.data ? { bars: r.data.bars, currency: r.data.currency ?? "", quoteTime: r.data.quoteTime, venue: r.data.venue } : null);
       await wait();
     }
     return cache.get(sym)!;
@@ -46,7 +46,7 @@ export async function collectDiscoveries(
     const bench = universe.regions[item.region]?.benchmark ?? universe.worldBenchmark;
     const regionBench = (await get(bench))?.bars ?? world;
     evals.push(evaluateCandidate({
-      item, bars: s.bars, currency: s.currency, regionBench, worldBench: world, eurPerUnit: fx,
+      item, bars: s.bars, currency: s.currency, quoteTime: s.quoteTime, regionBench, worldBench: world, eurPerUnit: fx,
       vix: ctx.vix, fearGreed: ctx.fearGreed, minTurnoverEUR: universe.liquidityMinEUR[item.type], now,
     }));
   }

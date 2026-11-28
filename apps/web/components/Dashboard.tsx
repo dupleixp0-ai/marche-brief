@@ -18,7 +18,7 @@ import { Abbr } from "./Abbr";
 import { MarketSheet, OutlookBlock, BiasBadge, type MarketKind } from "./MarketSheet";
 import { CurrencyProvider, useCurrency } from "../lib/currency";
 import { GLOSSARY } from "../lib/glossary";
-import { fmtDateTime, fmtNum, fmtPct, fmtRatio } from "../lib/format";
+import { fmtDateTime, fmtNum, fmtPct, fmtQuote, fmtRatio } from "../lib/format";
 
 const BASE = process.env.NEXT_PUBLIC_BASE_PATH ?? "";
 const WORKER = process.env.NEXT_PUBLIC_WORKER_URL ?? "";
@@ -166,7 +166,7 @@ function MiniTable({ items, snap, isEtf, onOpen }: { items: WatchItem[]; snap: S
             <tr key={it.ticker} onClick={() => onOpen(it)} className="cursor-pointer border-b border-slate-100 last:border-0 hover:bg-slate-50 dark:border-slate-800 dark:hover:bg-slate-800/50">
               <td className="py-2 pr-2">
                 <p className="font-medium leading-tight">{isEtf ? <Abbr text={it.name ?? it.ticker} /> : it.ticker}</p>
-                <p className="text-[10px] text-slate-500">{isEtf ? it.ticker : it.sector}</p>
+                <p className="text-[10px] text-slate-500">{isEtf ? it.ticker : it.sector} · {fmtQuote(r?.data?.bars.at(-1)?.date, r?.data?.quoteTime, r?.data?.venue)}</p>
               </td>
               <td className="whitespace-nowrap py-2 text-right tabular-nums">{cur.money(c.bars.at(-1)?.close, c.currency)}</td>
               <td className={`whitespace-nowrap py-2 pl-2 text-right text-xs tabular-nums ${ch == null ? "" : ch >= 0 ? "text-green-600" : "text-red-600"}`}>{fmtPct(ch)}</td>
@@ -332,7 +332,7 @@ function Inner({ data, snap, setSnap }: { data: DashboardData; snap: Snapshot | 
     const r = snap.prices[item.ticker];
     setOpen({
       ticker: item.ticker, name: isEtf ? item.name ?? item.ticker : `${item.ticker}`, subtitle: isEtf ? item.exchange : item.sector, isEtf,
-      bars: r?.data?.bars ?? [], currency: r?.data?.currency, meta: r ? { source: r.source, fetchedAt: r.fetchedAt, status: r.status } : undefined,
+      bars: r?.data?.bars ?? [], currency: r?.data?.currency, quote: { time: r?.data?.quoteTime, venue: r?.data?.venue }, meta: r ? { source: r.source, fetchedAt: r.fetchedAt, status: r.status } : undefined,
       score: snap.scores[item.ticker], intraday: snap.intraday?.[item.ticker]?.data ?? null, info: isEtf ? item : undefined,
       explanation: snap.brief?.data?.explanations[item.ticker], sentiment: snap.brief?.data?.sentiments[item.ticker],
       news: (snap.news?.data ?? []).filter((n) => n.symbols.includes(item.ticker)).slice(0, 5),
@@ -350,7 +350,7 @@ function Inner({ data, snap, setSnap }: { data: DashboardData; snap: Snapshot | 
   const openDiscovery = (d: Discovery) => {
     setOpen({
       ticker: d.ticker, name: d.name, subtitle: `${d.country} · ${d.exchange} · ${d.sector} · cotation ${d.currency}`, isEtf: d.type === "etf",
-      bars: d.history?.length ? d.history : [], currency: d.currency,
+      bars: d.history?.length ? d.history : [], currency: d.currency, quote: { time: d.lastTime, venue: d.exchange },
       meta: snap?.discoveries ? { source: snap.discoveries.source, fetchedAt: snap.discoveries.fetchedAt, status: snap.discoveries.status } : undefined,
       score: { score: d.score, decision: d.decision, factors: d.factors, asOf: d.lastDate },
       intraday: snap?.intraday?.[d.ticker]?.data ?? null,

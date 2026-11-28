@@ -15,6 +15,8 @@ export interface Discovery {
   currency: string;
   score: number; decision: Decision; factors: Factor[];
   lastClose: number; lastDate: string; marketOpen: boolean | null;
+  /** Heure exacte du dernier cours (ISO), si connue. */
+  lastTime?: string;
   perf3m: number | null;       // en devise de cotation
   perf3mEUR: number | null;    // converti en euros
   relRegion: number | null;    // vs indice régional, 3 mois
@@ -32,6 +34,7 @@ export interface CandidateInput {
   item: UniverseItem;
   bars: Bar[];
   currency: string;               // devise Yahoo (ex. "USD", "GBp")
+  quoteTime?: string;             // heure exacte du dernier cours (ISO)
   regionBench: Bar[];
   worldBench: Bar[];
   eurPerUnit: Bar[] | null;       // EUR pour 1 unité de la devise (null si EUR)
@@ -113,7 +116,7 @@ export function evaluateCandidate(c: CandidateInput): Evaluated {
     ok: true,
     d: {
       ...item, currency: c.currency, score: res.score, decision: res.decision, factors: res.factors,
-      lastClose: last.close, lastDate: last.date, marketOpen: isExchangeOpen(item.exchange, now),
+      lastClose: last.close, lastDate: last.date, ...(c.quoteTime ? { lastTime: c.quoteTime } : {}), marketOpen: isExchangeOpen(item.exchange, now),
       perf3m: r3, perf3mEUR: r3EUR, relRegion, relWorld, breakout, buyable: item.broker ?? null,
       spark: closes.slice(-63), history: bars.slice(-260).map((b) => ({ date: b.date, close: +b.close.toPrecision(6) })), why: why.slice(0, 3), risks: risks.slice(0, 3),
     },

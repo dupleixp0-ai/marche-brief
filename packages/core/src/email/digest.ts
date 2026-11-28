@@ -1,4 +1,4 @@
-// E-mail récapitulatif de 6h00 : contenu essentiel + alertes.
+// E-mail récapitulatif de 9h15 : contenu essentiel + alertes.
 import type { Snapshot } from "../collect";
 import type { Decision } from "../scoring/score";
 import { dailyChangePct } from "../indicators/change";

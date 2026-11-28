@@ -1,4 +1,4 @@
-// E-mail de 6h00.
+// E-mail de 9h15.
 // - Appelé par collect.ts après la collecte (envoi si SEND_EMAIL=true).
 // - « npm run email:preview » : génère tmp/email-preview.html depuis le dernier snapshot, sans envoyer.
 import { readFileSync, writeFileSync, mkdirSync, existsSync } from "node:fs";

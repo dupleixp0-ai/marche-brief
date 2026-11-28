@@ -15,10 +15,10 @@ Un dashboard web, consultable sur téléphone, qui rassemble chaque jour :
 
 Deux modes de mise à jour :
 
-1. **Automatique** : chaque jour à 6h00 (heure de Berlin/Paris, heure d'été comprise).
+1. **Automatique** : du lundi au vendredi à 9h15 (heure de Berlin/Paris, heure d'été comprise), juste après l'ouverture de Xetra (9h00).
 2. **Manuel** : un bouton « Actualiser » qui relance la collecte et les calculs à n'importe quel moment.
 
-Un e-mail récapitulatif est envoyé chaque matin à 6h00 avec le contenu essentiel du dashboard.
+Un e-mail récapitulatif est envoyé chaque jour ouvrable à 9h15 avec le contenu essentiel du dashboard.
 
 ## 2. Principe directeur : un signal transparent, pas une prédiction
 
@@ -35,7 +35,7 @@ GitHub Pages ne sert que des fichiers statiques : il ne peut pas lancer de calcu
 ```
 ┌──────────────────────────┐        ┌────────────────────────────┐
 │ GitHub Actions (cron)    │        │ Cloudflare Worker (gratuit) │
-│ chaque jour à 6h00       │        │ API « Actualiser »          │
+│ lun.–ven. à 9h15         │        │ API « Actualiser »          │
 │ - collecte les données   │        │ - collecte à la demande     │
 │ - calcule les scores     │        │ - calcule les scores        │
 │ - résumé Claude          │        │ - cache 5 min               │
@@ -197,7 +197,7 @@ Le bouton **Actualiser** :
 - **Cache** de 5 minutes sur le Worker : plusieurs « Actualiser » rapprochés ne multiplient pas les appels.
 - **Protection du Worker** : la page GitHub Pages est publique, donc l'API doit l'être aussi. Prévoir un code d'accès personnel (saisi une fois, mémorisé sur le téléphone), une limite de requêtes par minute et une restriction d'origine (CORS) à ton domaine GitHub Pages. Sans cela, n'importe qui pourrait consommer le crédit de l'API Claude.
 - **Confidentialité** : ne jamais mettre dans le dépôt public tes positions, montants ou adresse e-mail. Seuls les symboles suivis y figurent. Secrets uniquement dans GitHub Secrets et variables du Worker.
-- **Heure de 6h00** : GitHub Actions travaille en UTC. Planifier deux cron (04:00 et 05:00 UTC) et un garde-fou qui ne s'exécute que si l'heure locale de Berlin est 6h (gère l'heure d'été/hiver).
+- **Heure de 9h15** : GitHub Actions travaille en UTC. Deux cron (07:15 et 08:15 UTC, du lundi au vendredi) et un garde-fou qui ne s'exécute que s'il est entre 9h et 11h à Berlin (gère l'heure d'été/hiver et les retards).
 - **Retards GitHub** : les tâches planifiées peuvent démarrer avec quelques minutes de retard, c'est normal. L'e-mail indique l'heure réelle de la collecte.
 - **Jours fériés et week-ends** : le job détecte que le marché est fermé et le dit (« cours du vendredi »).
 - **Quotas** : surveiller les limites gratuites (Finnhub, Resend, Cloudflare, Claude) et afficher un message clair si une limite est atteinte.
@@ -225,7 +225,7 @@ marche-brief/
 │  └─ history/                # recommandations archivées par jour
 ├─ docker/                    # Dockerfile et compose pour le développement local
 └─ .github/workflows/
-   ├─ daily.yml               # cron 6h00 Europe/Berlin
+   ├─ daily.yml               # cron 9h15 Europe/Berlin (lun.–ven.)
    └─ deploy.yml              # build + déploiement GitHub Pages
 ```
 
@@ -237,11 +237,11 @@ Méthode : petites étapes. À la fin de chaque étape, Claude Code explique com
 1. **Données** : adaptateurs (cours, VIX, Fear & Greed) avec secours et tests ; affichage brut.
 2. **Moteur de score + backtest** : package `core` testé ; premiers résultats de fiabilité. **Étape décisive** : on regarde les chiffres avant de continuer.
 3. **Dashboard** : interface mobile complète à partir d'un snapshot de test.
-4. **Job quotidien** : GitHub Actions, snapshot automatique à 6h00, redéploiement.
+4. **Job quotidien** : GitHub Actions, snapshot automatique à 9h15, redéploiement.
 5. **Actualisation à la demande** : Cloudflare Worker, bouton, cache, code d'accès.
 6. **Actualités + résumés Claude** : brief du jour, sentiment, explications.
 7. **Découvertes** : sélection quotidienne d'actions et d'ETF du monde entier avec explications. Commencer par les États-Unis et l'Europe, puis ajouter l'Asie-Pacifique, puis les autres régions une fois les données vérifiées.
-8. **E-mail de 6h00** : contenu essentiel et alertes de changement de recommandation.
+8. **E-mail de 9h15** : contenu essentiel et alertes de changement de recommandation.
 9. **Finitions** : PWA, mode sombre, infobulles, traductions, suivi du taux de réussite réel.
 
 ## 12. Règles pour Claude Code

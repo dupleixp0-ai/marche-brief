@@ -58,5 +58,5 @@ if (snap.discoveries?.data) {
   for (const e of d.excluded) console.log(`  exclue ${e.ticker} : ${e.reason}`);
 }
 
-// E-mail de 6h00 (envoyé seulement si SEND_EMAIL=true : job quotidien).
+// E-mail de 9h15 (envoyé seulement si SEND_EMAIL=true : job quotidien).
 await sendDailyEmail(snap, previous);

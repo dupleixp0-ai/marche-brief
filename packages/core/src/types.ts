@@ -22,6 +22,18 @@ export interface PriceSeries {
   symbol: string;
   currency?: string;
   bars: Bar[];
+  /** Dernier cours pris sur une place qui cote plus tard (ex. Düsseldorf après la clôture de Xetra). */
+  late?: LateQuote;
+}
+
+/** Dernier cours d'une place secondaire, avec son heure exacte. */
+export interface LateQuote {
+  venue: string;
+  symbol: string;
+  price: number;
+  /** Heure du cours (ISO). */
+  time: string;
+  currency?: string;
 }
 
 export interface FearGreed {

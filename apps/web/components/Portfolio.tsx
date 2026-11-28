@@ -4,7 +4,7 @@ import { useEffect, useMemo, useRef, useState, type FormEvent, type ReactNode } 
 import { evaluatePortfolio, validateHolding, DE_TAX_RATE, READING_RULES, type Holding, type HoldingMarket, type Reading, type Snapshot } from "@marche-brief/core";
 import type { Watchlist } from "../lib/types";
 import { useCurrency } from "../lib/currency";
-import { fmtDateTime, fmtNum, fmtPct } from "../lib/format";
+import { fmtDateTime, fmtLate, fmtNum, fmtPct } from "../lib/format";
 import { DecisionBadge } from "./Badges";
 import { Abbr } from "./Abbr";
 import { changePassword, createVault, deleteVault, exportVault, importVault, openVault, saveVault, vaultExists, type Session, type VaultData } from "../lib/vault";
@@ -204,7 +204,7 @@ function Unlocked({ snap, watchlist, onOpen, state, onChange, onLock }: {
               <div className="flex items-start justify-between gap-2">
                 <button onClick={() => onOpen(r.ticker)} className="min-w-0 text-left">
                   <p className="font-semibold leading-tight"><Abbr text={labelOf(r.ticker)} /></p>
-                  <p className="text-[11px] text-slate-500">{r.ticker} · {fmtNum(r.shares, r.shares % 1 ? 4 : 0)} parts · moyen {cur.money(r.avgPrice, "EUR")}{r.asOf ? ` · cours du ${r.asOf.slice(8, 10)}/${r.asOf.slice(5, 7)}` : ""}</p>
+                  <p className="text-[11px] text-slate-500">{r.ticker} · {fmtNum(r.shares, r.shares % 1 ? 4 : 0)} parts · moyen {cur.money(r.avgPrice, "EUR")}{r.asOf ? ` · cours du ${r.asOf.slice(8, 10)}/${r.asOf.slice(5, 7)}` : ""}{snap?.prices[r.ticker]?.data?.late ? ` (${fmtLate(snap.prices[r.ticker]!.data!.late)})` : ""}</p>
                 </button>
                 <div className="shrink-0 text-right">
                   <p className="whitespace-nowrap font-semibold tabular-nums">{money(r.value)}</p>

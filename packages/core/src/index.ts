@@ -33,3 +33,4 @@ export * from "./market/outlook";
 export * from "./market/dailyPoint";
 export * from "./portfolio/portfolio";
 export * from "./adapters/http";
+export * from "./adapters/lateQuote";

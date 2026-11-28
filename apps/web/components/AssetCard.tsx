@@ -3,7 +3,7 @@ import { dailyChangePct, etfReading, type PriceSeries, type ScoreResult, type So
 import { DecisionBadge, StatusDot } from "./Badges";
 import { Sparkline } from "./Sparkline";
 import { Abbr } from "./Abbr";
-import { fmtPct } from "../lib/format";
+import { fmtLate, fmtPct } from "../lib/format";
 import { useCurrency } from "../lib/currency";
 
 export function AssetCard({ ticker, name, sub, r, s, isEtf, onOpen }: {
@@ -22,7 +22,7 @@ export function AssetCard({ ticker, name, sub, r, s, isEtf, onOpen }: {
           {r && <StatusDot status={r.status} />}
         </div>
         <p className="truncate text-xs text-slate-500">{isEtf ? `${ticker}${sub ? ` · ${sub}` : ""}` : name ?? ""}</p>
-        <p className="text-[10px] text-slate-400">Cours du {last?.date ?? "—"}</p>
+        <p className="text-[10px] text-slate-400">Cours du {last?.date ?? "—"}{r?.data?.late ? ` · ${fmtLate(r.data.late)}` : ""}</p>
       </div>
       <div className="hidden shrink-0 sm:block"><Sparkline values={bars.slice(-63).map((b) => b.close)} width={72} /></div>
       <div className="w-28 text-right">

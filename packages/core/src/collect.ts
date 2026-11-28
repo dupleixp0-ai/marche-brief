@@ -18,6 +18,7 @@ import { collectDiscoveries, type Universe } from "./discover/collect";
 import type { Discoveries } from "./discover/discover";
 import { convertBars, FX_PAIR, ratesFrom } from "./fx/fx";
 import { yahooIntradayFetcher, type IntradaySeries } from "./adapters/yahooIntraday";
+import { lateSymbol, mergeLateQuote, yahooLateQuoteFetcher } from "./adapters/lateQuote";
 
 /** Devises dont on garde le taux contre l'euro (affichage et conversions). */
 export const FX_CURRENCIES = ["USD", "GBP", "CHF"] as const;
@@ -130,6 +131,15 @@ export async function collectSnapshot(symbols: string[], previous?: Snapshot | n
   await mapLimit(symbols, opt.concurrency ?? 1, async (s) => {
     prices[s] = await withFallback([yahooFetcher(s, "2y"), stooqFetcher(s)], previous?.prices[s]);
     if (delayMs) await new Promise((r) => setTimeout(r, delayMs));
+  });
+
+  // Cours du soir (Düsseldorf) pour les cotations européennes : plus proche du dernier cours de Trade Republic.
+  const late = symbols.filter((s) => prices[s]?.data && lateSymbol(s));
+  await mapLimit(late, opt.concurrency ?? 1, async (s) => {
+    try {
+      const q = await yahooLateQuoteFetcher(lateSymbol(s)!).run();
+      prices[s] = { ...prices[s], data: mergeLateQuote(prices[s].data!, q) };
+    } catch { /* place secondaire indisponible : on garde le cours de la place principale */ }
   });
 
   const market = { vix, spx, fearGreed };

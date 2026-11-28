@@ -146,9 +146,11 @@ export async function collectSnapshot(symbols: string[], previous?: Snapshot | n
       return homemadeFearGreed(v, spx.data.bars.map((b) => b.close));
     },
   };
-  // Actualisation : si CNN refuse, on garde la valeur CNN du matin (marquée périmée) plutôt que l'indice maison.
-  const keepCnn = opt.quotesOnly && previous?.market?.fearGreed?.data;
-  const fearGreed = await withFallback(keepCnn ? [cnnFetcher()] : [cnnFetcher(), homemade], previous?.market.fearGreed);
+  // Actualisation : CNN refuse les requêtes venant de Cloudflare (code 418, vérifié dans les journaux du Worker).
+  // On garde donc la valeur CNN du brief du matin telle quelle (avec sa date), sans la redemander ni la remplacer
+  // par l'indice maison. Le job du matin (GitHub Actions) obtient bien CNN.
+  const keepCnn = opt.quotesOnly && previous?.market?.fearGreed?.data && !previous.market.fearGreed.data.homemade;
+  const fearGreed = keepCnn ? { ...previous!.market.fearGreed } : await withFallback([cnnFetcher(), homemade], previous?.market.fearGreed);
   // Sans historique CNN : historique calculé avec l'indice maison (signalé comme tel).
   if (fearGreed.data && !fearGreed.data.history?.length && vix.data && spx.data) {
     fearGreed.data = { ...fearGreed.data, history: homemadeFearGreedHistory(vix.data.bars, spx.data.bars), historyHomemade: true };

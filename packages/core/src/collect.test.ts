@@ -37,8 +37,9 @@ describe("actualisation des cours (bouton « Actualiser »)", () => {
     expect(snap.scores.NVDA).toBeDefined();
     expect(snap.brief).toBe(previous.brief); // brief du matin conservé
     expect(snap.news).toBe(previous.news);
-    // CNN indisponible : valeur du matin conservée et marquée périmée (pas d'indice maison).
-    expect(snap.market.fearGreed).toMatchObject({ source: "CNN", status: "stale", data: { value: 15 } });
+    // CNN n'est pas redemandé (bloqué depuis Cloudflare) : valeur du matin conservée telle quelle, avec sa date.
+    expect(snap.market.fearGreed).toMatchObject({ source: "CNN", status: "ok", fetchedAt: "2026-11-27T08:00:00Z", data: { value: 15 } });
+    expect(calls.some((c) => /cnn/i.test(decodeURIComponent(c)))).toBe(false);
     expect(calls.every((c) => c.startsWith("https://relais.test/proxy?url="))).toBe(true);
     expect(calls.some((c) => /finnhub|rss|federalreserve|ecb/i.test(decodeURIComponent(c)))).toBe(false);
   });

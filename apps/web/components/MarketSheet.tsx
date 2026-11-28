@@ -123,9 +123,9 @@ export function MarketSheet({ kind, snap, outlook, onClose, loadIntraday }: {
           <>
             {fg.data ? <FearGreedGauge value={fg.data.value} label={fg.data.label} /> : <p className="text-sm">Indisponible</p>}
             <p className="text-center text-[10px] text-slate-500">{fg.source}{fg.data?.homemade ? " (indice maison)" : ""} · {fmtDateTime(fg.fetchedAt)} <StatusBadge status={fg.status} /></p>
-            {fg.status === "stale" && !fg.data?.homemade && (
-              <p className="mt-2 rounded-lg bg-amber-50 p-2 text-xs text-amber-800 dark:bg-amber-950/40 dark:text-amber-300">
-                CNN n&apos;a pas répondu lors de la dernière actualisation : la valeur affichée est la dernière reçue ({fmtDateTime(fg.fetchedAt)}). Elle sera remise à jour par le brief du matin.
+            {!fg.data?.homemade && Date.parse(snap.generatedAt) - Date.parse(fg.fetchedAt) > 30 * 60_000 && (
+              <p className="mt-2 rounded-lg bg-slate-100 p-2 text-xs text-slate-600 dark:bg-slate-800 dark:text-slate-300">
+                Valeur CNN du brief du matin ({fmtDateTime(fg.fetchedAt)}). CNN refuse les demandes du relais « Actualiser » : elle est remise à jour chaque jour ouvrable à 9h15.
               </p>
             )}
             <div className="mt-3 grid grid-cols-5 gap-1 text-center text-[10px]">

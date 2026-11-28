@@ -1,0 +1,138 @@
+{
+ "generatedAt": "2026-11-28T17:02:45.636Z",
+ "recommendations": {
+  "EUNL.DE": {
+   "score": 56,
+   "decision": "Attendre",
+   "confidence": "moyenne",
+   "asOf": "2026-11-27",
+   "close": 127.4
+  },
+  "IS3N.DE": {
+   "score": 21,
+   "decision": "Vendre",
+   "confidence": "élevée",
+   "asOf": "2026-11-27",
+   "close": 43.527
+  },
+  "HNSC.MI": {
+   "score": 11,
+   "decision": "Vendre",
+   "confidence": "élevée",
+   "asOf": "2026-11-27",
+   "close": 27.865
+  },
+  "VVSM.DE": {
+   "score": 11,
+   "decision": "Vendre",
+   "confidence": "élevée",
+   "asOf": "2026-11-27",
+   "close": 73.44
+  },
+  "L0CK.DE": {
+   "score": 69,
+   "decision": "Acheter",
+   "confidence": "moyenne",
+   "asOf": "2026-11-27",
+   "close": 11.616
+  },
+  "V9N.DE": {
+   "score": 16,
+   "decision": "Vendre",
+   "confidence": "élevée",
+   "asOf": "2026-11-27",
+   "close": 19.2
+  },
+  "8PSG.DE": {
+   "score": 17,
+   "decision": "Vendre",
+   "confidence": "élevée",
+   "asOf": "2026-11-27",
+   "close": 319.05999755859375
+  },
+  "NVDA": {
+   "score": 8,
+   "decision": "Vendre",
+   "confidence": "élevée",
+   "asOf": "2026-11-27",
+   "close": 150.49000549316406
+  },
+  "AVGO": {
+   "score": 11,
+   "decision": "Vendre",
+   "confidence": "élevée",
+   "asOf": "2026-11-27",
+   "close": 312.3399963378906
+  },
+  "AMD": {
+   "score": 23,
+   "decision": "Vendre",
+   "confidence": "élevée",
+   "asOf": "2026-11-27",
+   "close": 424.5400085449219
+  },
+  "MU": {
+   "score": 10,
+   "decision": "Vendre",
+   "confidence": "élevée",
+   "asOf": "2026-11-27",
+   "close": 646.9500122070312
+  },
+  "MSFT": {
+   "score": 55,
+   "decision": "Attendre",
+   "confidence": "moyenne",
+   "asOf": "2026-11-27",
+   "close": 492.8500061035156
+  },
+  "GOOGL": {
+   "score": 13,
+   "decision": "Vendre",
+   "confidence": "élevée",
+   "asOf": "2026-11-27",
+   "close": 274.9599914550781
+  },
+  "AMZN": {
+   "score": 50,
+   "decision": "Acheter",
+   "confidence": "élevée",
+   "asOf": "2026-11-27",
+   "close": 254.1199951171875
+  },
+  "META": {
+   "score": 54,
+   "decision": "Attendre",
+   "confidence": "élevée",
+   "asOf": "2026-11-27",
+   "close": 628.9600219726562
+  },
+  "PANW": {
+   "score": 57,
+   "decision": "Attendre",
+   "confidence": "moyenne",
+   "asOf": "2026-11-27",
+   "close": 366.760009765625
+  },
+  "CRWD": {
+   "score": 53,
+   "decision": "Attendre",
+   "confidence": "élevée",
+   "asOf": "2026-11-27",
+   "close": 217.1999969482422
+  },
+  "EQIX": {
+   "score": 33,
+   "decision": "Vendre",
+   "confidence": "moyenne",
+   "asOf": "2026-11-27",
+   "close": 984.8699951171875
+  },
+  "DLR": {
+   "score": 22,
+   "decision": "Vendre",
+   "confidence": "élevée",
+   "asOf": "2026-11-27",
+   "close": 167.16000366210938
+  }
+ }
+}

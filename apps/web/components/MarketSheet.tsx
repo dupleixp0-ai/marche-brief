@@ -123,12 +123,17 @@ export function MarketSheet({ kind, snap, outlook, onClose, loadIntraday }: {
           <>
             {fg.data ? <FearGreedGauge value={fg.data.value} label={fg.data.label} /> : <p className="text-sm">Indisponible</p>}
             <p className="text-center text-[10px] text-slate-500">{fg.source}{fg.data?.homemade ? " (indice maison)" : ""} · {fmtDateTime(fg.fetchedAt)} <StatusBadge status={fg.status} /></p>
+            {fg.status === "stale" && !fg.data?.homemade && (
+              <p className="mt-2 rounded-lg bg-amber-50 p-2 text-xs text-amber-800 dark:bg-amber-950/40 dark:text-amber-300">
+                CNN n&apos;a pas répondu lors de la dernière actualisation : la valeur affichée est la dernière reçue ({fmtDateTime(fg.fetchedAt)}). Elle sera remise à jour par le brief du matin.
+              </p>
+            )}
             <div className="mt-3 grid grid-cols-5 gap-1 text-center text-[10px]">
-              {[["0–25", "Peur extrême", "bg-red-600"], ["25–45", "Peur", "bg-orange-500"], ["45–55", "Neutre", "bg-slate-400"], ["55–75", "Avidité", "bg-lime-500"], ["75–100", "Avidité extrême", "bg-green-600"]].map(([r, l, c]) => (
+              {[["0–25", "Peur extrême", "bg-red-600"], ["26–45", "Peur", "bg-orange-500"], ["46–55", "Neutre", "bg-slate-400"], ["56–75", "Avidité", "bg-lime-500"], ["76–100", "Avidité extrême", "bg-green-600"]].map(([r, l, c]) => (
                 <div key={r} className={`rounded-lg p-1.5 text-white ${c}`}><b>{r}</b><br />{l}</div>
               ))}
             </div>
-            {fg.data?.history?.length ? <FgHistory history={fg.data.history} homemade={!!fg.data.historyHomemade} /> : null}
+            {fg.data?.history?.length ? <FgHistory history={fg.data.history} homemade={!!fg.data.historyHomemade} cnnValue={fg.data.homemade ? null : fg.data.value} /> : null}
           </>
         ) : (
           <>
@@ -219,7 +224,7 @@ type FgRange = keyof typeof FG_RANGES;
 const FG_CLS = { down: "text-red-600", warn: "text-orange-500", up: "text-lime-600" } as const;
 const fgColor = (v: number) => { const t = fearGreedTone(v); return isExtremeGreed(v) ? "text-green-600" : t ? FG_CLS[t] : "text-slate-500"; };
 
-function FgHistory({ history, homemade }: { history: { date: string; value: number }[]; homemade: boolean }) {
+function FgHistory({ history, homemade, cnnValue }: { history: { date: string; value: number }[]; homemade: boolean; cnnValue: number | null }) {
   const [range, setRange] = useState<FgRange>("3M");
   const data = history.slice(-(FG_RANGES[range] + 1)).map((p) => ({ time: p.date, value: p.value }));
   const flat = (v: number) => data.map((p) => ({ time: p.time, value: v }));
@@ -233,13 +238,20 @@ function FgHistory({ history, homemade }: { history: { date: string; value: numb
   return (
     <div className="mt-4">
       <div className="flex flex-wrap items-center justify-between gap-2">
-        <h3 className="text-sm font-semibold">Évolution</h3>
+        <h3 className="text-sm font-semibold">Évolution{homemade ? " — indice maison" : " — CNN"}</h3>
         <div className="flex gap-1 rounded-full bg-slate-100 p-1 dark:bg-slate-800">
           {(Object.keys(FG_RANGES) as FgRange[]).map((k) => (
             <button key={k} onClick={() => setRange(k)} className={`rounded-full px-2.5 py-1 text-xs font-semibold ${range === k ? "bg-white shadow dark:bg-slate-700" : "text-slate-500"}`}>{k}</button>
           ))}
         </div>
       </div>
+      {homemade && cnnValue != null && (
+        <p className="mt-2 rounded-lg bg-amber-50 p-2 text-xs text-amber-800 dark:bg-amber-950/40 dark:text-amber-300">
+          L&apos;historique CNN n&apos;est pas encore disponible : la courbe et les valeurs passées ci-dessous viennent de l&apos;<b>indice maison</b> (VIX + tendance du S&amp;P 500).
+          Il ne se lit pas sur la même échelle que CNN (aujourd&apos;hui : {history.at(-1)?.value} maison contre {cnnValue} CNN) : ne compare pas les deux.
+          L&apos;historique CNN arrivera avec le prochain brief du matin.
+        </p>
+      )}
       <div className="mt-2"><PriceChart lines={lines} height={200} /></div>
       <p className="mt-1 text-[10px] text-slate-500">
         Sous 25 : peur extrême · au-dessus de 75 : avidité extrême
@@ -250,7 +262,7 @@ function FgHistory({ history, homemade }: { history: { date: string; value: numb
         <div className="mt-3 grid grid-cols-3 gap-2 sm:grid-cols-6">
           {marks.map((m) => (
             <div key={m.label} className="rounded-xl bg-slate-100 p-2 text-center dark:bg-slate-800">
-              <p className="text-[10px] uppercase tracking-wide text-slate-500">{m.label}</p>
+              <p className="text-[10px] uppercase tracking-wide text-slate-500">{m.label}{homemade ? " · maison" : ""}</p>
               <p className={`text-lg font-bold tabular-nums ${fgColor(m.value)}`}>{m.value}</p>
               <p className="text-[10px] text-slate-500">{fearGreedLabel(m.value)} · {m.date.slice(8, 10)}/{m.date.slice(5, 7)}</p>
             </div>

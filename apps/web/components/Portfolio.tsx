@@ -225,7 +225,7 @@ function Unlocked({ snap, watchlist, onOpen, state, onChange, onLock }: {
                   <div className="mt-2 flex flex-wrap items-center gap-2 text-xs">
                     {r.reading && <span className={`rounded-full px-2 py-0.5 font-semibold ${READ_CLS[r.reading]}`}>{r.reading}</span>}
                     {r.decision && <DecisionBadge decision={r.decision} score={r.score} />}
-                    <span className="text-slate-500">Poids {r.weight != null ? fmtPct(r.weight * 100, 1, false) : "—"} · cours {money(r.price)} · séance <span className={tone(r.dayPnl)}>{signed(r.dayPnl)}</span></span>
+                    <span className="text-slate-500">Poids {r.weight != null ? fmtPct(r.weight * 100, 1, false) : "—"} · cours {money(r.price)} · séance <span className={tone(r.dayPnl)}>{signed(r.dayPnl)}{r.dayPnl != null && r.value ? ` (${fmtPct((r.dayPnl / (r.value - r.dayPnl)) * 100)})` : ""}</span></span>
                   </div>
                   <ul className="mt-2 list-disc space-y-0.5 pl-5 text-xs text-slate-600 dark:text-slate-300">{r.reasons.map((x) => <li key={x}>{x}</li>)}</ul>
                 </>

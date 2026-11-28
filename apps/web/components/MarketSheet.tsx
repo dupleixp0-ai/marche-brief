@@ -1,10 +1,10 @@
 "use client";
 import { useEffect, useMemo, useState, type ReactNode } from "react";
-import { lastSession, seriesStats, smaSeries, type Bar, type IntradaySeries, type Outlook, type Signal, type Snapshot } from "@marche-brief/core";
+import { lastSession, seriesStats, smaSeries, type Bar, type IntradaySeries, type Outlook, type Signal, type Snapshot, changeBetween } from "@marche-brief/core";
 import { PriceChart, type Line } from "./PriceChart";
 import { FearGreedGauge } from "./FearGreedGauge";
 import { StatusBadge } from "./Badges";
-import { fmtDateTime, fmtNum, fmtPct } from "../lib/format";
+import { fmtChange, fmtDateTime, fmtNum, fmtPct } from "../lib/format";
 
 export type MarketKind = "spx" | "vix" | "fg";
 
@@ -105,7 +105,8 @@ export function MarketSheet({ kind, snap, outlook, onClose, loadIntraday }: {
   }, [range, intra, bars, kind, color]);
 
   const stats = useMemo(() => seriesStats(bars.map((b) => b.close)), [bars]);
-  const perf = view.first && view.last ? (view.last / view.first - 1) * 100 : null;
+  const chg = changeBetween(view.first, view.last);
+  const perf = chg?.pct ?? null;
   const fg = snap.market.fearGreed;
   const title = kind === "vix" ? "VIX — indice de la peur" : kind === "spx" ? "S&P 500" : "Fear & Greed (CNN)";
   const signal = (label: string) => outlook.signals.find((s) => s.label === label);
@@ -133,7 +134,7 @@ export function MarketSheet({ kind, snap, outlook, onClose, loadIntraday }: {
             <div className="mt-2 flex flex-wrap items-end justify-between gap-2">
               <div>
                 <p className="text-2xl font-bold tabular-nums">{view.last != null ? fmtNum(view.last, kind === "vix" ? 2 : 0) : "—"} <span className="text-base font-medium text-slate-500">{kind === "vix" ? "" : "pts"}</span></p>
-                <p className={`text-sm tabular-nums ${perf == null ? "" : (kind === "vix" ? -perf : perf) >= 0 ? "text-green-600" : "text-red-600"}`}>{fmtPct(perf)} sur {LABEL[range]}</p>
+                <p className={`text-sm tabular-nums ${perf == null ? "" : (kind === "vix" ? -perf : perf) >= 0 ? "text-green-600" : "text-red-600"}`}>{fmtChange(chg, "pts", kind === "vix" ? 2 : 0)} sur {LABEL[range]}</p>
               </div>
               <div className="flex gap-1 rounded-full bg-slate-100 p-1 dark:bg-slate-800">
                 {RANGES.map((k) => (

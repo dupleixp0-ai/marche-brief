@@ -36,3 +36,15 @@ describe("dailyChangePct", () => {
     expect(dailyChangePct([{ date: "a", close: 100 }])).toBeNull();
   });
 });
+
+describe("variation en montant et en %", () => {
+  it("séance : +2,50 € soit +2 %", async () => {
+    const { dailyChange, changeBetween } = await import("./change");
+    const c = dailyChange([{ date: "2026-11-26", close: 125 }, { date: "2026-11-27", close: 127.5 }])!;
+    expect(c.abs).toBeCloseTo(2.5);
+    expect(c.pct).toBeCloseTo(2);
+    expect(changeBetween(100, 90)).toEqual({ abs: -10, pct: -10 });
+    expect(dailyChange([{ date: "2026-11-27", close: 1 }])).toBeNull();
+    expect(changeBetween(0, 5)).toBeNull();
+  });
+});

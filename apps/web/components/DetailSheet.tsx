@@ -1,11 +1,11 @@
 "use client";
 import { useEffect, useMemo, useState, type ReactNode } from "react";
-import { smaSeries, etfReading, lastSession, type Bar, type Decision, type Factor, type IntradaySeries, type NewsItem, type SourceStatus } from "@marche-brief/core";
+import { smaSeries, etfReading, lastSession, type Bar, type Decision, type Factor, type IntradaySeries, type NewsItem, type SourceStatus, changeBetween } from "@marche-brief/core";
 import { PriceChart } from "./PriceChart";
 import { InfoTip } from "./InfoTip";
 import { DecisionBadge, StatusBadge } from "./Badges";
 import { Abbr } from "./Abbr";
-import { fmtDateTime, fmtNum, fmtPct, fmtQuote } from "../lib/format";
+import { fmtChange, fmtDateTime, fmtNum, fmtPct, fmtQuote } from "../lib/format";
 import { currencySymbol, useCurrency } from "../lib/currency";
 import type { WatchItem } from "../lib/types";
 
@@ -81,7 +81,7 @@ export function DetailSheet({ target: d, onClose, loadIntraday }: {
     };
   }, [d, range, intra, cur]);
 
-  const perf = view.first && view.last ? (view.last / view.first - 1) * 100 : null;
+  const chg = changeBetween(view.first, view.last);
   const s = d.score;
 
   return (
@@ -98,7 +98,7 @@ export function DetailSheet({ target: d, onClose, loadIntraday }: {
         <div className="mt-3 flex flex-wrap items-end justify-between gap-2">
           <div>
             <p className="text-2xl font-bold tabular-nums">{view.last != null ? fmtNum(view.last) : "—"} <span className="text-base font-medium text-slate-500">{view.unit}</span></p>
-            <p className={`text-sm tabular-nums ${perf == null ? "" : perf >= 0 ? "text-green-600" : "text-red-600"}`}>{fmtPct(perf)} sur {LABEL[range]}</p>
+            <p className={`text-sm tabular-nums ${chg == null ? "" : chg.pct >= 0 ? "text-green-600" : "text-red-600"}`}>{fmtChange(chg, view.unit)} sur {LABEL[range]}</p>
           </div>
           <div className="flex gap-1 rounded-full bg-slate-100 p-1 dark:bg-slate-800">
             {RANGES.map((k) => (

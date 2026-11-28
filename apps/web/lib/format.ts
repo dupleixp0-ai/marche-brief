@@ -20,4 +20,10 @@ export function fmtQuote(date?: string, time?: string, venue?: string): string {
   const hm = t.toLocaleTimeString("fr-FR", { timeZone: "Europe/Berlin", hour: "2-digit", minute: "2-digit" });
   return `${day} à ${hm}${venue ? ` · ${venue}` : ""}`;
 }
+/** Montant signé avec unité : « +1,57 € », « -57 pts ». */
+export const fmtSignedAmount = (x: number | null | undefined, unit: string, d = 2) =>
+  x == null ? "—" : `${x >= 0 ? "+" : "-"}${Math.abs(x).toLocaleString("fr-FR", { minimumFractionDigits: d, maximumFractionDigits: d })}${unit ? ` ${unit}` : ""}`;
+/** Variation : « +1,25 % · +1,57 € ». */
+export const fmtChange = (c: { abs: number; pct: number } | null | undefined, unit: string, d = 2) =>
+  c ? `${fmtPct(c.pct)} · ${fmtSignedAmount(c.abs, unit, d)}` : "—";
 export const fmtRatio = (x: number) => fmtPct(x * 100, 1, false);

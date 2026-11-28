@@ -1,6 +1,6 @@
 "use client";
 import { useCallback, useEffect, useMemo, useRef, useState, type ReactNode } from "react";
-import { collectSnapshot, setHttpRoute, withFallback, yahooIntradayFetcher, dailyChangePct, dailyPoint, marketOutlook, type PointBullet, type Tone, marketSummary, ratesFrom, smaSeries, DISPLAY_CURRENCIES, type Discovery, type DisplayCurrency, type IntradaySeries, type Snapshot } from "@marche-brief/core";
+import { collectSnapshot, setHttpRoute, withFallback, yahooIntradayFetcher, dailyChange, dailyChangePct, dailyPoint, marketOutlook, type PointBullet, type Tone, marketSummary, ratesFrom, smaSeries, DISPLAY_CURRENCIES, type Discovery, type DisplayCurrency, type IntradaySeries, type Snapshot } from "@marche-brief/core";
 import type { DashboardData, WatchItem } from "../lib/types";
 import { AssetCard } from "./AssetCard";
 import { InfoTip } from "./InfoTip";
@@ -16,9 +16,9 @@ import { PriceChart } from "./PriceChart";
 import { DecisionBadge, StatusBadge, StatusDot } from "./Badges";
 import { Abbr } from "./Abbr";
 import { MarketSheet, OutlookBlock, BiasBadge, type MarketKind } from "./MarketSheet";
-import { CurrencyProvider, useCurrency } from "../lib/currency";
+import { CurrencyProvider, currencySymbol, useCurrency } from "../lib/currency";
 import { GLOSSARY } from "../lib/glossary";
-import { fmtDateTime, fmtNum, fmtPct, fmtQuote, fmtRatio } from "../lib/format";
+import { fmtChange, fmtDateTime, fmtNum, fmtPct, fmtQuote, fmtRatio, fmtSignedAmount } from "../lib/format";
 
 const BASE = process.env.NEXT_PUBLIC_BASE_PATH ?? "";
 const WORKER = process.env.NEXT_PUBLIC_WORKER_URL ?? "";
@@ -160,7 +160,7 @@ function MiniTable({ items, snap, isEtf, onOpen }: { items: WatchItem[]; snap: S
         {items.map((it) => {
           const r = snap.prices[it.ticker];
           const c = cur.bars(r?.data?.bars ?? [], r?.data?.currency);
-          const ch = dailyChangePct(c.bars);
+          const ch = dailyChange(c.bars);
           const s = snap.scores[it.ticker];
           return (
             <tr key={it.ticker} onClick={() => onOpen(it)} className="cursor-pointer border-b border-slate-100 last:border-0 hover:bg-slate-50 dark:border-slate-800 dark:hover:bg-slate-800/50">
@@ -168,8 +168,10 @@ function MiniTable({ items, snap, isEtf, onOpen }: { items: WatchItem[]; snap: S
                 <p className="font-medium leading-tight">{isEtf ? <Abbr text={it.name ?? it.ticker} /> : it.ticker}</p>
                 <p className="text-[10px] text-slate-500">{isEtf ? it.ticker : it.sector} · {fmtQuote(r?.data?.bars.at(-1)?.date, r?.data?.quoteTime, r?.data?.venue)}</p>
               </td>
-              <td className="whitespace-nowrap py-2 text-right tabular-nums">{cur.money(c.bars.at(-1)?.close, c.currency)}</td>
-              <td className={`whitespace-nowrap py-2 pl-2 text-right text-xs tabular-nums ${ch == null ? "" : ch >= 0 ? "text-green-600" : "text-red-600"}`}>{fmtPct(ch)}</td>
+              <td className="whitespace-nowrap py-2 text-right tabular-nums">
+                {cur.money(c.bars.at(-1)?.close, c.currency)}
+                <p className={`text-[11px] ${ch == null ? "" : ch.pct >= 0 ? "text-green-600" : "text-red-600"}`}>{fmtChange(ch, currencySymbol(c.currency))}</p>
+              </td>
               <td className="py-2 pl-2 text-right">{s ? <DecisionBadge decision={s.decision} score={s.score} /> : "—"}</td>
             </tr>
           );
@@ -285,6 +287,7 @@ function Inner({ data, snap, setSnap }: { data: DashboardData; snap: Snapshot | 
       outlook: marketOutlook({ spxCloses: spxC, vixCloses: vixC, fearGreed: snap.market.fearGreed.data?.value ?? null }),
       summary: marketSummary({ vixCloses: vixC, spxCloses: spxC, fearGreed: snap.market.fearGreed.data?.value ?? null }),
       spxDay: dailyChangePct(spxBars),
+      spxDayPts: dailyChange(spxBars)?.abs ?? null,
       vixLines: [
         { label: "VIX", color: "#dc2626", data: pts(vixBars, vixC, 252), area: true },
         { label: "MM50", color: "#64748b", data: pts(vixBars, smaSeries(vixC, 50), 252), width: 1 as const },
@@ -400,7 +403,7 @@ function Inner({ data, snap, setSnap }: { data: DashboardData; snap: Snapshot | 
         <div className="grid grid-cols-2 gap-3 lg:grid-cols-4">
           <Kpi label="Fear & Greed" tip="tipFg" value={fg?.data ? fg.data.value : "—"} sub={fg?.data?.label} tone={fg?.data ? (fg.data.value < 25 ? "down" : fg.data.value > 75 ? "warn" : undefined) : undefined} onClick={() => setMarketOpen("fg")} />
           <Kpi label="VIX" tip="tipVix" value={market.summary.vix != null ? fmtNum(market.summary.vix, 1) : "—"} sub={`MM50 ${market.summary.vixMa50 != null ? fmtNum(market.summary.vixMa50, 1) : "—"}`} tone={(market.summary.vix ?? 0) > 30 ? "down" : (market.summary.vix ?? 99) < 15 ? "up" : undefined} onClick={() => setMarketOpen("vix")} />
-          <Kpi label="S&P 500" value={market.summary.spx != null ? fmtNum(market.summary.spx, 0) : "—"} sub={<span className={(market.spxDay ?? 0) >= 0 ? "text-green-600" : "text-red-600"}>{fmtPct(market.spxDay)} · {market.summary.spx != null && market.summary.spxMa125 != null ? (market.summary.spx > market.summary.spxMa125 ? "au-dessus de la MM125" : "sous la MM125") : ""}</span>} onClick={() => setMarketOpen("spx")} />
+          <Kpi label="S&P 500" value={market.summary.spx != null ? fmtNum(market.summary.spx, 0) : "—"} sub={<span className={(market.spxDay ?? 0) >= 0 ? "text-green-600" : "text-red-600"}>{fmtPct(market.spxDay)} ({fmtSignedAmount(market.spxDayPts, "pts", 0)}) · {market.summary.spx != null && market.summary.spxMa125 != null ? (market.summary.spx > market.summary.spxMa125 ? "au-dessus de la MM125" : "sous la MM125") : ""}</span>} onClick={() => setMarketOpen("spx")} />
           <Kpi label="Signaux du jour" value={<span><span className="text-green-600">{signals.Acheter}</span> · <span className="text-slate-500">{signals.Attendre}</span> · <span className="text-red-600">{signals.Vendre}</span></span>} sub="Acheter · Attendre · Vendre" onClick={() => setView("stocks")} />
         </div>
         <div className={`${panel} cursor-pointer text-sm transition hover:border-blue-400`} onClick={() => setView("market")}>

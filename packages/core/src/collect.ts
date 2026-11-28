@@ -6,6 +6,7 @@ import { cnnFetcher } from "./adapters/cnn";
 import { homemadeFearGreed, homemadeFearGreedHistory } from "./indicators/fearGreed";
 import type { FearGreed, PriceSeries, SourceResult } from "./types";
 import { scoreAsset, type ScoreResult } from "./scoring/score";
+import { timingOf, type Timing, type TimingStats } from "./timing/timing";
 import { alignTo } from "./backtest/backtest";
 import { marketClosedNote } from "./market/session";
 import type Anthropic from "@anthropic-ai/sdk";
@@ -33,7 +34,9 @@ export interface Snapshot {
     fearGreed: SourceResult<FearGreed>;
   };
   prices: Record<string, SourceResult<PriceSeries>>;
-  scores: Record<string, ScoreResult & { asOf: string }>;
+  scores: Record<string, ScoreResult & { asOf: string; timing?: Timing }>;
+  /** Statistiques historiques du « moment d'entrée » (étude sur 10 ans, data/timing.json). */
+  timingStats?: TimingStats;
   news: SourceResult<NewsItem[]>;
   brief: SourceResult<Brief>;
   discoveries: SourceResult<Discoveries> | null;
@@ -62,6 +65,8 @@ export interface CollectOptions {
   quotesOnly?: boolean;
   /** Nombre de cours téléchargés en parallèle (1 = séquentiel, défaut). */
   concurrency?: number;
+  /** Statistiques de l'étude « moment d'entrée » (data/timing.json). Absent = celles du snapshot précédent. */
+  timingStats?: TimingStats;
 }
 
 /** Exécute `fn` sur chaque élément avec au plus `n` appels simultanés. */
@@ -79,12 +84,15 @@ export function scoreSnapshot(
   previous?: Snapshot | null,
   sentiments: Record<string, { value: number }> = {},
   fx?: Snapshot["fx"],
+  timingStats?: TimingStats,
 ): Snapshot["scores"] {
   const out: Snapshot["scores"] = {};
   const benchUsd = market.spx.data?.bars ?? [];
   const rates = ratesFrom(fx);
   const vix = market.vix.data?.bars.at(-1)?.close ?? null;
   const fg = market.fearGreed.data?.value ?? null;
+  // Peur du marché pour le « moment d'entrée » : indice maison (VIX + S&P 500), le même que dans l'étude sur 10 ans.
+  const marketFear = vix != null && benchUsd.length > 125 ? homemadeFearGreed(vix, benchUsd.map((b) => b.close)).value : null;
   for (const [sym, r] of Object.entries(prices)) {
     const bars = r.data?.bars;
     if (!bars || bars.length < 210) continue; // pas assez d'historique : pas de score
@@ -94,7 +102,8 @@ export function scoreSnapshot(
     const bench = cur === "USD" ? benchUsd : convertBars(benchUsd, "USD", cur === "GBp" ? "GBP" : cur, rates) ?? benchUsd;
     const benchCloses = alignTo(bars.map((b) => b.date), bench).map((x, i) => x ?? closes[i]);
     const res = scoreAsset({ closes, benchCloses, vix, fearGreed: fg, newsSentiment: sentiments[sym]?.value ?? null }, previous?.scores?.[sym]?.decision);
-    out[sym] = { ...res, asOf: bars.at(-1)!.date };
+    const timing = timingOf(closes, marketFear, timingStats) ?? undefined;
+    out[sym] = { ...res, asOf: bars.at(-1)!.date, ...(timing ? { timing } : {}) };
   }
   return out;
 }
@@ -160,7 +169,8 @@ export async function collectSnapshot(symbols: string[], previous?: Snapshot | n
     outlook: marketOutlook({ spxCloses: spxC, vixCloses: vixC, fearGreed: fearGreed.data?.value ?? null }),
   }).map((p) => `- ${p.text}`).join("\n");
   const brief = keep ? previous.brief : await makeBrief(news, baseScores, previous?.brief, opt, now, context);
-  const scores = scoreSnapshot(market, prices, previous, brief.data?.sentiments ?? {}, fx);
+  const timingStats = opt.timingStats ?? previous?.timingStats;
+  const scores = scoreSnapshot(market, prices, previous, brief.data?.sentiments ?? {}, fx, timingStats);
 
   const discoveries = opt.universe
     ? await collectDiscoveries(opt.universe, { vix: vix.data?.bars.at(-1)?.close ?? null, fearGreed: fearGreed.data?.value ?? null, now, delayMs })
@@ -177,7 +187,7 @@ export async function collectSnapshot(symbols: string[], previous?: Snapshot | n
   }
 
   const lastUs = prices["SPY"]?.data?.bars.at(-1)?.date ?? spx.data?.bars.at(-1)?.date;
-  return { generatedAt: now.toISOString(), marketNote: marketClosedNote(lastUs, now), market, prices, scores, news, brief, discoveries, fx, intraday };
+  return { generatedAt: now.toISOString(), marketNote: marketClosedNote(lastUs, now), market, prices, scores, news, brief, discoveries, fx, intraday, ...(timingStats ? { timingStats } : {}) };
 }
 
 async function makeBrief(

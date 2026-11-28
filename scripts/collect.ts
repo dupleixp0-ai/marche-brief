@@ -23,6 +23,8 @@ const snap = await collectSnapshot(symbols, previous, {
   anthropic: process.env.ANTHROPIC_API_KEY ? new Anthropic() : null,
   names,
   universe: JSON.parse(readFileSync(path("config/universe.json"), "utf8")),
+  // Statistiques de l'étude « moment d'entrée » (npm run timing).
+  timingStats: existsSync(path("data/timing.json")) ? JSON.parse(readFileSync(path("data/timing.json"), "utf8")).stats : undefined,
 });
 writeFileSync(snapFile, JSON.stringify(snap, null, 1) + "\n");
 

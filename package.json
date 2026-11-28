@@ -11,6 +11,7 @@
     "test": "npm run test -w packages/core",
     "collect": "tsx scripts/collect.ts",
     "backtest": "tsx scripts/backtest.ts",
+    "timing": "tsx scripts/timing.ts",
     "should-run": "tsx scripts/should-run.ts",
     "email:preview": "tsx scripts/email.ts"
   },

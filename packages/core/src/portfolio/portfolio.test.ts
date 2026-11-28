@@ -59,3 +59,14 @@ describe("portefeuille", () => {
     expect(validateHolding({ ticker: "x y", shares: 1, avgPrice: 1 })).toContain("Symbole");
   });
 });
+
+describe("lecture et moment d'entrée", () => {
+  it("bon moment : mentionné quand la position n'est pas trop lourde", () => {
+    const r = positionReading({ decision: "Attendre", score: 55, pnlPct: -0.1, weight: 0.1, aboveMa200: true, moment: "favorable" });
+    expect(r.reasons.join(" ")).toContain("Bon moment");
+  });
+  it("hausse très étirée en gain : sécuriser une partie", () => {
+    const r = positionReading({ decision: "Acheter", score: 80, pnlPct: 0.6, weight: 0.1, aboveMa200: true, moment: "etire" });
+    expect(r.reasons.join(" ")).toContain("sécuriser");
+  });
+});

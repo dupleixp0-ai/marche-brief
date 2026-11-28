@@ -1,9 +1,9 @@
 "use client";
 import { useEffect, useMemo, useState, type ReactNode } from "react";
-import { smaSeries, etfReading, lastSession, type Bar, type Decision, type Factor, type IntradaySeries, type NewsItem, type SourceStatus, changeBetween } from "@marche-brief/core";
+import { smaSeries, etfReading, lastSession, type Bar, type Decision, type Factor, type IntradaySeries, type NewsItem, type SourceStatus, type Timing, changeBetween } from "@marche-brief/core";
 import { PriceChart } from "./PriceChart";
 import { InfoTip } from "./InfoTip";
-import { DecisionBadge, StatusBadge } from "./Badges";
+import { DecisionBadge, StatusBadge, TimingBadge } from "./Badges";
 import { Abbr } from "./Abbr";
 import { fmtChange, fmtDateTime, fmtNum, fmtPct, fmtQuote } from "../lib/format";
 import { currencySymbol, useCurrency } from "../lib/currency";
@@ -24,7 +24,7 @@ export interface DetailTarget {
   meta?: { source: string; fetchedAt: string; status: SourceStatus };
   /** Heure exacte et place du dernier cours. */
   quote?: { time?: string; venue?: string };
-  score?: { score: number; decision: Decision; factors: Factor[]; reasons?: string[]; confidence?: string; asOf?: string };
+  score?: { score: number; decision: Decision; factors: Factor[]; reasons?: string[]; confidence?: string; asOf?: string; timing?: Timing };
   intraday?: IntradaySeries | null;
   info?: WatchItem;
   explanation?: string;
@@ -136,6 +136,16 @@ export function DetailSheet({ target: d, onClose, loadIntraday }: {
               <span className="text-sm">Score {s.score}/100<InfoTip k="tipScore" />{s.confidence ? ` · confiance ${s.confidence}` : ""}</span>
             </div>
             {d.explanation && <p className="mt-2 rounded-lg bg-blue-50 p-2 text-sm dark:bg-blue-950/40">{d.explanation}</p>}
+            {s.timing && (
+              <div className={`mt-3 rounded-xl border p-3 ${s.timing.moment === "favorable" ? "border-green-600/40 bg-green-50 dark:bg-green-950/30" : s.timing.moment === "etire" ? "border-amber-500/40 bg-amber-50 dark:bg-amber-950/30" : "border-slate-200 dark:border-slate-800"}`}>
+                <div className="flex items-center gap-2">
+                  <h3 className="text-sm font-semibold">Moment d&apos;entrée<InfoTip k="tipTiming" /></h3>
+                  <TimingBadge moment={s.timing.moment} always />
+                </div>
+                <p className="mt-1 text-sm font-medium">{s.timing.label}</p>
+                <ul className="mt-1 list-disc space-y-1 pl-5 text-xs">{s.timing.reasons.map((x) => <li key={x}>{x}</li>)}</ul>
+              </div>
+            )}
             {d.isEtf && (
               <p className="mt-1 text-xs text-slate-500">
                 Lecture long terme : <b>{etfReading(s.decision)}</b>. Pour un ETF, « Vendre » signifie surtout « tendance dégradée ».

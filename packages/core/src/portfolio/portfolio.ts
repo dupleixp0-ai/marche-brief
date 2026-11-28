@@ -5,6 +5,7 @@ import type { Bar } from "../types";
 import type { Decision } from "../scoring/score";
 import { sma } from "../indicators/sma";
 import { fxFactor, type FxRates } from "../fx/fx";
+import type { TimingMoment } from "../timing/timing";
 
 /** Ligne saisie par l'utilisateur. `avgPrice` est dans `avgCurrency` (EUR par défaut, comme chez Trade Republic). */
 export interface Holding {
@@ -24,6 +25,8 @@ export interface HoldingMarket {
   score?: number;
   isEtf?: boolean;
   taxClass?: TaxClass;
+  /** Moment d'entrée (bon moment / neutre / hausse très étirée). */
+  moment?: TimingMoment;
 }
 
 export type Reading = "Renforcer" | "Conserver" | "Alléger";
@@ -92,7 +95,7 @@ export function estimateTax(taxableGain: number, allowance = DE_ALLOWANCE, rate 
 
 /** Lecture d'une position : le score, rapporté à ta situation (gain/perte, poids, tendance). */
 export function positionReading(inp: {
-  decision?: Decision; score?: number; pnlPct: number | null; weight: number | null; aboveMa200: boolean | null; isEtf?: boolean;
+  decision?: Decision; score?: number; pnlPct: number | null; weight: number | null; aboveMa200: boolean | null; isEtf?: boolean; moment?: TimingMoment;
 }): { reading: Reading | null; reasons: string[] } {
   if (!inp.decision) return { reading: null, reasons: ["Pas de score pour cette valeur."] };
   const r: string[] = [];
@@ -122,6 +125,12 @@ export function positionReading(inp: {
     else if (inp.pnlPct <= READING_RULES.bigLoss) r.push(`En perte de ${pct(inp.pnlPct)} : vérifier si la raison de l'achat tient toujours.`);
     else r.push(`${inp.pnlPct >= 0 ? "En gain" : "En perte"} de ${pct(inp.pnlPct)} sur ton cours moyen.`);
   }
+  if (inp.moment === "favorable" && inp.decision !== "Vendre" && !heavy)
+    r.push("Bon moment pour entrer : peur sur le marché ou valeur survendue (historiquement favorable à 3 mois).");
+  if (inp.moment === "etire")
+    r.push(inp.pnlPct != null && inp.pnlPct > 0
+      ? "Hausse très étirée : risque de forte chute plus élevé, sécuriser une partie du gain peut se justifier."
+      : "Hausse très étirée : renforcer seulement par petites tranches.");
   if (heavy && inp.decision !== "Vendre" && reading === "Conserver") r.push("Signal positif, mais éviter de renforcer encore cette ligne.");
   if (heavy && inp.decision === "Vendre") r.push(`Pèse ${pct(w).replace("+", "")} du portefeuille : concentration élevée.`);
   if (inp.isEtf && reading === "Alléger") r.push("Pour un ETF de long terme, « Alléger » ne veut pas dire tout vendre.");
@@ -168,7 +177,7 @@ export function evaluatePortfolio(
     const closes = (m?.bars ?? []).map((b) => b.close);
     const ma200 = sma(closes, 200);
     const aboveMa200 = ma200 == null || !closes.length ? null : closes.at(-1)! >= ma200;
-    Object.assign(r, positionReading({ decision: r.decision, score: r.score, pnlPct: r.pnlPct, weight: r.weight, aboveMa200, isEtf: m?.isEtf }));
+    Object.assign(r, positionReading({ decision: r.decision, score: r.score, pnlPct: r.pnlPct, weight: r.weight, aboveMa200, isEtf: m?.isEtf, moment: m?.moment }));
   }
   const taxable = priced.reduce((s, r) => s + (r.taxableGain ?? 0), 0);
   return {

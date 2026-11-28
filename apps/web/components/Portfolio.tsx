@@ -132,19 +132,19 @@ function Unlocked({ snap, watchlist, onOpen, state, onChange, onLock }: {
     if (snap) {
       for (const e of watchlist.etfs) {
         const r = snap.prices[e.ticker]?.data;
-        if (r) market[e.ticker] = { bars: r.bars, currency: r.currency, isEtf: true, taxClass: GOLD.test(`${e.name} ${e.fullName}`) ? "other" : "equityFund", decision: snap.scores[e.ticker]?.decision, score: snap.scores[e.ticker]?.score };
+        if (r) market[e.ticker] = { bars: r.bars, currency: r.currency, isEtf: true, taxClass: GOLD.test(`${e.name} ${e.fullName}`) ? "other" : "equityFund", decision: snap.scores[e.ticker]?.decision, score: snap.scores[e.ticker]?.score, moment: snap.scores[e.ticker]?.timing?.moment };
         options.push({ ticker: e.ticker, label: `${e.name ?? e.ticker} (${e.ticker})`, group: "Mes ETF" });
       }
       for (const s of watchlist.stocks) {
         const r = snap.prices[s.ticker]?.data;
-        if (r) market[s.ticker] = { bars: r.bars, currency: r.currency, taxClass: "stock", decision: snap.scores[s.ticker]?.decision, score: snap.scores[s.ticker]?.score };
+        if (r) market[s.ticker] = { bars: r.bars, currency: r.currency, taxClass: "stock", decision: snap.scores[s.ticker]?.decision, score: snap.scores[s.ticker]?.score, moment: snap.scores[s.ticker]?.timing?.moment };
         options.push({ ticker: s.ticker, label: `${s.ticker} · ${s.sector ?? ""}`, group: "Actions suivies" });
       }
       for (const d of [...(snap.discoveries?.data?.stocks ?? []), ...(snap.discoveries?.data?.etfs ?? [])]) {
         if (market[d.ticker]) continue;
         // Cours actualisé s'il a été récupéré par « Actualiser », sinon l'historique des découvertes.
         const fresh = snap.prices[d.ticker]?.data;
-        market[d.ticker] = { bars: fresh?.bars ?? d.history, currency: fresh?.currency ?? d.currency, isEtf: d.type === "etf", taxClass: d.type === "etf" ? (GOLD.test(d.name) ? "other" : "equityFund") : "stock", decision: snap.scores[d.ticker]?.decision ?? d.decision, score: snap.scores[d.ticker]?.score ?? d.score };
+        market[d.ticker] = { bars: fresh?.bars ?? d.history, currency: fresh?.currency ?? d.currency, isEtf: d.type === "etf", taxClass: d.type === "etf" ? (GOLD.test(d.name) ? "other" : "equityFund") : "stock", decision: snap.scores[d.ticker]?.decision ?? d.decision, score: snap.scores[d.ticker]?.score ?? d.score, moment: snap.scores[d.ticker]?.timing?.moment };
         options.push({ ticker: d.ticker, label: `${d.name} (${d.ticker})`, group: "Découvertes du jour" });
       }
     }

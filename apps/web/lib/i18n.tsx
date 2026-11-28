@@ -19,6 +19,7 @@ const fr = {
   tipMa: "Moyenne mobile (MM) : moyenne des cours de clôture sur N jours. Un cours au-dessus de sa MM200 indique une tendance de fond haussière.",
   tipRsi: "RSI (14) : force des hausses récentes, de 0 à 100. Au-dessus de 70 : surachat (risque de repli) ; sous 30 : survente.",
   tipScore: "Score de 0 à 100 : somme pondérée de 6 facteurs (tendance, momentum, force relative, risque, actualité, contexte). ≥ 65 Acheter, < 40 Vendre (seulement sous la MM200).",
+  tipTiming: "Quand entrer : « Bon moment » si le marché a peur (indice ≤ 25) ou si la valeur est survendue (RSI < 30) ; « Très étiré » si le cours dépasse sa MM200 de plus de 50 % (hausse souvent continue, mais risque de forte chute doublé). Mesuré sur 10 ans et 63 valeurs (page Fiabilité).",
   tipBacktest: "Backtest : on rejoue la règle du score sur les années passées et on compare à un simple achat-conservation, frais compris.",
 };
 type Dict = typeof fr;
@@ -36,6 +37,7 @@ const en: Dict = {
   tipMa: "Moving average (MA): average closing price over N days. A price above its 200-day MA signals a long-term uptrend.",
   tipRsi: "RSI (14): strength of recent gains, 0 to 100. Above 70: overbought (pullback risk); below 30: oversold.",
   tipScore: "Score 0–100: weighted sum of 6 factors (trend, momentum, relative strength, risk, news, context). ≥ 65 Buy, < 40 Sell (only below the 200-day MA).",
+  tipTiming: "When to enter: “Good time” when the market is fearful (index ≤ 25) or the asset is oversold (RSI < 30); “Very stretched” when the price is more than 50 % above its 200-day MA (gains often continue, but the risk of a sharp drop doubles). Measured over 10 years and 63 assets (Reliability page).",
   tipBacktest: "Backtest: the score rule is replayed over past years and compared with plain buy-and-hold, fees included.",
 };
 
@@ -52,6 +54,7 @@ const de: Dict = {
   tipMa: "Gleitender Durchschnitt (GD): Durchschnitt der Schlusskurse über N Tage. Kurs über dem GD200 = langfristiger Aufwärtstrend.",
   tipRsi: "RSI (14): Stärke der jüngsten Anstiege, 0 bis 100. Über 70: überkauft (Rücksetzerrisiko); unter 30: überverkauft.",
   tipScore: "Score 0–100: gewichtete Summe aus 6 Faktoren (Trend, Momentum, relative Stärke, Risiko, Nachrichten, Umfeld). ≥ 65 Kaufen, < 40 Verkaufen (nur unter GD200).",
+  tipTiming: "Einstiegszeitpunkt: „Guter Moment“ bei Angst am Markt (Index ≤ 25) oder überverkauftem Wert (RSI < 30); „Stark gedehnt“, wenn der Kurs mehr als 50 % über dem GD200 liegt (Anstieg hält oft an, aber doppeltes Risiko eines starken Rückgangs). Gemessen über 10 Jahre und 63 Werte (Seite Zuverlässigkeit).",
   tipBacktest: "Backtest: Die Score-Regel wird über vergangene Jahre nachgespielt und mit einfachem Kaufen-und-Halten verglichen, inkl. Gebühren.",
 };
 

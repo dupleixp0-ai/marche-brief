@@ -14,6 +14,7 @@ function load<T>(rel: string, fallback: T): T {
 export default function Home() {
   const data: DashboardData = {
     backtest: load("data/backtest.json", null),
+    timing: load("data/timing.json", null),
     watchlist: load("config/watchlist.json", { stocks: [], etfs: [] }),
     events: load<{ events: DashboardData["events"] }>("config/events.json", { events: [] }).events,
   };

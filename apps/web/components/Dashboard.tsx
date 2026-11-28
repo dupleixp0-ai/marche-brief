@@ -256,7 +256,7 @@ function Inner({ data, snap, setSnap }: { data: DashboardData; snap: Snapshot | 
         const base = published.current ?? snap;
         const watch = [...data.watchlist.etfs, ...data.watchlist.stocks].map((v) => v.ticker);
         const symbols = [...new Set([...watch, ...heldTickers()])];
-        const next = await collectSnapshot(symbols, base, { quotesOnly: true, delayMs: 0, concurrency: 4 });
+        const next = await collectSnapshot(symbols, base, { quotesOnly: true, delayMs: 0, concurrency: 4, timingStats: data.timing?.stats });
         const ok = Object.values(next.prices).filter((p) => p.status === "ok").length;
         if (!ok) throw new Error("aucun cours récupéré");
         lastLive.current = Date.now();
@@ -537,11 +537,35 @@ function Inner({ data, snap, setSnap }: { data: DashboardData; snap: Snapshot | 
                 </tbody>
               </table>
               <p className="mt-2 text-[10px] text-slate-500">
-                Période {bt.results[0]?.from} → {bt.results[0]?.to} · frais 0,1 % · actualité exclue · vente seulement sous la MM200 · calculé le {fmtDateTime(bt.generatedAt)}
+                Période {bt.results[0]?.from} → {bt.results[0]?.to} · frais 0,1 % · actualité exclue · règles v2 (vente sur baisse confirmée) · calculé le {fmtDateTime(bt.generatedAt)}
               </p>
             </div>
           ) : <p className="text-sm">Pas de backtest.</p>}
         </Panel>
+        {data.timing && (
+          <Panel title={<>Moment d&apos;entrée<InfoTip k="tipTiming" /></>}>
+            <p className="text-sm">Ce qui s&apos;est passé <b>3 mois après</b> chaque signal, sur {data.timing.assets} actions et ETF ({data.timing.from.slice(0, 4)}–{data.timing.to.slice(0, 4)}).</p>
+            <table className="mt-3 w-full text-xs tabular-nums">
+              <thead className="text-slate-500"><tr><th className="text-left">Signal</th><th className="text-right">Rendement moyen</th><th className="text-right">En hausse</th><th className="text-right">Chute &gt; 15 %</th></tr></thead>
+              <tbody>
+                {([["favorable", "Bon moment pour entrer"], ["neutre", "Neutre"], ["etire", "Très étiré"], ["all", "Tous les jours (référence)"]] as const).map(([k, l]) => {
+                  const x = data.timing!.stats[k];
+                  const halves = data.timing!.halves.map((h) => h[k]);
+                  return x ? (
+                    <tr key={k} className="border-b border-slate-100 dark:border-slate-800">
+                      <td className="py-1.5">{l}<span className="block text-[10px] text-slate-500">1re / 2e moitié : {halves.map((h) => (h ? fmtRatio(h.avg63) : "—")).join(" / ")}</span></td>
+                      <td className={`text-right font-semibold ${k === "favorable" ? "text-green-600" : ""}`}>{fmtRatio(x.avg63)}</td>
+                      <td className="text-right">{Math.round(x.hit63 * 100)} %</td>
+                      <td className={`text-right ${k === "etire" ? "text-amber-600 font-semibold" : ""}`}>{x.loss15 != null ? `${Math.round(x.loss15 * 100)} %` : "—"}</td>
+                    </tr>
+                  ) : null;
+                })}
+              </tbody>
+            </table>
+            <p className="mt-2 text-xs">Lecture : acheter quand le marché a peur ou quand une valeur est survendue a nettement mieux réussi, sur les deux moitiés de la période. Une valeur très étirée a souvent continué de monter, mais le risque d&apos;une forte chute était environ deux fois plus élevé. Ce sont des moyennes, pas des garanties.</p>
+            <p className="mt-1 text-[10px] text-slate-500">Peur du marché : indice maison (VIX + S&amp;P 500), le seul calculable sur 10 ans · calculé le {fmtDateTime(data.timing.generatedAt)}</p>
+          </Panel>
+        )}
         <Panel title={t("trackRecord")}><TrackRecord /></Panel>
       </div>
     ),

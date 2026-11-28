@@ -1,26 +1,29 @@
-// API « Actualiser » : collecte à la demande avec les mêmes calculs que le job quotidien.
-// Protections : code d'accès, CORS limité, 5 requêtes/minute par IP, cache de 5 minutes.
-import Anthropic from "@anthropic-ai/sdk";
-import { collectSnapshot, withFallback, yahooIntradayFetcher, type Snapshot } from "@marche-brief/core";
-import watchlist from "../../../config/watchlist.json";
+// Relais « Actualiser » : le navigateur ne peut pas interroger directement Yahoo, CNN, Stooq ou FRED
+// (pas d'en-têtes CORS). Le Worker relaie ces requêtes ; tous les calculs (scores, marché, gains/pertes)
+// sont faits dans le navigateur avec le même code que le job quotidien (packages/core).
+// Aucune clé Claude ici : Claude ne sert qu'au brief du matin (GitHub Actions).
+// Protections : code d'accès, CORS limité au site, liste fermée de sources, limite par IP, cache de 5 minutes.
+import { USER_AGENT } from "@marche-brief/core";
 
 interface Env {
   ACCESS_CODE: string;
-  ANTHROPIC_API_KEY?: string;
-  FINNHUB_API_KEY?: string;
   ALLOWED_ORIGINS: string;
-  SNAPSHOT_URL?: string;
 }
 
 const CACHE_SECONDS = 300;
-const RATE_LIMIT = 5; // requêtes par minute et par IP (par instance du Worker)
+/** Une actualisation complète ≈ 30 requêtes : on laisse de la marge, sans permettre d'abus. */
+const RATE_LIMIT = 240; // requêtes par minute et par IP (par instance du Worker)
+/** Seules ces sources peuvent être relayées (pas de relais ouvert). */
+const ALLOWED_HOSTS = new Set([
+  "query1.finance.yahoo.com", "query2.finance.yahoo.com",
+  "production.dataviz.cnn.io", "stooq.com", "fred.stlouisfed.org",
+]);
 const hits = new Map<string, { n: number; t: number }>();
-const symbols = [...watchlist.etfs, ...watchlist.stocks].map((v) => v.ticker);
 
 function cors(origin: string | null, env: Env): Record<string, string> {
   const allowed = env.ALLOWED_ORIGINS.split(",").map((s) => s.trim());
   return origin && allowed.includes(origin)
-    ? { "Access-Control-Allow-Origin": origin, "Access-Control-Allow-Headers": "X-Access-Code", "Access-Control-Allow-Methods": "GET, POST, OPTIONS", Vary: "Origin" }
+    ? { "Access-Control-Allow-Origin": origin, "Access-Control-Allow-Headers": "X-Access-Code", "Access-Control-Allow-Methods": "GET, OPTIONS", "Access-Control-Max-Age": "86400", Vary: "Origin" }
     : {};
 }
 
@@ -42,12 +45,19 @@ function rateLimited(ip: string): boolean {
   return ++h.n > RATE_LIMIT;
 }
 
-async function previousSnapshot(env: Env): Promise<Snapshot | null> {
-  if (!env.SNAPSHOT_URL) return null;
-  try {
-    const r = await fetch(env.SNAPSHOT_URL, { cf: { cacheTtl: 300 } } as RequestInit);
-    return r.ok ? ((await r.json()) as Snapshot) : null;
-  } catch { return null; }
+/** Récupère `target` (cache de 5 minutes partagé : plusieurs « Actualiser » rapprochés ne multiplient pas les appels). */
+async function relay(target: URL, ctx: ExecutionContext): Promise<Response> {
+  const cache = caches.default;
+  const key = new Request(`https://cache.marketpulse/${encodeURIComponent(target.toString())}`);
+  const hit = await cache.match(key);
+  if (hit) return hit;
+  const res = await fetch(target.toString(), { headers: { "User-Agent": USER_AGENT, Accept: "*/*" } });
+  const out = new Response(res.body, {
+    status: res.status,
+    headers: { "Content-Type": res.headers.get("Content-Type") ?? "text/plain", "Cache-Control": `max-age=${CACHE_SECONDS}` },
+  });
+  if (res.ok) ctx.waitUntil(cache.put(key, out.clone()));
+  return out;
 }
 
 export default {
@@ -57,42 +67,22 @@ export default {
 
     if (req.method === "OPTIONS") return new Response(null, { status: h["Access-Control-Allow-Origin"] ? 204 : 403, headers: h });
     if (url.pathname === "/health") return json({ ok: true }, 200, h);
-    const isRefresh = url.pathname === "/refresh" && req.method === "POST";
-    const isIntraday = url.pathname === "/intraday" && req.method === "GET";
-    if (!isRefresh && !isIntraday) return json({ error: "Introuvable" }, 404, h);
+    const routes = ["/check", "/proxy"];
+    if (req.method !== "GET" || !routes.includes(url.pathname)) return json({ error: "Introuvable" }, 404, h);
 
     if (!h["Access-Control-Allow-Origin"] && req.headers.get("Origin")) return json({ error: "Origine non autorisée" }, 403, h);
     if (!env.ACCESS_CODE) return json({ error: "Worker non configuré (ACCESS_CODE manquant)" }, 500, h);
     if (!sameCode(req.headers.get("X-Access-Code") ?? "", env.ACCESS_CODE)) return json({ error: "Code d'accès invalide" }, 401, h);
     if (rateLimited(req.headers.get("CF-Connecting-IP") ?? "local")) return json({ error: "Trop de requêtes, réessayer dans une minute" }, 429, h);
 
-    // Cours intraday d'une valeur (graphiques 1 jour / 1 semaine), cache 5 minutes.
-    if (isIntraday) {
-      const symbol = url.searchParams.get("symbol") ?? "";
-      if (!/^[A-Za-z0-9.^=-]{1,15}$/.test(symbol)) return json({ error: "Symbole invalide" }, 400, h);
-      const cache = caches.default;
-      const key = new Request(`${url.origin}/__cache/intraday/${encodeURIComponent(symbol)}`);
-      const hit = await cache.match(key);
-      if (hit) return json(await hit.json(), 200, { ...h, "X-Cache": "HIT" });
-      const r = await withFallback([yahooIntradayFetcher(symbol)]);
-      if (r.data) ctx.waitUntil(cache.put(key, new Response(JSON.stringify(r), { headers: { "Cache-Control": `max-age=${CACHE_SECONDS}` } })));
-      return json(r, r.data ? 200 : 502, { ...h, "X-Cache": "MISS" });
-    }
+    // Vérification du code d'accès (avant une actualisation).
+    if (url.pathname === "/check") return json({ ok: true }, 200, h);
 
-    // Cache de 5 minutes : plusieurs « Actualiser » rapprochés ne relancent pas la collecte.
-    const cache = caches.default;
-    const key = new Request(`${url.origin}/__cache/snapshot`);
-    const hit = await cache.match(key);
-    if (hit) return json(await hit.json(), 200, { ...h, "X-Cache": "HIT" });
-
-    // Le résumé Claude n'est régénéré que si de nouvelles actualités sont arrivées (voir collectSnapshot).
-    const snap = await collectSnapshot(symbols, await previousSnapshot(env), {
-      delayMs: 100,
-      finnhubKey: env.FINNHUB_API_KEY,
-      companyNews: false, // limite de sous-requêtes du Worker : actualités par société via le job quotidien
-      anthropic: env.ANTHROPIC_API_KEY ? new Anthropic({ apiKey: env.ANTHROPIC_API_KEY }) : null,
-    });
-    ctx.waitUntil(cache.put(key, new Response(JSON.stringify(snap), { headers: { "Cache-Control": `max-age=${CACHE_SECONDS}` } })));
-    return json(snap, 200, { ...h, "X-Cache": "MISS" });
+    // Relais vers une source autorisée.
+    let target: URL;
+    try { target = new URL(url.searchParams.get("url") ?? ""); } catch { return json({ error: "URL invalide" }, 400, h); }
+    if (target.protocol !== "https:" || !ALLOWED_HOSTS.has(target.hostname)) return json({ error: "Source non autorisée" }, 403, h);
+    const res = await relay(target, ctx);
+    return new Response(res.body, { status: res.status, headers: { ...Object.fromEntries(res.headers), ...h } });
   },
 };

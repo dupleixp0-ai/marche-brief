@@ -54,6 +54,21 @@ export interface CollectOptions {
   universe?: Universe | null;
   /** Collecter l'intraday des valeurs suivies et des découvertes (job quotidien). */
   intraday?: boolean;
+  /**
+   * Actualisation des cours seulement (bouton « Actualiser ») : cours, marché, taux et scores.
+   * Actualités, brief Claude, découvertes et intraday du snapshot précédent sont conservés tels quels.
+   */
+  quotesOnly?: boolean;
+  /** Nombre de cours téléchargés en parallèle (1 = séquentiel, défaut). */
+  concurrency?: number;
+}
+
+/** Exécute `fn` sur chaque élément avec au plus `n` appels simultanés. */
+async function mapLimit<T>(items: T[], n: number, fn: (x: T) => Promise<void>): Promise<void> {
+  let i = 0;
+  await Promise.all(Array.from({ length: Math.max(1, Math.min(n, items.length)) }, async () => {
+    while (i < items.length) await fn(items[i++]);
+  }));
 }
 
 /** Calcule les scores de toutes les valeurs ; `previous` sert à l'hystérésis. */
@@ -99,7 +114,9 @@ export async function collectSnapshot(symbols: string[], previous?: Snapshot | n
       return homemadeFearGreed(v, spx.data.bars.map((b) => b.close));
     },
   };
-  const fearGreed = await withFallback([cnnFetcher(), homemade], previous?.market.fearGreed);
+  // Actualisation : si CNN refuse, on garde la valeur CNN du matin (marquée périmée) plutôt que l'indice maison.
+  const keepCnn = opt.quotesOnly && previous?.market?.fearGreed?.data;
+  const fearGreed = await withFallback(keepCnn ? [cnnFetcher()] : [cnnFetcher(), homemade], previous?.market.fearGreed);
 
   const fx: Snapshot["fx"] = {};
   for (const c of FX_CURRENCIES) {
@@ -110,16 +127,17 @@ export async function collectSnapshot(symbols: string[], previous?: Snapshot | n
 
   const prices: Snapshot["prices"] = {};
   // Séquentiel avec petite pause : évite de saturer les sources gratuites.
-  for (const s of symbols) {
+  await mapLimit(symbols, opt.concurrency ?? 1, async (s) => {
     prices[s] = await withFallback([yahooFetcher(s, "2y"), stooqFetcher(s)], previous?.prices[s]);
     if (delayMs) await new Promise((r) => setTimeout(r, delayMs));
-  }
+  });
 
   const market = { vix, spx, fearGreed };
   const now = new Date();
 
   // Actualités, puis brief Claude régénéré seulement si de nouvelles actualités sont arrivées.
-  const news = await collectNews(symbols, { finnhubKey: opt.finnhubKey, companyNews: opt.companyNews, previous: previous?.news, now });
+  const keep = opt.quotesOnly && previous;
+  const news = keep ? previous.news : await collectNews(symbols, { finnhubKey: opt.finnhubKey, companyNews: opt.companyNews, previous: previous?.news, now });
   const baseScores = scoreSnapshot(market, prices, previous, {}, fx);
   // Contexte chiffré pour Claude : mêmes phrases que « Le point du jour » (marché, nervosité, tendance).
   const spxC = spx.data?.bars.map((b) => b.close) ?? [], vixC = vix.data?.bars.map((b) => b.close) ?? [];
@@ -127,7 +145,7 @@ export async function collectSnapshot(symbols: string[], previous?: Snapshot | n
     spx: spx.data?.bars ?? [], vix: vix.data?.bars ?? [], fearGreed: fearGreed.data, marketNote: null, etfs: [], stocks: [],
     outlook: marketOutlook({ spxCloses: spxC, vixCloses: vixC, fearGreed: fearGreed.data?.value ?? null }),
   }).map((p) => `- ${p.text}`).join("\n");
-  const brief = await makeBrief(news, baseScores, previous?.brief, opt, now, context);
+  const brief = keep ? previous.brief : await makeBrief(news, baseScores, previous?.brief, opt, now, context);
   const scores = scoreSnapshot(market, prices, previous, brief.data?.sentiments ?? {}, fx);
 
   const discoveries = opt.universe

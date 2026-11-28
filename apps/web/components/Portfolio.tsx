@@ -21,6 +21,9 @@ const GOLD = /gold|or physique/i;
 let memo: { session: Session; data: VaultData } | null = null;
 let hiddenAt = 0;
 
+/** Symboles détenus (coffre déverrouillé seulement) : « Actualiser » récupère aussi leurs cours. */
+export const heldTickers = (): string[] => memo?.data.holdings.map((h) => h.ticker) ?? [];
+
 const READ_CLS: Record<Reading, string> = {
   Renforcer: "bg-green-600 text-white", Conserver: "bg-slate-500 text-white", Alléger: "bg-amber-500 text-white",
 };
@@ -131,7 +134,9 @@ function Unlocked({ snap, watchlist, onOpen, state, onChange, onLock }: {
       }
       for (const d of [...(snap.discoveries?.data?.stocks ?? []), ...(snap.discoveries?.data?.etfs ?? [])]) {
         if (market[d.ticker]) continue;
-        market[d.ticker] = { bars: d.history, currency: d.currency, isEtf: d.type === "etf", taxClass: d.type === "etf" ? (GOLD.test(d.name) ? "other" : "equityFund") : "stock", decision: d.decision, score: d.score };
+        // Cours actualisé s'il a été récupéré par « Actualiser », sinon l'historique des découvertes.
+        const fresh = snap.prices[d.ticker]?.data;
+        market[d.ticker] = { bars: fresh?.bars ?? d.history, currency: fresh?.currency ?? d.currency, isEtf: d.type === "etf", taxClass: d.type === "etf" ? (GOLD.test(d.name) ? "other" : "equityFund") : "stock", decision: snap.scores[d.ticker]?.decision ?? d.decision, score: snap.scores[d.ticker]?.score ?? d.score };
         options.push({ ticker: d.ticker, label: `${d.name} (${d.ticker})`, group: "Découvertes du jour" });
       }
     }

@@ -35,11 +35,11 @@ GitHub Pages ne sert que des fichiers statiques : il ne peut pas lancer de calcu
 ```
 ┌──────────────────────────┐        ┌────────────────────────────┐
 │ GitHub Actions (cron)    │        │ Cloudflare Worker (gratuit) │
-│ lun.–ven. à 9h15         │        │ API « Actualiser »          │
-│ - collecte les données   │        │ - collecte à la demande     │
-│ - calcule les scores     │        │ - calcule les scores        │
+│ lun.–ven. à 9h15         │        │ Relais « Actualiser »       │
+│ - collecte les données   │        │ - Yahoo, CNN, Stooq, FRED   │
+│ - calcule les scores     │        │ - code d'accès, CORS        │
 │ - résumé Claude          │        │ - cache 5 min               │
-│ - écrit data/snapshot.json│       │ - clés API cachées ici      │
+│ - écrit data/snapshot.json│       │ - aucune clé Claude         │
 │ - envoie l'e-mail        │        └──────────────▲─────────────┘
 │ - redéploie Pages        │                       │ fetch (bouton)
 └────────────┬─────────────┘                       │
@@ -55,7 +55,7 @@ GitHub Pages ne sert que des fichiers statiques : il ne peut pas lancer de calcu
 Pourquoi ce découpage :
 
 - Le **snapshot du matin** garantit que le dashboard s'affiche toujours, même si une source de données est en panne.
-- Le **Worker** permet l'actualisation à la demande **sans exposer de clé secrète** dans la page publique.
+- Le **Worker** est un relais léger (le navigateur ne peut pas appeler Yahoo ou CNN directement) : « Actualiser » récupère les cours actuels et le navigateur recalcule scores, marché et gains/pertes avec `packages/core`. Claude n'est appelé que par le job du matin (brief), jamais par « Actualiser ».
 - La **logique de calcul** (score, indicateurs) est écrite **une seule fois** dans un package TypeScript partagé (`packages/core`), utilisé par l'Action et par le Worker. Les deux donnent ainsi les mêmes résultats.
 
 ### Stack

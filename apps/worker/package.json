@@ -8,8 +8,7 @@
     "deploy": "wrangler deploy"
   },
   "dependencies": {
-    "@marche-brief/core": "*",
-    "@anthropic-ai/sdk": "^1.14.0"
+    "@marche-brief/core": "*"
   },
   "devDependencies": {
     "wrangler": "^4.0.0",

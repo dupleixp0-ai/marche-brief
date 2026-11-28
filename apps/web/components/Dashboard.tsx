@@ -1,6 +1,6 @@
 "use client";
-import { useCallback, useEffect, useMemo, useState, type ReactNode } from "react";
-import { dailyChangePct, dailyPoint, marketOutlook, type PointBullet, type Tone, marketSummary, ratesFrom, smaSeries, DISPLAY_CURRENCIES, type Discovery, type DisplayCurrency, type IntradaySeries, type Snapshot } from "@marche-brief/core";
+import { useCallback, useEffect, useMemo, useRef, useState, type ReactNode } from "react";
+import { collectSnapshot, setHttpRoute, withFallback, yahooIntradayFetcher, dailyChangePct, dailyPoint, marketOutlook, type PointBullet, type Tone, marketSummary, ratesFrom, smaSeries, DISPLAY_CURRENCIES, type Discovery, type DisplayCurrency, type IntradaySeries, type Snapshot } from "@marche-brief/core";
 import type { DashboardData, WatchItem } from "../lib/types";
 import { AssetCard } from "./AssetCard";
 import { InfoTip } from "./InfoTip";
@@ -9,7 +9,7 @@ import { TrackRecord } from "./TrackRecord";
 import { useI18n, type Lang, type TKey } from "../lib/i18n";
 import { usePullToRefresh } from "../lib/usePullToRefresh";
 import { DiscoveriesSection } from "./Discoveries";
-import { PortfolioView } from "./Portfolio";
+import { PortfolioView, heldTickers } from "./Portfolio";
 import { DetailSheet, type DetailTarget } from "./DetailSheet";
 import { FearGreedGauge } from "./FearGreedGauge";
 import { PriceChart } from "./PriceChart";
@@ -210,10 +210,12 @@ function Inner({ data, snap, setSnap }: { data: DashboardData; snap: Snapshot | 
   }, []);
   const setView = (v: View) => { location.hash = v; setViewState(v); window.scrollTo({ top: 0 }); };
 
+  // Snapshot publié (job du matin) : référence pour l'hystérésis des scores lors des actualisations.
+  const published = useRef<Snapshot | null>(null);
   useEffect(() => {
     fetch(`${BASE}/data/snapshot.json`)
       .then((r) => (r.ok ? r.json() : Promise.reject(new Error(`HTTP ${r.status}`))))
-      .then(setSnap)
+      .then((s: Snapshot) => { published.current = s; setSnap(s); })
       .catch((e) => setError(`Données indisponibles (${e instanceof Error ? e.message : e}).`))
       .finally(() => setLoading(false));
   }, [setSnap]);
@@ -228,19 +230,35 @@ function Inner({ data, snap, setSnap }: { data: DashboardData; snap: Snapshot | 
     return code;
   };
 
-  // Actualiser : Worker (collecte à la demande) s'il est configuré, sinon relecture du snapshot publié.
+  // Les sources (Yahoo, CNN…) passent par le relais du Worker : le navigateur ne peut pas les appeler directement.
+  const connectRelay = async () => {
+    const code = accessCode();
+    const res = await fetch(`${WORKER}/check`, { headers: { "X-Access-Code": code } });
+    if (res.status === 401) { localStorage.removeItem(CODE_KEY); throw new Error("code d'accès invalide"); }
+    if (!res.ok) throw new Error(((await res.json().catch(() => null)) as { error?: string } | null)?.error ?? `HTTP ${res.status}`);
+    setHttpRoute((u) => ({ url: `${WORKER}/proxy?url=${encodeURIComponent(u)}`, headers: { "X-Access-Code": code } }));
+  };
+
+  // Actualiser : cours actuels, VIX, Fear & Greed et scores recalculés dans le navigateur (sans Claude :
+  // le brief du matin est conservé). Sans Worker configuré : relecture du snapshot publié.
   async function refresh() {
     setLoading(true); setError(null);
     try {
       if (WORKER) {
-        const res = await fetch(`${WORKER}/refresh`, { method: "POST", headers: { "X-Access-Code": accessCode() } });
-        if (res.status === 401) localStorage.removeItem(CODE_KEY);
-        if (!res.ok) throw new Error(((await res.json().catch(() => null)) as { error?: string } | null)?.error ?? `HTTP ${res.status}`);
-        setSnap(await res.json());
+        await connectRelay();
+        const base = published.current ?? snap;
+        const watch = [...data.watchlist.etfs, ...data.watchlist.stocks].map((v) => v.ticker);
+        const symbols = [...new Set([...watch, ...heldTickers()])];
+        const next = await collectSnapshot(symbols, base, { quotesOnly: true, delayMs: 0, concurrency: 4 });
+        const ok = Object.values(next.prices).filter((p) => p.status === "ok").length;
+        if (!ok) throw new Error("aucun cours récupéré");
+        setSnap(next);
       } else {
         const res = await fetch(`${BASE}/data/snapshot.json?t=${Date.now()}`);
         if (!res.ok) throw new Error(`HTTP ${res.status}`);
-        setSnap(await res.json());
+        const s = (await res.json()) as Snapshot;
+        published.current = s;
+        setSnap(s);
       }
     } catch (e) {
       setError(`Échec de l'actualisation (${e instanceof Error ? e.message : e}). Ancien contenu conservé.`);
@@ -248,13 +266,12 @@ function Inner({ data, snap, setSnap }: { data: DashboardData; snap: Snapshot | 
       setLoading(false);
     }
   }
-  const pull = usePullToRefresh(() => { if (!loading) refresh(); });
+  const pull = usePullToRefresh(refresh);
 
   const loadIntraday = useCallback(async (symbol: string): Promise<IntradaySeries> => {
-    const res = await fetch(`${WORKER}/intraday?symbol=${encodeURIComponent(symbol)}`, { headers: { "X-Access-Code": accessCode() } });
-    if (!res.ok) throw new Error(`HTTP ${res.status}`);
-    const r = (await res.json()) as { data: IntradaySeries | null };
-    if (!r.data) throw new Error("vide");
+    await connectRelay();
+    const r = await withFallback([yahooIntradayFetcher(symbol)]);
+    if (!r.data) throw new Error(r.error ?? "vide");
     return r.data;
   }, []);
 

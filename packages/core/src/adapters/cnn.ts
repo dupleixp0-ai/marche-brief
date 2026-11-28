@@ -8,7 +8,15 @@ export function parseCnnFearGreed(json: string): FearGreed {
   const fg = JSON.parse(json)?.fear_and_greed;
   const value = Number(fg?.score);
   if (!Number.isFinite(value)) throw new Error("score CNN absent");
-  return { value: Math.round(value), label: fearGreedLabel(value), homemade: false };
+  // Historique (≈ 1 an) : fear_and_greed_historical.data = [{ x: horodatage ms, y: score }].
+  const raw: unknown[] = JSON.parse(json)?.fear_and_greed_historical?.data ?? [];
+  const byDate = new Map<string, number>();
+  for (const p of raw as { x?: number; y?: number }[]) {
+    if (typeof p?.x !== "number" || typeof p?.y !== "number") continue;
+    byDate.set(new Date(p.x).toISOString().slice(0, 10), Math.round(p.y)); // dernière valeur du jour
+  }
+  const history = [...byDate].map(([date, v]) => ({ date, value: v })).sort((a, b) => a.date.localeCompare(b.date));
+  return { value: Math.round(value), label: fearGreedLabel(value), homemade: false, ...(history.length ? { history } : {}) };
 }
 
 export function fearGreedLabel(v: number): string {

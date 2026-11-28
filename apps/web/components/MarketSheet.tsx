@@ -1,6 +1,6 @@
 "use client";
 import { useEffect, useMemo, useState, type ReactNode } from "react";
-import { lastSession, seriesStats, smaSeries, type Bar, type IntradaySeries, type Outlook, type Signal, type Snapshot, changeBetween } from "@marche-brief/core";
+import { fearGreedLabel, fearGreedLookback, lastSession, seriesStats, smaSeries, type Bar, type IntradaySeries, type Outlook, type Signal, type Snapshot, changeBetween } from "@marche-brief/core";
 import { PriceChart, type Line } from "./PriceChart";
 import { FearGreedGauge } from "./FearGreedGauge";
 import { StatusBadge } from "./Badges";
@@ -128,6 +128,7 @@ export function MarketSheet({ kind, snap, outlook, onClose, loadIntraday }: {
                 <div key={r} className={`rounded-lg p-1.5 text-white ${c}`}><b>{r}</b><br />{l}</div>
               ))}
             </div>
+            {fg.data?.history?.length ? <FgHistory history={fg.data.history} homemade={!!fg.data.historyHomemade} /> : null}
           </>
         ) : (
           <>
@@ -208,6 +209,53 @@ export function MarketSheet({ kind, snap, outlook, onClose, loadIntraday }: {
           )}
         </div>
       </div>
+    </div>
+  );
+}
+
+// ---------- Historique du Fear & Greed ----------
+const FG_RANGES = { "1S": 5, "1M": 21, "3M": 63, "6M": 126, "1A": 252 } as const;
+type FgRange = keyof typeof FG_RANGES;
+const fgColor = (v: number) => (v < 25 ? "text-red-600" : v < 45 ? "text-orange-500" : v <= 55 ? "text-slate-500" : v <= 75 ? "text-lime-600" : "text-green-600");
+
+function FgHistory({ history, homemade }: { history: { date: string; value: number }[]; homemade: boolean }) {
+  const [range, setRange] = useState<FgRange>("3M");
+  const data = history.slice(-(FG_RANGES[range] + 1)).map((p) => ({ time: p.date, value: p.value }));
+  const flat = (v: number) => data.map((p) => ({ time: p.time, value: v }));
+  const lines: Line[] = [
+    { label: "Fear & Greed", color: "#7c3aed", data, area: true },
+    { label: "Peur (25)", color: "#dc2626", data: flat(25), width: 1 },
+    { label: "Avidité (75)", color: "#16a34a", data: flat(75), width: 1 },
+  ];
+  const marks = fearGreedLookback(history);
+  const lo = Math.min(...data.map((p) => p.value)), hi = Math.max(...data.map((p) => p.value));
+  return (
+    <div className="mt-4">
+      <div className="flex flex-wrap items-center justify-between gap-2">
+        <h3 className="text-sm font-semibold">Évolution</h3>
+        <div className="flex gap-1 rounded-full bg-slate-100 p-1 dark:bg-slate-800">
+          {(Object.keys(FG_RANGES) as FgRange[]).map((k) => (
+            <button key={k} onClick={() => setRange(k)} className={`rounded-full px-2.5 py-1 text-xs font-semibold ${range === k ? "bg-white shadow dark:bg-slate-700" : "text-slate-500"}`}>{k}</button>
+          ))}
+        </div>
+      </div>
+      <div className="mt-2"><PriceChart lines={lines} height={200} /></div>
+      <p className="mt-1 text-[10px] text-slate-500">
+        Sous 25 : peur extrême · au-dessus de 75 : avidité extrême
+        {data.length ? ` · sur la période : plus bas ${lo}, plus haut ${hi}` : ""} · une valeur par jour, du {data[0]?.time} au {data.at(-1)?.time}
+        {homemade ? " · historique calculé avec l'indice maison (VIX + tendance du S&P 500), CNN ne l'a pas fourni" : " · source CNN"}
+      </p>
+      {marks.length > 0 && (
+        <div className="mt-3 grid grid-cols-3 gap-2 sm:grid-cols-6">
+          {marks.map((m) => (
+            <div key={m.label} className="rounded-xl bg-slate-100 p-2 text-center dark:bg-slate-800">
+              <p className="text-[10px] uppercase tracking-wide text-slate-500">{m.label}</p>
+              <p className={`text-lg font-bold tabular-nums ${fgColor(m.value)}`}>{m.value}</p>
+              <p className="text-[10px] text-slate-500">{fearGreedLabel(m.value)} · {m.date.slice(8, 10)}/{m.date.slice(5, 7)}</p>
+            </div>
+          ))}
+        </div>
+      )}
     </div>
   );
 }

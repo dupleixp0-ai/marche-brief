@@ -52,3 +52,34 @@ describe("CNN", () => {
     expect(fearGreedLabel(90)).toBe("Avidité extrême");
   });
 });
+
+describe("historique Fear & Greed", () => {
+  it("CNN : une valeur par jour, triée, arrondie", async () => {
+    const { parseCnnFearGreed } = await import("./cnn");
+    const json = JSON.stringify({
+      fear_and_greed: { score: 18.4 },
+      fear_and_greed_historical: { data: [
+        { x: Date.parse("2026-11-26T21:00:00Z"), y: 15.2 },
+        { x: Date.parse("2026-11-25T10:00:00Z"), y: 30.1 },
+        { x: Date.parse("2026-11-25T21:00:00Z"), y: 28.6 },
+      ] },
+    });
+    expect(parseCnnFearGreed(json).history).toEqual([{ date: "2026-11-25", value: 29 }, { date: "2026-11-26", value: 15 }]);
+  });
+  it("indice maison : calculé jour par jour sur les dates communes", async () => {
+    const { homemadeFearGreedHistory } = await import("../indicators/fearGreed");
+    const spx = Array.from({ length: 200 }, (_, i) => ({ date: `D${String(i).padStart(3, "0")}`, close: 100 + i }));
+    const vix = spx.map((b) => ({ date: b.date, close: 15 }));
+    const h = homemadeFearGreedHistory(vix, spx);
+    expect(h).toHaveLength(75); // à partir de la 125e séance (MM125 disponible)
+    expect(h.at(-1)!.value).toBeGreaterThan(50); // VIX bas et tendance haussière → avidité
+  });
+});
+
+describe("repères Fear & Greed", () => {
+  it("veille et 1 semaine seulement si l'historique est court", async () => {
+    const { fearGreedLookback } = await import("../indicators/fearGreed");
+    const h = Array.from({ length: 10 }, (_, i) => ({ date: `2026-11-${String(i + 10)}`, value: i * 10 }));
+    expect(fearGreedLookback(h)).toEqual([{ label: "Veille", date: "2026-11-18", value: 80 }, { label: "1 semaine", date: "2026-11-14", value: 40 }]);
+  });
+});

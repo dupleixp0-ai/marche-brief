@@ -45,6 +45,10 @@ export interface FearGreed {
   label: string;
   /** true si calculé par l'indice maison (secours). */
   homemade: boolean;
+  /** Valeurs passées, une par jour (la plus ancienne en premier). */
+  history?: { date: string; value: number }[];
+  /** true si l'historique vient de l'indice maison (CNN ne l'a pas fourni). */
+  historyHomemade?: boolean;
 }
 
 /** Une source nommée : renvoie la donnée ou lève une erreur. */

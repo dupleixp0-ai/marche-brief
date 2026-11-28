@@ -3,7 +3,7 @@ import { yahooFetcher } from "./adapters/yahoo";
 import { stooqFetcher } from "./adapters/stooq";
 import { fredFetcher } from "./adapters/fred";
 import { cnnFetcher } from "./adapters/cnn";
-import { homemadeFearGreed } from "./indicators/fearGreed";
+import { homemadeFearGreed, homemadeFearGreedHistory } from "./indicators/fearGreed";
 import type { FearGreed, PriceSeries, SourceResult } from "./types";
 import { scoreAsset, type ScoreResult } from "./scoring/score";
 import { alignTo } from "./backtest/backtest";
@@ -118,6 +118,10 @@ export async function collectSnapshot(symbols: string[], previous?: Snapshot | n
   // Actualisation : si CNN refuse, on garde la valeur CNN du matin (marquée périmée) plutôt que l'indice maison.
   const keepCnn = opt.quotesOnly && previous?.market?.fearGreed?.data;
   const fearGreed = await withFallback(keepCnn ? [cnnFetcher()] : [cnnFetcher(), homemade], previous?.market.fearGreed);
+  // Sans historique CNN : historique calculé avec l'indice maison (signalé comme tel).
+  if (fearGreed.data && !fearGreed.data.history?.length && vix.data && spx.data) {
+    fearGreed.data = { ...fearGreed.data, history: homemadeFearGreedHistory(vix.data.bars, spx.data.bars), historyHomemade: true };
+  }
 
   const fx: Snapshot["fx"] = {};
   for (const c of FX_CURRENCIES) {

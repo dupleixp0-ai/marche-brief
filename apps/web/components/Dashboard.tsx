@@ -277,8 +277,8 @@ function Inner({ data, snap, setSnap }: { data: DashboardData; snap: Snapshot | 
   }
   const pull = usePullToRefresh(refresh);
 
-  // Onglet Perso : cours actualisés automatiquement à l'ouverture (et au retour dans l'app)
-  // s'ils datent de plus de 5 minutes, ou si une valeur détenue n'a pas encore de cours.
+  // Cours actualisés automatiquement à l'ouverture de l'app et au retour dans l'app s'ils datent
+  // de plus de 5 minutes (et au déverrouillage de Perso si une valeur détenue n'a pas encore de cours).
   // Seulement si le code d'accès est déjà mémorisé (aucune fenêtre ne s'ouvre d'elle-même).
   const refreshRef = useRef(refresh);
   refreshRef.current = refresh;
@@ -287,12 +287,12 @@ function Inner({ data, snap, setSnap }: { data: DashboardData; snap: Snapshot | 
     if (force || Date.now() - lastLive.current > AUTO_REFRESH_MS) refreshRef.current();
   }, []);
   useEffect(() => {
-    if (view !== "portfolio" || loading && !snap) return;
+    if (!snap) return;
     autoRefresh();
     const onVis = () => { if (!document.hidden) autoRefresh(); };
     document.addEventListener("visibilitychange", onVis);
     return () => document.removeEventListener("visibilitychange", onVis);
-  }, [view, !!snap, autoRefresh]); // eslint-disable-line react-hooks/exhaustive-deps
+  }, [!!snap, autoRefresh]); // eslint-disable-line react-hooks/exhaustive-deps
 
   const loadIntraday = useCallback(async (symbol: string): Promise<IntradaySeries> => {
     await connectRelay();

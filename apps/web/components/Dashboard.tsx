@@ -23,6 +23,7 @@ import { fmtChange, fmtDateTime, fmtNum, fmtPct, fmtQuote, fmtRatio, fmtSignedAm
 const BASE = process.env.NEXT_PUBLIC_BASE_PATH ?? "";
 const WORKER = process.env.NEXT_PUBLIC_WORKER_URL ?? "";
 const CODE_KEY = "marche-brief:code";
+const AUTO_REFRESH_MS = 5 * 60_000;
 
 export const APP_NAME = "MarketPulse";
 
@@ -243,7 +244,11 @@ function Inner({ data, snap, setSnap }: { data: DashboardData; snap: Snapshot | 
 
   // Actualiser : cours actuels, VIX, Fear & Greed et scores recalculés dans le navigateur (sans Claude :
   // le brief du matin est conservé). Sans Worker configuré : relecture du snapshot publié.
+  const busy = useRef(false);
+  const lastLive = useRef(0); // heure de la dernière actualisation des cours via le Worker
   async function refresh() {
+    if (busy.current) return;
+    busy.current = true;
     setLoading(true); setError(null);
     try {
       if (WORKER) {
@@ -254,6 +259,7 @@ function Inner({ data, snap, setSnap }: { data: DashboardData; snap: Snapshot | 
         const next = await collectSnapshot(symbols, base, { quotesOnly: true, delayMs: 0, concurrency: 4 });
         const ok = Object.values(next.prices).filter((p) => p.status === "ok").length;
         if (!ok) throw new Error("aucun cours récupéré");
+        lastLive.current = Date.now();
         setSnap(next);
       } else {
         const res = await fetch(`${BASE}/data/snapshot.json?t=${Date.now()}`);
@@ -265,10 +271,28 @@ function Inner({ data, snap, setSnap }: { data: DashboardData; snap: Snapshot | 
     } catch (e) {
       setError(`Échec de l'actualisation (${e instanceof Error ? e.message : e}). Ancien contenu conservé.`);
     } finally {
+      busy.current = false;
       setLoading(false);
     }
   }
   const pull = usePullToRefresh(refresh);
+
+  // Onglet Perso : cours actualisés automatiquement à l'ouverture (et au retour dans l'app)
+  // s'ils datent de plus de 5 minutes, ou si une valeur détenue n'a pas encore de cours.
+  // Seulement si le code d'accès est déjà mémorisé (aucune fenêtre ne s'ouvre d'elle-même).
+  const refreshRef = useRef(refresh);
+  refreshRef.current = refresh;
+  const autoRefresh = useCallback((force = false) => {
+    if (!WORKER || !localStorage.getItem(CODE_KEY) || busy.current) return;
+    if (force || Date.now() - lastLive.current > AUTO_REFRESH_MS) refreshRef.current();
+  }, []);
+  useEffect(() => {
+    if (view !== "portfolio" || loading && !snap) return;
+    autoRefresh();
+    const onVis = () => { if (!document.hidden) autoRefresh(); };
+    document.addEventListener("visibilitychange", onVis);
+    return () => document.removeEventListener("visibilitychange", onVis);
+  }, [view, !!snap, autoRefresh]); // eslint-disable-line react-hooks/exhaustive-deps
 
   const loadIntraday = useCallback(async (symbol: string): Promise<IntradaySeries> => {
     await connectRelay();
@@ -435,7 +459,8 @@ function Inner({ data, snap, setSnap }: { data: DashboardData; snap: Snapshot | 
         </div>
       </div>
     ),
-    portfolio: <PortfolioView snap={snap} watchlist={data.watchlist} onOpen={openTicker} />,
+    portfolio: <PortfolioView snap={snap} watchlist={data.watchlist} onOpen={openTicker}
+      onUnlock={(tickers) => autoRefresh(tickers.some((t) => !snap?.prices[t]))} />,
     market: marketPanel(true),
     etfs: snap && (
       <div className="space-y-4">

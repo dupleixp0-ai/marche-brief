@@ -28,7 +28,11 @@ const READ_CLS: Record<Reading, string> = {
   Renforcer: "bg-green-600 text-white", Conserver: "bg-slate-500 text-white", Alléger: "bg-amber-500 text-white",
 };
 
-export function PortfolioView({ snap, watchlist, onOpen }: { snap: Snapshot | null; watchlist: Watchlist; onOpen: (ticker: string) => void }) {
+export function PortfolioView({ snap, watchlist, onOpen, onUnlock }: {
+  snap: Snapshot | null; watchlist: Watchlist; onOpen: (ticker: string) => void;
+  /** Appelé au déverrouillage avec les symboles détenus (pour actualiser leurs cours). */
+  onUnlock?: (tickers: string[]) => void;
+}) {
   const [state, setState] = useState<{ session: Session; data: VaultData } | null>(memo);
   const [exists, setExists] = useState<boolean | null>(null);
   useEffect(() => setExists(vaultExists()), []);
@@ -43,7 +47,11 @@ export function PortfolioView({ snap, watchlist, onOpen }: { snap: Snapshot | nu
     return () => document.removeEventListener("visibilitychange", onVis);
   }, []);
 
-  const unlocked = (s: { session: Session; data: VaultData }) => { memo = s; setState(s); setExists(true); };
+  const unlocked = (s: { session: Session; data: VaultData }) => {
+    const first = !memo;
+    memo = s; setState(s); setExists(true);
+    if (first) onUnlock?.(s.data.holdings.map((h) => h.ticker));
+  };
   const lock = () => { memo = null; setState(null); };
 
   if (exists === null) return null;

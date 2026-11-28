@@ -30,7 +30,7 @@ export function AssetCard({ ticker, name, sub, r, s, isEtf, onOpen }: {
         <p className="font-medium tabular-nums">{last ? cur.money(last.close, conv.currency) : "—"}</p>
         <p className={`whitespace-nowrap text-xs tabular-nums ${ch == null ? "" : ch.pct >= 0 ? "text-green-600" : "text-red-600"}`}>{fmtChange(ch, currencySymbol(conv.currency))}</p>
         <div className="mt-1">{s ? <DecisionBadge decision={s.decision} score={s.score} /> : <span className="text-xs">—</span>}</div>
-        {s?.timing && s.timing.moment !== "neutre" && <div className="mt-1"><TimingBadge moment={s.timing.moment} /></div>}
+        {s?.timing && <div className="mt-1"><TimingBadge moment={s.timing.moment} always /></div>}
         {isEtf && s && <p className="mt-0.5 text-[10px] text-slate-500">{etfReading(s.decision)}</p>}
       </div>
     </button>

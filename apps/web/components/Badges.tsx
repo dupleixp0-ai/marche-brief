@@ -29,12 +29,12 @@ export function DecisionBadge({ decision, score }: { decision: Decision; score?:
 
 /** Moment d'entrée : affiché seulement quand il dit quelque chose (bon moment, ou hausse très étirée). */
 const MOMENT: Record<TimingMoment, { short: string; cls: string } | null> = {
-  favorable: { short: "Bon moment", cls: "border-green-600 text-green-700 dark:text-green-400" },
-  etire: { short: "Très étiré", cls: "border-amber-500 text-amber-700 dark:text-amber-400" },
+  favorable: { short: "Entrée : bon moment", cls: "border-green-600 text-green-700 dark:text-green-400" },
+  etire: { short: "Entrée : très étiré", cls: "border-amber-500 text-amber-700 dark:text-amber-400" },
   neutre: null,
 };
 export function TimingBadge({ moment, always }: { moment?: TimingMoment; always?: boolean }) {
-  const m = moment ? MOMENT[moment] ?? (always ? { short: "Neutre", cls: "border-slate-400 text-slate-500" } : null) : null;
+  const m = moment ? MOMENT[moment] ?? (always ? { short: "Entrée : neutre", cls: "border-slate-400 text-slate-500" } : null) : null;
   if (!m) return null;
   return <span className={`whitespace-nowrap rounded-full border px-1.5 py-px text-[10px] font-semibold ${m.cls}`}>{m.short}</span>;
 }

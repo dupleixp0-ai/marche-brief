@@ -77,6 +77,29 @@ async function mapLimit<T>(items: T[], n: number, fn: (x: T) => Promise<void>): 
   }));
 }
 
+/** Peur du marché pour le « moment d'entrée » : indice maison (VIX + S&P 500), le même que dans l'étude sur 10 ans. */
+export function marketFearOf(market: Snapshot["market"]): number | null {
+  const vix = market.vix.data?.bars.at(-1)?.close;
+  const spx = market.spx.data?.bars ?? [];
+  return vix != null && spx.length > 125 ? homemadeFearGreed(vix, spx.map((b) => b.close)).value : null;
+}
+
+/**
+ * Complète un snapshot qui n'a pas encore le « moment d'entrée » (snapshot publié avant la fonction,
+ * ou statistiques plus récentes) : même calcul que lors de la collecte, sans rien télécharger.
+ */
+export function withTiming(snap: Snapshot, stats?: TimingStats): Snapshot {
+  const st = stats ?? snap.timingStats;
+  const fear = marketFearOf(snap.market);
+  const scores: Snapshot["scores"] = {};
+  for (const [sym, s] of Object.entries(snap.scores ?? {})) {
+    const bars = snap.prices[sym]?.data?.bars;
+    const timing = s.timing ?? (bars ? timingOf(bars.map((b) => b.close), fear, st) ?? undefined : undefined);
+    scores[sym] = timing ? { ...s, timing } : s;
+  }
+  return { ...snap, scores, ...(st ? { timingStats: st } : {}) };
+}
+
 /** Calcule les scores de toutes les valeurs ; `previous` sert à l'hystérésis. */
 export function scoreSnapshot(
   market: Snapshot["market"],
@@ -91,8 +114,7 @@ export function scoreSnapshot(
   const rates = ratesFrom(fx);
   const vix = market.vix.data?.bars.at(-1)?.close ?? null;
   const fg = market.fearGreed.data?.value ?? null;
-  // Peur du marché pour le « moment d'entrée » : indice maison (VIX + S&P 500), le même que dans l'étude sur 10 ans.
-  const marketFear = vix != null && benchUsd.length > 125 ? homemadeFearGreed(vix, benchUsd.map((b) => b.close)).value : null;
+  const marketFear = marketFearOf(market);
   for (const [sym, r] of Object.entries(prices)) {
     const bars = r.data?.bars;
     if (!bars || bars.length < 210) continue; // pas assez d'historique : pas de score

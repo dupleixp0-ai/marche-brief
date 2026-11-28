@@ -68,7 +68,7 @@ export function classifyTiming(f: TimingFeatures): TimingMoment {
 
 export const TIMING_LABELS: Record<TimingMoment, string> = {
   favorable: "Bon moment pour entrer",
-  neutre: "Moment neutre",
+  neutre: "Pas de signal : ni bon moment, ni hausse étirée",
   etire: "Hausse très étirée : risque élevé",
 };
 

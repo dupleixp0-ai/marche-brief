@@ -1,6 +1,6 @@
 "use client";
 import { useCallback, useEffect, useMemo, useRef, useState, type ReactNode } from "react";
-import { collectSnapshot, fearGreedTone, fearGreedLabel, setHttpRoute, withFallback, yahooIntradayFetcher, dailyChange, dailyChangePct, dailyPoint, marketOutlook, type PointBullet, type Tone, marketSummary, ratesFrom, smaSeries, DISPLAY_CURRENCIES, type Discovery, type DisplayCurrency, type IntradaySeries, type Snapshot } from "@marche-brief/core";
+import { collectSnapshot, withTiming, marketFearOf, timingOf, type Timing, fearGreedTone, fearGreedLabel, setHttpRoute, withFallback, yahooIntradayFetcher, dailyChange, dailyChangePct, dailyPoint, marketOutlook, type PointBullet, type Tone, marketSummary, ratesFrom, smaSeries, DISPLAY_CURRENCIES, type Discovery, type DisplayCurrency, type IntradaySeries, type Snapshot } from "@marche-brief/core";
 import type { DashboardData, WatchItem } from "../lib/types";
 import { AssetCard } from "./AssetCard";
 import { InfoTip } from "./InfoTip";
@@ -228,10 +228,11 @@ function Inner({ data, snap, setSnap }: { data: DashboardData; snap: Snapshot | 
   useEffect(() => {
     fetch(`${BASE}/data/snapshot.json`)
       .then((r) => (r.ok ? r.json() : Promise.reject(new Error(`HTTP ${r.status}`))))
-      .then((s: Snapshot) => { published.current = s; setSnap(s); })
+      // Moment d'entrée calculé dès l'ouverture, même si le snapshot publié ne le contient pas encore.
+      .then((s: Snapshot) => { const t = withTiming(s, data.timing?.stats); published.current = t; setSnap(t); })
       .catch((e) => setError(`Données indisponibles (${e instanceof Error ? e.message : e}).`))
       .finally(() => setLoading(false));
-  }, [setSnap]);
+  }, [setSnap, data.timing]);
 
   const accessCode = () => {
     let code = localStorage.getItem(CODE_KEY);
@@ -274,7 +275,7 @@ function Inner({ data, snap, setSnap }: { data: DashboardData; snap: Snapshot | 
       } else {
         const res = await fetch(`${BASE}/data/snapshot.json?t=${Date.now()}`);
         if (!res.ok) throw new Error(`HTTP ${res.status}`);
-        const s = (await res.json()) as Snapshot;
+        const s = withTiming((await res.json()) as Snapshot, data.timing?.stats);
         published.current = s;
         setSnap(s);
       }
@@ -384,12 +385,22 @@ function Inner({ data, snap, setSnap }: { data: DashboardData; snap: Snapshot | 
     const d = [...(snap?.discoveries?.data?.stocks ?? []), ...(snap?.discoveries?.data?.etfs ?? [])].find((x) => x.ticker === ticker);
     if (d) openDiscovery(d);
   };
+  // Moment d'entrée des découvertes (même règle que pour les valeurs suivies, sur leur historique d'un an).
+  const discTiming = useMemo(() => {
+    const fear = snap ? marketFearOf(snap.market) : null;
+    const cache = new Map<string, Timing | null>();
+    return (d: Discovery): Timing | null => {
+      if (!cache.has(d.ticker)) cache.set(d.ticker, d.history?.length ? timingOf(d.history.map((b) => b.close), fear, data.timing?.stats) : null);
+      return cache.get(d.ticker)!;
+    };
+  }, [snap, data.timing]);
+
   const openDiscovery = (d: Discovery) => {
     setOpen({
       ticker: d.ticker, name: d.name, subtitle: `${d.country} · ${d.exchange} · ${d.sector} · cotation ${d.currency}`, isEtf: d.type === "etf",
       bars: d.history?.length ? d.history : [], currency: d.currency, quote: { time: d.lastTime, venue: d.exchange },
       meta: snap?.discoveries ? { source: snap.discoveries.source, fetchedAt: snap.discoveries.fetchedAt, status: snap.discoveries.status } : undefined,
-      score: { score: d.score, decision: d.decision, factors: d.factors, asOf: d.lastDate },
+      score: { score: d.score, decision: d.decision, factors: d.factors, asOf: d.lastDate, timing: discTiming(d) ?? undefined },
       intraday: snap?.intraday?.[d.ticker]?.data ?? null,
       extra: (
         <div className="mt-4 grid gap-3 md:grid-cols-2">
@@ -504,7 +515,7 @@ function Inner({ data, snap, setSnap }: { data: DashboardData; snap: Snapshot | 
         </div>
       </div>
     ),
-    discoveries: <DiscoveriesSection res={snap?.discoveries} onOpen={openDiscovery} />,
+    discoveries: <DiscoveriesSection res={snap?.discoveries} onOpen={openDiscovery} timingFor={discTiming} />,
     news: (
       <div className="grid gap-4 lg:grid-cols-3">
         <Panel title={t("brief")} className="lg:col-span-2">

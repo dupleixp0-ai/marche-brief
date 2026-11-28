@@ -43,3 +43,20 @@ describe("actualisation des cours (bouton « Actualiser »)", () => {
     expect(calls.some((c) => /finnhub|rss|federalreserve|ecb/i.test(decodeURIComponent(c)))).toBe(false);
   });
 });
+
+describe("withTiming", () => {
+  it("ajoute le moment d'entrée à un snapshot qui ne l'a pas, sans changer le score", async () => {
+    const { withTiming } = await import("./collect");
+    const bars = Array.from({ length: 300 }, (_, i) => ({ date: new Date(Date.UTC(2025, 0, 1 + i)).toISOString().slice(0, 10), close: 100 * (1 + 0.01 * Math.sin(i)) }));
+    const src = (data: unknown) => ({ data, source: "test", fetchedAt: "", status: "ok" as const });
+    const snap = {
+      generatedAt: "", market: { vix: src({ symbol: "^VIX", bars: bars.map((b) => ({ ...b, close: 40 })) }), spx: src({ symbol: "^GSPC", bars }), fearGreed: src({ value: 50, label: "Neutre" }) },
+      prices: { AAA: src({ symbol: "AAA", bars }) },
+      scores: { AAA: { score: 50, decision: "Attendre", confidence: "faible", factors: [], reasons: [], asOf: "x" } },
+    } as never;
+    const out = withTiming(snap, { favorable: { n: 1, avg63: 0.09, hit63: 0.7 } });
+    expect(out.scores.AAA.score).toBe(50);
+    expect(out.scores.AAA.timing?.moment).toBe("favorable"); // VIX 40 → peur extrême
+    expect(out.timingStats?.favorable?.avg63).toBe(0.09);
+  });
+});

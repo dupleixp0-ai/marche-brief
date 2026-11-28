@@ -1,7 +1,7 @@
 "use client";
 import { useEffect, useMemo, useState } from "react";
-import type { Discovery, Discoveries as D, SourceResult } from "@marche-brief/core";
-import { DecisionBadge, StatusBadge } from "./Badges";
+import type { Discovery, Discoveries as D, SourceResult, Timing } from "@marche-brief/core";
+import { DecisionBadge, StatusBadge, TimingBadge } from "./Badges";
 import { Sparkline } from "./Sparkline";
 import { fmtDateTime, fmtRatio, fmtQuote } from "../lib/format";
 import { useCurrency } from "../lib/currency";
@@ -24,7 +24,7 @@ export function useFollowed() {
 const pctCls = (x: number | null) => (x == null ? "" : x >= 0 ? "text-green-600" : "text-red-600");
 const signed = (x: number | null) => (x == null ? "—" : `${x >= 0 ? "+" : ""}${fmtRatio(x)}`);
 
-function Card({ d, followed, onFollow, onOpen }: { d: Discovery; followed: boolean; onFollow: () => void; onOpen: () => void }) {
+function Card({ d, followed, onFollow, onOpen, timing }: { d: Discovery; followed: boolean; onFollow: () => void; onOpen: () => void; timing?: Timing | null }) {
   const cur = useCurrency();
   const conv = cur.bars(d.history?.length ? d.history : [{ date: d.lastDate, close: d.lastClose }], d.currency);
   const spark = d.history?.length ? conv.bars.slice(-63).map((b) => b.close) : d.spark;
@@ -43,6 +43,7 @@ function Card({ d, followed, onFollow, onOpen }: { d: Discovery; followed: boole
         </div>
         <div className="text-right">
           <DecisionBadge decision={d.decision} score={d.score} />
+          {timing && <div className="mt-1"><TimingBadge moment={timing.moment} always /></div>}
           <p className="mt-1 text-sm tabular-nums">{cur.money(conv.bars.at(-1)?.close, conv.currency)}</p>
         </div>
       </div>
@@ -71,7 +72,7 @@ function Card({ d, followed, onFollow, onOpen }: { d: Discovery; followed: boole
   );
 }
 
-export function DiscoveriesSection({ res, onOpen }: { res: SourceResult<D> | null | undefined; onOpen: (d: Discovery) => void }) {
+export function DiscoveriesSection({ res, onOpen, timingFor }: { res: SourceResult<D> | null | undefined; onOpen: (d: Discovery) => void; timingFor?: (d: Discovery) => Timing | null }) {
   const [region, setRegion] = useState("Tous");
   const [type, setType] = useState<"stocks" | "etfs">("stocks");
   const [buyableOnly, setBuyableOnly] = useState(false);
@@ -101,7 +102,7 @@ export function DiscoveriesSection({ res, onOpen }: { res: SourceResult<D> | nul
         </label>
       </div>
       <div className="mt-3 grid gap-3 md:grid-cols-2 xl:grid-cols-3">
-        {shown.length ? shown.map((d) => <Card key={d.ticker} d={d} followed={list.includes(d.ticker)} onFollow={() => toggle(d.ticker)} onOpen={() => onOpen(d)} />)
+        {shown.length ? shown.map((d) => <Card key={d.ticker} d={d} followed={list.includes(d.ticker)} onFollow={() => toggle(d.ticker)} onOpen={() => onOpen(d)} timing={timingFor?.(d)} />)
           : <p className="text-sm text-slate-500">Aucune valeur ne remplit les critères avec ces filtres.</p>}
       </div>
       <p className="mt-2 text-[10px] text-slate-500">

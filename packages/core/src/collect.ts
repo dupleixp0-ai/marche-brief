@@ -151,8 +151,9 @@ export async function collectSnapshot(symbols: string[], previous?: Snapshot | n
   // par l'indice maison. Le job du matin (GitHub Actions) obtient bien CNN.
   const keepCnn = opt.quotesOnly && previous?.market?.fearGreed?.data && !previous.market.fearGreed.data.homemade;
   const fearGreed = keepCnn ? { ...previous!.market.fearGreed } : await withFallback([cnnFetcher(), homemade], previous?.market.fearGreed);
-  // Sans historique CNN : historique calculé avec l'indice maison (signalé comme tel).
-  if (fearGreed.data && !fearGreed.data.history?.length && vix.data && spx.data) {
+  // Historique maison seulement si la valeur affichée est elle-même l'indice maison :
+  // on ne mélange jamais une valeur CNN avec une courbe maison (échelles différentes).
+  if (fearGreed.data?.homemade && !fearGreed.data.history?.length && vix.data && spx.data) {
     fearGreed.data = { ...fearGreed.data, history: homemadeFearGreedHistory(vix.data.bars, spx.data.bars), historyHomemade: true };
   }
 

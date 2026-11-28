@@ -133,7 +133,9 @@ export function MarketSheet({ kind, snap, outlook, onClose, loadIntraday }: {
                 <div key={r} className={`rounded-lg p-1.5 text-white ${c}`}><b>{r}</b><br />{l}</div>
               ))}
             </div>
-            {fg.data?.history?.length ? <FgHistory history={fg.data.history} homemade={!!fg.data.historyHomemade} cnnValue={fg.data.homemade ? null : fg.data.value} /> : null}
+            {fg.data?.history?.length && (fg.data.homemade || !fg.data.historyHomemade)
+              ? <FgHistory history={fg.data.history} homemade={!!fg.data.historyHomemade} />
+              : fg.data && <p className="mt-4 text-xs text-slate-500">Historique CNN pas encore disponible : il arrivera avec le prochain brief du matin.</p>}
           </>
         ) : (
           <>
@@ -224,7 +226,7 @@ type FgRange = keyof typeof FG_RANGES;
 const FG_CLS = { down: "text-red-600", warn: "text-orange-500", up: "text-lime-600" } as const;
 const fgColor = (v: number) => { const t = fearGreedTone(v); return isExtremeGreed(v) ? "text-green-600" : t ? FG_CLS[t] : "text-slate-500"; };
 
-function FgHistory({ history, homemade, cnnValue }: { history: { date: string; value: number }[]; homemade: boolean; cnnValue: number | null }) {
+function FgHistory({ history, homemade }: { history: { date: string; value: number }[]; homemade: boolean }) {
   const [range, setRange] = useState<FgRange>("3M");
   const data = history.slice(-(FG_RANGES[range] + 1)).map((p) => ({ time: p.date, value: p.value }));
   const flat = (v: number) => data.map((p) => ({ time: p.time, value: v }));
@@ -245,13 +247,6 @@ function FgHistory({ history, homemade, cnnValue }: { history: { date: string; v
           ))}
         </div>
       </div>
-      {homemade && cnnValue != null && (
-        <p className="mt-2 rounded-lg bg-amber-50 p-2 text-xs text-amber-800 dark:bg-amber-950/40 dark:text-amber-300">
-          L&apos;historique CNN n&apos;est pas encore disponible : la courbe et les valeurs passées ci-dessous viennent de l&apos;<b>indice maison</b> (VIX + tendance du S&amp;P 500).
-          Il ne se lit pas sur la même échelle que CNN (aujourd&apos;hui : {history.at(-1)?.value} maison contre {cnnValue} CNN) : ne compare pas les deux.
-          L&apos;historique CNN arrivera avec le prochain brief du matin.
-        </p>
-      )}
       <div className="mt-2"><PriceChart lines={lines} height={200} /></div>
       <p className="mt-1 text-[10px] text-slate-500">
         Sous 25 : peur extrême · au-dessus de 75 : avidité extrême

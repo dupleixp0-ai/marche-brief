@@ -30,6 +30,8 @@ export const APP_NAME = "MarketPulse";
 // ---------- Navigation ----------
 const VIEWS = ["overview", "market", "etfs", "stocks", "discoveries", "news", "reliability", "portfolio"] as const;
 type View = (typeof VIEWS)[number];
+/** Onglets de la barre du bas (téléphone) ; tout le reste est dans le menu ☰. */
+const TAB_VIEWS: View[] = ["overview", "market", "etfs", "stocks", "portfolio"];
 const ICON: Record<View, string> = {
   overview: "M3 13h8V3H3v10zm0 8h8v-6H3v6zm10 0h8V11h-8v10zm0-18v6h8V3h-8z",
   portfolio: "M6 10V7a6 6 0 0112 0v3M5 10h14v11H5zM12 14v3",
@@ -201,12 +203,20 @@ function Inner({ data, snap, setSnap }: { data: DashboardData; snap: Snapshot | 
   const [view, setViewState] = useState<View>("overview");
   const [open, setOpen] = useState<DetailTarget | null>(null);
   const [marketOpen, setMarketOpen] = useState<MarketKind | null>(null);
+  const [menu, setMenu] = useState(false);
+  // Menu ☰ : fermeture avec Échap.
+  useEffect(() => {
+    if (!menu) return;
+    const k = (e: KeyboardEvent) => e.key === "Escape" && setMenu(false);
+    addEventListener("keydown", k);
+    return () => removeEventListener("keydown", k);
+  }, [menu]);
   const [sort, setSort] = useState<"score" | "nom">("score");
   const bt = data.backtest;
 
   // Vue courante dans l'URL (#market…) : bouton retour et favoris fonctionnent.
   useEffect(() => {
-    const read = () => { const h = location.hash.slice(1) as View; setViewState(VIEWS.includes(h) ? h : "overview"); setOpen(null); setMarketOpen(null); };
+    const read = () => { const h = location.hash.slice(1) as View; setViewState(VIEWS.includes(h) ? h : "overview"); setOpen(null); setMarketOpen(null); setMenu(false); };
     read();
     window.addEventListener("hashchange", read);
     return () => window.removeEventListener("hashchange", read);
@@ -571,10 +581,24 @@ function Inner({ data, snap, setSnap }: { data: DashboardData; snap: Snapshot | 
     ),
   };
 
+  // Devise et langue : dans le bandeau sur ordinateur, dans le menu ☰ sur téléphone.
+  const settings = (
+    <>
+      <select aria-label="Devise" value={cur.currency} onChange={(e) => cur.setCurrency(e.target.value as DisplayCurrency)}
+        className="rounded-full border border-slate-300 bg-white px-2 py-1.5 text-xs font-semibold dark:border-slate-700 dark:bg-slate-900">
+        {DISPLAY_CURRENCIES.map((c) => <option key={c} value={c}>{c}</option>)}
+      </select>
+      <select aria-label="Langue" value={lang} onChange={(e) => setLang(e.target.value as Lang)}
+        className="rounded-full border border-slate-300 bg-white px-2 py-1.5 text-xs dark:border-slate-700 dark:bg-slate-900">
+        <option value="fr">FR</option><option value="en">EN</option><option value="de">DE</option>
+      </select>
+    </>
+  );
+
   const navBtn = (v: View, compact: boolean) => (
-    <button key={v} onClick={() => setView(v)} aria-current={view === v ? "page" : undefined}
+    <button key={v} onClick={() => { setView(v); setMenu(false); }} aria-current={view === v ? "page" : undefined}
       className={compact
-        ? `flex min-w-[2.9rem] flex-1 flex-col items-center gap-0.5 px-0.5 py-1.5 text-[10px] ${view === v ? "text-blue-600" : "text-slate-500"}`
+        ? `flex min-w-0 flex-1 flex-col items-center gap-0.5 px-0.5 py-1.5 text-[10px] ${view === v ? "text-blue-600" : "text-slate-500"}`
         : `flex w-full items-center gap-3 rounded-xl px-3 py-2 text-sm font-medium ${view === v ? "bg-blue-600 text-white" : "text-slate-600 hover:bg-slate-100 dark:text-slate-300 dark:hover:bg-slate-800"}`}>
       <Icon d={ICON[v]} className={compact ? "h-5 w-5" : "h-5 w-5 shrink-0"} />
       <span className={compact ? "truncate" : ""}>{compact ? SHORT[lang][v] : t(LABEL_KEY[v])}</span>
@@ -584,18 +608,29 @@ function Inner({ data, snap, setSnap }: { data: DashboardData; snap: Snapshot | 
   return (
     <div className="lg:pl-64">
       {/* Menu latéral (ordinateur) */}
-      <aside className="fixed inset-y-0 left-0 z-40 hidden w-64 flex-col border-r border-slate-200 bg-white p-4 lg:flex dark:border-slate-800 dark:bg-slate-900">
+      {/* Menu latéral : toujours visible sur ordinateur ; sur téléphone, tiroir ouvert par le bouton ☰. */}
+      {menu && <div className="fixed inset-0 z-40 bg-black/50 lg:hidden" onClick={() => setMenu(false)} aria-hidden />}
+      <aside aria-label="Menu" className={`fixed inset-y-0 left-0 z-50 flex w-72 flex-col overflow-y-auto border-r border-slate-200 bg-white p-4 pt-[calc(env(safe-area-inset-top)+1rem)] shadow-xl transition-transform duration-200 lg:z-40 lg:w-64 lg:translate-x-0 lg:pt-4 lg:shadow-none dark:border-slate-800 dark:bg-slate-900 ${menu ? "translate-x-0" : "-translate-x-full"}`}>
         <div className="mb-6 flex items-center gap-2 px-2">
           <span className="grid h-9 w-9 place-items-center rounded-xl bg-blue-600 text-white"><Icon d={ICON.market} /></span>
           <span className="text-lg font-bold">{APP_NAME}</span>
+          <button onClick={() => setMenu(false)} aria-label="Fermer le menu" className="ml-auto grid h-9 w-9 place-items-center rounded-full text-xl text-slate-500 hover:bg-slate-100 lg:hidden dark:hover:bg-slate-800">×</button>
         </div>
         <nav className="space-y-1">{VIEWS.map((v) => navBtn(v, false))}</nav>
+        <div className="mt-6 space-y-3 border-t border-slate-200 px-2 pt-4 text-xs lg:hidden dark:border-slate-800">
+          <div className="flex items-center gap-2"><span className="text-slate-500">Devise et langue</span>{settings}</div>
+          <MarketClock />
+        </div>
       </aside>
 
       {/* Bandeau d'état */}
       <header className="sticky top-0 z-30 border-b border-slate-200 bg-slate-50/95 px-4 pb-3 pt-[calc(env(safe-area-inset-top)+1.5rem)] lg:pt-3 backdrop-blur lg:px-8 dark:border-slate-800 dark:bg-slate-950/90">
         <div className="flex items-center justify-between gap-3">
-          <div className="min-w-0">
+          <button onClick={() => setMenu(true)} aria-label="Ouvrir le menu" aria-expanded={menu}
+            className="-ml-1 grid h-10 w-10 shrink-0 place-items-center rounded-full text-slate-700 hover:bg-slate-200 lg:hidden dark:text-slate-200 dark:hover:bg-slate-800">
+            <svg viewBox="0 0 24 24" className="h-6 w-6" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round"><path d="M4 7h16M4 12h16M4 17h16" /></svg>
+          </button>
+          <div className="min-w-0 flex-1">
             <h1 className="truncate text-lg font-bold leading-tight lg:text-2xl">{t(LABEL_KEY[view])}</h1>
             <p className="text-[11px] text-slate-500">
               {snap ? `${t("updated")} ${fmtDateTime(snap.generatedAt)}` : t("noData")} · {t("sourcesOk")} {okCount}/{sources.length}
@@ -603,14 +638,7 @@ function Inner({ data, snap, setSnap }: { data: DashboardData; snap: Snapshot | 
           </div>
           <div className="flex items-center gap-2">
             <div className="mr-2 hidden rounded-full border border-slate-200 px-3 py-1.5 lg:block dark:border-slate-700"><MarketClock /></div>
-            <select aria-label="Devise" value={cur.currency} onChange={(e) => cur.setCurrency(e.target.value as DisplayCurrency)}
-              className="rounded-full border border-slate-300 bg-white px-2 py-1.5 text-xs font-semibold dark:border-slate-700 dark:bg-slate-900">
-              {DISPLAY_CURRENCIES.map((c) => <option key={c} value={c}>{c}</option>)}
-            </select>
-            <select aria-label="Langue" value={lang} onChange={(e) => setLang(e.target.value as Lang)}
-              className="rounded-full border border-slate-300 bg-white px-2 py-1.5 text-xs dark:border-slate-700 dark:bg-slate-900">
-              <option value="fr">FR</option><option value="en">EN</option><option value="de">DE</option>
-            </select>
+            <div className="hidden items-center gap-2 lg:flex">{settings}</div>
             <button onClick={refresh} disabled={loading}
               className="rounded-full bg-blue-600 px-4 py-2 text-sm font-semibold text-white disabled:opacity-60">
               {loading ? "…" : t("refresh")}
@@ -631,7 +659,7 @@ function Inner({ data, snap, setSnap }: { data: DashboardData; snap: Snapshot | 
 
       {/* Barre d'onglets (téléphone) */}
       <nav className="fixed inset-x-0 bottom-0 z-40 flex overflow-x-auto border-t border-slate-200 bg-white/95 pb-[env(safe-area-inset-bottom)] backdrop-blur lg:hidden dark:border-slate-800 dark:bg-slate-900/95">
-        {VIEWS.map((v) => navBtn(v, true))}
+        {TAB_VIEWS.map((v) => navBtn(v, true))}
       </nav>
 
       {marketOpen && snap && market && <MarketSheet kind={marketOpen} snap={snap} outlook={market.outlook} onClose={() => setMarketOpen(null)} loadIntraday={WORKER ? loadIntraday : undefined} />}

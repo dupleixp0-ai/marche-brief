@@ -1,7 +1,7 @@
 // Backtest sur 10 ans de la stratégie « suivre le score » → data/backtest.json.
 // Usage : npm run backtest
 import { readFileSync, writeFileSync } from "node:fs";
-import { yahooFetcher, fredFetcher, withFallback, backtest, summarize, type BacktestResult, type DecisionRules } from "@marche-brief/core";
+import { yahooFetcher, fredFetcher, withFallback, backtest, summarize, type BacktestResult, type DecisionRules, DEFAULT_RULES } from "@marche-brief/core";
 
 const root = new URL("../", import.meta.url);
 const path = (p: string) => new URL(p, root);
@@ -21,6 +21,7 @@ const VARIANTS: Record<string, DecisionRules> = {
   "A · score seul": {},
   "B · vente si sous MM200": { sellNeedsBelowMA200: true },
   "C · B + retour au-dessus MM200": { sellNeedsBelowMA200: true, reentryAboveMA200: true },
+  "D · baisse confirmée (v2)": DEFAULT_RULES,
 };
 const data: Record<string, { date: string; close: number }[]> = {};
 for (const s of symbols) {
@@ -35,7 +36,7 @@ for (const [name, rules] of Object.entries(VARIANTS)) {
   variants[name] = v;
   console.log(`${name.padEnd(32)} CAGR ${v.beatsCagr}/${v.assets} · Sharpe ${v.beatsSharpe}/${v.assets} · baisse ${v.beatsDrawdown}/${v.assets} · écart ${pct(v.avgCagrDiff)}/an`);
 }
-const results = variants["B · vente si sous MM200"].results;
+const results = variants["D · baisse confirmée (v2)"].results;
 const sum = summarize(results);
 writeFileSync(path("data/backtest-variants.json"), JSON.stringify(variants, null, 1) + "\n");
 writeFileSync(path("data/backtest.json"), JSON.stringify(sum, null, 1) + "\n");

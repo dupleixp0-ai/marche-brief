@@ -1,5 +1,5 @@
 import { describe, it, expect } from "vitest";
-import { scoreAsset, decide, rawDecision, etfReading, confidenceOf } from "./score";
+import { scoreAsset, decide, rawDecision, etfReading, confidenceOf, DEFAULT_RULES, V1_RULES } from "./score";
 
 // Séries synthétiques figées : hausse régulière / baisse régulière / plat.
 const up = Array.from({ length: 300 }, (_, i) => 100 * 1.002 ** i);
@@ -66,5 +66,29 @@ describe("règles MM200", () => {
   it("sans règle → Vendre ; avec règle → Attendre tant que le cours est au-dessus de la MM200", () => {
     expect(scoreAsset(inp, null, undefined, {}).decision).toBe("Vendre");
     expect(scoreAsset(inp, null, undefined, { sellNeedsBelowMA200: true }).decision).toBe("Attendre");
+  });
+});
+
+describe("règles v2 : baisse confirmée", () => {
+  const bench = Array(300).fill(100);
+  it("sous la MM200 mais en hausse sur 6 mois → Attendre, pas Vendre", () => {
+    // Forte hausse puis rechute récente sous la MM200 ; le cours reste au-dessus de celui d'il y a 6 mois.
+    const c = [...Array(150).fill(50), ...Array.from({ length: 110 }, (_, i) => 50 * 1.012 ** i), ...Array.from({ length: 40 }, (_, i) => 185 * 0.975 ** i)];
+    const inp = { closes: c, benchCloses: bench, vix: 30, fearGreed: 20 };
+    expect(scoreAsset(inp, null, undefined, V1_RULES).decision).toBe("Vendre");
+    expect(scoreAsset(inp, null, undefined, DEFAULT_RULES).decision).toBe("Attendre");
+  });
+  it("baisse longue et confirmée → Vendre", () => {
+    expect(scoreAsset({ closes: down, benchCloses: flat, vix: 30, fearGreed: 25 }).decision).toBe("Vendre");
+  });
+  it("juste sous la MM200 (moins de 2 %) → Attendre", () => {
+    const c = [...Array(200).fill(100), ...Array.from({ length: 100 }, (_, i) => 100 * 0.9999 ** i)];
+    expect(scoreAsset({ closes: c, benchCloses: bench, vix: 35, fearGreed: 10 }, "Acheter").decision).not.toBe("Vendre");
+  });
+  it("après Vendre, retour à Acheter dès que le cours repasse la MM200 avec un score ≥ 50", () => {
+    const c = [...Array.from({ length: 200 }, (_, i) => 100 * 0.999 ** i), ...Array.from({ length: 100 }, (_, i) => 82 * 1.004 ** i)];
+    const r = scoreAsset({ closes: c, benchCloses: bench, vix: 15, fearGreed: 55 }, "Vendre");
+    expect(r.score).toBeGreaterThanOrEqual(50);
+    expect(r.decision).toBe("Acheter");
   });
 });

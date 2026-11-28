@@ -135,14 +135,23 @@ export function confidenceOf(score: number): ScoreResult["confidence"] {
 }
 
 /** Score complet + décision + raisons (3 à 5 facteurs les plus marquants). */
-/** Règles de décision optionnelles (comparées au backtest). */
+/** Règles de décision (comparées au backtest, voir scripts/backtest.ts). */
 export interface DecisionRules {
   /** « Vendre » seulement si le cours est sous sa MM200 ; sinon « Attendre ». */
   sellNeedsBelowMA200?: boolean;
-  /** Après « Vendre », repasser à « Acheter » dès que le cours repasse au-dessus de sa MM200 avec un score ≥ 43. */
+  /** Marge sous la MM200 exigée pour « Vendre » (0,02 = 2 % sous la moyenne) : évite les faux signaux autour de la ligne. */
+  sellBand?: number;
+  /** « Vendre » seulement si le rendement sur 6 mois est négatif (baisse confirmée). */
+  sellNeedsNegativeMomentum?: boolean;
+  /** Après « Vendre », repasser à « Acheter » dès que le cours repasse au-dessus de sa MM200 avec un score ≥ cette valeur. */
+  reentryScore?: number;
+  /** Ancienne règle de retour (score ≥ 43). */
   reentryAboveMA200?: boolean;
 }
-export const DEFAULT_RULES: DecisionRules = { sellNeedsBelowMA200: true, reentryAboveMA200: false };
+/** Règles retenues (backtest 10 ans : même protection contre les fortes baisses, moins de sorties inutiles). */
+export const DEFAULT_RULES: DecisionRules = { sellNeedsBelowMA200: true, sellBand: 0.02, sellNeedsNegativeMomentum: true, reentryScore: 50 };
+/** Règles d'avant (version 1), gardées pour comparaison. */
+export const V1_RULES: DecisionRules = { sellNeedsBelowMA200: true };
 
 export function scoreAsset(inp: ScoreInput, previous?: Decision | null, weights = DEFAULT_WEIGHTS, rules: DecisionRules = DEFAULT_RULES): ScoreResult {
   const factors = computeFactors(inp, weights);
@@ -157,7 +166,13 @@ export function scoreAsset(inp: ScoreInput, previous?: Decision | null, weights 
   const ma200 = sma(inp.closes, 200);
   const last = inp.closes[inp.closes.length - 1];
   if (ma200 != null) {
-    if (rules.sellNeedsBelowMA200 && decision === "Vendre" && last >= ma200) decision = "Attendre";
+    const band = rules.sellBand ?? 0;
+    if (rules.sellNeedsBelowMA200 && decision === "Vendre" && last >= ma200 * (1 - band)) decision = "Attendre";
+    if (rules.sellNeedsNegativeMomentum && decision === "Vendre") {
+      const r6 = returnOver(inp.closes, 126);
+      if (r6 != null && r6 >= 0) decision = "Attendre";
+    }
+    if (rules.reentryScore != null && previous === "Vendre" && last > ma200 && score >= rules.reentryScore) decision = "Acheter";
     if (rules.reentryAboveMA200 && previous === "Vendre" && last > ma200 && score >= THRESHOLDS.sell + THRESHOLDS.hysteresis)
       decision = "Acheter";
   }

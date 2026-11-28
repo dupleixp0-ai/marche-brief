@@ -16,7 +16,7 @@ export function parseCnnFearGreed(json: string): FearGreed {
     byDate.set(new Date(p.x).toISOString().slice(0, 10), Math.round(p.y)); // dernière valeur du jour
   }
   const history = [...byDate].map(([date, v]) => ({ date, value: v })).sort((a, b) => a.date.localeCompare(b.date));
-  return { value: Math.round(value), label: fearGreedLabel(value), homemade: false, ...(history.length ? { history } : {}) };
+  return { value: Math.round(value), label: fearGreedLabel(Math.round(value)), homemade: false, ...(history.length ? { history } : {}) };
 }
 
 export function fearGreedLabel(v: number): string {
@@ -25,6 +25,15 @@ export function fearGreedLabel(v: number): string {
   if (v <= 55) return "Neutre";
   if (v <= 75) return "Avidité";
   return "Avidité extrême";
+}
+
+/** Couleur de la zone (mêmes seuils que le libellé) : peur extrême en rouge, peur en orange, avidité en vert, avidité extrême en alerte. */
+export function fearGreedTone(v: number): "down" | "warn" | "up" | undefined {
+  if (v < 25) return "down";
+  if (v < 45) return "warn";
+  if (v <= 55) return undefined;
+  if (v <= 75) return "up";
+  return "warn";
 }
 
 export function cnnFetcher(): Fetcher<FearGreed> {

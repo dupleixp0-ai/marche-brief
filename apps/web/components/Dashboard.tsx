@@ -1,6 +1,6 @@
 "use client";
 import { useCallback, useEffect, useMemo, useRef, useState, type ReactNode } from "react";
-import { collectSnapshot, setHttpRoute, withFallback, yahooIntradayFetcher, dailyChange, dailyChangePct, dailyPoint, marketOutlook, type PointBullet, type Tone, marketSummary, ratesFrom, smaSeries, DISPLAY_CURRENCIES, type Discovery, type DisplayCurrency, type IntradaySeries, type Snapshot } from "@marche-brief/core";
+import { collectSnapshot, fearGreedTone, fearGreedLabel, setHttpRoute, withFallback, yahooIntradayFetcher, dailyChange, dailyChangePct, dailyPoint, marketOutlook, type PointBullet, type Tone, marketSummary, ratesFrom, smaSeries, DISPLAY_CURRENCIES, type Discovery, type DisplayCurrency, type IntradaySeries, type Snapshot } from "@marche-brief/core";
 import type { DashboardData, WatchItem } from "../lib/types";
 import { AssetCard } from "./AssetCard";
 import { InfoTip } from "./InfoTip";
@@ -404,7 +404,7 @@ function Inner({ data, snap, setSnap }: { data: DashboardData; snap: Snapshot | 
         <OutlookBlock o={market.outlook} />
       </Panel>
       <Panel onClick={() => setMarketOpen("fg")} title={<>Fear &amp; Greed<InfoTip k="tipFg" /></>} right={<span className="text-[10px] text-blue-600">Détails →</span>}>
-        {fg?.data ? <FearGreedGauge value={fg.data.value} label={fg.data.label} /> : <p className="text-sm">Indisponible</p>}
+        {fg?.data ? <FearGreedGauge value={fg.data.value} label={fearGreedLabel(fg.data.value)} /> : <p className="text-sm">Indisponible</p>}
         {fg && <p className="text-center text-[10px] text-slate-500">{fg.source}{fg.data?.homemade ? " (indice maison)" : ""} · {fmtDateTime(fg.fetchedAt)} <StatusBadge status={fg.status} /></p>}
         <p className="mt-3 text-sm">{market.summary.sentence}</p>
       </Panel>
@@ -425,7 +425,7 @@ function Inner({ data, snap, setSnap }: { data: DashboardData; snap: Snapshot | 
     overview: snap && market && (
       <div className="space-y-4">
         <div className="grid grid-cols-2 gap-3 lg:grid-cols-4">
-          <Kpi label="Fear & Greed" tip="tipFg" value={fg?.data ? fg.data.value : "—"} sub={fg?.data?.label} tone={fg?.data ? (fg.data.value < 25 ? "down" : fg.data.value > 75 ? "warn" : undefined) : undefined} onClick={() => setMarketOpen("fg")} />
+          <Kpi label="Fear & Greed" tip="tipFg" value={fg?.data ? fg.data.value : "—"} sub={fg?.data ? fearGreedLabel(fg.data.value) : undefined} tone={fg?.data ? fearGreedTone(fg.data.value) : undefined} onClick={() => setMarketOpen("fg")} />
           <Kpi label="VIX" tip="tipVix" value={market.summary.vix != null ? fmtNum(market.summary.vix, 1) : "—"} sub={`MM50 ${market.summary.vixMa50 != null ? fmtNum(market.summary.vixMa50, 1) : "—"}`} tone={(market.summary.vix ?? 0) > 30 ? "down" : (market.summary.vix ?? 99) < 15 ? "up" : undefined} onClick={() => setMarketOpen("vix")} />
           <Kpi label="S&P 500" value={market.summary.spx != null ? fmtNum(market.summary.spx, 0) : "—"} sub={<span className={(market.spxDay ?? 0) >= 0 ? "text-green-600" : "text-red-600"}>{fmtPct(market.spxDay)} ({fmtSignedAmount(market.spxDayPts, "pts", 0)}) · {market.summary.spx != null && market.summary.spxMa125 != null ? (market.summary.spx > market.summary.spxMa125 ? "au-dessus de la MM125" : "sous la MM125") : ""}</span>} onClick={() => setMarketOpen("spx")} />
           <Kpi label="Signaux du jour" value={<span><span className="text-green-600">{signals.Acheter}</span> · <span className="text-slate-500">{signals.Attendre}</span> · <span className="text-red-600">{signals.Vendre}</span></span>} sub="Acheter · Attendre · Vendre" onClick={() => setView("stocks")} />

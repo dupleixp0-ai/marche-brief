@@ -3,7 +3,7 @@ import { readFileSync } from "node:fs";
 import { parseYahooChart } from "./yahoo";
 import { parseStooqCsv, toStooqSymbol } from "./stooq";
 import { parseFredCsv } from "./fred";
-import { parseCnnFearGreed, fearGreedLabel } from "./cnn";
+import { parseCnnFearGreed, fearGreedLabel, fearGreedTone } from "./cnn";
 
 const fx = (f: string) => readFileSync(new URL(`../__fixtures__/${f}`, import.meta.url), "utf8");
 
@@ -81,5 +81,20 @@ describe("repères Fear & Greed", () => {
     const { fearGreedLookback } = await import("../indicators/fearGreed");
     const h = Array.from({ length: 10 }, (_, i) => ({ date: `2026-11-${String(i + 10)}`, value: i * 10 }));
     expect(fearGreedLookback(h)).toEqual([{ label: "Veille", date: "2026-11-18", value: 80 }, { label: "1 semaine", date: "2026-11-14", value: 40 }]);
+  });
+});
+
+describe("Fear & Greed : libellé et couleur", () => {
+  it("libellé calculé sur la valeur arrondie affichée", () => {
+    const r = parseCnnFearGreed(JSON.stringify({ fear_and_greed: { score: 24.6 } }));
+    expect(r.value).toBe(25);
+    expect(r.label).toBe("Peur");
+  });
+  it("une couleur par zone, mêmes seuils que le libellé", () => {
+    expect(fearGreedTone(18)).toBe("down");
+    expect(fearGreedTone(25)).toBe("warn");
+    expect(fearGreedTone(50)).toBeUndefined();
+    expect(fearGreedTone(65)).toBe("up");
+    expect(fearGreedTone(80)).toBe("warn");
   });
 });
